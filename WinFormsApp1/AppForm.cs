@@ -19,6 +19,7 @@ namespace CodeCompilerServiceManager
         public AppForm()
         {
             InitializeComponent();
+            serviceConnector.ErrorMessage += ServiceConnector_ErrorMessageHandler;
             LoadOptions();
             labelServiceStatus.Text = "Stan us³ugi: Pobieranie...";
             InitTimer();
@@ -117,7 +118,7 @@ namespace CodeCompilerServiceManager
             workerOnRestart.RunWorkerAsync();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSaveManagerSettings_Click(object sender, EventArgs e)
         {
             AppSettingsModel model = new AppSettingsModel()
             {
@@ -141,6 +142,23 @@ namespace CodeCompilerServiceManager
         }
 
         #endregion
+
+        private void ServiceConnector_ErrorMessageHandler(object? sender, string errorMessage)
+        {
+            if (txtOutputConsole.InvokeRequired)
+            {
+                Action safeWrite = delegate { ServiceConnector_ErrorMessageHandler(null, errorMessage);};
+                txtOutputConsole.Invoke(safeWrite);
+            }
+            else
+            {
+                string errMessage = DateTime.Now + " " + "[ServiceManager] - " + " " + errorMessage;
+                txtOutputConsole.ForeColor = Color.Red;
+                txtOutputConsole.Text += errMessage;
+                txtOutputConsole.Text += Environment.NewLine;
+
+            }
+        }
 
         private void CheckStatus(object sender, EventArgs e)
         {
@@ -214,7 +232,7 @@ namespace CodeCompilerServiceManager
             AppSettings.SaveSettings(model);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnResetManagerSettings_Click(object sender, EventArgs e)
         {
             AppSettingsModel model = AppSettings.RestartSettings();
             numericUpDownIntervalRefresh.Value = model.CheckStatusInterval;

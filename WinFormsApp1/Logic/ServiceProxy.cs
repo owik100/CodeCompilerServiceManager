@@ -12,12 +12,21 @@ namespace CodeCompilerServiceConfig.Logic
     {
         //TODO DI?
         ServiceController _sc;
+        public event EventHandler<string> ErrorMessage;
+
         public ServiceProxy()
         {
             _sc = new ServiceController("CodeCompilerServiceOwik");
         }
+
+        protected virtual void OnErrorMessage(string errorMessage)
+        {
+            ErrorMessage?.Invoke(this, errorMessage);
+        }
+
         public ServiceControllerStatus RunService()
         {
+            ServiceControllerStatus result = ServiceControllerStatus.Stopped;
             try
             {
                 _sc.Refresh();
@@ -25,17 +34,19 @@ namespace CodeCompilerServiceConfig.Logic
                 {
                     _sc.Start();
                     _sc.WaitForStatus(ServiceControllerStatus.Running, AppSettings.OperationTimeout);
+                    result = _sc.Status;
                 }
             }
             catch (Exception ex)
             {
-                //LogToApp
+                OnErrorMessage(ex.Message);
             }
-            return _sc.Status;
+            return result;
         }
 
         public ServiceControllerStatus StopService()
         {
+            ServiceControllerStatus result = ServiceControllerStatus.Stopped;
             try
             {
                 _sc.Refresh();
@@ -43,18 +54,20 @@ namespace CodeCompilerServiceConfig.Logic
                 {
                     _sc.Stop();
                     _sc.WaitForStatus(ServiceControllerStatus.Stopped, AppSettings.OperationTimeout);
+                    result = _sc.Status;
                 }
 
             }
             catch (Exception ex)
             {
-                //LogToApp
+                OnErrorMessage(ex.Message);
             }
-            return _sc.Status;
+            return result;
         }
 
         public ServiceControllerStatus RestartService()
         {
+            ServiceControllerStatus result = ServiceControllerStatus.Stopped;
             try
             {
                 _sc.Refresh();
@@ -73,13 +86,14 @@ namespace CodeCompilerServiceConfig.Logic
 
                     _sc.Start();
                     _sc.WaitForStatus(ServiceControllerStatus.Running, timeoutLocal);
+                    result = _sc.Status;
                 }
             }
             catch (Exception ex)
             {
-                //LogToApp
+                OnErrorMessage(ex.Message);
             }
-            return _sc.Status;
+            return result;
         }
 
         public ServiceControllerStatus GetServiceStatus()
@@ -93,7 +107,7 @@ namespace CodeCompilerServiceConfig.Logic
             }
             catch (Exception ex)
             {
-                //LogToApp
+                OnErrorMessage(ex.Message);
             }
             return result;
         }

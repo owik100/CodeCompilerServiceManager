@@ -37,9 +37,9 @@
             this.labelOperationTimeout = new System.Windows.Forms.Label();
             this.labelInterval = new System.Windows.Forms.Label();
             this.numericUpDownIntervalRefresh = new System.Windows.Forms.NumericUpDown();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.txtOutputConsole = new System.Windows.Forms.RichTextBox();
+            this.btnSaveManagerSettings = new System.Windows.Forms.Button();
+            this.btnResetManagerSettings = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericOperationTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalRefresh)).BeginInit();
@@ -153,42 +153,43 @@
             0});
             this.numericUpDownIntervalRefresh.ValueChanged += new System.EventHandler(this.numericUpDownIntervalRefresh_ValueChanged);
             // 
-            // richTextBox1
+            // txtOutputConsole
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(96, 306);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(648, 96);
-            this.richTextBox1.TabIndex = 10;
-            this.richTextBox1.Text = "";
+            this.txtOutputConsole.Location = new System.Drawing.Point(96, 306);
+            this.txtOutputConsole.Name = "txtOutputConsole";
+            this.txtOutputConsole.ReadOnly = true;
+            this.txtOutputConsole.Size = new System.Drawing.Size(648, 96);
+            this.txtOutputConsole.TabIndex = 10;
+            this.txtOutputConsole.Text = "";
             // 
-            // button1
+            // btnSaveManagerSettings
             // 
-            this.button1.Location = new System.Drawing.Point(364, 193);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Zapisz ustawienia";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnSaveManagerSettings.Location = new System.Drawing.Point(364, 209);
+            this.btnSaveManagerSettings.Name = "btnSaveManagerSettings";
+            this.btnSaveManagerSettings.Size = new System.Drawing.Size(108, 23);
+            this.btnSaveManagerSettings.TabIndex = 11;
+            this.btnSaveManagerSettings.Text = "Zapisz ustawienia";
+            this.btnSaveManagerSettings.UseVisualStyleBackColor = true;
+            this.btnSaveManagerSettings.Click += new System.EventHandler(this.btnSaveManagerSettings_Click);
             // 
-            // button2
+            // btnResetManagerSettings
             // 
-            this.button2.Location = new System.Drawing.Point(364, 222);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(108, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Restart ustawień";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnResetManagerSettings.Location = new System.Drawing.Point(364, 242);
+            this.btnResetManagerSettings.Name = "btnResetManagerSettings";
+            this.btnResetManagerSettings.Size = new System.Drawing.Size(108, 23);
+            this.btnResetManagerSettings.TabIndex = 12;
+            this.btnResetManagerSettings.Text = "Restart ustawień";
+            this.btnResetManagerSettings.UseVisualStyleBackColor = true;
+            this.btnResetManagerSettings.Click += new System.EventHandler(this.btnResetManagerSettings_Click);
             // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.btnResetManagerSettings);
+            this.Controls.Add(this.btnSaveManagerSettings);
+            this.Controls.Add(this.txtOutputConsole);
             this.Controls.Add(this.numericUpDownIntervalRefresh);
             this.Controls.Add(this.labelInterval);
             this.Controls.Add(this.labelOperationTimeout);
@@ -219,8 +220,8 @@
         private Label labelOperationTimeout;
         private Label labelInterval;
         private NumericUpDown numericUpDownIntervalRefresh;
-        private RichTextBox richTextBox1;
-        private Button button1;
-        private Button button2;
+        private RichTextBox txtOutputConsole;
+        private Button btnSaveManagerSettings;
+        private Button btnResetManagerSettings;
     }
 }
