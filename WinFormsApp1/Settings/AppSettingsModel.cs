@@ -10,5 +10,6 @@ namespace CodeCompilerServiceManager.Settings
     {
         public TimeSpan OperationTimeout { get; set; }
         public int CheckStatusInterval { get; set; }
+        public bool RefreshStatusEnabled { get; set; }
     }
 }

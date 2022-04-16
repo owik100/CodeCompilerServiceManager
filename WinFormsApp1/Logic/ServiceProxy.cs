@@ -39,7 +39,7 @@ namespace CodeCompilerServiceConfig.Logic
             }
             catch (Exception ex)
             {
-                OnErrorMessage(ex.Message);
+                OnErrorMessage(ex.ToString());
             }
             return result;
         }
@@ -60,7 +60,7 @@ namespace CodeCompilerServiceConfig.Logic
             }
             catch (Exception ex)
             {
-                OnErrorMessage(ex.Message);
+                OnErrorMessage(ex.ToString());
             }
             return result;
         }
@@ -91,7 +91,7 @@ namespace CodeCompilerServiceConfig.Logic
             }
             catch (Exception ex)
             {
-                OnErrorMessage(ex.Message);
+                OnErrorMessage(ex.ToString());
             }
             return result;
         }
@@ -103,11 +103,10 @@ namespace CodeCompilerServiceConfig.Logic
             {
                 _sc.Refresh();
                 result = _sc.Status;
-
             }
             catch (Exception ex)
             {
-                OnErrorMessage(ex.Message);
+                OnErrorMessage(ex.ToString());
             }
             return result;
         }

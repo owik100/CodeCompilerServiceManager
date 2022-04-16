@@ -9,9 +9,16 @@ namespace CodeCompilerServiceManager.Settings
 {
     public static class AppSettings
     {
-        //TODO Zapis i odczyt do rejestru
         public static TimeSpan OperationTimeout;
         public static int CheckStatusInterval;
+        public static bool RefreshStatusEnabled;
+
+        public static event EventHandler<string> ErrorMessage;
+
+        public static void OnErrorMessage(string errorMessage)
+        {
+            ErrorMessage?.Invoke(null, errorMessage);
+        }
 
         public static AppSettingsModel RestartSettings()
         {
@@ -19,10 +26,12 @@ namespace CodeCompilerServiceManager.Settings
             {
                 OperationTimeout = TimeSpan.FromMilliseconds(5000),
                 CheckStatusInterval = 3000,
+                RefreshStatusEnabled = true,
             };
 
             OperationTimeout = TimeSpan.FromMilliseconds(5000);
             CheckStatusInterval = 3000;
+            RefreshStatusEnabled = true;
 
             SaveSettings(model);
             return model;
@@ -36,11 +45,12 @@ namespace CodeCompilerServiceManager.Settings
 
                 key.SetValue("OperationTimeout", model.OperationTimeout);
                 key.SetValue("CheckStatusInterval", model.CheckStatusInterval);
+                key.SetValue("RefreshStatusEnabled", model.RefreshStatusEnabled);
                 key.Close();
             }
             catch (Exception ex)
             {
-                //log
+                OnErrorMessage(ex.ToString());
             }
         }
 
@@ -58,6 +68,9 @@ namespace CodeCompilerServiceManager.Settings
 
                     string checkStatusInterval = key.GetValue("CheckStatusInterval").ToString();
                     result.CheckStatusInterval = Convert.ToInt32(checkStatusInterval);
+
+                    string refreshStatusEnabled = key.GetValue("RefreshStatusEnabled").ToString();
+                    result.RefreshStatusEnabled = bool.Parse(refreshStatusEnabled);
                     key.Close();
                 }
                 else
@@ -67,11 +80,12 @@ namespace CodeCompilerServiceManager.Settings
             }
             catch (Exception ex)
             {
-                //log
+                OnErrorMessage(ex.ToString());
                 RestartSettings();
             }
             OperationTimeout = result.OperationTimeout;
             CheckStatusInterval = result.CheckStatusInterval;
+            RefreshStatusEnabled = result.RefreshStatusEnabled;
 
             return result;
         }

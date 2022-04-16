@@ -40,6 +40,8 @@
             this.txtOutputConsole = new System.Windows.Forms.RichTextBox();
             this.btnSaveManagerSettings = new System.Windows.Forms.Button();
             this.btnResetManagerSettings = new System.Windows.Forms.Button();
+            this.btnClearManagerConsole = new System.Windows.Forms.Button();
+            this.checkBoxRefreshEnabled = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericOperationTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalRefresh)).BeginInit();
@@ -182,11 +184,36 @@
             this.btnResetManagerSettings.UseVisualStyleBackColor = true;
             this.btnResetManagerSettings.Click += new System.EventHandler(this.btnResetManagerSettings_Click);
             // 
+            // btnClearManagerConsole
+            // 
+            this.btnClearManagerConsole.Location = new System.Drawing.Point(96, 415);
+            this.btnClearManagerConsole.Name = "btnClearManagerConsole";
+            this.btnClearManagerConsole.Size = new System.Drawing.Size(117, 23);
+            this.btnClearManagerConsole.TabIndex = 13;
+            this.btnClearManagerConsole.Text = "Wyczyść konsole";
+            this.btnClearManagerConsole.UseVisualStyleBackColor = true;
+            this.btnClearManagerConsole.Click += new System.EventHandler(this.btnClearManagerConsole_Click);
+            // 
+            // checkBoxRefreshEnabled
+            // 
+            this.checkBoxRefreshEnabled.AutoSize = true;
+            this.checkBoxRefreshEnabled.Checked = true;
+            this.checkBoxRefreshEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxRefreshEnabled.Location = new System.Drawing.Point(95, 168);
+            this.checkBoxRefreshEnabled.Name = "checkBoxRefreshEnabled";
+            this.checkBoxRefreshEnabled.Size = new System.Drawing.Size(139, 19);
+            this.checkBoxRefreshEnabled.TabIndex = 14;
+            this.checkBoxRefreshEnabled.Text = "Odświeżaj stan usługi";
+            this.checkBoxRefreshEnabled.UseVisualStyleBackColor = true;
+            this.checkBoxRefreshEnabled.CheckedChanged += new System.EventHandler(this.checkBoxRefreshEnabled_CheckedChanged);
+            // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.checkBoxRefreshEnabled);
+            this.Controls.Add(this.btnClearManagerConsole);
             this.Controls.Add(this.btnResetManagerSettings);
             this.Controls.Add(this.btnSaveManagerSettings);
             this.Controls.Add(this.txtOutputConsole);
@@ -223,5 +250,7 @@
         private RichTextBox txtOutputConsole;
         private Button btnSaveManagerSettings;
         private Button btnResetManagerSettings;
+        private Button btnClearManagerConsole;
+        private CheckBox checkBoxRefreshEnabled;
     }
 }

@@ -19,12 +19,16 @@ namespace CodeCompilerServiceManager
         public AppForm()
         {
             InitializeComponent();
+            AppSettings.ErrorMessage += ServiceConnector_ErrorMessageHandler;
             serviceConnector.ErrorMessage += ServiceConnector_ErrorMessageHandler;
             LoadOptions();
-            labelServiceStatus.Text = "Stan us³ugi: Pobieranie...";
+            labelServiceStatus.Text = "Stan us³ugi: Nieznany...";
             InitTimer();
             InitWorkers();
-            CheckStatus(null, null);
+            if (checkBoxRefreshEnabled.Checked)
+            {
+                CheckStatus(null, null);
+            }
         }
 
         private void LoadOptions()
@@ -32,6 +36,7 @@ namespace CodeCompilerServiceManager
             AppSettingsModel model = AppSettings.LoadSettings();
             numericUpDownIntervalRefresh.Value = model.CheckStatusInterval;
             numericOperationTimeout.Value = Convert.ToDecimal(model.OperationTimeout.TotalMilliseconds);
+            checkBoxRefreshEnabled.Checked = model.RefreshStatusEnabled;
         }
 
         private void InitTimer()
@@ -39,7 +44,11 @@ namespace CodeCompilerServiceManager
             serviceStatusTimer = new System.Windows.Forms.Timer();
             serviceStatusTimer.Tick += new EventHandler(CheckStatus);
             serviceStatusTimer.Interval = AppSettings.CheckStatusInterval;
-            serviceStatusTimer.Start();
+            if (checkBoxRefreshEnabled.Checked)
+            {
+                serviceStatusTimer.Start();
+            }
+
         }
 
         #region backgroundWorkers
@@ -123,7 +132,8 @@ namespace CodeCompilerServiceManager
             AppSettingsModel model = new AppSettingsModel()
             {
                 CheckStatusInterval = Convert.ToInt32(numericUpDownIntervalRefresh.Value),
-                OperationTimeout = TimeSpan.FromMilliseconds(Convert.ToDouble(numericOperationTimeout.Value))
+                OperationTimeout = TimeSpan.FromMilliseconds(Convert.ToDouble(numericOperationTimeout.Value)),
+                RefreshStatusEnabled = checkBoxRefreshEnabled.Checked,
             };
             AppSettings.SaveSettings(model);
         }
@@ -227,7 +237,8 @@ namespace CodeCompilerServiceManager
             AppSettingsModel model = new AppSettingsModel()
             {
                 CheckStatusInterval = Convert.ToInt32(numericUpDownIntervalRefresh.Value),
-                OperationTimeout = TimeSpan.FromMilliseconds(Convert.ToDouble(numericOperationTimeout.Value))
+                OperationTimeout = TimeSpan.FromMilliseconds(Convert.ToDouble(numericOperationTimeout.Value)),
+                RefreshStatusEnabled = checkBoxRefreshEnabled.Checked,
             };
             AppSettings.SaveSettings(model);
         }
@@ -237,6 +248,25 @@ namespace CodeCompilerServiceManager
             AppSettingsModel model = AppSettings.RestartSettings();
             numericUpDownIntervalRefresh.Value = model.CheckStatusInterval;
             numericOperationTimeout.Value = Convert.ToDecimal(model.OperationTimeout.TotalMilliseconds);
+            checkBoxRefreshEnabled.Checked = model.RefreshStatusEnabled;
+        }
+
+        private void btnClearManagerConsole_Click(object sender, EventArgs e)
+        {
+            txtOutputConsole.Clear();
+        }
+
+        private void checkBoxRefreshEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if(serviceStatusTimer != null){
+                serviceStatusTimer.Enabled = checkBoxRefreshEnabled.Checked;
+            }
+
+            if (checkBoxRefreshEnabled.Checked)
+            {
+                CheckStatus(null, null);
+            }
+            SaveManagerSettings();
         }
     }
 }
