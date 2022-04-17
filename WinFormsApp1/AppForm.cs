@@ -38,11 +38,83 @@ namespace CodeCompilerServiceManager
             {
                 textBoxServicePath.Text = servisePath;
                 serviceSettings = new ServiceSettings(servisePath);
+
+                PrepareLibOptions();
+                PrepareServiceOptions();
             }
             if (checkBoxRefreshEnabled.Checked)
             {
                 CheckStatus(null, null);
             }
+        }
+
+        private void PrepareServiceOptions()
+        {
+            //2 way binding?
+            bool saveToEventLog = false;
+            var settingExist = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.Where(x => x.Name == "EventLog")?.FirstOrDefault();
+            if(settingExist != null)
+            {
+                saveToEventLog = true;
+            }
+
+            checkBoxLogToEventViewer.Checked = saveToEventLog;
+
+            bool saveToFile = false;
+            settingExist = null;
+            settingExist = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.Where(x => x.Name == "File")?.FirstOrDefault();
+            if (settingExist != null)
+            {
+                saveToFile = true;
+            }
+
+            checkBoxLogToFile.Checked = saveToFile;
+
+            string pathToFileLog = "";
+            pathToFileLog = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.Where(x => x.Name == "File")?.FirstOrDefault()?.Args?.path;
+            if (!String.IsNullOrEmpty(pathToFileLog))
+            {
+                textBoxPathToLogs.Text = pathToFileLog;
+            }
+
+            decimal intervalRefresh = -1;
+            intervalRefresh = (decimal)(serviceSettings?.ServiceSettingsModel?.ServiceOptions?.Interval);
+            if (intervalRefresh > 0)
+            {
+                numericUpDownServiceMainInterval.Value = intervalRefresh;
+            }
+
+            decimal bufferSize = -1;
+            bufferSize = (decimal)(serviceSettings?.ServiceSettingsModel?.ServiceOptions?.InternalBufferSize);
+            if (bufferSize > 0)
+            {
+                numericUpDownInternalBufferSize.Value = bufferSize;
+            }
+
+        }
+
+        private void PrepareLibOptions()
+        {
+            string pathToInput = "";
+            pathToInput = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath;
+            if (!String.IsNullOrEmpty(pathToInput))
+            {
+                textBoxInputPath.Text = pathToInput;
+            }
+
+            string pathToOutput = "";
+            pathToOutput = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.OutputPath;
+            if (!String.IsNullOrEmpty(pathToOutput))
+            {
+                textBoxOutputPath.Text = pathToOutput;
+            }
+
+            bool? compileToConsoleApp = false;
+            compileToConsoleApp = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildToConsoleApp;
+            if (compileToConsoleApp == null)
+                compileToConsoleApp = false;
+
+            checkBoxCompileToConsoleApp.Checked = (bool)compileToConsoleApp;
         }
 
         private void LoadOptions()

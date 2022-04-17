@@ -49,9 +49,23 @@
             this.labelServicePath = new System.Windows.Forms.Label();
             this.buttonOpenLogFolder = new System.Windows.Forms.Button();
             this.buttonRefreshServiceState = new System.Windows.Forms.Button();
+            this.checkBoxLogToEventViewer = new System.Windows.Forms.CheckBox();
+            this.checkBoxLogToFile = new System.Windows.Forms.CheckBox();
+            this.textBoxPathToLogs = new System.Windows.Forms.TextBox();
+            this.numericUpDownServiceMainInterval = new System.Windows.Forms.NumericUpDown();
+            this.labelIntervalService = new System.Windows.Forms.Label();
+            this.labelInternalBufferSize = new System.Windows.Forms.Label();
+            this.numericUpDownInternalBufferSize = new System.Windows.Forms.NumericUpDown();
+            this.textBoxInputPath = new System.Windows.Forms.TextBox();
+            this.textBoxOutputPath = new System.Windows.Forms.TextBox();
+            this.labelInputPath = new System.Windows.Forms.Label();
+            this.labelIOutputPath = new System.Windows.Forms.Label();
+            this.checkBoxCompileToConsoleApp = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericOperationTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalRefresh)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownServiceMainInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownInternalBufferSize)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStartService
@@ -282,11 +296,157 @@
             this.buttonRefreshServiceState.UseVisualStyleBackColor = true;
             this.buttonRefreshServiceState.Click += new System.EventHandler(this.buttonRefreshServiceState_Click);
             // 
+            // checkBoxLogToEventViewer
+            // 
+            this.checkBoxLogToEventViewer.AutoSize = true;
+            this.checkBoxLogToEventViewer.Location = new System.Drawing.Point(552, 54);
+            this.checkBoxLogToEventViewer.Name = "checkBoxLogToEventViewer";
+            this.checkBoxLogToEventViewer.Size = new System.Drawing.Size(200, 19);
+            this.checkBoxLogToEventViewer.TabIndex = 23;
+            this.checkBoxLogToEventViewer.Text = "Zapisuj logi do dziennika zdarzeń";
+            this.checkBoxLogToEventViewer.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxLogToFile
+            // 
+            this.checkBoxLogToFile.AutoSize = true;
+            this.checkBoxLogToFile.Location = new System.Drawing.Point(552, 81);
+            this.checkBoxLogToFile.Name = "checkBoxLogToFile";
+            this.checkBoxLogToFile.Size = new System.Drawing.Size(133, 19);
+            this.checkBoxLogToFile.TabIndex = 24;
+            this.checkBoxLogToFile.Text = "Zapisuj logi do pliku";
+            this.checkBoxLogToFile.UseVisualStyleBackColor = true;
+            // 
+            // textBoxPathToLogs
+            // 
+            this.textBoxPathToLogs.Location = new System.Drawing.Point(390, 108);
+            this.textBoxPathToLogs.Name = "textBoxPathToLogs";
+            this.textBoxPathToLogs.Size = new System.Drawing.Size(398, 23);
+            this.textBoxPathToLogs.TabIndex = 25;
+            this.textBoxPathToLogs.WordWrap = false;
+            // 
+            // numericUpDownServiceMainInterval
+            // 
+            this.numericUpDownServiceMainInterval.Location = new System.Drawing.Point(818, 59);
+            this.numericUpDownServiceMainInterval.Maximum = new decimal(new int[] {
+            -1981284353,
+            -1966660860,
+            0,
+            0});
+            this.numericUpDownServiceMainInterval.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numericUpDownServiceMainInterval.Name = "numericUpDownServiceMainInterval";
+            this.numericUpDownServiceMainInterval.Size = new System.Drawing.Size(253, 23);
+            this.numericUpDownServiceMainInterval.TabIndex = 29;
+            this.numericUpDownServiceMainInterval.Value = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            // 
+            // labelIntervalService
+            // 
+            this.labelIntervalService.AutoSize = true;
+            this.labelIntervalService.Location = new System.Drawing.Point(818, 41);
+            this.labelIntervalService.Name = "labelIntervalService";
+            this.labelIntervalService.Size = new System.Drawing.Size(253, 15);
+            this.labelIntervalService.TabIndex = 28;
+            this.labelIntervalService.Text = "Interwał odświeżania głównej akcji usługi (ms):";
+            // 
+            // labelInternalBufferSize
+            // 
+            this.labelInternalBufferSize.AutoSize = true;
+            this.labelInternalBufferSize.Location = new System.Drawing.Point(818, 90);
+            this.labelInternalBufferSize.Name = "labelInternalBufferSize";
+            this.labelInternalBufferSize.Size = new System.Drawing.Size(234, 15);
+            this.labelInternalBufferSize.TabIndex = 27;
+            this.labelInternalBufferSize.Text = "Rozmiar (w bajtach) buforu wewnętrznego.";
+            // 
+            // numericUpDownInternalBufferSize
+            // 
+            this.numericUpDownInternalBufferSize.Location = new System.Drawing.Point(818, 108);
+            this.numericUpDownInternalBufferSize.Maximum = new decimal(new int[] {
+            -478150656,
+            139961312,
+            16263,
+            0});
+            this.numericUpDownInternalBufferSize.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericUpDownInternalBufferSize.Name = "numericUpDownInternalBufferSize";
+            this.numericUpDownInternalBufferSize.Size = new System.Drawing.Size(253, 23);
+            this.numericUpDownInternalBufferSize.TabIndex = 26;
+            this.numericUpDownInternalBufferSize.Value = new decimal(new int[] {
+            8192,
+            0,
+            0,
+            0});
+            // 
+            // textBoxInputPath
+            // 
+            this.textBoxInputPath.Location = new System.Drawing.Point(795, 180);
+            this.textBoxInputPath.Name = "textBoxInputPath";
+            this.textBoxInputPath.Size = new System.Drawing.Size(398, 23);
+            this.textBoxInputPath.TabIndex = 30;
+            this.textBoxInputPath.WordWrap = false;
+            // 
+            // textBoxOutputPath
+            // 
+            this.textBoxOutputPath.Location = new System.Drawing.Point(795, 234);
+            this.textBoxOutputPath.Name = "textBoxOutputPath";
+            this.textBoxOutputPath.Size = new System.Drawing.Size(398, 23);
+            this.textBoxOutputPath.TabIndex = 31;
+            this.textBoxOutputPath.WordWrap = false;
+            // 
+            // labelInputPath
+            // 
+            this.labelInputPath.AutoSize = true;
+            this.labelInputPath.Location = new System.Drawing.Point(795, 162);
+            this.labelInputPath.Name = "labelInputPath";
+            this.labelInputPath.Size = new System.Drawing.Size(210, 15);
+            this.labelInputPath.TabIndex = 32;
+            this.labelInputPath.Text = "Folder wejściowy plików do kompilacji";
+            // 
+            // labelIOutputPath
+            // 
+            this.labelIOutputPath.AutoSize = true;
+            this.labelIOutputPath.Location = new System.Drawing.Point(795, 209);
+            this.labelIOutputPath.Name = "labelIOutputPath";
+            this.labelIOutputPath.Size = new System.Drawing.Size(207, 15);
+            this.labelIOutputPath.TabIndex = 33;
+            this.labelIOutputPath.Text = "Folder wyściowy plików do kompilacji";
+            // 
+            // checkBoxCompileToConsoleApp
+            // 
+            this.checkBoxCompileToConsoleApp.AutoSize = true;
+            this.checkBoxCompileToConsoleApp.Location = new System.Drawing.Point(795, 288);
+            this.checkBoxCompileToConsoleApp.Name = "checkBoxCompileToConsoleApp";
+            this.checkBoxCompileToConsoleApp.Size = new System.Drawing.Size(200, 19);
+            this.checkBoxCompileToConsoleApp.TabIndex = 34;
+            this.checkBoxCompileToConsoleApp.Text = "Kompiluj do aplikacji konsolowej";
+            this.checkBoxCompileToConsoleApp.UseVisualStyleBackColor = true;
+            // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 623);
+            this.ClientSize = new System.Drawing.Size(1205, 623);
+            this.Controls.Add(this.checkBoxCompileToConsoleApp);
+            this.Controls.Add(this.labelIOutputPath);
+            this.Controls.Add(this.labelInputPath);
+            this.Controls.Add(this.textBoxOutputPath);
+            this.Controls.Add(this.textBoxInputPath);
+            this.Controls.Add(this.numericUpDownServiceMainInterval);
+            this.Controls.Add(this.labelIntervalService);
+            this.Controls.Add(this.labelInternalBufferSize);
+            this.Controls.Add(this.numericUpDownInternalBufferSize);
+            this.Controls.Add(this.textBoxPathToLogs);
+            this.Controls.Add(this.checkBoxLogToFile);
+            this.Controls.Add(this.checkBoxLogToEventViewer);
             this.Controls.Add(this.buttonRefreshServiceState);
             this.Controls.Add(this.buttonOpenLogFolder);
             this.Controls.Add(this.labelServicePath);
@@ -313,6 +473,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericOperationTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalRefresh)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownServiceMainInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownInternalBufferSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -341,5 +503,17 @@
         private Label labelServicePath;
         private Button buttonOpenLogFolder;
         private Button buttonRefreshServiceState;
+        private CheckBox checkBoxLogToEventViewer;
+        private CheckBox checkBoxLogToFile;
+        private TextBox textBoxPathToLogs;
+        private NumericUpDown numericUpDownServiceMainInterval;
+        private Label labelIntervalService;
+        private Label labelInternalBufferSize;
+        private NumericUpDown numericUpDownInternalBufferSize;
+        private TextBox textBoxInputPath;
+        private TextBox textBoxOutputPath;
+        private Label labelInputPath;
+        private Label labelIOutputPath;
+        private CheckBox checkBoxCompileToConsoleApp;
     }
 }
