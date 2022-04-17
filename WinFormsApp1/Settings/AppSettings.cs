@@ -12,12 +12,13 @@ namespace CodeCompilerServiceManager.Settings
         public static TimeSpan OperationTimeout;
         public static int CheckStatusInterval;
         public static bool RefreshStatusEnabled;
+        public static string ServicePath;
 
-        public static event EventHandler<string> ErrorMessage;
+        public static event EventHandler<string> GetMessage;
 
-        public static void OnErrorMessage(string errorMessage)
+        public static void OnMessage(string errorMessage)
         {
-            ErrorMessage?.Invoke(null, errorMessage);
+            GetMessage?.Invoke(null, errorMessage);
         }
 
         public static AppSettingsModel RestartSettings()
@@ -50,7 +51,7 @@ namespace CodeCompilerServiceManager.Settings
             }
             catch (Exception ex)
             {
-                OnErrorMessage(ex.ToString());
+                OnMessage(ex.ToString());
             }
         }
 
@@ -80,7 +81,7 @@ namespace CodeCompilerServiceManager.Settings
             }
             catch (Exception ex)
             {
-                OnErrorMessage(ex.ToString());
+                OnMessage(ex.ToString());
                 RestartSettings();
             }
             OperationTimeout = result.OperationTimeout;

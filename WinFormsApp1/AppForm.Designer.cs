@@ -42,6 +42,12 @@
             this.btnResetManagerSettings = new System.Windows.Forms.Button();
             this.btnClearManagerConsole = new System.Windows.Forms.Button();
             this.checkBoxRefreshEnabled = new System.Windows.Forms.CheckBox();
+            this.buttonInstallService = new System.Windows.Forms.Button();
+            this.buttonDeleteService = new System.Windows.Forms.Button();
+            this.buttonAppRestart = new System.Windows.Forms.Button();
+            this.textBoxServicePath = new System.Windows.Forms.TextBox();
+            this.labelServicePath = new System.Windows.Forms.Label();
+            this.buttonOpenLogFolder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericOperationTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalRefresh)).BeginInit();
@@ -157,10 +163,10 @@
             // 
             // txtOutputConsole
             // 
-            this.txtOutputConsole.Location = new System.Drawing.Point(96, 306);
+            this.txtOutputConsole.Location = new System.Drawing.Point(96, 347);
             this.txtOutputConsole.Name = "txtOutputConsole";
             this.txtOutputConsole.ReadOnly = true;
-            this.txtOutputConsole.Size = new System.Drawing.Size(648, 96);
+            this.txtOutputConsole.Size = new System.Drawing.Size(648, 235);
             this.txtOutputConsole.TabIndex = 10;
             this.txtOutputConsole.Text = "";
             // 
@@ -186,7 +192,7 @@
             // 
             // btnClearManagerConsole
             // 
-            this.btnClearManagerConsole.Location = new System.Drawing.Point(96, 415);
+            this.btnClearManagerConsole.Location = new System.Drawing.Point(87, 588);
             this.btnClearManagerConsole.Name = "btnClearManagerConsole";
             this.btnClearManagerConsole.Size = new System.Drawing.Size(117, 23);
             this.btnClearManagerConsole.TabIndex = 13;
@@ -207,11 +213,75 @@
             this.checkBoxRefreshEnabled.UseVisualStyleBackColor = true;
             this.checkBoxRefreshEnabled.CheckedChanged += new System.EventHandler(this.checkBoxRefreshEnabled_CheckedChanged);
             // 
+            // buttonInstallService
+            // 
+            this.buttonInstallService.Location = new System.Drawing.Point(509, 209);
+            this.buttonInstallService.Name = "buttonInstallService";
+            this.buttonInstallService.Size = new System.Drawing.Size(119, 23);
+            this.buttonInstallService.TabIndex = 15;
+            this.buttonInstallService.Text = "Zainstaluj usługę";
+            this.buttonInstallService.UseVisualStyleBackColor = true;
+            this.buttonInstallService.Click += new System.EventHandler(this.buttonInstallService_Click);
+            // 
+            // buttonDeleteService
+            // 
+            this.buttonDeleteService.Location = new System.Drawing.Point(509, 238);
+            this.buttonDeleteService.Name = "buttonDeleteService";
+            this.buttonDeleteService.Size = new System.Drawing.Size(119, 23);
+            this.buttonDeleteService.TabIndex = 16;
+            this.buttonDeleteService.Text = "Usuń usługę";
+            this.buttonDeleteService.UseVisualStyleBackColor = true;
+            this.buttonDeleteService.Click += new System.EventHandler(this.buttonDeleteService_Click);
+            // 
+            // buttonAppRestart
+            // 
+            this.buttonAppRestart.Location = new System.Drawing.Point(364, 180);
+            this.buttonAppRestart.Name = "buttonAppRestart";
+            this.buttonAppRestart.Size = new System.Drawing.Size(108, 23);
+            this.buttonAppRestart.TabIndex = 17;
+            this.buttonAppRestart.Text = "Restart aplikacji";
+            this.buttonAppRestart.UseVisualStyleBackColor = true;
+            this.buttonAppRestart.Click += new System.EventHandler(this.buttonAppRestart_Click);
+            // 
+            // textBoxServicePath
+            // 
+            this.textBoxServicePath.Location = new System.Drawing.Point(187, 289);
+            this.textBoxServicePath.Name = "textBoxServicePath";
+            this.textBoxServicePath.ReadOnly = true;
+            this.textBoxServicePath.Size = new System.Drawing.Size(557, 23);
+            this.textBoxServicePath.TabIndex = 19;
+            this.textBoxServicePath.WordWrap = false;
+            // 
+            // labelServicePath
+            // 
+            this.labelServicePath.AutoSize = true;
+            this.labelServicePath.Location = new System.Drawing.Point(98, 292);
+            this.labelServicePath.Name = "labelServicePath";
+            this.labelServicePath.Size = new System.Drawing.Size(83, 15);
+            this.labelServicePath.TabIndex = 20;
+            this.labelServicePath.Text = "Ścieżka usługi:";
+            // 
+            // buttonOpenLogFolder
+            // 
+            this.buttonOpenLogFolder.Location = new System.Drawing.Point(511, 183);
+            this.buttonOpenLogFolder.Name = "buttonOpenLogFolder";
+            this.buttonOpenLogFolder.Size = new System.Drawing.Size(233, 23);
+            this.buttonOpenLogFolder.TabIndex = 21;
+            this.buttonOpenLogFolder.Text = "Otwórz folder z logami serwisu";
+            this.buttonOpenLogFolder.UseVisualStyleBackColor = true;
+            this.buttonOpenLogFolder.Click += new System.EventHandler(this.buttonOpenLogFolder_Click);
+            // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 623);
+            this.Controls.Add(this.buttonOpenLogFolder);
+            this.Controls.Add(this.labelServicePath);
+            this.Controls.Add(this.textBoxServicePath);
+            this.Controls.Add(this.buttonAppRestart);
+            this.Controls.Add(this.buttonDeleteService);
+            this.Controls.Add(this.buttonInstallService);
             this.Controls.Add(this.checkBoxRefreshEnabled);
             this.Controls.Add(this.btnClearManagerConsole);
             this.Controls.Add(this.btnResetManagerSettings);
@@ -252,5 +322,11 @@
         private Button btnResetManagerSettings;
         private Button btnClearManagerConsole;
         private CheckBox checkBoxRefreshEnabled;
+        private Button buttonInstallService;
+        private Button buttonDeleteService;
+        private Button buttonAppRestart;
+        private TextBox textBoxServicePath;
+        private Label labelServicePath;
+        private Button buttonOpenLogFolder;
     }
 }

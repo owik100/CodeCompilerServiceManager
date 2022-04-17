@@ -1,7 +1,9 @@
 using CodeCompilerServiceConfig.Logic;
 using CodeCompilerServiceManager.Settings;
+using Newtonsoft.Json;
 using System.ComponentModel;
 using System.ServiceProcess;
+using CodeCompilerService.OptionModels;
 
 namespace CodeCompilerServiceManager
 {
@@ -19,12 +21,21 @@ namespace CodeCompilerServiceManager
         public AppForm()
         {
             InitializeComponent();
-            AppSettings.ErrorMessage += ServiceConnector_ErrorMessageHandler;
-            serviceConnector.ErrorMessage += ServiceConnector_ErrorMessageHandler;
+            AppSettings.GetMessage += ServiceConnector_MessageHandler;
+            serviceConnector.GetMessage += ServiceConnector_MessageHandler;
             LoadOptions();
             labelServiceStatus.Text = "Stan us³ugi: Nieznany...";
             InitTimer();
             InitWorkers();
+            string servisePath = serviceConnector.GetServicePath();
+            if (string.IsNullOrEmpty(servisePath))
+            {
+                ServiceConnector_MessageHandler(null, "Nie znaleziono œcie¿ki us³ugi!");
+            }
+            else
+            {
+                textBoxServicePath.Text = servisePath;
+            }
             if (checkBoxRefreshEnabled.Checked)
             {
                 CheckStatus(null, null);
@@ -141,7 +152,10 @@ namespace CodeCompilerServiceManager
         private void numericUpDownIntervalRefresh_ValueChanged(object sender, EventArgs e)
         {
             AppSettings.CheckStatusInterval = Convert.ToInt32(numericUpDownIntervalRefresh.Value);
-            serviceStatusTimer.Interval = AppSettings.CheckStatusInterval;
+            if (serviceStatusTimer != null)
+            {
+                serviceStatusTimer.Interval = AppSettings.CheckStatusInterval;
+            }
             SaveManagerSettings();
         }
 
@@ -153,11 +167,11 @@ namespace CodeCompilerServiceManager
 
         #endregion
 
-        private void ServiceConnector_ErrorMessageHandler(object? sender, string errorMessage)
+        private void ServiceConnector_MessageHandler(object? sender, string errorMessage)
         {
             if (txtOutputConsole.InvokeRequired)
             {
-                Action safeWrite = delegate { ServiceConnector_ErrorMessageHandler(null, errorMessage);};
+                Action safeWrite = delegate { ServiceConnector_MessageHandler(null, errorMessage); };
                 txtOutputConsole.Invoke(safeWrite);
             }
             else
@@ -258,7 +272,8 @@ namespace CodeCompilerServiceManager
 
         private void checkBoxRefreshEnabled_CheckedChanged(object sender, EventArgs e)
         {
-            if(serviceStatusTimer != null){
+            if (serviceStatusTimer != null)
+            {
                 serviceStatusTimer.Enabled = checkBoxRefreshEnabled.Checked;
             }
 
@@ -267,6 +282,50 @@ namespace CodeCompilerServiceManager
                 CheckStatus(null, null);
             }
             SaveManagerSettings();
+        }
+
+        private void buttonInstallService_Click(object sender, EventArgs e)
+        {
+            string path = serviceConnector.InstallService();
+            if (!string.IsNullOrEmpty(path))
+            {
+                textBoxServicePath.Text = path;
+            }
+        }
+
+        private void buttonDeleteService_Click(object sender, EventArgs e)
+        {
+            bool res = serviceConnector.RemoveService();
+            if (res)
+            {
+                textBoxServicePath.Text = "";
+            }
+        }
+
+        private void buttonAppRestart_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+            Environment.Exit(0);
+        }
+
+        private void buttonOpenLogFolder_Click(object sender, EventArgs e)
+        {
+            //TODO wczytanie jsona konfigu na start
+            string serviceConfigPath = textBoxServicePath.Text;
+            if (string.IsNullOrEmpty(serviceConfigPath))
+            {
+                ServiceConnector_MessageHandler(null, "Nie znaleziono œcie¿ki us³ugi!");
+            }
+            else
+            {
+                string pathToJson = Path.GetDirectoryName(serviceConfigPath) + @"\appsettings.json";
+                using (StreamReader r = new StreamReader(pathToJson))
+                {
+                    string json = r.ReadToEnd();
+                    WorkerServiceOptions items = JsonConvert.DeserializeObject< WorkerServiceOptions > (json);
+                }
+            }
+
         }
     }
 }
