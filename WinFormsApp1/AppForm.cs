@@ -4,12 +4,14 @@ using Newtonsoft.Json;
 using System.ComponentModel;
 using System.ServiceProcess;
 using CodeCompilerService.OptionModels;
+using CodeCompilerServiceManager.Settings.Models;
 
 namespace CodeCompilerServiceManager
 {
     public partial class AppForm : Form
     {
         ServiceProxy serviceConnector = new ServiceProxy();
+        ServiceSettings serviceSettings;
 
         private System.Windows.Forms.Timer serviceStatusTimer;
         private BackgroundWorker workerOnStart;
@@ -35,6 +37,7 @@ namespace CodeCompilerServiceManager
             else
             {
                 textBoxServicePath.Text = servisePath;
+                serviceSettings = new ServiceSettings(servisePath);
             }
             if (checkBoxRefreshEnabled.Checked)
             {
@@ -318,14 +321,22 @@ namespace CodeCompilerServiceManager
             }
             else
             {
-                string pathToJson = Path.GetDirectoryName(serviceConfigPath) + @"\appsettings.json";
-                using (StreamReader r = new StreamReader(pathToJson))
+                string path = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo.Where(x => x.Name == "File").FirstOrDefault()?.Args?.path;
+                if (string.IsNullOrWhiteSpace(path))
                 {
-                    string json = r.ReadToEnd();
-                    WorkerServiceOptions items = JsonConvert.DeserializeObject< WorkerServiceOptions > (json);
+                    ServiceConnector_MessageHandler(null, "Nie znaleziono œcie¿ki do logów w opcjach!");
+                }
+                else
+                {
+                    string argument = "/select, \"" + path + "\"";
+                    System.Diagnostics.Process.Start("explorer.exe", argument);
                 }
             }
+        }
 
+        private void buttonRefreshServiceState_Click(object sender, EventArgs e)
+        {
+            CheckStatus(null, null);
         }
     }
 }

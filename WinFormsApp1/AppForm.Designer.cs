@@ -48,6 +48,7 @@
             this.textBoxServicePath = new System.Windows.Forms.TextBox();
             this.labelServicePath = new System.Windows.Forms.Label();
             this.buttonOpenLogFolder = new System.Windows.Forms.Button();
+            this.buttonRefreshServiceState = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericOperationTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalRefresh)).BeginInit();
@@ -207,9 +208,9 @@
             this.checkBoxRefreshEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxRefreshEnabled.Location = new System.Drawing.Point(95, 168);
             this.checkBoxRefreshEnabled.Name = "checkBoxRefreshEnabled";
-            this.checkBoxRefreshEnabled.Size = new System.Drawing.Size(139, 19);
+            this.checkBoxRefreshEnabled.Size = new System.Drawing.Size(220, 19);
             this.checkBoxRefreshEnabled.TabIndex = 14;
-            this.checkBoxRefreshEnabled.Text = "Odświeżaj stan usługi";
+            this.checkBoxRefreshEnabled.Text = "Odświeżaj stan usługi automatycznie";
             this.checkBoxRefreshEnabled.UseVisualStyleBackColor = true;
             this.checkBoxRefreshEnabled.CheckedChanged += new System.EventHandler(this.checkBoxRefreshEnabled_CheckedChanged);
             // 
@@ -271,11 +272,22 @@
             this.buttonOpenLogFolder.UseVisualStyleBackColor = true;
             this.buttonOpenLogFolder.Click += new System.EventHandler(this.buttonOpenLogFolder_Click);
             // 
+            // buttonRefreshServiceState
+            // 
+            this.buttonRefreshServiceState.Location = new System.Drawing.Point(161, 12);
+            this.buttonRefreshServiceState.Name = "buttonRefreshServiceState";
+            this.buttonRefreshServiceState.Size = new System.Drawing.Size(209, 23);
+            this.buttonRefreshServiceState.TabIndex = 22;
+            this.buttonRefreshServiceState.Text = "Ręcznie odśwież stan usługi";
+            this.buttonRefreshServiceState.UseVisualStyleBackColor = true;
+            this.buttonRefreshServiceState.Click += new System.EventHandler(this.buttonRefreshServiceState_Click);
+            // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 623);
+            this.Controls.Add(this.buttonRefreshServiceState);
             this.Controls.Add(this.buttonOpenLogFolder);
             this.Controls.Add(this.labelServicePath);
             this.Controls.Add(this.textBoxServicePath);
@@ -328,5 +340,6 @@
         private TextBox textBoxServicePath;
         private Label labelServicePath;
         private Button buttonOpenLogFolder;
+        private Button buttonRefreshServiceState;
     }
 }
