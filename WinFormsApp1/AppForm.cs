@@ -46,6 +46,9 @@ namespace CodeCompilerServiceManager
             {
                 CheckStatus(null, null);
             }
+
+            restartRequired = false;
+            labelRestartRequired.Visible = restartRequired;
         }
 
         private void PrepareServiceOptions()
@@ -156,6 +159,8 @@ namespace CodeCompilerServiceManager
         private void workerOnRestart_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             OnStatusChanged((ServiceControllerStatus)Convert.ToInt32(e.Result));
+            restartRequired = false;
+            labelRestartRequired.Visible = restartRequired;
         }
 
         private void workerOnRestart_DoWork(object? sender, DoWorkEventArgs e)
@@ -181,6 +186,8 @@ namespace CodeCompilerServiceManager
         private void workerOnStart_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             OnStatusChanged((ServiceControllerStatus)Convert.ToInt32(e.Result));
+            restartRequired = false;
+            labelRestartRequired.Visible = restartRequired;
         }
         #endregion
 
@@ -192,6 +199,10 @@ namespace CodeCompilerServiceManager
             pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
             btnStartService.Enabled = false;
             btnReStartService.Enabled = false;
+            if (restartRequired)
+            {
+                SaveServiceAndLibraryOptions();
+            }
             workerOnStart.RunWorkerAsync();
         }
 
@@ -210,6 +221,10 @@ namespace CodeCompilerServiceManager
             pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
             btnStopService.Enabled = false;
             btnReStartService.Enabled = false;
+            if (restartRequired)
+            {
+                SaveServiceAndLibraryOptions();
+            }
             workerOnRestart.RunWorkerAsync();
         }
 
@@ -409,6 +424,111 @@ namespace CodeCompilerServiceManager
         private void buttonRefreshServiceState_Click(object sender, EventArgs e)
         {
             CheckStatus(null, null);
+        }
+
+        private void checkBoxLogToEventViewer_CheckedChanged(object sender, EventArgs e)
+        {
+            restartRequired = true;
+            labelRestartRequired.Visible = restartRequired;
+        }
+
+        private void checkBoxLogToFile_CheckedChanged(object sender, EventArgs e)
+        {
+            restartRequired = true;
+            labelRestartRequired.Visible = restartRequired;
+        }
+
+        private void textBoxPathToLogs_TextChanged(object sender, EventArgs e)
+        {
+            restartRequired = true;
+            labelRestartRequired.Visible = restartRequired;
+        }
+
+        private void numericUpDownServiceMainInterval_ValueChanged(object sender, EventArgs e)
+        {
+            restartRequired = true;
+            labelRestartRequired.Visible = restartRequired;
+        }
+
+        private void numericUpDownInternalBufferSize_ValueChanged(object sender, EventArgs e)
+        {
+            restartRequired = true;
+            labelRestartRequired.Visible = restartRequired;
+        }
+
+        private void textBoxInputPath_TextChanged(object sender, EventArgs e)
+        {
+            restartRequired = true;
+            labelRestartRequired.Visible = restartRequired;
+        }
+
+        private void textBoxOutputPath_TextChanged(object sender, EventArgs e)
+        {
+            restartRequired = true;
+            labelRestartRequired.Visible = restartRequired;
+        }
+
+        private void checkBoxCompileToConsoleApp_CheckedChanged(object sender, EventArgs e)
+        {
+            restartRequired = true;
+            labelRestartRequired.Visible = restartRequired;
+        }
+
+        private void AppForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (restartRequired)
+            {
+                //Info ze wymagany restart po zmianach, jak tak zapisz zmiany zrob restart uslugi i wyjdz,
+                //jak nie wyjdz bez zapisywania, jak anuluj nie rob nic
+            }
+        }
+
+        private void SaveServiceAndLibraryOptions()
+        {
+            //Serilog
+            var WriteToEventLog = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.FirstOrDefault(x => x?.Name == "EventLog" || x?.Name == "EventLogOff");
+            if (WriteToEventLog != null)
+            {
+                if (checkBoxLogToEventViewer.Checked)
+                {
+                    WriteToEventLog.Name = "EventLog";
+                }
+                else
+                {
+                    WriteToEventLog.Name = "EventLogOFF";
+                }
+            }
+
+            var WriteToFile = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.FirstOrDefault(x => x?.Name == "File" || x?.Name == "FileOFF");
+            if (WriteToFile != null)
+            {
+                if (checkBoxLogToFile.Checked)
+                {
+                    WriteToFile.Name = "File";
+                }
+                else
+                {
+                    WriteToFile.Name = "FileOFF";
+                }
+
+                    WriteToFile.Args.path = textBoxPathToLogs.Text;
+            }
+
+           
+            serviceSettings.SaveSettingsToJson(textBoxServicePath.Text);
+        }
+
+        private void buttonSaveAndRestart_Click(object sender, EventArgs e)
+        {
+            //Zapisz i zrestartuj usluge
+            SaveServiceAndLibraryOptions();
+            btnReStartService_Click(null, null);
+
+        }
+
+        private void buttonCancelChanges_Click(object sender, EventArgs e)
+        {
+            //Wczytaj jsona i zdeserializuj
         }
     }
 }

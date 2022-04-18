@@ -1,5 +1,6 @@
 ﻿using CodeCompilerServiceManager.Settings.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,19 @@ namespace CodeCompilerServiceManager.Settings
             catch (Exception ex)
             {
                 //Log
+            }
+        }
+
+        public void SaveSettingsToJson(string serviceConfigPath)
+        {
+            string pathToJson = Path.GetDirectoryName(serviceConfigPath) + @"\appsettings.json";
+            var jsonModel = Newtonsoft.Json.JsonConvert.SerializeObject(ServiceSettingsModel);
+            JObject json = JObject.Parse(jsonModel);
+            string prettyParesJson = json.ToString();
+
+            using (StreamWriter file = File.CreateText(pathToJson))
+            {
+                file.Write(prettyParesJson);
             }
         }
         

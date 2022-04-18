@@ -61,6 +61,9 @@
             this.labelInputPath = new System.Windows.Forms.Label();
             this.labelIOutputPath = new System.Windows.Forms.Label();
             this.checkBoxCompileToConsoleApp = new System.Windows.Forms.CheckBox();
+            this.labelRestartRequired = new System.Windows.Forms.Label();
+            this.buttonSaveAndRestart = new System.Windows.Forms.Button();
+            this.buttonCancelChanges = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericOperationTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalRefresh)).BeginInit();
@@ -305,6 +308,7 @@
             this.checkBoxLogToEventViewer.TabIndex = 23;
             this.checkBoxLogToEventViewer.Text = "Zapisuj logi do dziennika zdarzeń";
             this.checkBoxLogToEventViewer.UseVisualStyleBackColor = true;
+            this.checkBoxLogToEventViewer.CheckedChanged += new System.EventHandler(this.checkBoxLogToEventViewer_CheckedChanged);
             // 
             // checkBoxLogToFile
             // 
@@ -315,6 +319,7 @@
             this.checkBoxLogToFile.TabIndex = 24;
             this.checkBoxLogToFile.Text = "Zapisuj logi do pliku";
             this.checkBoxLogToFile.UseVisualStyleBackColor = true;
+            this.checkBoxLogToFile.CheckedChanged += new System.EventHandler(this.checkBoxLogToFile_CheckedChanged);
             // 
             // textBoxPathToLogs
             // 
@@ -323,6 +328,7 @@
             this.textBoxPathToLogs.Size = new System.Drawing.Size(398, 23);
             this.textBoxPathToLogs.TabIndex = 25;
             this.textBoxPathToLogs.WordWrap = false;
+            this.textBoxPathToLogs.TextChanged += new System.EventHandler(this.textBoxPathToLogs_TextChanged);
             // 
             // numericUpDownServiceMainInterval
             // 
@@ -345,6 +351,7 @@
             0,
             0,
             0});
+            this.numericUpDownServiceMainInterval.ValueChanged += new System.EventHandler(this.numericUpDownServiceMainInterval_ValueChanged);
             // 
             // labelIntervalService
             // 
@@ -385,6 +392,7 @@
             0,
             0,
             0});
+            this.numericUpDownInternalBufferSize.ValueChanged += new System.EventHandler(this.numericUpDownInternalBufferSize_ValueChanged);
             // 
             // textBoxInputPath
             // 
@@ -393,6 +401,7 @@
             this.textBoxInputPath.Size = new System.Drawing.Size(398, 23);
             this.textBoxInputPath.TabIndex = 30;
             this.textBoxInputPath.WordWrap = false;
+            this.textBoxInputPath.TextChanged += new System.EventHandler(this.textBoxInputPath_TextChanged);
             // 
             // textBoxOutputPath
             // 
@@ -401,6 +410,7 @@
             this.textBoxOutputPath.Size = new System.Drawing.Size(398, 23);
             this.textBoxOutputPath.TabIndex = 31;
             this.textBoxOutputPath.WordWrap = false;
+            this.textBoxOutputPath.TextChanged += new System.EventHandler(this.textBoxOutputPath_TextChanged);
             // 
             // labelInputPath
             // 
@@ -429,12 +439,47 @@
             this.checkBoxCompileToConsoleApp.TabIndex = 34;
             this.checkBoxCompileToConsoleApp.Text = "Kompiluj do aplikacji konsolowej";
             this.checkBoxCompileToConsoleApp.UseVisualStyleBackColor = true;
+            this.checkBoxCompileToConsoleApp.CheckedChanged += new System.EventHandler(this.checkBoxCompileToConsoleApp_CheckedChanged);
+            // 
+            // labelRestartRequired
+            // 
+            this.labelRestartRequired.AutoSize = true;
+            this.labelRestartRequired.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelRestartRequired.ForeColor = System.Drawing.Color.Red;
+            this.labelRestartRequired.Location = new System.Drawing.Point(376, 12);
+            this.labelRestartRequired.Name = "labelRestartRequired";
+            this.labelRestartRequired.Size = new System.Drawing.Size(582, 25);
+            this.labelRestartRequired.TabIndex = 35;
+            this.labelRestartRequired.Text = "Po zmianie opcji serwisu lub biblioteki wymagany jest restart usługi!";
+            // 
+            // buttonSaveAndRestart
+            // 
+            this.buttonSaveAndRestart.Location = new System.Drawing.Point(297, 41);
+            this.buttonSaveAndRestart.Name = "buttonSaveAndRestart";
+            this.buttonSaveAndRestart.Size = new System.Drawing.Size(199, 23);
+            this.buttonSaveAndRestart.TabIndex = 36;
+            this.buttonSaveAndRestart.Text = "Zapisz i zrestartuj usługę";
+            this.buttonSaveAndRestart.UseVisualStyleBackColor = true;
+            this.buttonSaveAndRestart.Click += new System.EventHandler(this.buttonSaveAndRestart_Click);
+            // 
+            // buttonCancelChanges
+            // 
+            this.buttonCancelChanges.Location = new System.Drawing.Point(297, 70);
+            this.buttonCancelChanges.Name = "buttonCancelChanges";
+            this.buttonCancelChanges.Size = new System.Drawing.Size(199, 23);
+            this.buttonCancelChanges.TabIndex = 37;
+            this.buttonCancelChanges.Text = "Anuluj zmiany";
+            this.buttonCancelChanges.UseVisualStyleBackColor = true;
+            this.buttonCancelChanges.Click += new System.EventHandler(this.buttonCancelChanges_Click);
             // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1205, 623);
+            this.ClientSize = new System.Drawing.Size(1243, 623);
+            this.Controls.Add(this.buttonCancelChanges);
+            this.Controls.Add(this.buttonSaveAndRestart);
+            this.Controls.Add(this.labelRestartRequired);
             this.Controls.Add(this.checkBoxCompileToConsoleApp);
             this.Controls.Add(this.labelIOutputPath);
             this.Controls.Add(this.labelInputPath);
@@ -470,6 +515,7 @@
             this.Controls.Add(this.btnStartService);
             this.Name = "AppForm";
             this.Text = "Code Compiler Service Manager";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AppForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericOperationTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalRefresh)).EndInit();
@@ -515,5 +561,8 @@
         private Label labelInputPath;
         private Label labelIOutputPath;
         private CheckBox checkBoxCompileToConsoleApp;
+        private Label labelRestartRequired;
+        private Button buttonSaveAndRestart;
+        private Button buttonCancelChanges;
     }
 }
