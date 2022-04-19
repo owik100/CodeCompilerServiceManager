@@ -749,8 +749,20 @@ namespace CodeCompilerServiceManager
             {
                 if (restartRequired)
                 {
-                    //Info ze wymagany restart po zmianach, jak tak zapisz zmiany zrob restart uslugi i wyjdz,
-                    //jak nie wyjdz bez zapisywania, jak anuluj nie rob nic
+                    DialogResult dialogResult = MessageBox.Show("Masz nie zapisane zmiany. Chcesz je zapisaæ? (Us³uga zostanie zrestartowana)", "Uwaga", MessageBoxButtons.YesNoCancel, icon: MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        btnReStartService_Click(null, null);
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        e.Cancel = false;
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
                 }
             }
             catch (Exception ex)
