@@ -1,4 +1,4 @@
-using CodeCompilerServiceConfig.Logic;
+using CodeCompilerServiceManager.Logic;
 using CodeCompilerServiceManager.Settings;
 using Newtonsoft.Json;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ namespace CodeCompilerServiceManager
 {
     public partial class AppForm : Form
     {
-        ServiceProxy serviceConnector = new ServiceProxy();
+        IServiceProxy serviceConnector = new ServiceProxy();
         ServiceSettings serviceSettings;
 
         private System.Windows.Forms.Timer serviceStatusTimer;
@@ -25,7 +25,7 @@ namespace CodeCompilerServiceManager
             InitializeComponent();
             AppSettings.GetMessage += ServiceConnector_MessageHandler;
             serviceConnector.GetMessage += ServiceConnector_MessageHandler;
-            LoadOptions();
+            LoadManagerOptions();
             labelServiceStatus.Text = "Stan us³ugi: Nieznany...";
             InitTimer();
             InitWorkers();
@@ -39,8 +39,8 @@ namespace CodeCompilerServiceManager
                 textBoxServicePath.Text = servisePath;
                 serviceSettings = new ServiceSettings(servisePath, false);
 
-                PrepareLibOptions();
-                PrepareServiceOptions();
+                BindLibraryOptionsToControls();
+                BindServiceOptionsToControls();
             }
             if (checkBoxRefreshEnabled.Checked)
             {
@@ -51,12 +51,13 @@ namespace CodeCompilerServiceManager
             labelRestartRequired.Visible = restartRequired;
         }
 
-        private void PrepareServiceOptions()
+        #region Private methods
+        private void BindServiceOptionsToControls()
         {
             //2 way binding?
             bool saveToEventLog = false;
             var settingExist = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.Where(x => x.Name == "EventLog")?.FirstOrDefault();
-            if(settingExist != null)
+            if (settingExist != null)
             {
                 saveToEventLog = true;
             }
@@ -75,7 +76,7 @@ namespace CodeCompilerServiceManager
 
             string pathToFileLog = "";
             pathToFileLog = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.Where(x => x.Name == "File")?.FirstOrDefault()?.Args?.path;
-            if (!String.IsNullOrEmpty(pathToFileLog))
+            if (pathToFileLog != null)
             {
                 textBoxPathToLogs.Text = pathToFileLog;
             }
@@ -93,10 +94,8 @@ namespace CodeCompilerServiceManager
             {
                 numericUpDownInternalBufferSize.Value = bufferSize;
             }
-
         }
-
-        private void PrepareLibOptions()
+        private void BindLibraryOptionsToControls()
         {
             string pathToInput = "";
             pathToInput = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath;
@@ -119,15 +118,13 @@ namespace CodeCompilerServiceManager
 
             checkBoxCompileToConsoleApp.Checked = (bool)compileToConsoleApp;
         }
-
-        private void LoadOptions()
+        private void LoadManagerOptions()
         {
             AppSettingsModel model = AppSettings.LoadSettings();
             numericUpDownIntervalRefresh.Value = model.CheckStatusInterval;
             numericOperationTimeout.Value = Convert.ToDecimal(model.OperationTimeout.TotalMilliseconds);
             checkBoxRefreshEnabled.Checked = model.RefreshStatusEnabled;
         }
-
         private void InitTimer()
         {
             serviceStatusTimer = new System.Windows.Forms.Timer();
@@ -137,8 +134,85 @@ namespace CodeCompilerServiceManager
             {
                 serviceStatusTimer.Start();
             }
-
         }
+        private void SaveManagerSettings()
+        {
+            AppSettingsModel model = new AppSettingsModel()
+            {
+                CheckStatusInterval = Convert.ToInt32(numericUpDownIntervalRefresh.Value),
+                OperationTimeout = TimeSpan.FromMilliseconds(Convert.ToDouble(numericOperationTimeout.Value)),
+                RefreshStatusEnabled = checkBoxRefreshEnabled.Checked,
+            };
+            AppSettings.SaveSettings(model);
+        }
+        private void SaveServiceAndLibraryOptions()
+        {
+            //Serilog
+            var WriteToEventLog = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.FirstOrDefault(x => x?.Name == "EventLog" || x?.Name == "EventLogOff");
+            if (WriteToEventLog != null)
+            {
+                if (checkBoxLogToEventViewer.Checked)
+                {
+                    WriteToEventLog.Name = "EventLog";
+                }
+                else
+                {
+                    WriteToEventLog.Name = "EventLogOFF";
+                }
+            }
+
+            var WriteToFile = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.FirstOrDefault(x => x?.Name == "File" || x?.Name == "FileOFF");
+            if (WriteToFile != null)
+            {
+                if (checkBoxLogToFile.Checked)
+                {
+                    WriteToFile.Name = "File";
+                }
+                else
+                {
+                    WriteToFile.Name = "FileOFF";
+                }
+
+                WriteToFile.Args.path = textBoxPathToLogs.Text;
+            }
+
+
+            //Service options
+            var serviceInterval = serviceSettings?.ServiceSettingsModel?.ServiceOptions?.Interval;
+            if (serviceInterval != null && serviceInterval > -1)
+            {
+                serviceSettings.ServiceSettingsModel.ServiceOptions.Interval = (int)numericUpDownServiceMainInterval.Value;
+            }
+            var bufferSize = serviceSettings?.ServiceSettingsModel?.ServiceOptions?.InternalBufferSize;
+            if (bufferSize != null && bufferSize > -1)
+            {
+                serviceSettings.ServiceSettingsModel.ServiceOptions.InternalBufferSize = (int)numericUpDownInternalBufferSize.Value;
+            }
+
+
+            //Library options
+            var libInputPath = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath;
+            if (libInputPath != null)
+            {
+                serviceSettings.ServiceSettingsModel.CodeCompilerLibOptions.InputPath = textBoxInputPath.Text;
+            }
+
+            var libOutputtPath = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.OutputPath;
+            if (libOutputtPath != null)
+            {
+                serviceSettings.ServiceSettingsModel.CodeCompilerLibOptions.OutputPath = textBoxOutputPath.Text;
+            }
+
+            var compileToWindowConsole = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildToConsoleApp;
+            if (compileToWindowConsole != null)
+            {
+                serviceSettings.ServiceSettingsModel.CodeCompilerLibOptions.BuildToConsoleApp = checkBoxCompileToConsoleApp.Checked;
+            }
+
+            serviceSettings.SaveSettingsToJson(textBoxServicePath.Text);
+        }
+
+        #endregion
 
         #region backgroundWorkers
         private void InitWorkers()
@@ -255,111 +329,6 @@ namespace CodeCompilerServiceManager
             SaveManagerSettings();
         }
 
-        #endregion
-
-        private void ServiceConnector_MessageHandler(object? sender, string errorMessage)
-        {
-            if (txtOutputConsole.InvokeRequired)
-            {
-                Action safeWrite = delegate { ServiceConnector_MessageHandler(null, errorMessage); };
-                txtOutputConsole.Invoke(safeWrite);
-            }
-            else
-            {
-                string errMessage = DateTime.Now + " " + "[ServiceManager] - " + " " + errorMessage;
-                txtOutputConsole.ForeColor = Color.Red;
-                txtOutputConsole.Text += errMessage;
-                txtOutputConsole.Text += Environment.NewLine;
-
-            }
-        }
-
-        private void CheckStatus(object sender, EventArgs e)
-        {
-            ServiceControllerStatus result = serviceConnector.GetServiceStatus();
-            OnStatusChanged(result);
-        }
-
-        private void OnStatusChanged(ServiceControllerStatus status)
-        {
-            btnReStartService.Enabled = true;
-            switch (status)
-            {
-                case ServiceControllerStatus.Stopped:
-                    OnStopped();
-                    break;
-                case ServiceControllerStatus.StartPending:
-                    OnStartPending();
-                    break;
-                case ServiceControllerStatus.StopPending:
-                    OnStopPending();
-                    break;
-                case ServiceControllerStatus.Running:
-                    OnRunning();
-                    break;
-                default:
-                    OnOtherStatus(status);
-                    break;
-            }
-        }
-
-        private void OnStopped()
-        {
-            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.red;
-            labelServiceStatus.Text = "Stan us³ugi: Zatrzymana";
-            btnStartService.Enabled = true;
-            btnStopService.Enabled = false;
-        }
-
-        private void OnRunning()
-        {
-            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.green;
-            labelServiceStatus.Text = "Stan us³ugi: Uruchomiona";
-            btnStartService.Enabled = false;
-            btnStopService.Enabled = true;
-        }
-
-        private void OnStartPending()
-        {
-            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
-            labelServiceStatus.Text = "Stan us³ugi: Uruchamianie...";
-        }
-        private void OnStopPending()
-        {
-            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
-            labelServiceStatus.Text = "Stan us³ugi: Zatrzymywanie...";
-        }
-
-        private void OnOtherStatus(ServiceControllerStatus result)
-        {
-            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
-            labelServiceStatus.Text = "Stan us³ugi: " + result.ToString();
-        }
-
-        private void SaveManagerSettings()
-        {
-            AppSettingsModel model = new AppSettingsModel()
-            {
-                CheckStatusInterval = Convert.ToInt32(numericUpDownIntervalRefresh.Value),
-                OperationTimeout = TimeSpan.FromMilliseconds(Convert.ToDouble(numericOperationTimeout.Value)),
-                RefreshStatusEnabled = checkBoxRefreshEnabled.Checked,
-            };
-            AppSettings.SaveSettings(model);
-        }
-
-        private void btnResetManagerSettings_Click(object sender, EventArgs e)
-        {
-            AppSettingsModel model = AppSettings.RestartSettings();
-            numericUpDownIntervalRefresh.Value = model.CheckStatusInterval;
-            numericOperationTimeout.Value = Convert.ToDecimal(model.OperationTimeout.TotalMilliseconds);
-            checkBoxRefreshEnabled.Checked = model.RefreshStatusEnabled;
-        }
-
-        private void btnClearManagerConsole_Click(object sender, EventArgs e)
-        {
-            txtOutputConsole.Clear();
-        }
-
         private void checkBoxRefreshEnabled_CheckedChanged(object sender, EventArgs e)
         {
             if (serviceStatusTimer != null)
@@ -400,7 +369,6 @@ namespace CodeCompilerServiceManager
 
         private void buttonOpenLogFolder_Click(object sender, EventArgs e)
         {
-            //TODO wczytanie jsona konfigu na start
             string serviceConfigPath = textBoxServicePath.Text;
             if (string.IsNullOrEmpty(serviceConfigPath))
             {
@@ -483,72 +451,20 @@ namespace CodeCompilerServiceManager
             }
         }
 
-        private void SaveServiceAndLibraryOptions()
+
+        private void btnResetManagerSettings_Click(object sender, EventArgs e)
         {
-            //Serilog
-            var WriteToEventLog = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.FirstOrDefault(x => x?.Name == "EventLog" || x?.Name == "EventLogOff");
-            if (WriteToEventLog != null)
-            {
-                if (checkBoxLogToEventViewer.Checked)
-                {
-                    WriteToEventLog.Name = "EventLog";
-                }
-                else
-                {
-                    WriteToEventLog.Name = "EventLogOFF";
-                }
-            }
-
-            var WriteToFile = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.FirstOrDefault(x => x?.Name == "File" || x?.Name == "FileOFF");
-            if (WriteToFile != null)
-            {
-                if (checkBoxLogToFile.Checked)
-                {
-                    WriteToFile.Name = "File";
-                }
-                else
-                {
-                    WriteToFile.Name = "FileOFF";
-                }
-
-                    WriteToFile.Args.path = textBoxPathToLogs.Text;
-            }
-
-
-            //Service options
-            var serviceInterval = serviceSettings?.ServiceSettingsModel?.ServiceOptions?.Interval;
-            if(serviceInterval != null && serviceInterval > -1)
-            {
-                serviceSettings.ServiceSettingsModel.ServiceOptions.Interval = (int)numericUpDownServiceMainInterval.Value;
-            }
-            var bufferSize = serviceSettings?.ServiceSettingsModel?.ServiceOptions?.InternalBufferSize;
-            if (bufferSize != null && bufferSize > -1)
-            {
-                serviceSettings.ServiceSettingsModel.ServiceOptions.InternalBufferSize = (int)numericUpDownInternalBufferSize.Value;
-            }
-
-
-            //Library options
-            var libInputPath = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath;
-            if (libInputPath != null)
-            {
-                serviceSettings.ServiceSettingsModel.CodeCompilerLibOptions.InputPath = textBoxInputPath.Text;
-            }
-
-            var libOutputtPath = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.OutputPath;
-            if (libOutputtPath != null)
-            {
-                serviceSettings.ServiceSettingsModel.CodeCompilerLibOptions.OutputPath = textBoxOutputPath.Text;
-            }
-
-            var compileToWindowConsole = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildToConsoleApp;
-            if (compileToWindowConsole != null)
-            {
-                serviceSettings.ServiceSettingsModel.CodeCompilerLibOptions.BuildToConsoleApp = checkBoxCompileToConsoleApp.Checked;
-            }
-
-            serviceSettings.SaveSettingsToJson(textBoxServicePath.Text);
+            AppSettingsModel model = AppSettings.RestartSettings();
+            numericUpDownIntervalRefresh.Value = model.CheckStatusInterval;
+            numericOperationTimeout.Value = Convert.ToDecimal(model.OperationTimeout.TotalMilliseconds);
+            checkBoxRefreshEnabled.Checked = model.RefreshStatusEnabled;
         }
+
+        private void btnClearManagerConsole_Click(object sender, EventArgs e)
+        {
+            txtOutputConsole.Clear();
+        }
+
 
         private void buttonSaveAndRestart_Click(object sender, EventArgs e)
         {
@@ -571,8 +487,8 @@ namespace CodeCompilerServiceManager
                 textBoxServicePath.Text = servisePath;
                 serviceSettings = new ServiceSettings(servisePath, false);
 
-                PrepareLibOptions();
-                PrepareServiceOptions();
+                BindLibraryOptionsToControls();
+                BindServiceOptionsToControls();
                 restartRequired = false;
                 labelRestartRequired.Visible = restartRequired;
             }
@@ -590,13 +506,93 @@ namespace CodeCompilerServiceManager
                 textBoxServicePath.Text = servisePath;
                 serviceSettings = new ServiceSettings(servisePath, true);
 
-                PrepareLibOptions();
-                PrepareServiceOptions();
+                BindLibraryOptionsToControls();
+                BindServiceOptionsToControls();
                 restartRequired = false;
                 labelRestartRequired.Visible = restartRequired;
 
                 buttonSaveAndRestart_Click(null, null);
             }
         }
+        #endregion
+
+        private void ServiceConnector_MessageHandler(object? sender, string errorMessage)
+        {
+            if (txtOutputConsole.InvokeRequired)
+            {
+                Action safeWrite = delegate { ServiceConnector_MessageHandler(null, errorMessage); };
+                txtOutputConsole.Invoke(safeWrite);
+            }
+            else
+            {
+                string errMessage = DateTime.Now + " " + "[ServiceManager] - " + " " + errorMessage;
+                txtOutputConsole.ForeColor = Color.Red;
+                txtOutputConsole.Text += errMessage;
+                txtOutputConsole.Text += Environment.NewLine;
+            }
+        }
+
+        private void CheckStatus(object sender, EventArgs e)
+        {
+            ServiceControllerStatus result = serviceConnector.GetServiceStatus();
+            OnStatusChanged(result);
+        }
+
+        private void OnStatusChanged(ServiceControllerStatus status)
+        {
+            btnReStartService.Enabled = true;
+            switch (status)
+            {
+                case ServiceControllerStatus.Stopped:
+                    OnStopped();
+                    break;
+                case ServiceControllerStatus.StartPending:
+                    OnStartPending();
+                    break;
+                case ServiceControllerStatus.StopPending:
+                    OnStopPending();
+                    break;
+                case ServiceControllerStatus.Running:
+                    OnRunning();
+                    break;
+                default:
+                    OnOtherStatus(status);
+                    break;
+            }
+        }
+
+        private void OnStopped()
+        {
+            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.red;
+            labelServiceStatus.Text = "Stan us³ugi: Zatrzymana";
+            btnStartService.Enabled = true;
+            btnStopService.Enabled = false;
+        }
+
+        private void OnRunning()
+        {
+            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.green;
+            labelServiceStatus.Text = "Stan us³ugi: Uruchomiona";
+            btnStartService.Enabled = false;
+            btnStopService.Enabled = true;
+        }
+
+        private void OnStartPending()
+        {
+            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+            labelServiceStatus.Text = "Stan us³ugi: Uruchamianie...";
+        }
+        private void OnStopPending()
+        {
+            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+            labelServiceStatus.Text = "Stan us³ugi: Zatrzymywanie...";
+        }
+
+        private void OnOtherStatus(ServiceControllerStatus result)
+        {
+            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+            labelServiceStatus.Text = "Stan us³ugi: " + result.ToString();
+        }
+
     }
 }

@@ -8,10 +8,11 @@ using CodeCompilerServiceManager.Settings;
 using System.Diagnostics;
 using System.Globalization;
 using System.Management;
+using CodeCompilerServiceManager.Logic;
 
-namespace CodeCompilerServiceConfig.Logic
+namespace CodeCompilerServiceManager.Logic
 {
-    public class ServiceProxy
+    public class ServiceProxy : IServiceProxy
     {
         //TODO DI?
         ServiceController _sc;
@@ -135,6 +136,7 @@ namespace CodeCompilerServiceConfig.Logic
             return result;
         }
 
+        //TODO Przeniesc kody z procesow z okienkami windowsa gdzies indziej
         public string InstallService()
         {
             try
