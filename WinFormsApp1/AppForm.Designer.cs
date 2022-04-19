@@ -64,6 +64,7 @@
             this.labelRestartRequired = new System.Windows.Forms.Label();
             this.buttonSaveAndRestart = new System.Windows.Forms.Button();
             this.buttonCancelChanges = new System.Windows.Forms.Button();
+            this.buttonSetDefaultServiceSettings = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericOperationTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalRefresh)).BeginInit();
@@ -472,11 +473,22 @@
             this.buttonCancelChanges.UseVisualStyleBackColor = true;
             this.buttonCancelChanges.Click += new System.EventHandler(this.buttonCancelChanges_Click);
             // 
+            // buttonSetDefaultServiceSettings
+            // 
+            this.buttonSetDefaultServiceSettings.Location = new System.Drawing.Point(795, 346);
+            this.buttonSetDefaultServiceSettings.Name = "buttonSetDefaultServiceSettings";
+            this.buttonSetDefaultServiceSettings.Size = new System.Drawing.Size(287, 23);
+            this.buttonSetDefaultServiceSettings.TabIndex = 38;
+            this.buttonSetDefaultServiceSettings.Text = "Przywróć ustawienia usługi na domyślne";
+            this.buttonSetDefaultServiceSettings.UseVisualStyleBackColor = true;
+            this.buttonSetDefaultServiceSettings.Click += new System.EventHandler(this.buttonSetDefaultServiceSettings_Click);
+            // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1243, 623);
+            this.Controls.Add(this.buttonSetDefaultServiceSettings);
             this.Controls.Add(this.buttonCancelChanges);
             this.Controls.Add(this.buttonSaveAndRestart);
             this.Controls.Add(this.labelRestartRequired);
@@ -564,5 +576,6 @@
         private Label labelRestartRequired;
         private Button buttonSaveAndRestart;
         private Button buttonCancelChanges;
+        private Button buttonSetDefaultServiceSettings;
     }
 }

@@ -37,7 +37,7 @@ namespace CodeCompilerServiceManager
             else
             {
                 textBoxServicePath.Text = servisePath;
-                serviceSettings = new ServiceSettings(servisePath);
+                serviceSettings = new ServiceSettings(servisePath, false);
 
                 PrepareLibOptions();
                 PrepareServiceOptions();
@@ -100,14 +100,14 @@ namespace CodeCompilerServiceManager
         {
             string pathToInput = "";
             pathToInput = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath;
-            if (!String.IsNullOrEmpty(pathToInput))
+            if (pathToInput != null)
             {
                 textBoxInputPath.Text = pathToInput;
             }
 
             string pathToOutput = "";
             pathToOutput = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.OutputPath;
-            if (!String.IsNullOrEmpty(pathToOutput))
+            if (pathToOutput != null)
             {
                 textBoxOutputPath.Text = pathToOutput;
             }
@@ -514,7 +514,39 @@ namespace CodeCompilerServiceManager
                     WriteToFile.Args.path = textBoxPathToLogs.Text;
             }
 
-           
+
+            //Service options
+            var serviceInterval = serviceSettings?.ServiceSettingsModel?.ServiceOptions?.Interval;
+            if(serviceInterval != null && serviceInterval > -1)
+            {
+                serviceSettings.ServiceSettingsModel.ServiceOptions.Interval = (int)numericUpDownServiceMainInterval.Value;
+            }
+            var bufferSize = serviceSettings?.ServiceSettingsModel?.ServiceOptions?.InternalBufferSize;
+            if (bufferSize != null && bufferSize > -1)
+            {
+                serviceSettings.ServiceSettingsModel.ServiceOptions.InternalBufferSize = (int)numericUpDownInternalBufferSize.Value;
+            }
+
+
+            //Library options
+            var libInputPath = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath;
+            if (libInputPath != null)
+            {
+                serviceSettings.ServiceSettingsModel.CodeCompilerLibOptions.InputPath = textBoxInputPath.Text;
+            }
+
+            var libOutputtPath = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.OutputPath;
+            if (libOutputtPath != null)
+            {
+                serviceSettings.ServiceSettingsModel.CodeCompilerLibOptions.OutputPath = textBoxOutputPath.Text;
+            }
+
+            var compileToWindowConsole = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildToConsoleApp;
+            if (compileToWindowConsole != null)
+            {
+                serviceSettings.ServiceSettingsModel.CodeCompilerLibOptions.BuildToConsoleApp = checkBoxCompileToConsoleApp.Checked;
+            }
+
             serviceSettings.SaveSettingsToJson(textBoxServicePath.Text);
         }
 
@@ -529,6 +561,42 @@ namespace CodeCompilerServiceManager
         private void buttonCancelChanges_Click(object sender, EventArgs e)
         {
             //Wczytaj jsona i zdeserializuj
+            string servisePath = serviceConnector.GetServicePath();
+            if (string.IsNullOrEmpty(servisePath))
+            {
+                ServiceConnector_MessageHandler(null, "Nie znaleziono œcie¿ki us³ugi!");
+            }
+            else
+            {
+                textBoxServicePath.Text = servisePath;
+                serviceSettings = new ServiceSettings(servisePath, false);
+
+                PrepareLibOptions();
+                PrepareServiceOptions();
+                restartRequired = false;
+                labelRestartRequired.Visible = restartRequired;
+            }
+        }
+
+        private void buttonSetDefaultServiceSettings_Click(object sender, EventArgs e)
+        {
+            string servisePath = serviceConnector.GetServicePath();
+            if (string.IsNullOrEmpty(servisePath))
+            {
+                ServiceConnector_MessageHandler(null, "Nie znaleziono œcie¿ki us³ugi!");
+            }
+            else
+            {
+                textBoxServicePath.Text = servisePath;
+                serviceSettings = new ServiceSettings(servisePath, true);
+
+                PrepareLibOptions();
+                PrepareServiceOptions();
+                restartRequired = false;
+                labelRestartRequired.Visible = restartRequired;
+
+                buttonSaveAndRestart_Click(null, null);
+            }
         }
     }
 }
