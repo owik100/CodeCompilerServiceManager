@@ -38,6 +38,7 @@ namespace CodeCompilerServiceManager
             {
                 textBoxServicePath.Text = servisePath;
                 serviceSettings = new ServiceSettings(servisePath, false);
+                serviceSettings.GetMessage += ServiceConnector_MessageHandler;
 
                 BindLibraryOptionsToControls();
                 BindServiceOptionsToControls();
@@ -345,19 +346,53 @@ namespace CodeCompilerServiceManager
 
         private void buttonInstallService_Click(object sender, EventArgs e)
         {
-            string path = serviceConnector.InstallService();
-            if (!string.IsNullOrEmpty(path))
+            string path = "";
+            if (serviceConnector.ServiceExist())
             {
+                ServiceConnector_MessageHandler(null, "Us³uga jest ju¿ zainstalowana!");
+            }
+            else
+            {
+                MessageBox.Show("Wybierz folder zawieraj¹cy us³ugê CodeCompilerServiceOwik", "Wybór œcie¿ki", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                using (var dialog = new FolderBrowserDialog())
+                {
+                    DialogResult result = dialog.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        path = dialog.SelectedPath;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                serviceConnector.InstallService(path);
                 textBoxServicePath.Text = path;
             }
         }
 
         private void buttonDeleteService_Click(object sender, EventArgs e)
         {
-            bool res = serviceConnector.RemoveService();
-            if (res)
+            if (serviceConnector.ServiceExist())
             {
-                textBoxServicePath.Text = "";
+                DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz odinstalowaæ us³ugê CodeCompilerServiceOwik?", "Uwaga", MessageBoxButtons.YesNo, icon: MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    bool res = serviceConnector.RemoveService();
+                    if (res)
+                    {
+                        textBoxServicePath.Text = "";
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                ServiceConnector_MessageHandler(null, "Us³uga nie jest zainstalowana!");
             }
         }
 

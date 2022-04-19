@@ -1,4 +1,5 @@
-﻿using CodeCompilerServiceManager.Settings.Models;
+﻿using CodeCompilerServiceManager.Logic;
+using CodeCompilerServiceManager.Settings.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -9,9 +10,16 @@ using System.Threading.Tasks;
 
 namespace CodeCompilerServiceManager.Settings
 {
-    public class ServiceSettings
+    public class ServiceSettings: IMeesageHandling
     {
         public ServiceSettingsModel ServiceSettingsModel;
+
+        public event EventHandler<string> GetMessage;
+
+        public void OnMessage(string errorMessage)
+        {
+            GetMessage?.Invoke(null, errorMessage);
+        }
         public ServiceSettings(string serviceConfigPath, bool restartToDefault)
         {
             ServiceSettingsModel = new ServiceSettingsModel();
@@ -27,81 +35,86 @@ namespace CodeCompilerServiceManager.Settings
             }
             catch (Exception ex)
             {
-                //Log
+                OnMessage(ex.ToString());
             }
         }
 
         public void SaveSettingsToJson(string serviceConfigPath)
         {
-            string pathToJson = Path.GetDirectoryName(serviceConfigPath) + @"\appsettings.json";
-            var jsonModel = Newtonsoft.Json.JsonConvert.SerializeObject(ServiceSettingsModel);
-            JObject json = JObject.Parse(jsonModel);
-            foreach (var item in json)
+            try
             {
-                if (item.Key == "Serilog")
+                string pathToJson = Path.GetDirectoryName(serviceConfigPath) + @"\appsettings.json";
+                var jsonModel = Newtonsoft.Json.JsonConvert.SerializeObject(ServiceSettingsModel);
+                JObject json = JObject.Parse(jsonModel);
+                foreach (var item in json)
                 {
-                    var writeTo = item.Value["WriteTo"];
-                    if (writeTo != null)
+                    if (item.Key == "Serilog")
                     {
-                        foreach (JToken option in writeTo)
+                        var writeTo = item.Value["WriteTo"];
+                        if (writeTo != null)
                         {
-                            var name = option.Value<string?>("Name") ?? "";
-                            if (name == "EventLog" || name == "EventLogOFF")
+                            foreach (JToken option in writeTo)
                             {
-                                var args = option["Args"];
-                                if(args != null)
+                                var name = option.Value<string?>("Name") ?? "";
+                                if (name == "EventLog" || name == "EventLogOFF")
                                 {
-                                    if(args["path"] != null && args["path"].Parent != null)
-                                        args["path"].Parent.Remove();
-                                }
-                            }
-
-                            if (name == "Console")
-                            {
-                                var args = option["Args"];
-                                if (args != null)
-                                {
-                                    if (args["source"] != null && args["source"].Parent != null)
-                                        args["source"].Parent.Remove();
-
-                                    if (args["restrictedToMinimumLevel"] != null && args["restrictedToMinimumLevel"].Parent != null)
-                                        args["restrictedToMinimumLevel"].Parent.Remove();
-
-                                    if (args["manageEventSource"] != null && args["manageEventSource"].Parent != null)
-                                        args["manageEventSource"].Parent.Remove();
-
-                                    if (args["path"] != null && args["path"].Parent != null)
-                                        args["path"].Parent.Remove();
-                                }
-                            }
-
-                            if (name == "File")
-                            {
-                                var args = option["Args"];
-                                if (args != null)
-                                {
-                                    if (args["source"] != null && args["source"].Parent != null)
-                                        args["source"].Parent.Remove();
-
-                                    if (args["restrictedToMinimumLevel"] != null && args["restrictedToMinimumLevel"].Parent != null)
-                                        args["restrictedToMinimumLevel"].Parent.Remove();
-
-                                    if (args["manageEventSource"] != null && args["manageEventSource"].Parent != null)
-                                        args["manageEventSource"].Parent.Remove();
+                                    var args = option["Args"];
+                                    if (args != null)
+                                    {
+                                        if (args["path"] != null && args["path"].Parent != null)
+                                            args["path"].Parent.Remove();
+                                    }
                                 }
 
+                                if (name == "Console")
+                                {
+                                    var args = option["Args"];
+                                    if (args != null)
+                                    {
+                                        if (args["source"] != null && args["source"].Parent != null)
+                                            args["source"].Parent.Remove();
+
+                                        if (args["restrictedToMinimumLevel"] != null && args["restrictedToMinimumLevel"].Parent != null)
+                                            args["restrictedToMinimumLevel"].Parent.Remove();
+
+                                        if (args["manageEventSource"] != null && args["manageEventSource"].Parent != null)
+                                            args["manageEventSource"].Parent.Remove();
+
+                                        if (args["path"] != null && args["path"].Parent != null)
+                                            args["path"].Parent.Remove();
+                                    }
+                                }
+
+                                if (name == "File")
+                                {
+                                    var args = option["Args"];
+                                    if (args != null)
+                                    {
+                                        if (args["source"] != null && args["source"].Parent != null)
+                                            args["source"].Parent.Remove();
+
+                                        if (args["restrictedToMinimumLevel"] != null && args["restrictedToMinimumLevel"].Parent != null)
+                                            args["restrictedToMinimumLevel"].Parent.Remove();
+
+                                        if (args["manageEventSource"] != null && args["manageEventSource"].Parent != null)
+                                            args["manageEventSource"].Parent.Remove();
+                                    }
+                                }
                             }
                         }
                     }
                 }
-            }
-            string prettyParesJson = json.ToString();
+                string prettyParesJson = json.ToString();
 
-            using (StreamWriter file = File.CreateText(pathToJson))
+                using (StreamWriter file = File.CreateText(pathToJson))
+                {
+                    file.Write(prettyParesJson);
+                }
+            }
+            catch (Exception ex)
             {
-                file.Write(prettyParesJson);
+                OnMessage(ex.ToString());
             }
         }
-
     }
 }

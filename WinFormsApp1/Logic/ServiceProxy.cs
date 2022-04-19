@@ -8,19 +8,19 @@ using CodeCompilerServiceManager.Settings;
 using System.Diagnostics;
 using System.Globalization;
 using System.Management;
-using CodeCompilerServiceManager.Logic;
 
 namespace CodeCompilerServiceManager.Logic
 {
     public class ServiceProxy : IServiceProxy
     {
-        //TODO DI?
         ServiceController _sc;
+        IProcessHelper _processHelper;
         public event EventHandler<string> GetMessage;
 
         public ServiceProxy()
         {
             _sc = new ServiceController("CodeCompilerServiceOwik");
+            _processHelper = new ProcessHelper();
         }
 
         protected virtual void OnMessage(string errorMessage)
@@ -136,88 +136,30 @@ namespace CodeCompilerServiceManager.Logic
             return result;
         }
 
-        //TODO Przeniesc kody z procesow z okienkami windowsa gdzies indziej
-        public string InstallService()
+        public bool ServiceExist()
+        {
+            return ServiceController.GetServices().Any(s => s.ServiceName == "CodeCompilerServiceOwik");
+        }
+
+        public void InstallService(string pathToServiceExe)
         {
             try
             {
-                bool serviceExists = ServiceController.GetServices().Any(s => s.ServiceName == "CodeCompilerServiceOwik");
-                if (serviceExists)
-                {
-                    OnMessage("Usługu jest już zainstalowana!");
-                }
-                else
-                {
-                    string selectedFolder = "";
-                    MessageBox.Show("Wybierz folder zawierający usługę CodeCompilerServiceOwik", "Wybór ścieżki",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
-                    {
-                        System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-
-                        if (result == System.Windows.Forms.DialogResult.OK)
-                        {
-                            selectedFolder = dialog.SelectedPath;
-                        }
-                        else
-                        {
-                            return "";
-                        }
-                    }
-
-                    Process p = new Process();
-                    p.StartInfo.StandardOutputEncoding = Encoding.GetEncoding(CultureInfo.CurrentCulture.TextInfo.OEMCodePage);
-                    p.StartInfo.UseShellExecute = false;
-                    p.StartInfo.RedirectStandardOutput = true;
-                    p.StartInfo.CreateNoWindow = true;
-                    p.StartInfo.FileName = "CMD.exe";
-                    p.StartInfo.Arguments = $"/C SC CREATE \"CodeCompilerServiceOwik\" binpath={selectedFolder + "\\CodeCompilerService.exe"}";
-                    p.Start();
-                    string output = p.StandardOutput.ReadToEnd();
-                    p.WaitForExit();
-                    OnMessage(output);
-                    return selectedFolder;
-                }
+                string output = _processHelper.InstallServiceUsingCMD(pathToServiceExe);
+                OnMessage(output);
             }
             catch (Exception ex)
             {
                 OnMessage(ex.ToString());
             }
-            return "";
         }
         public bool RemoveService()
         {
             try
             {
-                bool serviceExists = ServiceController.GetServices().Any(s => s.ServiceName == "CodeCompilerServiceOwik");
-
-                if (!serviceExists)
-                {
-                    OnMessage("Usługu nie jest zainstalowana!");
-                }
-                else
-                {
-
-                    DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz odinstalować usługę CodeCompilerServiceOwik?", "Uwaga", MessageBoxButtons.YesNo,icon: MessageBoxIcon.Warning);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        Process p = new Process();
-                        p.StartInfo.StandardOutputEncoding = Encoding.GetEncoding(CultureInfo.CurrentCulture.TextInfo.OEMCodePage);
-                        p.StartInfo.UseShellExecute = false;
-                        p.StartInfo.RedirectStandardOutput = true;
-                        p.StartInfo.CreateNoWindow = true;
-                        p.StartInfo.FileName = "CMD.exe";
-                        p.StartInfo.Arguments = "/C SC DELETE \"CodeCompilerServiceOwik\"";
-                        p.Start();
-                        string output = p.StandardOutput.ReadToEnd();
-                        p.WaitForExit();
-                        OnMessage(output);
-                        return true;
-                    }
-                    else if (dialogResult == DialogResult.No)
-                    {
-                        return false;
-                    }
-                }
+                string output = _processHelper.RemoveService();
+                OnMessage(output);
+                return true;
             }
             catch (Exception ex)
             {
