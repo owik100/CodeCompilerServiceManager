@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ServiceProcess;
 using CodeCompilerService.OptionModels;
 using CodeCompilerServiceManager.Settings.Models;
+using CodeCompilerServiceManager.Helpers;
 
 namespace CodeCompilerServiceManager
 {
@@ -19,6 +20,8 @@ namespace CodeCompilerServiceManager
         private BackgroundWorker workerOnRestart;
 
         private bool restartRequired = false;
+        private Button currentMenuButton;
+        private Form activeForm;
 
         public AppForm()
         {
@@ -31,6 +34,7 @@ namespace CodeCompilerServiceManager
         {
             try
             {
+                ActiveNavButton(buttonHome);
                 AppSettings.GetMessage += ServiceConnector_MessageHandler;
                 serviceConnector.GetMessage += ServiceConnector_MessageHandler;
                 LoadManagerOptions();
@@ -347,6 +351,49 @@ namespace CodeCompilerServiceManager
             labelServiceStatus.Text = "Stan us³ugi: " + result.ToString();
         }
 
+        private void ActiveNavButton(object btnSender)
+        {
+            DisableNavButtons();
+            if (btnSender != null && (Button)btnSender != currentMenuButton)
+            {
+                currentMenuButton = (Button)btnSender;
+                currentMenuButton.BackColor = ColorManager.PrimaryColor;
+                currentMenuButton.ForeColor = Color.White;
+                currentMenuButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                labelTitleBar.Text = ((Button)btnSender).Text;
+            }
+        }
+
+        private void OpenChildControl(Form childForm, object btnSender)
+        {
+            if(activeForm != null)
+            {
+                activeForm.Close();
+            }
+            ActiveNavButton(btnSender);
+            activeForm = childForm;
+
+            activeForm.TopLevel = false;
+            ActiveForm.FormBorderStyle = FormBorderStyle.None;
+            ActiveForm.Dock = DockStyle.Fill;
+            this.panelDesktopParent.Controls.Add(childForm);
+            this.panelDesktopParent.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+        }
+
+        private void DisableNavButtons()
+        {
+            foreach (Control btn in panelSideMenu.Controls)
+            {
+                if(btn.GetType() == typeof(Button))
+                {
+                    btn.BackColor = ColorManager.BackColorSidePanel;
+                    btn.ForeColor = Color.Gainsboro;
+                    btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+                }
+            }
+        }
         #endregion
 
         #region backgroundWorkers
@@ -401,6 +448,44 @@ namespace CodeCompilerServiceManager
         #endregion
 
         #region formEvents
+
+        private void buttonHome_Click(object sender, EventArgs e)
+        {
+            ActiveNavButton(sender);
+        }
+
+        private void buttonManagerSettings_Click(object sender, EventArgs e)
+        {
+            OpenChildControl(new FormTestOne(), sender);
+        }
+
+        private void buttonServiceSettings_Click(object sender, EventArgs e)
+        {
+            OpenChildControl(new FormTestTwo(), sender);
+        }
+
+        private void buttonLibrarySettings_Click(object sender, EventArgs e)
+        {
+            ActiveNavButton(sender);
+        }
+
+        private void buttonInfo_Click(object sender, EventArgs e)
+        {
+            ActiveNavButton(sender);
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                ServiceConnector_MessageHandler(null, ex.ToString());
+            }
+        }
+
         private void btnStartService_Click(object sender, EventArgs e)
         {
             try
