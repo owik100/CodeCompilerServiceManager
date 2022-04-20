@@ -554,6 +554,7 @@ namespace CodeCompilerServiceManager
                     }
                     serviceConnector.InstallService(path);
                     textBoxServicePath.Text = path;
+                    btnReStartService_Click(null, null);
                 }
             }
             catch (Exception ex)
@@ -575,6 +576,7 @@ namespace CodeCompilerServiceManager
                         if (res)
                         {
                             textBoxServicePath.Text = "";
+                            btnStopService_Click(null, null);
                         }
                     }
                     else

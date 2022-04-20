@@ -74,7 +74,7 @@
             // 
             // btnStartService
             // 
-            this.btnStartService.Location = new System.Drawing.Point(87, 78);
+            this.btnStartService.Location = new System.Drawing.Point(81, 143);
             this.btnStartService.Name = "btnStartService";
             this.btnStartService.Size = new System.Drawing.Size(174, 23);
             this.btnStartService.TabIndex = 0;
@@ -84,7 +84,7 @@
             // 
             // btnStopService
             // 
-            this.btnStopService.Location = new System.Drawing.Point(87, 107);
+            this.btnStopService.Location = new System.Drawing.Point(81, 172);
             this.btnStopService.Name = "btnStopService";
             this.btnStopService.Size = new System.Drawing.Size(175, 23);
             this.btnStopService.TabIndex = 1;
@@ -94,7 +94,7 @@
             // 
             // btnReStartService
             // 
-            this.btnReStartService.Location = new System.Drawing.Point(87, 136);
+            this.btnReStartService.Location = new System.Drawing.Point(81, 201);
             this.btnReStartService.Name = "btnReStartService";
             this.btnReStartService.Size = new System.Drawing.Size(175, 23);
             this.btnReStartService.TabIndex = 2;
@@ -105,7 +105,7 @@
             // labelServiceStatus
             // 
             this.labelServiceStatus.AutoSize = true;
-            this.labelServiceStatus.Location = new System.Drawing.Point(87, 50);
+            this.labelServiceStatus.Location = new System.Drawing.Point(81, 115);
             this.labelServiceStatus.Name = "labelServiceStatus";
             this.labelServiceStatus.Size = new System.Drawing.Size(68, 15);
             this.labelServiceStatus.TabIndex = 3;
@@ -114,7 +114,7 @@
             // pictureServiceStatus
             // 
             this.pictureServiceStatus.Image = global::CodeCompilerServiceManager.Properties.Resources.yellow;
-            this.pictureServiceStatus.Location = new System.Drawing.Point(87, 12);
+            this.pictureServiceStatus.Location = new System.Drawing.Point(81, 77);
             this.pictureServiceStatus.Name = "pictureServiceStatus";
             this.pictureServiceStatus.Size = new System.Drawing.Size(68, 35);
             this.pictureServiceStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -123,7 +123,7 @@
             // 
             // numericOperationTimeout
             // 
-            this.numericOperationTimeout.Location = new System.Drawing.Point(96, 260);
+            this.numericOperationTimeout.Location = new System.Drawing.Point(90, 325);
             this.numericOperationTimeout.Maximum = new decimal(new int[] {
             30000,
             0,
@@ -142,7 +142,7 @@
             // labelOperationTimeout
             // 
             this.labelOperationTimeout.AutoSize = true;
-            this.labelOperationTimeout.Location = new System.Drawing.Point(96, 242);
+            this.labelOperationTimeout.Location = new System.Drawing.Point(90, 307);
             this.labelOperationTimeout.Name = "labelOperationTimeout";
             this.labelOperationTimeout.Size = new System.Drawing.Size(233, 15);
             this.labelOperationTimeout.TabIndex = 7;
@@ -151,7 +151,7 @@
             // labelInterval
             // 
             this.labelInterval.AutoSize = true;
-            this.labelInterval.Location = new System.Drawing.Point(96, 193);
+            this.labelInterval.Location = new System.Drawing.Point(90, 258);
             this.labelInterval.Name = "labelInterval";
             this.labelInterval.Size = new System.Drawing.Size(213, 15);
             this.labelInterval.TabIndex = 8;
@@ -159,7 +159,7 @@
             // 
             // numericUpDownIntervalRefresh
             // 
-            this.numericUpDownIntervalRefresh.Location = new System.Drawing.Point(96, 211);
+            this.numericUpDownIntervalRefresh.Location = new System.Drawing.Point(90, 276);
             this.numericUpDownIntervalRefresh.Maximum = new decimal(new int[] {
             180000,
             0,
@@ -182,7 +182,7 @@
             // 
             // txtOutputConsole
             // 
-            this.txtOutputConsole.Location = new System.Drawing.Point(96, 347);
+            this.txtOutputConsole.Location = new System.Drawing.Point(90, 412);
             this.txtOutputConsole.Name = "txtOutputConsole";
             this.txtOutputConsole.ReadOnly = true;
             this.txtOutputConsole.Size = new System.Drawing.Size(648, 235);
@@ -191,7 +191,7 @@
             // 
             // btnSaveManagerSettings
             // 
-            this.btnSaveManagerSettings.Location = new System.Drawing.Point(364, 209);
+            this.btnSaveManagerSettings.Location = new System.Drawing.Point(358, 274);
             this.btnSaveManagerSettings.Name = "btnSaveManagerSettings";
             this.btnSaveManagerSettings.Size = new System.Drawing.Size(108, 23);
             this.btnSaveManagerSettings.TabIndex = 11;
@@ -201,7 +201,7 @@
             // 
             // btnResetManagerSettings
             // 
-            this.btnResetManagerSettings.Location = new System.Drawing.Point(364, 242);
+            this.btnResetManagerSettings.Location = new System.Drawing.Point(358, 307);
             this.btnResetManagerSettings.Name = "btnResetManagerSettings";
             this.btnResetManagerSettings.Size = new System.Drawing.Size(108, 23);
             this.btnResetManagerSettings.TabIndex = 12;
@@ -211,7 +211,7 @@
             // 
             // btnClearManagerConsole
             // 
-            this.btnClearManagerConsole.Location = new System.Drawing.Point(87, 588);
+            this.btnClearManagerConsole.Location = new System.Drawing.Point(81, 653);
             this.btnClearManagerConsole.Name = "btnClearManagerConsole";
             this.btnClearManagerConsole.Size = new System.Drawing.Size(117, 23);
             this.btnClearManagerConsole.TabIndex = 13;
@@ -224,7 +224,7 @@
             this.checkBoxRefreshEnabled.AutoSize = true;
             this.checkBoxRefreshEnabled.Checked = true;
             this.checkBoxRefreshEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxRefreshEnabled.Location = new System.Drawing.Point(95, 168);
+            this.checkBoxRefreshEnabled.Location = new System.Drawing.Point(89, 233);
             this.checkBoxRefreshEnabled.Name = "checkBoxRefreshEnabled";
             this.checkBoxRefreshEnabled.Size = new System.Drawing.Size(220, 19);
             this.checkBoxRefreshEnabled.TabIndex = 14;
@@ -234,7 +234,7 @@
             // 
             // buttonInstallService
             // 
-            this.buttonInstallService.Location = new System.Drawing.Point(509, 209);
+            this.buttonInstallService.Location = new System.Drawing.Point(503, 274);
             this.buttonInstallService.Name = "buttonInstallService";
             this.buttonInstallService.Size = new System.Drawing.Size(119, 23);
             this.buttonInstallService.TabIndex = 15;
@@ -244,7 +244,7 @@
             // 
             // buttonDeleteService
             // 
-            this.buttonDeleteService.Location = new System.Drawing.Point(509, 238);
+            this.buttonDeleteService.Location = new System.Drawing.Point(503, 303);
             this.buttonDeleteService.Name = "buttonDeleteService";
             this.buttonDeleteService.Size = new System.Drawing.Size(119, 23);
             this.buttonDeleteService.TabIndex = 16;
@@ -254,7 +254,7 @@
             // 
             // buttonAppRestart
             // 
-            this.buttonAppRestart.Location = new System.Drawing.Point(364, 180);
+            this.buttonAppRestart.Location = new System.Drawing.Point(358, 245);
             this.buttonAppRestart.Name = "buttonAppRestart";
             this.buttonAppRestart.Size = new System.Drawing.Size(108, 23);
             this.buttonAppRestart.TabIndex = 17;
@@ -264,7 +264,7 @@
             // 
             // textBoxServicePath
             // 
-            this.textBoxServicePath.Location = new System.Drawing.Point(187, 289);
+            this.textBoxServicePath.Location = new System.Drawing.Point(181, 354);
             this.textBoxServicePath.Name = "textBoxServicePath";
             this.textBoxServicePath.ReadOnly = true;
             this.textBoxServicePath.Size = new System.Drawing.Size(557, 23);
@@ -274,7 +274,7 @@
             // labelServicePath
             // 
             this.labelServicePath.AutoSize = true;
-            this.labelServicePath.Location = new System.Drawing.Point(98, 292);
+            this.labelServicePath.Location = new System.Drawing.Point(92, 357);
             this.labelServicePath.Name = "labelServicePath";
             this.labelServicePath.Size = new System.Drawing.Size(83, 15);
             this.labelServicePath.TabIndex = 20;
@@ -282,7 +282,7 @@
             // 
             // buttonOpenLogFolder
             // 
-            this.buttonOpenLogFolder.Location = new System.Drawing.Point(511, 183);
+            this.buttonOpenLogFolder.Location = new System.Drawing.Point(505, 248);
             this.buttonOpenLogFolder.Name = "buttonOpenLogFolder";
             this.buttonOpenLogFolder.Size = new System.Drawing.Size(233, 23);
             this.buttonOpenLogFolder.TabIndex = 21;
@@ -292,7 +292,7 @@
             // 
             // buttonRefreshServiceState
             // 
-            this.buttonRefreshServiceState.Location = new System.Drawing.Point(161, 12);
+            this.buttonRefreshServiceState.Location = new System.Drawing.Point(155, 77);
             this.buttonRefreshServiceState.Name = "buttonRefreshServiceState";
             this.buttonRefreshServiceState.Size = new System.Drawing.Size(209, 23);
             this.buttonRefreshServiceState.TabIndex = 22;
@@ -303,7 +303,7 @@
             // checkBoxLogToEventViewer
             // 
             this.checkBoxLogToEventViewer.AutoSize = true;
-            this.checkBoxLogToEventViewer.Location = new System.Drawing.Point(552, 54);
+            this.checkBoxLogToEventViewer.Location = new System.Drawing.Point(546, 119);
             this.checkBoxLogToEventViewer.Name = "checkBoxLogToEventViewer";
             this.checkBoxLogToEventViewer.Size = new System.Drawing.Size(200, 19);
             this.checkBoxLogToEventViewer.TabIndex = 23;
@@ -314,7 +314,7 @@
             // checkBoxLogToFile
             // 
             this.checkBoxLogToFile.AutoSize = true;
-            this.checkBoxLogToFile.Location = new System.Drawing.Point(552, 81);
+            this.checkBoxLogToFile.Location = new System.Drawing.Point(546, 146);
             this.checkBoxLogToFile.Name = "checkBoxLogToFile";
             this.checkBoxLogToFile.Size = new System.Drawing.Size(133, 19);
             this.checkBoxLogToFile.TabIndex = 24;
@@ -324,7 +324,7 @@
             // 
             // textBoxPathToLogs
             // 
-            this.textBoxPathToLogs.Location = new System.Drawing.Point(390, 108);
+            this.textBoxPathToLogs.Location = new System.Drawing.Point(384, 173);
             this.textBoxPathToLogs.Name = "textBoxPathToLogs";
             this.textBoxPathToLogs.Size = new System.Drawing.Size(398, 23);
             this.textBoxPathToLogs.TabIndex = 25;
@@ -333,7 +333,7 @@
             // 
             // numericUpDownServiceMainInterval
             // 
-            this.numericUpDownServiceMainInterval.Location = new System.Drawing.Point(818, 59);
+            this.numericUpDownServiceMainInterval.Location = new System.Drawing.Point(812, 124);
             this.numericUpDownServiceMainInterval.Maximum = new decimal(new int[] {
             -1981284353,
             -1966660860,
@@ -357,7 +357,7 @@
             // labelIntervalService
             // 
             this.labelIntervalService.AutoSize = true;
-            this.labelIntervalService.Location = new System.Drawing.Point(818, 41);
+            this.labelIntervalService.Location = new System.Drawing.Point(812, 106);
             this.labelIntervalService.Name = "labelIntervalService";
             this.labelIntervalService.Size = new System.Drawing.Size(253, 15);
             this.labelIntervalService.TabIndex = 28;
@@ -366,7 +366,7 @@
             // labelInternalBufferSize
             // 
             this.labelInternalBufferSize.AutoSize = true;
-            this.labelInternalBufferSize.Location = new System.Drawing.Point(818, 90);
+            this.labelInternalBufferSize.Location = new System.Drawing.Point(812, 155);
             this.labelInternalBufferSize.Name = "labelInternalBufferSize";
             this.labelInternalBufferSize.Size = new System.Drawing.Size(234, 15);
             this.labelInternalBufferSize.TabIndex = 27;
@@ -374,7 +374,7 @@
             // 
             // numericUpDownInternalBufferSize
             // 
-            this.numericUpDownInternalBufferSize.Location = new System.Drawing.Point(818, 108);
+            this.numericUpDownInternalBufferSize.Location = new System.Drawing.Point(812, 173);
             this.numericUpDownInternalBufferSize.Maximum = new decimal(new int[] {
             -478150656,
             139961312,
@@ -397,7 +397,7 @@
             // 
             // textBoxInputPath
             // 
-            this.textBoxInputPath.Location = new System.Drawing.Point(795, 180);
+            this.textBoxInputPath.Location = new System.Drawing.Point(789, 245);
             this.textBoxInputPath.Name = "textBoxInputPath";
             this.textBoxInputPath.Size = new System.Drawing.Size(398, 23);
             this.textBoxInputPath.TabIndex = 30;
@@ -406,7 +406,7 @@
             // 
             // textBoxOutputPath
             // 
-            this.textBoxOutputPath.Location = new System.Drawing.Point(795, 234);
+            this.textBoxOutputPath.Location = new System.Drawing.Point(789, 299);
             this.textBoxOutputPath.Name = "textBoxOutputPath";
             this.textBoxOutputPath.Size = new System.Drawing.Size(398, 23);
             this.textBoxOutputPath.TabIndex = 31;
@@ -416,7 +416,7 @@
             // labelInputPath
             // 
             this.labelInputPath.AutoSize = true;
-            this.labelInputPath.Location = new System.Drawing.Point(795, 162);
+            this.labelInputPath.Location = new System.Drawing.Point(789, 227);
             this.labelInputPath.Name = "labelInputPath";
             this.labelInputPath.Size = new System.Drawing.Size(210, 15);
             this.labelInputPath.TabIndex = 32;
@@ -425,7 +425,7 @@
             // labelIOutputPath
             // 
             this.labelIOutputPath.AutoSize = true;
-            this.labelIOutputPath.Location = new System.Drawing.Point(795, 209);
+            this.labelIOutputPath.Location = new System.Drawing.Point(789, 274);
             this.labelIOutputPath.Name = "labelIOutputPath";
             this.labelIOutputPath.Size = new System.Drawing.Size(207, 15);
             this.labelIOutputPath.TabIndex = 33;
@@ -434,7 +434,7 @@
             // checkBoxCompileToConsoleApp
             // 
             this.checkBoxCompileToConsoleApp.AutoSize = true;
-            this.checkBoxCompileToConsoleApp.Location = new System.Drawing.Point(795, 288);
+            this.checkBoxCompileToConsoleApp.Location = new System.Drawing.Point(789, 353);
             this.checkBoxCompileToConsoleApp.Name = "checkBoxCompileToConsoleApp";
             this.checkBoxCompileToConsoleApp.Size = new System.Drawing.Size(200, 19);
             this.checkBoxCompileToConsoleApp.TabIndex = 34;
@@ -447,7 +447,7 @@
             this.labelRestartRequired.AutoSize = true;
             this.labelRestartRequired.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelRestartRequired.ForeColor = System.Drawing.Color.Red;
-            this.labelRestartRequired.Location = new System.Drawing.Point(376, 12);
+            this.labelRestartRequired.Location = new System.Drawing.Point(370, 77);
             this.labelRestartRequired.Name = "labelRestartRequired";
             this.labelRestartRequired.Size = new System.Drawing.Size(582, 25);
             this.labelRestartRequired.TabIndex = 35;
@@ -455,7 +455,7 @@
             // 
             // buttonSaveAndRestart
             // 
-            this.buttonSaveAndRestart.Location = new System.Drawing.Point(297, 41);
+            this.buttonSaveAndRestart.Location = new System.Drawing.Point(291, 106);
             this.buttonSaveAndRestart.Name = "buttonSaveAndRestart";
             this.buttonSaveAndRestart.Size = new System.Drawing.Size(199, 23);
             this.buttonSaveAndRestart.TabIndex = 36;
@@ -465,7 +465,7 @@
             // 
             // buttonCancelChanges
             // 
-            this.buttonCancelChanges.Location = new System.Drawing.Point(297, 70);
+            this.buttonCancelChanges.Location = new System.Drawing.Point(291, 135);
             this.buttonCancelChanges.Name = "buttonCancelChanges";
             this.buttonCancelChanges.Size = new System.Drawing.Size(199, 23);
             this.buttonCancelChanges.TabIndex = 37;
@@ -475,7 +475,7 @@
             // 
             // buttonSetDefaultServiceSettings
             // 
-            this.buttonSetDefaultServiceSettings.Location = new System.Drawing.Point(795, 346);
+            this.buttonSetDefaultServiceSettings.Location = new System.Drawing.Point(789, 411);
             this.buttonSetDefaultServiceSettings.Name = "buttonSetDefaultServiceSettings";
             this.buttonSetDefaultServiceSettings.Size = new System.Drawing.Size(287, 23);
             this.buttonSetDefaultServiceSettings.TabIndex = 38;
@@ -487,7 +487,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1243, 623);
+            this.ClientSize = new System.Drawing.Size(1243, 685);
             this.Controls.Add(this.buttonSetDefaultServiceSettings);
             this.Controls.Add(this.buttonCancelChanges);
             this.Controls.Add(this.buttonSaveAndRestart);
