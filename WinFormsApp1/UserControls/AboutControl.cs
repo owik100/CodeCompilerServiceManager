@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CodeCompilerServiceManager.Helpers
+namespace CodeCompilerServiceManager.UserControls
 {
-    public partial class FormTestOne : Form
+    public partial class AboutControl : UserControl
     {
-        public FormTestOne()
+        public AboutControl()
         {
             InitializeComponent();
         }

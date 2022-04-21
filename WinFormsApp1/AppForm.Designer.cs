@@ -33,29 +33,12 @@
             this.btnReStartService = new System.Windows.Forms.Button();
             this.labelServiceStatus = new System.Windows.Forms.Label();
             this.pictureServiceStatus = new System.Windows.Forms.PictureBox();
-            this.numericOperationTimeout = new System.Windows.Forms.NumericUpDown();
-            this.labelOperationTimeout = new System.Windows.Forms.Label();
-            this.labelInterval = new System.Windows.Forms.Label();
-            this.numericUpDownIntervalRefresh = new System.Windows.Forms.NumericUpDown();
             this.txtOutputConsole = new System.Windows.Forms.RichTextBox();
-            this.btnSaveManagerSettings = new System.Windows.Forms.Button();
-            this.btnResetManagerSettings = new System.Windows.Forms.Button();
             this.btnClearManagerConsole = new System.Windows.Forms.Button();
-            this.checkBoxRefreshEnabled = new System.Windows.Forms.CheckBox();
             this.buttonInstallService = new System.Windows.Forms.Button();
             this.buttonDeleteService = new System.Windows.Forms.Button();
             this.buttonAppRestart = new System.Windows.Forms.Button();
-            this.textBoxServicePath = new System.Windows.Forms.TextBox();
-            this.labelServicePath = new System.Windows.Forms.Label();
-            this.buttonOpenLogFolder = new System.Windows.Forms.Button();
             this.buttonRefreshServiceState = new System.Windows.Forms.Button();
-            this.checkBoxLogToEventViewer = new System.Windows.Forms.CheckBox();
-            this.checkBoxLogToFile = new System.Windows.Forms.CheckBox();
-            this.textBoxPathToLogs = new System.Windows.Forms.TextBox();
-            this.numericUpDownServiceMainInterval = new System.Windows.Forms.NumericUpDown();
-            this.labelIntervalService = new System.Windows.Forms.Label();
-            this.labelInternalBufferSize = new System.Windows.Forms.Label();
-            this.numericUpDownInternalBufferSize = new System.Windows.Forms.NumericUpDown();
             this.textBoxInputPath = new System.Windows.Forms.TextBox();
             this.textBoxOutputPath = new System.Windows.Forms.TextBox();
             this.labelInputPath = new System.Windows.Forms.Label();
@@ -78,10 +61,6 @@
             this.labelTitleBar = new System.Windows.Forms.Label();
             this.panelDesktopParent = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericOperationTimeout)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalRefresh)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownServiceMainInterval)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownInternalBufferSize)).BeginInit();
             this.panelSideMenu.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
             this.SuspendLayout();
@@ -135,93 +114,14 @@
             this.pictureServiceStatus.TabIndex = 4;
             this.pictureServiceStatus.TabStop = false;
             // 
-            // numericOperationTimeout
-            // 
-            this.numericOperationTimeout.Location = new System.Drawing.Point(241, 328);
-            this.numericOperationTimeout.Maximum = new decimal(new int[] {
-            30000,
-            0,
-            0,
-            0});
-            this.numericOperationTimeout.Name = "numericOperationTimeout";
-            this.numericOperationTimeout.Size = new System.Drawing.Size(70, 23);
-            this.numericOperationTimeout.TabIndex = 6;
-            this.numericOperationTimeout.Value = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.numericOperationTimeout.ValueChanged += new System.EventHandler(this.numericOperationTimeout_ValueChanged);
-            // 
-            // labelOperationTimeout
-            // 
-            this.labelOperationTimeout.AutoSize = true;
-            this.labelOperationTimeout.Location = new System.Drawing.Point(241, 310);
-            this.labelOperationTimeout.Name = "labelOperationTimeout";
-            this.labelOperationTimeout.Size = new System.Drawing.Size(233, 15);
-            this.labelOperationTimeout.TabIndex = 7;
-            this.labelOperationTimeout.Text = "Timeout wykonanej akcji na usłudze (ms):  ";
-            // 
-            // labelInterval
-            // 
-            this.labelInterval.AutoSize = true;
-            this.labelInterval.Location = new System.Drawing.Point(241, 261);
-            this.labelInterval.Name = "labelInterval";
-            this.labelInterval.Size = new System.Drawing.Size(213, 15);
-            this.labelInterval.TabIndex = 8;
-            this.labelInterval.Text = "Interwał odświeżania stanu usługi (ms):";
-            // 
-            // numericUpDownIntervalRefresh
-            // 
-            this.numericUpDownIntervalRefresh.Location = new System.Drawing.Point(241, 279);
-            this.numericUpDownIntervalRefresh.Maximum = new decimal(new int[] {
-            180000,
-            0,
-            0,
-            0});
-            this.numericUpDownIntervalRefresh.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.numericUpDownIntervalRefresh.Name = "numericUpDownIntervalRefresh";
-            this.numericUpDownIntervalRefresh.Size = new System.Drawing.Size(70, 23);
-            this.numericUpDownIntervalRefresh.TabIndex = 9;
-            this.numericUpDownIntervalRefresh.Value = new decimal(new int[] {
-            3000,
-            0,
-            0,
-            0});
-            this.numericUpDownIntervalRefresh.ValueChanged += new System.EventHandler(this.numericUpDownIntervalRefresh_ValueChanged);
-            // 
             // txtOutputConsole
             // 
             this.txtOutputConsole.Location = new System.Drawing.Point(241, 415);
             this.txtOutputConsole.Name = "txtOutputConsole";
             this.txtOutputConsole.ReadOnly = true;
-            this.txtOutputConsole.Size = new System.Drawing.Size(648, 235);
+            this.txtOutputConsole.Size = new System.Drawing.Size(516, 235);
             this.txtOutputConsole.TabIndex = 10;
             this.txtOutputConsole.Text = "";
-            // 
-            // btnSaveManagerSettings
-            // 
-            this.btnSaveManagerSettings.Location = new System.Drawing.Point(509, 277);
-            this.btnSaveManagerSettings.Name = "btnSaveManagerSettings";
-            this.btnSaveManagerSettings.Size = new System.Drawing.Size(108, 23);
-            this.btnSaveManagerSettings.TabIndex = 11;
-            this.btnSaveManagerSettings.Text = "Zapisz ustawienia";
-            this.btnSaveManagerSettings.UseVisualStyleBackColor = true;
-            this.btnSaveManagerSettings.Click += new System.EventHandler(this.btnSaveManagerSettings_Click);
-            // 
-            // btnResetManagerSettings
-            // 
-            this.btnResetManagerSettings.Location = new System.Drawing.Point(509, 310);
-            this.btnResetManagerSettings.Name = "btnResetManagerSettings";
-            this.btnResetManagerSettings.Size = new System.Drawing.Size(108, 23);
-            this.btnResetManagerSettings.TabIndex = 12;
-            this.btnResetManagerSettings.Text = "Restart ustawień";
-            this.btnResetManagerSettings.UseVisualStyleBackColor = true;
-            this.btnResetManagerSettings.Click += new System.EventHandler(this.btnResetManagerSettings_Click);
             // 
             // btnClearManagerConsole
             // 
@@ -233,22 +133,9 @@
             this.btnClearManagerConsole.UseVisualStyleBackColor = true;
             this.btnClearManagerConsole.Click += new System.EventHandler(this.btnClearManagerConsole_Click);
             // 
-            // checkBoxRefreshEnabled
-            // 
-            this.checkBoxRefreshEnabled.AutoSize = true;
-            this.checkBoxRefreshEnabled.Checked = true;
-            this.checkBoxRefreshEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxRefreshEnabled.Location = new System.Drawing.Point(240, 236);
-            this.checkBoxRefreshEnabled.Name = "checkBoxRefreshEnabled";
-            this.checkBoxRefreshEnabled.Size = new System.Drawing.Size(220, 19);
-            this.checkBoxRefreshEnabled.TabIndex = 14;
-            this.checkBoxRefreshEnabled.Text = "Odświeżaj stan usługi automatycznie";
-            this.checkBoxRefreshEnabled.UseVisualStyleBackColor = true;
-            this.checkBoxRefreshEnabled.CheckedChanged += new System.EventHandler(this.checkBoxRefreshEnabled_CheckedChanged);
-            // 
             // buttonInstallService
             // 
-            this.buttonInstallService.Location = new System.Drawing.Point(654, 277);
+            this.buttonInstallService.Location = new System.Drawing.Point(543, 200);
             this.buttonInstallService.Name = "buttonInstallService";
             this.buttonInstallService.Size = new System.Drawing.Size(119, 23);
             this.buttonInstallService.TabIndex = 15;
@@ -258,7 +145,7 @@
             // 
             // buttonDeleteService
             // 
-            this.buttonDeleteService.Location = new System.Drawing.Point(654, 306);
+            this.buttonDeleteService.Location = new System.Drawing.Point(413, 227);
             this.buttonDeleteService.Name = "buttonDeleteService";
             this.buttonDeleteService.Size = new System.Drawing.Size(119, 23);
             this.buttonDeleteService.TabIndex = 16;
@@ -268,41 +155,13 @@
             // 
             // buttonAppRestart
             // 
-            this.buttonAppRestart.Location = new System.Drawing.Point(509, 248);
+            this.buttonAppRestart.Location = new System.Drawing.Point(442, 175);
             this.buttonAppRestart.Name = "buttonAppRestart";
             this.buttonAppRestart.Size = new System.Drawing.Size(108, 23);
             this.buttonAppRestart.TabIndex = 17;
             this.buttonAppRestart.Text = "Restart aplikacji";
             this.buttonAppRestart.UseVisualStyleBackColor = true;
             this.buttonAppRestart.Click += new System.EventHandler(this.buttonAppRestart_Click);
-            // 
-            // textBoxServicePath
-            // 
-            this.textBoxServicePath.Location = new System.Drawing.Point(332, 357);
-            this.textBoxServicePath.Name = "textBoxServicePath";
-            this.textBoxServicePath.ReadOnly = true;
-            this.textBoxServicePath.Size = new System.Drawing.Size(557, 23);
-            this.textBoxServicePath.TabIndex = 19;
-            this.textBoxServicePath.WordWrap = false;
-            // 
-            // labelServicePath
-            // 
-            this.labelServicePath.AutoSize = true;
-            this.labelServicePath.Location = new System.Drawing.Point(243, 360);
-            this.labelServicePath.Name = "labelServicePath";
-            this.labelServicePath.Size = new System.Drawing.Size(83, 15);
-            this.labelServicePath.TabIndex = 20;
-            this.labelServicePath.Text = "Ścieżka usługi:";
-            // 
-            // buttonOpenLogFolder
-            // 
-            this.buttonOpenLogFolder.Location = new System.Drawing.Point(656, 251);
-            this.buttonOpenLogFolder.Name = "buttonOpenLogFolder";
-            this.buttonOpenLogFolder.Size = new System.Drawing.Size(233, 23);
-            this.buttonOpenLogFolder.TabIndex = 21;
-            this.buttonOpenLogFolder.Text = "Otwórz folder z logami serwisu";
-            this.buttonOpenLogFolder.UseVisualStyleBackColor = true;
-            this.buttonOpenLogFolder.Click += new System.EventHandler(this.buttonOpenLogFolder_Click);
             // 
             // buttonRefreshServiceState
             // 
@@ -314,104 +173,9 @@
             this.buttonRefreshServiceState.UseVisualStyleBackColor = true;
             this.buttonRefreshServiceState.Click += new System.EventHandler(this.buttonRefreshServiceState_Click);
             // 
-            // checkBoxLogToEventViewer
-            // 
-            this.checkBoxLogToEventViewer.AutoSize = true;
-            this.checkBoxLogToEventViewer.Location = new System.Drawing.Point(697, 122);
-            this.checkBoxLogToEventViewer.Name = "checkBoxLogToEventViewer";
-            this.checkBoxLogToEventViewer.Size = new System.Drawing.Size(200, 19);
-            this.checkBoxLogToEventViewer.TabIndex = 23;
-            this.checkBoxLogToEventViewer.Text = "Zapisuj logi do dziennika zdarzeń";
-            this.checkBoxLogToEventViewer.UseVisualStyleBackColor = true;
-            this.checkBoxLogToEventViewer.CheckedChanged += new System.EventHandler(this.checkBoxLogToEventViewer_CheckedChanged);
-            // 
-            // checkBoxLogToFile
-            // 
-            this.checkBoxLogToFile.AutoSize = true;
-            this.checkBoxLogToFile.Location = new System.Drawing.Point(697, 149);
-            this.checkBoxLogToFile.Name = "checkBoxLogToFile";
-            this.checkBoxLogToFile.Size = new System.Drawing.Size(133, 19);
-            this.checkBoxLogToFile.TabIndex = 24;
-            this.checkBoxLogToFile.Text = "Zapisuj logi do pliku";
-            this.checkBoxLogToFile.UseVisualStyleBackColor = true;
-            this.checkBoxLogToFile.CheckedChanged += new System.EventHandler(this.checkBoxLogToFile_CheckedChanged);
-            // 
-            // textBoxPathToLogs
-            // 
-            this.textBoxPathToLogs.Location = new System.Drawing.Point(535, 176);
-            this.textBoxPathToLogs.Name = "textBoxPathToLogs";
-            this.textBoxPathToLogs.Size = new System.Drawing.Size(398, 23);
-            this.textBoxPathToLogs.TabIndex = 25;
-            this.textBoxPathToLogs.WordWrap = false;
-            this.textBoxPathToLogs.TextChanged += new System.EventHandler(this.textBoxPathToLogs_TextChanged);
-            // 
-            // numericUpDownServiceMainInterval
-            // 
-            this.numericUpDownServiceMainInterval.Location = new System.Drawing.Point(963, 127);
-            this.numericUpDownServiceMainInterval.Maximum = new decimal(new int[] {
-            -1981284353,
-            -1966660860,
-            0,
-            0});
-            this.numericUpDownServiceMainInterval.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.numericUpDownServiceMainInterval.Name = "numericUpDownServiceMainInterval";
-            this.numericUpDownServiceMainInterval.Size = new System.Drawing.Size(253, 23);
-            this.numericUpDownServiceMainInterval.TabIndex = 29;
-            this.numericUpDownServiceMainInterval.Value = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDownServiceMainInterval.ValueChanged += new System.EventHandler(this.numericUpDownServiceMainInterval_ValueChanged);
-            // 
-            // labelIntervalService
-            // 
-            this.labelIntervalService.AutoSize = true;
-            this.labelIntervalService.Location = new System.Drawing.Point(963, 109);
-            this.labelIntervalService.Name = "labelIntervalService";
-            this.labelIntervalService.Size = new System.Drawing.Size(253, 15);
-            this.labelIntervalService.TabIndex = 28;
-            this.labelIntervalService.Text = "Interwał odświeżania głównej akcji usługi (ms):";
-            // 
-            // labelInternalBufferSize
-            // 
-            this.labelInternalBufferSize.AutoSize = true;
-            this.labelInternalBufferSize.Location = new System.Drawing.Point(963, 158);
-            this.labelInternalBufferSize.Name = "labelInternalBufferSize";
-            this.labelInternalBufferSize.Size = new System.Drawing.Size(234, 15);
-            this.labelInternalBufferSize.TabIndex = 27;
-            this.labelInternalBufferSize.Text = "Rozmiar (w bajtach) buforu wewnętrznego.";
-            // 
-            // numericUpDownInternalBufferSize
-            // 
-            this.numericUpDownInternalBufferSize.Location = new System.Drawing.Point(963, 176);
-            this.numericUpDownInternalBufferSize.Maximum = new decimal(new int[] {
-            -478150656,
-            139961312,
-            16263,
-            0});
-            this.numericUpDownInternalBufferSize.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericUpDownInternalBufferSize.Name = "numericUpDownInternalBufferSize";
-            this.numericUpDownInternalBufferSize.Size = new System.Drawing.Size(253, 23);
-            this.numericUpDownInternalBufferSize.TabIndex = 26;
-            this.numericUpDownInternalBufferSize.Value = new decimal(new int[] {
-            8192,
-            0,
-            0,
-            0});
-            this.numericUpDownInternalBufferSize.ValueChanged += new System.EventHandler(this.numericUpDownInternalBufferSize_ValueChanged);
-            // 
             // textBoxInputPath
             // 
-            this.textBoxInputPath.Location = new System.Drawing.Point(940, 248);
+            this.textBoxInputPath.Location = new System.Drawing.Point(937, 127);
             this.textBoxInputPath.Name = "textBoxInputPath";
             this.textBoxInputPath.Size = new System.Drawing.Size(276, 23);
             this.textBoxInputPath.TabIndex = 30;
@@ -420,7 +184,7 @@
             // 
             // textBoxOutputPath
             // 
-            this.textBoxOutputPath.Location = new System.Drawing.Point(940, 302);
+            this.textBoxOutputPath.Location = new System.Drawing.Point(937, 181);
             this.textBoxOutputPath.Name = "textBoxOutputPath";
             this.textBoxOutputPath.Size = new System.Drawing.Size(276, 23);
             this.textBoxOutputPath.TabIndex = 31;
@@ -430,7 +194,7 @@
             // labelInputPath
             // 
             this.labelInputPath.AutoSize = true;
-            this.labelInputPath.Location = new System.Drawing.Point(940, 230);
+            this.labelInputPath.Location = new System.Drawing.Point(937, 109);
             this.labelInputPath.Name = "labelInputPath";
             this.labelInputPath.Size = new System.Drawing.Size(210, 15);
             this.labelInputPath.TabIndex = 32;
@@ -439,7 +203,7 @@
             // labelIOutputPath
             // 
             this.labelIOutputPath.AutoSize = true;
-            this.labelIOutputPath.Location = new System.Drawing.Point(940, 277);
+            this.labelIOutputPath.Location = new System.Drawing.Point(937, 156);
             this.labelIOutputPath.Name = "labelIOutputPath";
             this.labelIOutputPath.Size = new System.Drawing.Size(207, 15);
             this.labelIOutputPath.TabIndex = 33;
@@ -448,7 +212,7 @@
             // checkBoxCompileToConsoleApp
             // 
             this.checkBoxCompileToConsoleApp.AutoSize = true;
-            this.checkBoxCompileToConsoleApp.Location = new System.Drawing.Point(940, 356);
+            this.checkBoxCompileToConsoleApp.Location = new System.Drawing.Point(937, 235);
             this.checkBoxCompileToConsoleApp.Name = "checkBoxCompileToConsoleApp";
             this.checkBoxCompileToConsoleApp.Size = new System.Drawing.Size(200, 19);
             this.checkBoxCompileToConsoleApp.TabIndex = 34;
@@ -489,7 +253,7 @@
             // 
             // buttonSetDefaultServiceSettings
             // 
-            this.buttonSetDefaultServiceSettings.Location = new System.Drawing.Point(940, 414);
+            this.buttonSetDefaultServiceSettings.Location = new System.Drawing.Point(937, 260);
             this.buttonSetDefaultServiceSettings.Name = "buttonSetDefaultServiceSettings";
             this.buttonSetDefaultServiceSettings.Size = new System.Drawing.Size(287, 23);
             this.buttonSetDefaultServiceSettings.TabIndex = 38;
@@ -649,9 +413,9 @@
             // 
             // panelDesktopParent
             // 
-            this.panelDesktopParent.Location = new System.Drawing.Point(914, 443);
+            this.panelDesktopParent.Location = new System.Drawing.Point(763, 300);
             this.panelDesktopParent.Name = "panelDesktopParent";
-            this.panelDesktopParent.Size = new System.Drawing.Size(304, 230);
+            this.panelDesktopParent.Size = new System.Drawing.Size(455, 373);
             this.panelDesktopParent.TabIndex = 41;
             // 
             // AppForm
@@ -671,29 +435,12 @@
             this.Controls.Add(this.labelInputPath);
             this.Controls.Add(this.textBoxOutputPath);
             this.Controls.Add(this.textBoxInputPath);
-            this.Controls.Add(this.numericUpDownServiceMainInterval);
-            this.Controls.Add(this.labelIntervalService);
-            this.Controls.Add(this.labelInternalBufferSize);
-            this.Controls.Add(this.numericUpDownInternalBufferSize);
-            this.Controls.Add(this.textBoxPathToLogs);
-            this.Controls.Add(this.checkBoxLogToFile);
-            this.Controls.Add(this.checkBoxLogToEventViewer);
             this.Controls.Add(this.buttonRefreshServiceState);
-            this.Controls.Add(this.buttonOpenLogFolder);
-            this.Controls.Add(this.labelServicePath);
-            this.Controls.Add(this.textBoxServicePath);
             this.Controls.Add(this.buttonAppRestart);
             this.Controls.Add(this.buttonDeleteService);
             this.Controls.Add(this.buttonInstallService);
-            this.Controls.Add(this.checkBoxRefreshEnabled);
             this.Controls.Add(this.btnClearManagerConsole);
-            this.Controls.Add(this.btnResetManagerSettings);
-            this.Controls.Add(this.btnSaveManagerSettings);
             this.Controls.Add(this.txtOutputConsole);
-            this.Controls.Add(this.numericUpDownIntervalRefresh);
-            this.Controls.Add(this.labelInterval);
-            this.Controls.Add(this.labelOperationTimeout);
-            this.Controls.Add(this.numericOperationTimeout);
             this.Controls.Add(this.pictureServiceStatus);
             this.Controls.Add(this.labelServiceStatus);
             this.Controls.Add(this.btnReStartService);
@@ -703,10 +450,6 @@
             this.Text = "Code Compiler Service Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AppForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericOperationTimeout)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalRefresh)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownServiceMainInterval)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownInternalBufferSize)).EndInit();
             this.panelSideMenu.ResumeLayout(false);
             this.panelTitleBar.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -721,29 +464,12 @@
         private Button btnReStartService;
         private Label labelServiceStatus;
         private PictureBox pictureServiceStatus;
-        private NumericUpDown numericOperationTimeout;
-        private Label labelOperationTimeout;
-        private Label labelInterval;
-        private NumericUpDown numericUpDownIntervalRefresh;
         private RichTextBox txtOutputConsole;
-        private Button btnSaveManagerSettings;
-        private Button btnResetManagerSettings;
         private Button btnClearManagerConsole;
-        private CheckBox checkBoxRefreshEnabled;
         private Button buttonInstallService;
         private Button buttonDeleteService;
         private Button buttonAppRestart;
-        private TextBox textBoxServicePath;
-        private Label labelServicePath;
-        private Button buttonOpenLogFolder;
         private Button buttonRefreshServiceState;
-        private CheckBox checkBoxLogToEventViewer;
-        private CheckBox checkBoxLogToFile;
-        private TextBox textBoxPathToLogs;
-        private NumericUpDown numericUpDownServiceMainInterval;
-        private Label labelIntervalService;
-        private Label labelInternalBufferSize;
-        private NumericUpDown numericUpDownInternalBufferSize;
         private TextBox textBoxInputPath;
         private TextBox textBoxOutputPath;
         private Label labelInputPath;

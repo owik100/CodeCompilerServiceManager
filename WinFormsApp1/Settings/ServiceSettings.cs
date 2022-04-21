@@ -10,19 +10,19 @@ using System.Threading.Tasks;
 
 namespace CodeCompilerServiceManager.Settings
 {
-    public class ServiceSettings: IMeesageHandling
+    public static class ServiceSettings
     {
-        public ServiceSettingsModel ServiceSettingsModel;
+        public static ServiceSettingsModel ServiceSettingsModel;
 
-        public event EventHandler<string> GetMessage;
+        public static event EventHandler<string> GetMessage;
 
-        public void OnMessage(string errorMessage)
+        public static void OnMessage(string errorMessage)
         {
             GetMessage?.Invoke(null, errorMessage);
         }
-        public ServiceSettings(string serviceConfigPath, bool restartToDefault)
+        public static ServiceSettingsModel LoadSettings(string serviceConfigPath, bool restartToDefault)
         {
-            ServiceSettingsModel = new ServiceSettingsModel();
+            ServiceSettingsModel model = new ServiceSettingsModel();
             try
             {
                 string jsonFileName = restartToDefault ? @"\appsettingsDefault.json" : @"\appsettings.json";
@@ -37,9 +37,10 @@ namespace CodeCompilerServiceManager.Settings
             {
                 OnMessage(ex.ToString());
             }
+            return model;
         }
 
-        public void SaveSettingsToJson(string serviceConfigPath)
+        public static void SaveSettingsToJson(string serviceConfigPath)
         {
             try
             {

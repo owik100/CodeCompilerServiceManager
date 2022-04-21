@@ -6,20 +6,18 @@ using System.ServiceProcess;
 using CodeCompilerService.OptionModels;
 using CodeCompilerServiceManager.Settings.Models;
 using CodeCompilerServiceManager.Helpers;
+using CodeCompilerServiceManager.UserControls;
 
 namespace CodeCompilerServiceManager
 {
     public partial class AppForm : Form
     {
         IServiceProxy serviceConnector = new ServiceProxy();
-        ServiceSettings serviceSettings;
 
-        private System.Windows.Forms.Timer serviceStatusTimer;
         private BackgroundWorker workerOnStart;
         private BackgroundWorker workerOnStop;
         private BackgroundWorker workerOnRestart;
 
-        private bool restartRequired = false;
         private Button currentMenuButton;
         private Form activeForm;
 
@@ -28,6 +26,32 @@ namespace CodeCompilerServiceManager
             InitializeComponent();
             InitializeManager();
         }
+
+        #region Properties
+        public System.Windows.Forms.Timer ServiceStatusTimer { get; private set; }
+        public bool RestartServiceRequired { get; set; } = false;
+        #endregion
+
+        #region Public Methods
+        public void CheckStatus(object sender, EventArgs e)
+        {
+            ServiceControllerStatus result = serviceConnector.GetServiceStatus();
+            OnStatusChanged(result);
+        }
+        public void SetRestartRequiredState()
+        {
+            RestartServiceRequired = true;
+            labelRestartRequired.Visible = RestartServiceRequired;
+        }
+        public string GetServicePath()
+        {
+            return serviceConnector.GetServicePath();
+        }
+        public void ReStartService()
+        {
+            btnReStartService_Click(null, null);
+        }
+        #endregion
 
         #region Private methods
         private void InitializeManager()
@@ -41,101 +65,55 @@ namespace CodeCompilerServiceManager
                 InitTimer();
                 InitWorkers();
                 labelServiceStatus.Text = "Stan us³ugi: Nieznany...";
-                string servisePath = serviceConnector.GetServicePath();
-                if (string.IsNullOrEmpty(servisePath))
+                string servicePath = GetServicePath();
+                if (string.IsNullOrEmpty(servicePath))
                 {
                     ServiceConnector_MessageHandler(null, "Nie znaleziono œcie¿ki us³ugi!");
                 }
                 else
                 {
-                    textBoxServicePath.Text = servisePath;
-                    serviceSettings = new ServiceSettings(servisePath, false);
-                    serviceSettings.GetMessage += ServiceConnector_MessageHandler;
+                    LoadServiceSettings(servicePath);
+                    ServiceSettings.GetMessage += ServiceConnector_MessageHandler;
 
                     BindLibraryOptionsToControls();
-                    BindServiceOptionsToControls();
                 }
-                if (checkBoxRefreshEnabled.Checked)
+                if (AppSettings.RefreshStatusEnabled)
                 {
                     CheckStatus(null, null);
                 }
-                restartRequired = false;
-                labelRestartRequired.Visible = restartRequired;
+                RestartServiceRequired = false;
+                labelRestartRequired.Visible = RestartServiceRequired;
             }
             catch (Exception ex)
             {
                 ServiceConnector_MessageHandler(null, ex.ToString());
             }
         }
-        private void BindServiceOptionsToControls()
+
+        private void LoadServiceSettings(string serviceConfigPath)
         {
-            try
-            {
-                bool saveToEventLog = false;
-                var settingExist = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.Where(x => x.Name == "EventLog")?.FirstOrDefault();
-                if (settingExist != null)
-                {
-                    saveToEventLog = true;
-                }
-
-                checkBoxLogToEventViewer.Checked = saveToEventLog;
-
-                bool saveToFile = false;
-                settingExist = null;
-                settingExist = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.Where(x => x.Name == "File")?.FirstOrDefault();
-                if (settingExist != null)
-                {
-                    saveToFile = true;
-                }
-
-                checkBoxLogToFile.Checked = saveToFile;
-
-                string pathToFileLog = "";
-                pathToFileLog = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.Where(x => x.Name == "File")?.FirstOrDefault()?.Args?.path;
-                if (pathToFileLog != null)
-                {
-                    textBoxPathToLogs.Text = pathToFileLog;
-                }
-
-                decimal intervalRefresh = -1;
-                intervalRefresh = (decimal)(serviceSettings?.ServiceSettingsModel?.ServiceOptions?.Interval);
-                if (intervalRefresh > 0)
-                {
-                    numericUpDownServiceMainInterval.Value = intervalRefresh;
-                }
-
-                decimal bufferSize = -1;
-                bufferSize = (decimal)(serviceSettings?.ServiceSettingsModel?.ServiceOptions?.InternalBufferSize);
-                if (bufferSize > 0)
-                {
-                    numericUpDownInternalBufferSize.Value = bufferSize;
-                }
-            }
-            catch (Exception ex)
-            {
-                ServiceConnector_MessageHandler(null, ex.ToString());
-            }
+            ServiceSettings.LoadSettings(serviceConfigPath, false);
         }
         private void BindLibraryOptionsToControls()
         {
             try
             {
                 string pathToInput = "";
-                pathToInput = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath;
+                pathToInput = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath;
                 if (pathToInput != null)
                 {
                     textBoxInputPath.Text = pathToInput;
                 }
 
                 string pathToOutput = "";
-                pathToOutput = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.OutputPath;
+                pathToOutput = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.OutputPath;
                 if (pathToOutput != null)
                 {
                     textBoxOutputPath.Text = pathToOutput;
                 }
 
                 bool? compileToConsoleApp = false;
-                compileToConsoleApp = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildToConsoleApp;
+                compileToConsoleApp = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildToConsoleApp;
                 if (compileToConsoleApp == null)
                     compileToConsoleApp = false;
 
@@ -152,9 +130,6 @@ namespace CodeCompilerServiceManager
             try
             {
                 AppSettingsModel model = AppSettings.LoadSettings();
-                numericUpDownIntervalRefresh.Value = model.CheckStatusInterval;
-                numericOperationTimeout.Value = Convert.ToDecimal(model.OperationTimeout.TotalMilliseconds);
-                checkBoxRefreshEnabled.Checked = model.RefreshStatusEnabled;
             }
             catch (Exception ex)
             {
@@ -165,12 +140,12 @@ namespace CodeCompilerServiceManager
         {
             try
             {
-                serviceStatusTimer = new System.Windows.Forms.Timer();
-                serviceStatusTimer.Tick += new EventHandler(CheckStatus);
-                serviceStatusTimer.Interval = AppSettings.CheckStatusInterval;
-                if (checkBoxRefreshEnabled.Checked)
+                ServiceStatusTimer = new System.Windows.Forms.Timer();
+                ServiceStatusTimer.Tick += new EventHandler(CheckStatus);
+                ServiceStatusTimer.Interval = AppSettings.CheckStatusInterval;
+                if (AppSettings.RefreshStatusEnabled)
                 {
-                    serviceStatusTimer.Start();
+                    ServiceStatusTimer.Start();
                 }
             }
             catch (Exception ex)
@@ -179,90 +154,38 @@ namespace CodeCompilerServiceManager
             }
 
         }
-        private void SaveManagerSettings()
+        //TODO impleemt
+        private void SaveLibraryOptions()
         {
-            try
-            {
-                AppSettingsModel model = new AppSettingsModel()
-                {
-                    CheckStatusInterval = Convert.ToInt32(numericUpDownIntervalRefresh.Value),
-                    OperationTimeout = TimeSpan.FromMilliseconds(Convert.ToDouble(numericOperationTimeout.Value)),
-                    RefreshStatusEnabled = checkBoxRefreshEnabled.Checked,
-                };
-                AppSettings.SaveSettings(model);
-            }
-            catch (Exception ex)
-            {
-                ServiceConnector_MessageHandler(null, ex.ToString());
-            }
+
         }
+
         private void SaveServiceAndLibraryOptions()
         {
             try
             {
-                //Serilog
-                var WriteToEventLog = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.FirstOrDefault(x => x?.Name == "EventLog" || x?.Name == "EventLogOff");
-                if (WriteToEventLog != null)
-                {
-                    if (checkBoxLogToEventViewer.Checked)
-                    {
-                        WriteToEventLog.Name = "EventLog";
-                    }
-                    else
-                    {
-                        WriteToEventLog.Name = "EventLogOFF";
-                    }
-                }
-
-                var WriteToFile = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo?.FirstOrDefault(x => x?.Name == "File" || x?.Name == "FileOFF");
-                if (WriteToFile != null)
-                {
-                    if (checkBoxLogToFile.Checked)
-                    {
-                        WriteToFile.Name = "File";
-                    }
-                    else
-                    {
-                        WriteToFile.Name = "FileOFF";
-                    }
-
-                    WriteToFile.Args.path = textBoxPathToLogs.Text;
-                }
-
-
-                //Service options
-                var serviceInterval = serviceSettings?.ServiceSettingsModel?.ServiceOptions?.Interval;
-                if (serviceInterval != null && serviceInterval > -1)
-                {
-                    serviceSettings.ServiceSettingsModel.ServiceOptions.Interval = (int)numericUpDownServiceMainInterval.Value;
-                }
-                var bufferSize = serviceSettings?.ServiceSettingsModel?.ServiceOptions?.InternalBufferSize;
-                if (bufferSize != null && bufferSize > -1)
-                {
-                    serviceSettings.ServiceSettingsModel.ServiceOptions.InternalBufferSize = (int)numericUpDownInternalBufferSize.Value;
-                }
-
+              
 
                 //Library options
-                var libInputPath = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath;
+                var libInputPath = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath;
                 if (libInputPath != null)
                 {
-                    serviceSettings.ServiceSettingsModel.CodeCompilerLibOptions.InputPath = textBoxInputPath.Text;
+                    ServiceSettings.ServiceSettingsModel.CodeCompilerLibOptions.InputPath = textBoxInputPath.Text;
                 }
 
-                var libOutputtPath = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.OutputPath;
+                var libOutputtPath = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.OutputPath;
                 if (libOutputtPath != null)
                 {
-                    serviceSettings.ServiceSettingsModel.CodeCompilerLibOptions.OutputPath = textBoxOutputPath.Text;
+                    ServiceSettings.ServiceSettingsModel.CodeCompilerLibOptions.OutputPath = textBoxOutputPath.Text;
                 }
 
-                var compileToWindowConsole = serviceSettings?.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildToConsoleApp;
+                var compileToWindowConsole = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildToConsoleApp;
                 if (compileToWindowConsole != null)
                 {
-                    serviceSettings.ServiceSettingsModel.CodeCompilerLibOptions.BuildToConsoleApp = checkBoxCompileToConsoleApp.Checked;
+                    ServiceSettings.ServiceSettingsModel.CodeCompilerLibOptions.BuildToConsoleApp = checkBoxCompileToConsoleApp.Checked;
                 }
 
-                serviceSettings.SaveSettingsToJson(textBoxServicePath.Text);
+                ServiceSettings.SaveSettingsToJson(GetServicePath());
             }
             catch (Exception ex)
             {
@@ -283,16 +206,6 @@ namespace CodeCompilerServiceManager
                 txtOutputConsole.Text += errMessage;
                 txtOutputConsole.Text += Environment.NewLine;
             }
-        }
-        private void CheckStatus(object sender, EventArgs e)
-        {
-            ServiceControllerStatus result = serviceConnector.GetServiceStatus();
-            OnStatusChanged(result);
-        }
-        private void SetRestartRequiredState()
-        {
-            restartRequired = true;
-            labelRestartRequired.Visible = restartRequired;
         }
 
         private void OnStatusChanged(ServiceControllerStatus status)
@@ -364,7 +277,7 @@ namespace CodeCompilerServiceManager
             }
         }
 
-        private void OpenChildControl(Form childForm, object btnSender)
+        private void OpenChildForm(Form childForm, object btnSender)
         {
             if(activeForm != null)
             {
@@ -380,6 +293,15 @@ namespace CodeCompilerServiceManager
             this.panelDesktopParent.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
+        }
+
+        private void OpenChildControl(UserControl childControl, object btnSender)
+        {
+            this.panelDesktopParent.Controls.Clear();
+            ActiveNavButton(btnSender);
+
+            this.panelDesktopParent.Controls.Add(childControl);
+            childControl.Dock = DockStyle.Fill;
         }
 
         private void DisableNavButtons()
@@ -415,8 +337,8 @@ namespace CodeCompilerServiceManager
         private void workerOnRestart_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             OnStatusChanged((ServiceControllerStatus)Convert.ToInt32(e.Result));
-            restartRequired = false;
-            labelRestartRequired.Visible = restartRequired;
+            RestartServiceRequired = false;
+            labelRestartRequired.Visible = RestartServiceRequired;
         }
 
         private void workerOnRestart_DoWork(object? sender, DoWorkEventArgs e)
@@ -442,8 +364,8 @@ namespace CodeCompilerServiceManager
         private void workerOnStart_RunWorkerCompleted(object? sender, RunWorkerCompletedEventArgs e)
         {
             OnStatusChanged((ServiceControllerStatus)Convert.ToInt32(e.Result));
-            restartRequired = false;
-            labelRestartRequired.Visible = restartRequired;
+            RestartServiceRequired = false;
+            labelRestartRequired.Visible = RestartServiceRequired;
         }
         #endregion
 
@@ -456,22 +378,22 @@ namespace CodeCompilerServiceManager
 
         private void buttonManagerSettings_Click(object sender, EventArgs e)
         {
-            OpenChildControl(new FormTestOne(), sender);
+            OpenChildControl(new ManagerSettingsControl(this), sender);
         }
 
         private void buttonServiceSettings_Click(object sender, EventArgs e)
         {
-            OpenChildControl(new FormTestTwo(), sender);
+            OpenChildControl(new ServiceSettingsControl(this), sender);
         }
 
         private void buttonLibrarySettings_Click(object sender, EventArgs e)
         {
-            ActiveNavButton(sender);
+
         }
 
         private void buttonInfo_Click(object sender, EventArgs e)
         {
-            ActiveNavButton(sender);
+            OpenChildControl(new AboutControl(), sender);
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -494,7 +416,7 @@ namespace CodeCompilerServiceManager
                 pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
                 btnStartService.Enabled = false;
                 btnReStartService.Enabled = false;
-                if (restartRequired)
+                if (RestartServiceRequired)
                 {
                     SaveServiceAndLibraryOptions();
                 }
@@ -530,7 +452,7 @@ namespace CodeCompilerServiceManager
                 pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
                 btnStopService.Enabled = false;
                 btnReStartService.Enabled = false;
-                if (restartRequired)
+                if (RestartServiceRequired)
                 {
                     SaveServiceAndLibraryOptions();
                 }
@@ -541,75 +463,6 @@ namespace CodeCompilerServiceManager
                 ServiceConnector_MessageHandler(null, ex.ToString());
             }
 
-        }
-
-        private void btnSaveManagerSettings_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                AppSettingsModel model = new AppSettingsModel()
-                {
-                    CheckStatusInterval = Convert.ToInt32(numericUpDownIntervalRefresh.Value),
-                    OperationTimeout = TimeSpan.FromMilliseconds(Convert.ToDouble(numericOperationTimeout.Value)),
-                    RefreshStatusEnabled = checkBoxRefreshEnabled.Checked,
-                };
-                AppSettings.SaveSettings(model);
-            }
-            catch (Exception ex)
-            {
-                ServiceConnector_MessageHandler(null, ex.ToString());
-            }
-        }
-
-        private void numericUpDownIntervalRefresh_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                AppSettings.CheckStatusInterval = Convert.ToInt32(numericUpDownIntervalRefresh.Value);
-                if (serviceStatusTimer != null)
-                {
-                    serviceStatusTimer.Interval = AppSettings.CheckStatusInterval;
-                }
-                SaveManagerSettings();
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        private void numericOperationTimeout_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                AppSettings.OperationTimeout = TimeSpan.FromMilliseconds(Convert.ToDouble(numericOperationTimeout.Value));
-                SaveManagerSettings();
-            }
-            catch (Exception ex)
-            {
-                ServiceConnector_MessageHandler(null, ex.ToString());
-            }
-        }
-
-        private void checkBoxRefreshEnabled_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (serviceStatusTimer != null)
-                {
-                    serviceStatusTimer.Enabled = checkBoxRefreshEnabled.Checked;
-                }
-
-                if (checkBoxRefreshEnabled.Checked)
-                {
-                    CheckStatus(null, null);
-                }
-                SaveManagerSettings();
-            }
-            catch (Exception ex)
-            {
-                ServiceConnector_MessageHandler(null, ex.ToString());
-            }
         }
 
         private void buttonInstallService_Click(object sender, EventArgs e)
@@ -638,7 +491,7 @@ namespace CodeCompilerServiceManager
                         }
                     }
                     serviceConnector.InstallService(path);
-                    textBoxServicePath.Text = path;
+                    //textBoxServicePath.Text = path;
                     btnReStartService_Click(null, null);
                 }
             }
@@ -660,7 +513,7 @@ namespace CodeCompilerServiceManager
                         bool res = serviceConnector.RemoveService();
                         if (res)
                         {
-                            textBoxServicePath.Text = "";
+                            //textBoxServicePath.Text = "";
                             btnStopService_Click(null, null);
                         }
                     }
@@ -693,100 +546,11 @@ namespace CodeCompilerServiceManager
             }
         }
 
-        private void buttonOpenLogFolder_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string serviceConfigPath = textBoxServicePath.Text;
-                if (string.IsNullOrEmpty(serviceConfigPath))
-                {
-                    ServiceConnector_MessageHandler(null, "Nie znaleziono œcie¿ki us³ugi!");
-                }
-                else
-                {
-                    string path = serviceSettings?.ServiceSettingsModel?.Serilog?.WriteTo.Where(x => x.Name == "File").FirstOrDefault()?.Args?.path;
-                    if (string.IsNullOrWhiteSpace(path))
-                    {
-                        ServiceConnector_MessageHandler(null, "Nie znaleziono œcie¿ki do logów w opcjach!");
-                    }
-                    else
-                    {
-                        string argument = "/select, \"" + path + "\"";
-                        System.Diagnostics.Process.Start("explorer.exe", argument);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ServiceConnector_MessageHandler(null, ex.ToString());
-            }
-        }
-
         private void buttonRefreshServiceState_Click(object sender, EventArgs e)
         {
             try
             {
                 CheckStatus(null, null);
-            }
-            catch (Exception ex)
-            {
-                ServiceConnector_MessageHandler(null, ex.ToString());
-            }
-        }
-
-        private void checkBoxLogToEventViewer_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                SetRestartRequiredState();
-            }
-            catch (Exception ex)
-            {
-                ServiceConnector_MessageHandler(null, ex.ToString());
-            }
-        }
-
-        private void checkBoxLogToFile_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                SetRestartRequiredState();
-            }
-            catch (Exception ex)
-            {
-                ServiceConnector_MessageHandler(null, ex.ToString());
-            }
-        }
-
-        private void textBoxPathToLogs_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                SetRestartRequiredState();
-            }
-            catch (Exception ex)
-            {
-                ServiceConnector_MessageHandler(null, ex.ToString());
-            }
-        }
-
-        private void numericUpDownServiceMainInterval_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                SetRestartRequiredState();
-            }
-            catch (Exception ex)
-            {
-                ServiceConnector_MessageHandler(null, ex.ToString());
-            }
-        }
-
-        private void numericUpDownInternalBufferSize_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                SetRestartRequiredState();
             }
             catch (Exception ex)
             {
@@ -834,7 +598,7 @@ namespace CodeCompilerServiceManager
         {
             try
             {
-                if (restartRequired)
+                if (RestartServiceRequired)
                 {
                     DialogResult dialogResult = MessageBox.Show("Masz nie zapisane zmiany. Chcesz je zapisaæ? (Us³uga zostanie zrestartowana)", "Uwaga", MessageBoxButtons.YesNoCancel, icon: MessageBoxIcon.Warning);
                     if (dialogResult == DialogResult.Yes)
@@ -856,23 +620,6 @@ namespace CodeCompilerServiceManager
             {
                 ServiceConnector_MessageHandler(null, ex.ToString());
             }
-        }
-
-
-        private void btnResetManagerSettings_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                AppSettingsModel model = AppSettings.RestartSettings();
-                numericUpDownIntervalRefresh.Value = model.CheckStatusInterval;
-                numericOperationTimeout.Value = Convert.ToDecimal(model.OperationTimeout.TotalMilliseconds);
-                checkBoxRefreshEnabled.Checked = model.RefreshStatusEnabled;
-            }
-            catch (Exception ex)
-            {
-                ServiceConnector_MessageHandler(null, ex.ToString());
-            }
-
         }
 
         private void btnClearManagerConsole_Click(object sender, EventArgs e)
@@ -912,13 +659,11 @@ namespace CodeCompilerServiceManager
                 }
                 else
                 {
-                    textBoxServicePath.Text = servisePath;
-                    serviceSettings = new ServiceSettings(servisePath, false);
+                    ServiceSettings.LoadSettings(servisePath, false);
 
                     BindLibraryOptionsToControls();
-                    BindServiceOptionsToControls();
-                    restartRequired = false;
-                    labelRestartRequired.Visible = restartRequired;
+                    RestartServiceRequired = false;
+                    labelRestartRequired.Visible = RestartServiceRequired;
                 }
             }
             catch (Exception ex)
@@ -938,13 +683,11 @@ namespace CodeCompilerServiceManager
                 }
                 else
                 {
-                    textBoxServicePath.Text = servisePath;
-                    serviceSettings = new ServiceSettings(servisePath, true);
+                    ServiceSettings.LoadSettings(servisePath, true);
 
                     BindLibraryOptionsToControls();
-                    BindServiceOptionsToControls();
-                    restartRequired = false;
-                    labelRestartRequired.Visible = restartRequired;
+                    RestartServiceRequired = false;
+                    labelRestartRequired.Visible = RestartServiceRequired;
 
                     buttonSaveAndRestart_Click(null, null);
                 }
