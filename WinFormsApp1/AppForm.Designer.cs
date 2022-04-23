@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.panelSideMenu = new System.Windows.Forms.Panel();
-            this.labelSplitterMenu = new System.Windows.Forms.Label();
+            this.panelSlideMenuBottom = new System.Windows.Forms.Panel();
             this.buttonExit = new System.Windows.Forms.Button();
+            this.buttonRestart = new System.Windows.Forms.Button();
             this.buttonInfo = new System.Windows.Forms.Button();
             this.buttonLibrarySettings = new System.Windows.Forms.Button();
             this.buttonServiceSettings = new System.Windows.Forms.Button();
@@ -41,6 +42,7 @@
             this.labelTitleBar = new System.Windows.Forms.Label();
             this.panelDesktopParent = new System.Windows.Forms.Panel();
             this.panelSideMenu.SuspendLayout();
+            this.panelSlideMenuBottom.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,8 +50,7 @@
             // 
             this.panelSideMenu.AutoScroll = true;
             this.panelSideMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.panelSideMenu.Controls.Add(this.labelSplitterMenu);
-            this.panelSideMenu.Controls.Add(this.buttonExit);
+            this.panelSideMenu.Controls.Add(this.panelSlideMenuBottom);
             this.panelSideMenu.Controls.Add(this.buttonInfo);
             this.panelSideMenu.Controls.Add(this.buttonLibrarySettings);
             this.panelSideMenu.Controls.Add(this.buttonServiceSettings);
@@ -57,36 +58,50 @@
             this.panelSideMenu.Controls.Add(this.buttonHome);
             this.panelSideMenu.Controls.Add(this.panelLogo);
             this.panelSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelSideMenu.Location = new System.Drawing.Point(0, 0);
+            this.panelSideMenu.Location = new System.Drawing.Point(3, 24);
             this.panelSideMenu.Name = "panelSideMenu";
-            this.panelSideMenu.Size = new System.Drawing.Size(220, 685);
+            this.panelSideMenu.Size = new System.Drawing.Size(220, 693);
             this.panelSideMenu.TabIndex = 39;
             // 
-            // labelSplitterMenu
+            // panelSlideMenuBottom
             // 
-            this.labelSplitterMenu.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.labelSplitterMenu.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelSplitterMenu.ForeColor = System.Drawing.SystemColors.Control;
-            this.labelSplitterMenu.Location = new System.Drawing.Point(0, 633);
-            this.labelSplitterMenu.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.labelSplitterMenu.Name = "labelSplitterMenu";
-            this.labelSplitterMenu.Size = new System.Drawing.Size(220, 2);
-            this.labelSplitterMenu.TabIndex = 7;
+            this.panelSlideMenuBottom.Controls.Add(this.buttonExit);
+            this.panelSlideMenuBottom.Controls.Add(this.buttonRestart);
+            this.panelSlideMenuBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelSlideMenuBottom.Location = new System.Drawing.Point(0, 593);
+            this.panelSlideMenuBottom.Name = "panelSlideMenuBottom";
+            this.panelSlideMenuBottom.Size = new System.Drawing.Size(220, 100);
+            this.panelSlideMenuBottom.TabIndex = 9;
             // 
             // buttonExit
             // 
-            this.buttonExit.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonExit.Dock = System.Windows.Forms.DockStyle.Right;
             this.buttonExit.FlatAppearance.BorderSize = 0;
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonExit.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonExit.Location = new System.Drawing.Point(0, 635);
+            this.buttonExit.Location = new System.Drawing.Point(110, 0);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(220, 50);
-            this.buttonExit.TabIndex = 6;
+            this.buttonExit.Size = new System.Drawing.Size(110, 100);
+            this.buttonExit.TabIndex = 10;
             this.buttonExit.Text = "Wyjście";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            // 
+            // buttonRestart
+            // 
+            this.buttonRestart.Dock = System.Windows.Forms.DockStyle.Left;
+            this.buttonRestart.FlatAppearance.BorderSize = 0;
+            this.buttonRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRestart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonRestart.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonRestart.Location = new System.Drawing.Point(0, 0);
+            this.buttonRestart.Name = "buttonRestart";
+            this.buttonRestart.Size = new System.Drawing.Size(110, 100);
+            this.buttonRestart.TabIndex = 9;
+            this.buttonRestart.Text = "Restart";
+            this.buttonRestart.UseVisualStyleBackColor = true;
+            this.buttonRestart.Click += new System.EventHandler(this.buttonRestart_Click);
             // 
             // buttonInfo
             // 
@@ -165,7 +180,7 @@
             // 
             // panelLogo
             // 
-            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(195)))), ((int)(((byte)(74)))));
+            this.panelLogo.BackColor = System.Drawing.Color.White;
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
@@ -177,19 +192,20 @@
             this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(142)))), ((int)(((byte)(60)))));
             this.panelTitleBar.Controls.Add(this.labelTitleBar);
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitleBar.Location = new System.Drawing.Point(220, 0);
+            this.panelTitleBar.Location = new System.Drawing.Point(223, 24);
             this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(1010, 75);
+            this.panelTitleBar.Size = new System.Drawing.Size(798, 75);
             this.panelTitleBar.TabIndex = 40;
             // 
             // labelTitleBar
             // 
+            this.labelTitleBar.BackColor = System.Drawing.Color.Black;
             this.labelTitleBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelTitleBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTitleBar.ForeColor = System.Drawing.Color.White;
             this.labelTitleBar.Location = new System.Drawing.Point(0, 0);
             this.labelTitleBar.Name = "labelTitleBar";
-            this.labelTitleBar.Size = new System.Drawing.Size(1010, 75);
+            this.labelTitleBar.Size = new System.Drawing.Size(798, 75);
             this.labelTitleBar.TabIndex = 0;
             this.labelTitleBar.Text = "Home";
             this.labelTitleBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -197,23 +213,26 @@
             // panelDesktopParent
             // 
             this.panelDesktopParent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktopParent.Location = new System.Drawing.Point(220, 75);
+            this.panelDesktopParent.Location = new System.Drawing.Point(223, 99);
             this.panelDesktopParent.Name = "panelDesktopParent";
-            this.panelDesktopParent.Size = new System.Drawing.Size(1010, 610);
+            this.panelDesktopParent.Size = new System.Drawing.Size(798, 618);
             this.panelDesktopParent.TabIndex = 41;
             // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1230, 685);
+            this.ClientSize = new System.Drawing.Size(1024, 720);
             this.Controls.Add(this.panelDesktopParent);
             this.Controls.Add(this.panelTitleBar);
             this.Controls.Add(this.panelSideMenu);
+            this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
             this.Name = "AppForm";
+            this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
             this.Text = "Code Compiler Service Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AppForm_FormClosing);
             this.panelSideMenu.ResumeLayout(false);
+            this.panelSlideMenuBottom.ResumeLayout(false);
             this.panelTitleBar.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -223,8 +242,6 @@
         private Panel panelSideMenu;
         private Button buttonHome;
         private Panel panelLogo;
-        private Label labelSplitterMenu;
-        private Button buttonExit;
         private Button buttonInfo;
         private Button buttonLibrarySettings;
         private Button buttonServiceSettings;
@@ -232,5 +249,8 @@
         private Panel panelTitleBar;
         private Label labelTitleBar;
         private Panel panelDesktopParent;
+        private Panel panelSlideMenuBottom;
+        private Button buttonExit;
+        private Button buttonRestart;
     }
 }

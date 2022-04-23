@@ -7,10 +7,11 @@ using CodeCompilerService.OptionModels;
 using CodeCompilerServiceManager.Settings.Models;
 using CodeCompilerServiceManager.Helpers;
 using CodeCompilerServiceManager.UserControls;
+using MaterialSkin.Controls;
 
 namespace CodeCompilerServiceManager
 {
-    public partial class AppForm : Form
+    public partial class AppForm : MaterialForm
     {
         IServiceProxy serviceConnector = new ServiceProxy();
 
@@ -25,6 +26,7 @@ namespace CodeCompilerServiceManager
         public AppForm()
         {
             InitializeComponent();
+            InitColors();
             InitializeHomeControl();
             InitializeManager();
         }
@@ -71,6 +73,11 @@ namespace CodeCompilerServiceManager
         #endregion
 
         #region Private methods
+        private void InitColors()
+        {
+            //panelLogo.BackColor = ColorManager.PrimaryColorAccent;
+            labelTitleBar.BackColor = ColorManager.PrimaryColor;
+        }
         private void InitializeHomeControl()
         {
             homeControl = new HomeControl(this);
@@ -111,7 +118,7 @@ namespace CodeCompilerServiceManager
         {
             ServiceSettings.LoadSettings(serviceConfigPath, false);
         }
-     
+
         private void LoadManagerOptions()
         {
             try
@@ -147,7 +154,7 @@ namespace CodeCompilerServiceManager
             workerOnStart.RunWorkerAsync();
         }
 
-        private void StopServiceWorker() 
+        private void StopServiceWorker()
         {
             workerOnStop.RunWorkerAsync();
         }
@@ -183,7 +190,7 @@ namespace CodeCompilerServiceManager
         {
             foreach (Control btn in panelSideMenu.Controls)
             {
-                if(btn.GetType() == typeof(Button))
+                if (btn.GetType() == typeof(Button))
                 {
                     btn.BackColor = ColorManager.BackColorSidePanel;
                     btn.ForeColor = Color.Gainsboro;
@@ -273,6 +280,20 @@ namespace CodeCompilerServiceManager
         {
             Application.Exit();
         }
+
+        private void buttonRestart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Application.Restart();
+                Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                homeControl.ServiceConnector_MessageHandler(null, ex.ToString());
+            }
+        }
+
         private void AppForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -297,7 +318,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-               homeControl.ServiceConnector_MessageHandler(null, ex.ToString());
+                homeControl.ServiceConnector_MessageHandler(null, ex.ToString());
             }
         }
         #endregion

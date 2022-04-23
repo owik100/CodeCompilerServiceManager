@@ -50,19 +50,6 @@ namespace CodeCompilerServiceManager.UserControls
             }
         }
 
-        private void buttonAppRestart_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Application.Restart();
-                Environment.Exit(0);
-            }
-            catch (Exception ex)
-            {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
-            }
-        }
-
         private void btnStartService_Click(object sender, EventArgs e)
         {
             try
@@ -84,6 +71,7 @@ namespace CodeCompilerServiceManager.UserControls
             try
             {
                 txtOutputConsole.Clear();
+
             }
             catch (Exception ex)
             {
