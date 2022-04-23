@@ -28,25 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.linkLabelGithub = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
-            // checkBox1
+            // linkLabelGithub
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(35, 73);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(83, 19);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.linkLabelGithub.AutoSize = true;
+            this.linkLabelGithub.Location = new System.Drawing.Point(43, 28);
+            this.linkLabelGithub.Name = "linkLabelGithub";
+            this.linkLabelGithub.Size = new System.Drawing.Size(43, 15);
+            this.linkLabelGithub.TabIndex = 0;
+            this.linkLabelGithub.TabStop = true;
+            this.linkLabelGithub.Text = "Github";
+            this.linkLabelGithub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelGithub_LinkClicked);
             // 
-            // About
+            // AboutControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.checkBox1);
-            this.Name = "About";
+            this.Controls.Add(this.linkLabelGithub);
+            this.Name = "AboutControl";
+            this.Size = new System.Drawing.Size(600, 300);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -54,6 +56,6 @@
 
         #endregion
 
-        private CheckBox checkBox1;
+        private LinkLabel linkLabelGithub;
     }
 }

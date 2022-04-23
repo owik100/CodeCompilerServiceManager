@@ -24,6 +24,73 @@ namespace CodeCompilerServiceManager.UserControls
         }
 
         #region controlEvenets
+        private void buttonInstallService_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string path = "";
+                if (_appFormParent.ServiceExist())
+                {
+                    //ServiceConnector_MessageHandler(null, "Usługa jest już zainstalowana!");
+                }
+                else
+                {
+                    MessageBox.Show("Wybierz folder zawierający usługę CodeCompilerServiceOwik", "Wybór ścieżki", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    using (var dialog = new FolderBrowserDialog())
+                    {
+                        DialogResult result = dialog.ShowDialog();
+
+                        if (result == DialogResult.OK)
+                        {
+                            path = dialog.SelectedPath;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    _appFormParent.InstallService(path);
+                    _appFormParent.ReStartService();
+                    textBoxServicePath.Text = path;
+                }
+            }
+            catch (Exception ex)
+            {
+                //ServiceConnector_MessageHandler(null, ex.ToString());
+            }
+        }
+
+        private void buttonDeleteService_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_appFormParent.ServiceExist())
+                {
+                    DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz odinstalować usługę CodeCompilerServiceOwik?", "Uwaga", MessageBoxButtons.YesNo, icon: MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        bool res = _appFormParent.RemoveService();
+                        if (res)
+                        {
+                            textBoxServicePath.Text = "";
+                            _appFormParent.StopService();
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    //ServiceConnector_MessageHandler(null, "Usługa nie jest zainstalowana!");
+                }
+            }
+            catch (Exception ex)
+            {
+                //ServiceConnector_MessageHandler(null, ex.ToString());
+            }
+        }
 
         private void checkBoxLogToEventViewer_CheckedChanged(object sender, EventArgs e)
         {

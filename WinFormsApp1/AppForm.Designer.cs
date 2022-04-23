@@ -28,26 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnStartService = new System.Windows.Forms.Button();
-            this.btnStopService = new System.Windows.Forms.Button();
-            this.btnReStartService = new System.Windows.Forms.Button();
-            this.labelServiceStatus = new System.Windows.Forms.Label();
-            this.pictureServiceStatus = new System.Windows.Forms.PictureBox();
-            this.txtOutputConsole = new System.Windows.Forms.RichTextBox();
-            this.btnClearManagerConsole = new System.Windows.Forms.Button();
-            this.buttonInstallService = new System.Windows.Forms.Button();
-            this.buttonDeleteService = new System.Windows.Forms.Button();
-            this.buttonAppRestart = new System.Windows.Forms.Button();
-            this.buttonRefreshServiceState = new System.Windows.Forms.Button();
-            this.textBoxInputPath = new System.Windows.Forms.TextBox();
-            this.textBoxOutputPath = new System.Windows.Forms.TextBox();
-            this.labelInputPath = new System.Windows.Forms.Label();
-            this.labelIOutputPath = new System.Windows.Forms.Label();
-            this.checkBoxCompileToConsoleApp = new System.Windows.Forms.CheckBox();
-            this.labelRestartRequired = new System.Windows.Forms.Label();
-            this.buttonSaveAndRestart = new System.Windows.Forms.Button();
-            this.buttonCancelChanges = new System.Windows.Forms.Button();
-            this.buttonSetDefaultServiceSettings = new System.Windows.Forms.Button();
             this.panelSideMenu = new System.Windows.Forms.Panel();
             this.labelSplitterMenu = new System.Windows.Forms.Label();
             this.buttonExit = new System.Windows.Forms.Button();
@@ -60,206 +40,9 @@
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.labelTitleBar = new System.Windows.Forms.Label();
             this.panelDesktopParent = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).BeginInit();
             this.panelSideMenu.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnStartService
-            // 
-            this.btnStartService.Location = new System.Drawing.Point(232, 146);
-            this.btnStartService.Name = "btnStartService";
-            this.btnStartService.Size = new System.Drawing.Size(174, 23);
-            this.btnStartService.TabIndex = 0;
-            this.btnStartService.Text = "Uruchom usługę";
-            this.btnStartService.UseVisualStyleBackColor = true;
-            this.btnStartService.Click += new System.EventHandler(this.btnStartService_Click);
-            // 
-            // btnStopService
-            // 
-            this.btnStopService.Location = new System.Drawing.Point(232, 175);
-            this.btnStopService.Name = "btnStopService";
-            this.btnStopService.Size = new System.Drawing.Size(175, 23);
-            this.btnStopService.TabIndex = 1;
-            this.btnStopService.Text = "Zatrzymaj usługę";
-            this.btnStopService.UseVisualStyleBackColor = true;
-            this.btnStopService.Click += new System.EventHandler(this.btnStopService_Click);
-            // 
-            // btnReStartService
-            // 
-            this.btnReStartService.Location = new System.Drawing.Point(232, 204);
-            this.btnReStartService.Name = "btnReStartService";
-            this.btnReStartService.Size = new System.Drawing.Size(175, 23);
-            this.btnReStartService.TabIndex = 2;
-            this.btnReStartService.Text = "Uruchom ponowne usługę";
-            this.btnReStartService.UseVisualStyleBackColor = true;
-            this.btnReStartService.Click += new System.EventHandler(this.btnReStartService_Click);
-            // 
-            // labelServiceStatus
-            // 
-            this.labelServiceStatus.AutoSize = true;
-            this.labelServiceStatus.Location = new System.Drawing.Point(232, 118);
-            this.labelServiceStatus.Name = "labelServiceStatus";
-            this.labelServiceStatus.Size = new System.Drawing.Size(68, 15);
-            this.labelServiceStatus.TabIndex = 3;
-            this.labelServiceStatus.Text = "Stan usługi:";
-            // 
-            // pictureServiceStatus
-            // 
-            this.pictureServiceStatus.Image = global::CodeCompilerServiceManager.Properties.Resources.yellow;
-            this.pictureServiceStatus.Location = new System.Drawing.Point(232, 80);
-            this.pictureServiceStatus.Name = "pictureServiceStatus";
-            this.pictureServiceStatus.Size = new System.Drawing.Size(68, 35);
-            this.pictureServiceStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureServiceStatus.TabIndex = 4;
-            this.pictureServiceStatus.TabStop = false;
-            // 
-            // txtOutputConsole
-            // 
-            this.txtOutputConsole.Location = new System.Drawing.Point(241, 415);
-            this.txtOutputConsole.Name = "txtOutputConsole";
-            this.txtOutputConsole.ReadOnly = true;
-            this.txtOutputConsole.Size = new System.Drawing.Size(516, 235);
-            this.txtOutputConsole.TabIndex = 10;
-            this.txtOutputConsole.Text = "";
-            // 
-            // btnClearManagerConsole
-            // 
-            this.btnClearManagerConsole.Location = new System.Drawing.Point(232, 656);
-            this.btnClearManagerConsole.Name = "btnClearManagerConsole";
-            this.btnClearManagerConsole.Size = new System.Drawing.Size(117, 23);
-            this.btnClearManagerConsole.TabIndex = 13;
-            this.btnClearManagerConsole.Text = "Wyczyść konsole";
-            this.btnClearManagerConsole.UseVisualStyleBackColor = true;
-            this.btnClearManagerConsole.Click += new System.EventHandler(this.btnClearManagerConsole_Click);
-            // 
-            // buttonInstallService
-            // 
-            this.buttonInstallService.Location = new System.Drawing.Point(543, 200);
-            this.buttonInstallService.Name = "buttonInstallService";
-            this.buttonInstallService.Size = new System.Drawing.Size(119, 23);
-            this.buttonInstallService.TabIndex = 15;
-            this.buttonInstallService.Text = "Zainstaluj usługę";
-            this.buttonInstallService.UseVisualStyleBackColor = true;
-            this.buttonInstallService.Click += new System.EventHandler(this.buttonInstallService_Click);
-            // 
-            // buttonDeleteService
-            // 
-            this.buttonDeleteService.Location = new System.Drawing.Point(413, 227);
-            this.buttonDeleteService.Name = "buttonDeleteService";
-            this.buttonDeleteService.Size = new System.Drawing.Size(119, 23);
-            this.buttonDeleteService.TabIndex = 16;
-            this.buttonDeleteService.Text = "Usuń usługę";
-            this.buttonDeleteService.UseVisualStyleBackColor = true;
-            this.buttonDeleteService.Click += new System.EventHandler(this.buttonDeleteService_Click);
-            // 
-            // buttonAppRestart
-            // 
-            this.buttonAppRestart.Location = new System.Drawing.Point(442, 175);
-            this.buttonAppRestart.Name = "buttonAppRestart";
-            this.buttonAppRestart.Size = new System.Drawing.Size(108, 23);
-            this.buttonAppRestart.TabIndex = 17;
-            this.buttonAppRestart.Text = "Restart aplikacji";
-            this.buttonAppRestart.UseVisualStyleBackColor = true;
-            this.buttonAppRestart.Click += new System.EventHandler(this.buttonAppRestart_Click);
-            // 
-            // buttonRefreshServiceState
-            // 
-            this.buttonRefreshServiceState.Location = new System.Drawing.Point(306, 80);
-            this.buttonRefreshServiceState.Name = "buttonRefreshServiceState";
-            this.buttonRefreshServiceState.Size = new System.Drawing.Size(209, 23);
-            this.buttonRefreshServiceState.TabIndex = 22;
-            this.buttonRefreshServiceState.Text = "Ręcznie odśwież stan usługi";
-            this.buttonRefreshServiceState.UseVisualStyleBackColor = true;
-            this.buttonRefreshServiceState.Click += new System.EventHandler(this.buttonRefreshServiceState_Click);
-            // 
-            // textBoxInputPath
-            // 
-            this.textBoxInputPath.Location = new System.Drawing.Point(937, 127);
-            this.textBoxInputPath.Name = "textBoxInputPath";
-            this.textBoxInputPath.Size = new System.Drawing.Size(276, 23);
-            this.textBoxInputPath.TabIndex = 30;
-            this.textBoxInputPath.WordWrap = false;
-            this.textBoxInputPath.TextChanged += new System.EventHandler(this.textBoxInputPath_TextChanged);
-            // 
-            // textBoxOutputPath
-            // 
-            this.textBoxOutputPath.Location = new System.Drawing.Point(937, 181);
-            this.textBoxOutputPath.Name = "textBoxOutputPath";
-            this.textBoxOutputPath.Size = new System.Drawing.Size(276, 23);
-            this.textBoxOutputPath.TabIndex = 31;
-            this.textBoxOutputPath.WordWrap = false;
-            this.textBoxOutputPath.TextChanged += new System.EventHandler(this.textBoxOutputPath_TextChanged);
-            // 
-            // labelInputPath
-            // 
-            this.labelInputPath.AutoSize = true;
-            this.labelInputPath.Location = new System.Drawing.Point(937, 109);
-            this.labelInputPath.Name = "labelInputPath";
-            this.labelInputPath.Size = new System.Drawing.Size(210, 15);
-            this.labelInputPath.TabIndex = 32;
-            this.labelInputPath.Text = "Folder wejściowy plików do kompilacji";
-            // 
-            // labelIOutputPath
-            // 
-            this.labelIOutputPath.AutoSize = true;
-            this.labelIOutputPath.Location = new System.Drawing.Point(937, 156);
-            this.labelIOutputPath.Name = "labelIOutputPath";
-            this.labelIOutputPath.Size = new System.Drawing.Size(207, 15);
-            this.labelIOutputPath.TabIndex = 33;
-            this.labelIOutputPath.Text = "Folder wyściowy plików do kompilacji";
-            // 
-            // checkBoxCompileToConsoleApp
-            // 
-            this.checkBoxCompileToConsoleApp.AutoSize = true;
-            this.checkBoxCompileToConsoleApp.Location = new System.Drawing.Point(937, 235);
-            this.checkBoxCompileToConsoleApp.Name = "checkBoxCompileToConsoleApp";
-            this.checkBoxCompileToConsoleApp.Size = new System.Drawing.Size(200, 19);
-            this.checkBoxCompileToConsoleApp.TabIndex = 34;
-            this.checkBoxCompileToConsoleApp.Text = "Kompiluj do aplikacji konsolowej";
-            this.checkBoxCompileToConsoleApp.UseVisualStyleBackColor = true;
-            this.checkBoxCompileToConsoleApp.CheckedChanged += new System.EventHandler(this.checkBoxCompileToConsoleApp_CheckedChanged);
-            // 
-            // labelRestartRequired
-            // 
-            this.labelRestartRequired.AutoSize = true;
-            this.labelRestartRequired.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelRestartRequired.ForeColor = System.Drawing.Color.Red;
-            this.labelRestartRequired.Location = new System.Drawing.Point(521, 80);
-            this.labelRestartRequired.Name = "labelRestartRequired";
-            this.labelRestartRequired.Size = new System.Drawing.Size(582, 25);
-            this.labelRestartRequired.TabIndex = 35;
-            this.labelRestartRequired.Text = "Po zmianie opcji serwisu lub biblioteki wymagany jest restart usługi!";
-            // 
-            // buttonSaveAndRestart
-            // 
-            this.buttonSaveAndRestart.Location = new System.Drawing.Point(442, 109);
-            this.buttonSaveAndRestart.Name = "buttonSaveAndRestart";
-            this.buttonSaveAndRestart.Size = new System.Drawing.Size(199, 23);
-            this.buttonSaveAndRestart.TabIndex = 36;
-            this.buttonSaveAndRestart.Text = "Zapisz i zrestartuj usługę";
-            this.buttonSaveAndRestart.UseVisualStyleBackColor = true;
-            this.buttonSaveAndRestart.Click += new System.EventHandler(this.buttonSaveAndRestart_Click);
-            // 
-            // buttonCancelChanges
-            // 
-            this.buttonCancelChanges.Location = new System.Drawing.Point(442, 138);
-            this.buttonCancelChanges.Name = "buttonCancelChanges";
-            this.buttonCancelChanges.Size = new System.Drawing.Size(199, 23);
-            this.buttonCancelChanges.TabIndex = 37;
-            this.buttonCancelChanges.Text = "Anuluj zmiany";
-            this.buttonCancelChanges.UseVisualStyleBackColor = true;
-            this.buttonCancelChanges.Click += new System.EventHandler(this.buttonCancelChanges_Click);
-            // 
-            // buttonSetDefaultServiceSettings
-            // 
-            this.buttonSetDefaultServiceSettings.Location = new System.Drawing.Point(937, 260);
-            this.buttonSetDefaultServiceSettings.Name = "buttonSetDefaultServiceSettings";
-            this.buttonSetDefaultServiceSettings.Size = new System.Drawing.Size(287, 23);
-            this.buttonSetDefaultServiceSettings.TabIndex = 38;
-            this.buttonSetDefaultServiceSettings.Text = "Przywróć ustawienia usługi na domyślne";
-            this.buttonSetDefaultServiceSettings.UseVisualStyleBackColor = true;
-            this.buttonSetDefaultServiceSettings.Click += new System.EventHandler(this.buttonSetDefaultServiceSettings_Click);
             // 
             // panelSideMenu
             // 
@@ -413,9 +196,10 @@
             // 
             // panelDesktopParent
             // 
-            this.panelDesktopParent.Location = new System.Drawing.Point(763, 300);
+            this.panelDesktopParent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDesktopParent.Location = new System.Drawing.Point(220, 75);
             this.panelDesktopParent.Name = "panelDesktopParent";
-            this.panelDesktopParent.Size = new System.Drawing.Size(455, 373);
+            this.panelDesktopParent.Size = new System.Drawing.Size(1010, 610);
             this.panelDesktopParent.TabIndex = 41;
             // 
             // AppForm
@@ -426,59 +210,16 @@
             this.Controls.Add(this.panelDesktopParent);
             this.Controls.Add(this.panelTitleBar);
             this.Controls.Add(this.panelSideMenu);
-            this.Controls.Add(this.buttonSetDefaultServiceSettings);
-            this.Controls.Add(this.buttonCancelChanges);
-            this.Controls.Add(this.buttonSaveAndRestart);
-            this.Controls.Add(this.labelRestartRequired);
-            this.Controls.Add(this.checkBoxCompileToConsoleApp);
-            this.Controls.Add(this.labelIOutputPath);
-            this.Controls.Add(this.labelInputPath);
-            this.Controls.Add(this.textBoxOutputPath);
-            this.Controls.Add(this.textBoxInputPath);
-            this.Controls.Add(this.buttonRefreshServiceState);
-            this.Controls.Add(this.buttonAppRestart);
-            this.Controls.Add(this.buttonDeleteService);
-            this.Controls.Add(this.buttonInstallService);
-            this.Controls.Add(this.btnClearManagerConsole);
-            this.Controls.Add(this.txtOutputConsole);
-            this.Controls.Add(this.pictureServiceStatus);
-            this.Controls.Add(this.labelServiceStatus);
-            this.Controls.Add(this.btnReStartService);
-            this.Controls.Add(this.btnStopService);
-            this.Controls.Add(this.btnStartService);
             this.Name = "AppForm";
             this.Text = "Code Compiler Service Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AppForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).EndInit();
             this.panelSideMenu.ResumeLayout(false);
             this.panelTitleBar.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private Button btnStartService;
-        private Button btnStopService;
-        private Button btnReStartService;
-        private Label labelServiceStatus;
-        private PictureBox pictureServiceStatus;
-        private RichTextBox txtOutputConsole;
-        private Button btnClearManagerConsole;
-        private Button buttonInstallService;
-        private Button buttonDeleteService;
-        private Button buttonAppRestart;
-        private Button buttonRefreshServiceState;
-        private TextBox textBoxInputPath;
-        private TextBox textBoxOutputPath;
-        private Label labelInputPath;
-        private Label labelIOutputPath;
-        private CheckBox checkBoxCompileToConsoleApp;
-        private Label labelRestartRequired;
-        private Button buttonSaveAndRestart;
-        private Button buttonCancelChanges;
-        private Button buttonSetDefaultServiceSettings;
         private Panel panelSideMenu;
         private Button buttonHome;
         private Panel panelLogo;

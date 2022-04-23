@@ -42,6 +42,8 @@
             this.buttonCancelChanges = new System.Windows.Forms.Button();
             this.buttonSaveAndRestart = new System.Windows.Forms.Button();
             this.buttonSetDefaultServiceSettings = new System.Windows.Forms.Button();
+            this.buttonDeleteService = new System.Windows.Forms.Button();
+            this.buttonInstallService = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownServiceMainInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownInternalBufferSize)).BeginInit();
             this.SuspendLayout();
@@ -210,10 +212,32 @@
             this.buttonSetDefaultServiceSettings.UseVisualStyleBackColor = true;
             this.buttonSetDefaultServiceSettings.Click += new System.EventHandler(this.buttonSetDefaultServiceSettings_Click);
             // 
+            // buttonDeleteService
+            // 
+            this.buttonDeleteService.Location = new System.Drawing.Point(338, 13);
+            this.buttonDeleteService.Name = "buttonDeleteService";
+            this.buttonDeleteService.Size = new System.Drawing.Size(119, 23);
+            this.buttonDeleteService.TabIndex = 45;
+            this.buttonDeleteService.Text = "Usuń usługę";
+            this.buttonDeleteService.UseVisualStyleBackColor = true;
+            this.buttonDeleteService.Click += new System.EventHandler(this.buttonDeleteService_Click);
+            // 
+            // buttonInstallService
+            // 
+            this.buttonInstallService.Location = new System.Drawing.Point(213, 13);
+            this.buttonInstallService.Name = "buttonInstallService";
+            this.buttonInstallService.Size = new System.Drawing.Size(119, 23);
+            this.buttonInstallService.TabIndex = 44;
+            this.buttonInstallService.Text = "Zainstaluj usługę";
+            this.buttonInstallService.UseVisualStyleBackColor = true;
+            this.buttonInstallService.Click += new System.EventHandler(this.buttonInstallService_Click);
+            // 
             // ServiceSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.buttonDeleteService);
+            this.Controls.Add(this.buttonInstallService);
             this.Controls.Add(this.buttonSetDefaultServiceSettings);
             this.Controls.Add(this.buttonCancelChanges);
             this.Controls.Add(this.buttonSaveAndRestart);
@@ -253,5 +277,7 @@
         private Button buttonCancelChanges;
         private Button buttonSaveAndRestart;
         private Button buttonSetDefaultServiceSettings;
+        private Button buttonDeleteService;
+        private Button buttonInstallService;
     }
 }
