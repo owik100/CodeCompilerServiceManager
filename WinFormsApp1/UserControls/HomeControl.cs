@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeCompilerServiceManager.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,7 @@ namespace CodeCompilerServiceManager.UserControls
         {
             _appFormParent = appFormParent;
             InitializeComponent();
+            FixControlPositions();
         }
 
         #region controlEvents
@@ -99,7 +101,14 @@ namespace CodeCompilerServiceManager.UserControls
         #endregion
 
         #region privateMethods
-
+        private void FixControlPositions()
+        {
+            pictureServiceStatus.Location = new Point((panelStatusInfo.Width - pictureServiceStatus.Width) / 2, pictureServiceStatus.Location.Y);
+            labelServiceStatus.Location = new Point((panelStatusInfo.Width - labelServiceStatus.Width) / 2, labelServiceStatus.Location.Y);
+            btnClearManagerConsole.Location = new Point((panelClearConsole.Width - btnClearManagerConsole.Width) / 2, btnClearManagerConsole.Location.Y);
+            panelServiceButtonContainer.Location = new Point((panelServiceButtons.Width - panelServiceButtonContainer.Width) / 2, panelServiceButtonContainer.Location.Y);
+            toolTip1.BackColor = ColorManager.PrimaryColorAccent;
+        }
         private void OnStopped()
         {
             pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.red;
@@ -175,5 +184,12 @@ namespace CodeCompilerServiceManager.UserControls
             }
         }
         #endregion
+
+        private void toolTip1_draw(object sender, DrawToolTipEventArgs e)
+        {
+            e.DrawBackground();
+            e.DrawBorder();
+            e.DrawText();
+        }
     }
 }
