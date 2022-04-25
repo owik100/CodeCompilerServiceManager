@@ -49,6 +49,10 @@ namespace CodeCompilerServiceManager.Settings
                 key.SetValue("CheckStatusInterval", model.CheckStatusInterval);
                 key.SetValue("RefreshStatusEnabled", model.RefreshStatusEnabled);
                 key.Close();
+
+                OperationTimeout = model.OperationTimeout;
+                CheckStatusInterval = model.CheckStatusInterval;
+                RefreshStatusEnabled = model.RefreshStatusEnabled;
             }
             catch (Exception ex)
             {

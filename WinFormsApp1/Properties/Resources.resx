@@ -121,11 +121,17 @@
   <data name="cog" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="content_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\content-save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="content_save_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\content-save white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="green" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAqUAAAKlCAYAAADy2JUyAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAC3SSURBVHhe7d0r
+        wAAADsABataJCQAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAC3SSURBVHhe7d0r
         dBRZ2zbgkiMjIyORSGQkMhIZiUTiklcxDolEIiORSGQkEolEIv//2SH9Tady59Sp7q7DtbKumZV7pau7
         67Droar23t3//vc/AADYqxgCAMAuxRBgrrrz7qgcXzspD/18G9BFeehn9dmaw/QdAOYohgBTUEXbfQXm
         ejH4u/y/iWvfYf07fSx/f866t/Xf1Xp4kdYVwNjFEGAMqsA6vCq0zro39f/287m0guxnSYUb//lV2rpq

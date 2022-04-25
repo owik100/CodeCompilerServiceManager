@@ -98,6 +98,13 @@ namespace CodeCompilerServiceManager.UserControls
 
         }
 
+        private void toolTip1_draw(object sender, DrawToolTipEventArgs e)
+        {
+            e.DrawBackground();
+            e.DrawBorder();
+            e.DrawText();
+        }
+
         #endregion
 
         #region privateMethods
@@ -184,12 +191,5 @@ namespace CodeCompilerServiceManager.UserControls
             }
         }
         #endregion
-
-        private void toolTip1_draw(object sender, DrawToolTipEventArgs e)
-        {
-            e.DrawBackground();
-            e.DrawBorder();
-            e.DrawText();
-        }
     }
 }
