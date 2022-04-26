@@ -253,7 +253,7 @@
             this.Controls.Add(this.checkBoxLogToEventViewer);
             this.Controls.Add(this.buttonOpenLogFolder);
             this.Name = "ServiceSettingsControl";
-            this.Size = new System.Drawing.Size(600, 300);
+            this.Size = new System.Drawing.Size(866, 618);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownServiceMainInterval)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownInternalBufferSize)).EndInit();
             this.ResumeLayout(false);

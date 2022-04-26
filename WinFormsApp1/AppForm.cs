@@ -198,6 +198,30 @@ namespace CodeCompilerServiceManager
                 }
             }
         }
+
+
+        /// <returns>True means, we want cancel changing user control</returns>
+        private bool HandleLeaveUcerControl()
+        {
+            if (RestartServiceRequired)
+            {
+                DialogResult dialogResult = MessageBox.Show("Masz nie zapisane zmiany. Chcesz je zapisaæ? (Us³uga zostanie zrestartowana)", "Uwaga", MessageBoxButtons.YesNoCancel, icon: MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    //Zrobic zapis na kontrolce serwisu/biblioteki
+                    return false;
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    return false;
+                }
+                else if(dialogResult == DialogResult.Cancel)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
 
         #region backgroundWorkers
@@ -253,27 +277,42 @@ namespace CodeCompilerServiceManager
 
         private void buttonHome_Click(object sender, EventArgs e)
         {
-            OpenChildControl(homeControl, sender);
+            if (!HandleLeaveUcerControl())
+            {
+                OpenChildControl(homeControl, sender);
+            }
         }
 
         private void buttonManagerSettings_Click(object sender, EventArgs e)
         {
-            OpenChildControl(new ManagerSettingsControl(this), sender);
+            if (!HandleLeaveUcerControl())
+            {
+                OpenChildControl(new ManagerSettingsControl(this), sender);
+            }
         }
 
         private void buttonServiceSettings_Click(object sender, EventArgs e)
         {
-            OpenChildControl(new ServiceSettingsControl(this), sender);
+            if (!HandleLeaveUcerControl())
+            {
+                OpenChildControl(new ServiceSettingsControl(this), sender);
+            }
         }
 
         private void buttonLibrarySettings_Click(object sender, EventArgs e)
         {
-            OpenChildControl(new LibrarySettingsControl(this), sender);
+            if (!HandleLeaveUcerControl())
+            {
+                OpenChildControl(new LibrarySettingsControl(this), sender);
+            }
         }
 
         private void buttonInfo_Click(object sender, EventArgs e)
         {
-            OpenChildControl(new AboutControl(), sender);
+            if (!HandleLeaveUcerControl())
+            {
+                OpenChildControl(new AboutControl(), sender);
+            }
         }
 
         private void buttonExit_Click(object sender, EventArgs e)

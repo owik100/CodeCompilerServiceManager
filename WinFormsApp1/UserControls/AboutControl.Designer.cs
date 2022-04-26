@@ -48,7 +48,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.linkLabelGithub);
             this.Name = "AboutControl";
-            this.Size = new System.Drawing.Size(600, 300);
+            this.Size = new System.Drawing.Size(866, 618);
             this.ResumeLayout(false);
             this.PerformLayout();
 

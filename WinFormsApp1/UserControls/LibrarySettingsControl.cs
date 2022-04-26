@@ -20,9 +20,16 @@ namespace CodeCompilerServiceManager.UserControls
             _appFormParent = appFormParent;
             InitializeComponent();
             BindSettingsToControlls();
+            SetButtonEnabledStatus(false);
         }
 
         #region privateMethods
+        private void SetButtonEnabledStatus(bool enabled)
+        {
+            buttonSaveAndRestart.Enabled = enabled;
+            buttonCancelChanges.Enabled = enabled;
+        }
+
         private void BindSettingsToControlls()
         {
             try
@@ -46,7 +53,8 @@ namespace CodeCompilerServiceManager.UserControls
                 if (compileToConsoleApp == null)
                     compileToConsoleApp = false;
 
-                checkBoxCompileToConsoleApp.Checked = (bool)compileToConsoleApp;
+                materialRadioButtonMakeDll.Checked = !(bool)compileToConsoleApp;
+                materialRadioButtonMakeExe.Checked = (bool)compileToConsoleApp;
             }
             catch (Exception ex)
             {
@@ -76,7 +84,7 @@ namespace CodeCompilerServiceManager.UserControls
                 var compileToWindowConsole = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildToConsoleApp;
                 if (compileToWindowConsole != null)
                 {
-                    ServiceSettings.ServiceSettingsModel.CodeCompilerLibOptions.BuildToConsoleApp = checkBoxCompileToConsoleApp.Checked;
+                    ServiceSettings.ServiceSettingsModel.CodeCompilerLibOptions.BuildToConsoleApp = materialRadioButtonMakeExe.Checked;
                 }
 
                 string servisePath = _appFormParent.GetServicePath();
@@ -100,6 +108,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 _appFormParent.RestartServiceRequired = true;
                 labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
             }
             catch (Exception ex)
             {
@@ -113,6 +122,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 _appFormParent.RestartServiceRequired = true;
                 labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
             }
             catch (Exception ex)
             {
@@ -120,12 +130,27 @@ namespace CodeCompilerServiceManager.UserControls
             }
         }
 
-        private void checkBoxCompileToConsoleApp_CheckedChanged(object sender, EventArgs e)
+        private void materialRadioButtonMakeDll_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
                 _appFormParent.RestartServiceRequired = true;
                 labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
+            }
+            catch (Exception ex)
+            {
+                //ServiceConnector_MessageHandler(null, ex.ToString());
+            }
+        }
+
+        private void materialRadioButtonMakeExe_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _appFormParent.RestartServiceRequired = true;
+                labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
             }
             catch (Exception ex)
             {
@@ -141,6 +166,7 @@ namespace CodeCompilerServiceManager.UserControls
                 _appFormParent.ReStartService();
                 _appFormParent.RestartServiceRequired = false;
                 labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(false);
             }
             catch (Exception ex)
             {
@@ -161,6 +187,7 @@ namespace CodeCompilerServiceManager.UserControls
                 {
                     ServiceSettings.LoadSettings(servisePath, false);
                     BindSettingsToControlls();
+                    SetButtonEnabledStatus(false);
                 }
             }
             catch (Exception ex)
@@ -184,6 +211,53 @@ namespace CodeCompilerServiceManager.UserControls
 
                     BindSettingsToControlls();
                     buttonSaveAndRestart_Click(null, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                //ServiceConnector_MessageHandler(null, ex.ToString());
+            }
+        }
+        private void materialButtonChooseInputFolder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var dialog = new FolderBrowserDialog())
+                {
+                    DialogResult result = dialog.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        textBoxInputPath.Text = dialog.SelectedPath;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //ServiceConnector_MessageHandler(null, ex.ToString());
+            }
+        }
+
+        private void materialButtonChooseOutputFolder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var dialog = new FolderBrowserDialog())
+                {
+                    DialogResult result = dialog.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        textBoxOutputPath.Text = dialog.SelectedPath;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
             }
             catch (Exception ex)

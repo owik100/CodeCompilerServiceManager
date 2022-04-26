@@ -173,7 +173,7 @@
             this.Controls.Add(this.labelInterval);
             this.Controls.Add(this.checkBoxRefreshEnabled);
             this.Name = "ManagerSettingsControl";
-            this.Size = new System.Drawing.Size(798, 618);
+            this.Size = new System.Drawing.Size(866, 618);
             this.ResumeLayout(false);
             this.PerformLayout();
 

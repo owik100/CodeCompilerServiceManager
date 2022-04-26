@@ -194,7 +194,7 @@
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitleBar.Location = new System.Drawing.Point(223, 24);
             this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(798, 75);
+            this.panelTitleBar.Size = new System.Drawing.Size(866, 75);
             this.panelTitleBar.TabIndex = 40;
             // 
             // labelTitleBar
@@ -205,7 +205,7 @@
             this.labelTitleBar.ForeColor = System.Drawing.Color.White;
             this.labelTitleBar.Location = new System.Drawing.Point(0, 0);
             this.labelTitleBar.Name = "labelTitleBar";
-            this.labelTitleBar.Size = new System.Drawing.Size(798, 75);
+            this.labelTitleBar.Size = new System.Drawing.Size(866, 75);
             this.labelTitleBar.TabIndex = 0;
             this.labelTitleBar.Text = "Home";
             this.labelTitleBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -215,19 +215,19 @@
             this.panelDesktopParent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktopParent.Location = new System.Drawing.Point(223, 99);
             this.panelDesktopParent.Name = "panelDesktopParent";
-            this.panelDesktopParent.Size = new System.Drawing.Size(798, 618);
+            this.panelDesktopParent.Size = new System.Drawing.Size(866, 618);
             this.panelDesktopParent.TabIndex = 41;
             // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1024, 720);
+            this.ClientSize = new System.Drawing.Size(1092, 720);
             this.Controls.Add(this.panelDesktopParent);
             this.Controls.Add(this.panelTitleBar);
             this.Controls.Add(this.panelSideMenu);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
-            this.MinimumSize = new System.Drawing.Size(1024, 720);
+            this.MinimumSize = new System.Drawing.Size(1092, 720);
             this.Name = "AppForm";
             this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
             this.Text = "Code Compiler Service Manager";

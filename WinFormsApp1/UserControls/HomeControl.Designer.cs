@@ -59,7 +59,7 @@
             this.btnClearManagerConsole.Depth = 0;
             this.btnClearManagerConsole.HighEmphasis = true;
             this.btnClearManagerConsole.Icon = null;
-            this.btnClearManagerConsole.Location = new System.Drawing.Point(300, 7);
+            this.btnClearManagerConsole.Location = new System.Drawing.Point(334, 7);
             this.btnClearManagerConsole.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnClearManagerConsole.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnClearManagerConsole.Name = "btnClearManagerConsole";
@@ -79,7 +79,7 @@
             this.txtOutputConsole.Multiline = true;
             this.txtOutputConsole.Name = "txtOutputConsole";
             this.txtOutputConsole.ReadOnly = true;
-            this.txtOutputConsole.Size = new System.Drawing.Size(778, 343);
+            this.txtOutputConsole.Size = new System.Drawing.Size(846, 343);
             this.txtOutputConsole.TabIndex = 41;
             // 
             // panelStatusInfo
@@ -89,7 +89,7 @@
             this.panelStatusInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelStatusInfo.Location = new System.Drawing.Point(0, 0);
             this.panelStatusInfo.Name = "panelStatusInfo";
-            this.panelStatusInfo.Size = new System.Drawing.Size(798, 100);
+            this.panelStatusInfo.Size = new System.Drawing.Size(866, 100);
             this.panelStatusInfo.TabIndex = 42;
             // 
             // labelServiceStatus
@@ -98,7 +98,7 @@
             this.labelServiceStatus.AutoSize = true;
             this.labelServiceStatus.Depth = 0;
             this.labelServiceStatus.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelServiceStatus.Location = new System.Drawing.Point(327, 68);
+            this.labelServiceStatus.Location = new System.Drawing.Point(361, 68);
             this.labelServiceStatus.Margin = new System.Windows.Forms.Padding(3, 100, 3, 0);
             this.labelServiceStatus.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelServiceStatus.Name = "labelServiceStatus";
@@ -111,7 +111,7 @@
             // 
             this.pictureServiceStatus.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureServiceStatus.Image = global::CodeCompilerServiceManager.Properties.Resources.yellow;
-            this.pictureServiceStatus.Location = new System.Drawing.Point(371, 14);
+            this.pictureServiceStatus.Location = new System.Drawing.Point(405, 14);
             this.pictureServiceStatus.Name = "pictureServiceStatus";
             this.pictureServiceStatus.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
             this.pictureServiceStatus.Size = new System.Drawing.Size(70, 51);
@@ -125,7 +125,7 @@
             this.panelServiceButtons.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelServiceButtons.Location = new System.Drawing.Point(0, 100);
             this.panelServiceButtons.Name = "panelServiceButtons";
-            this.panelServiceButtons.Size = new System.Drawing.Size(798, 106);
+            this.panelServiceButtons.Size = new System.Drawing.Size(866, 106);
             this.panelServiceButtons.TabIndex = 43;
             // 
             // panelServiceButtonContainer
@@ -135,7 +135,7 @@
             this.panelServiceButtonContainer.Controls.Add(this.btnReStartService);
             this.panelServiceButtonContainer.Controls.Add(this.buttonRefreshServiceState);
             this.panelServiceButtonContainer.Controls.Add(this.btnStopService);
-            this.panelServiceButtonContainer.Location = new System.Drawing.Point(229, 6);
+            this.panelServiceButtonContainer.Location = new System.Drawing.Point(263, 6);
             this.panelServiceButtonContainer.Name = "panelServiceButtonContainer";
             this.panelServiceButtonContainer.Size = new System.Drawing.Size(341, 66);
             this.panelServiceButtonContainer.TabIndex = 42;
@@ -239,7 +239,7 @@
             this.panelConsole.Location = new System.Drawing.Point(0, 206);
             this.panelConsole.Name = "panelConsole";
             this.panelConsole.Padding = new System.Windows.Forms.Padding(10);
-            this.panelConsole.Size = new System.Drawing.Size(798, 363);
+            this.panelConsole.Size = new System.Drawing.Size(866, 363);
             this.panelConsole.TabIndex = 44;
             // 
             // panelClearConsole
@@ -248,7 +248,7 @@
             this.panelClearConsole.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelClearConsole.Location = new System.Drawing.Point(0, 569);
             this.panelClearConsole.Name = "panelClearConsole";
-            this.panelClearConsole.Size = new System.Drawing.Size(798, 49);
+            this.panelClearConsole.Size = new System.Drawing.Size(866, 49);
             this.panelClearConsole.TabIndex = 42;
             // 
             // toolTip1
@@ -267,7 +267,7 @@
             this.Controls.Add(this.panelServiceButtons);
             this.Controls.Add(this.panelStatusInfo);
             this.Name = "HomeControl";
-            this.Size = new System.Drawing.Size(798, 618);
+            this.Size = new System.Drawing.Size(866, 618);
             this.panelStatusInfo.ResumeLayout(false);
             this.panelStatusInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureServiceStatus)).EndInit();
