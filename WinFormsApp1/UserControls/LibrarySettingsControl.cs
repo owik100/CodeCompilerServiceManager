@@ -22,6 +22,8 @@ namespace CodeCompilerServiceManager.UserControls
             InitializeComponent();
             BindSettingsToControlls();
             SetButtonEnabledStatus(false);
+            toolTip1.OwnerDraw = true;
+            toolTip1.BackColor = ColorManager.PrimaryColorAccent;
         }
 
         #region privateMethods
@@ -115,6 +117,15 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 //ServiceConnector_MessageHandler(null, ex.ToString());
             }
+        }
+
+
+
+        private void toolTip1_draw(object sender, DrawToolTipEventArgs e)
+        {
+            e.DrawBackground();
+            e.DrawBorder();
+            e.DrawText();
         }
 
         private void textBoxOutputPath_TextChanged(object sender, EventArgs e)
@@ -266,6 +277,17 @@ namespace CodeCompilerServiceManager.UserControls
                 //ServiceConnector_MessageHandler(null, ex.ToString());
             }
         }
+        private void textBoxInputPath_Enter(object sender, EventArgs e)
+        {
+            textBoxInputPath.SelectionStart = textBoxInputPath.Text.Length;
+            textBoxInputPath.SelectionLength = 0;
+        }
+
+        private void textBoxOutputPath_Enter(object sender, EventArgs e)
+        {
+            textBoxOutputPath.SelectionStart = textBoxOutputPath.Text.Length;
+            textBoxOutputPath.SelectionLength = 0;
+        }
         #endregion
 
         #region IUserControlWithSave
@@ -275,4 +297,5 @@ namespace CodeCompilerServiceManager.UserControls
         }
         #endregion
     }
+    
 }

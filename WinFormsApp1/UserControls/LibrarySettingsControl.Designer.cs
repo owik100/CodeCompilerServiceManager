@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.labelInputPath = new MaterialSkin.Controls.MaterialLabel();
             this.labelIOutputPath = new MaterialSkin.Controls.MaterialLabel();
             this.materialRadioButtonMakeDll = new MaterialSkin.Controls.MaterialRadioButton();
@@ -40,6 +41,7 @@
             this.buttonSetDefaultServiceSettings = new MaterialSkin.Controls.MaterialButton();
             this.materialButtonChooseInputFolder = new MaterialSkin.Controls.MaterialButton();
             this.materialButtonChooseOutputFolder = new MaterialSkin.Controls.MaterialButton();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // labelInputPath
@@ -137,12 +139,13 @@
             this.textBoxInputPath.SelectionLength = 0;
             this.textBoxInputPath.SelectionStart = 0;
             this.textBoxInputPath.ShortcutsEnabled = true;
-            this.textBoxInputPath.Size = new System.Drawing.Size(457, 48);
+            this.textBoxInputPath.Size = new System.Drawing.Size(728, 48);
             this.textBoxInputPath.TabIndex = 52;
             this.textBoxInputPath.TabStop = false;
             this.textBoxInputPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textBoxInputPath.TrailingIcon = null;
             this.textBoxInputPath.UseSystemPasswordChar = false;
+            this.textBoxInputPath.Enter += new System.EventHandler(this.textBoxInputPath_Enter);
             this.textBoxInputPath.TextChanged += new System.EventHandler(this.textBoxInputPath_TextChanged);
             // 
             // textBoxOutputPath
@@ -166,12 +169,13 @@
             this.textBoxOutputPath.SelectionLength = 0;
             this.textBoxOutputPath.SelectionStart = 0;
             this.textBoxOutputPath.ShortcutsEnabled = true;
-            this.textBoxOutputPath.Size = new System.Drawing.Size(457, 48);
+            this.textBoxOutputPath.Size = new System.Drawing.Size(728, 48);
             this.textBoxOutputPath.TabIndex = 53;
             this.textBoxOutputPath.TabStop = false;
             this.textBoxOutputPath.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textBoxOutputPath.TrailingIcon = null;
             this.textBoxOutputPath.UseSystemPasswordChar = false;
+            this.textBoxOutputPath.Enter += new System.EventHandler(this.textBoxOutputPath_Enter);
             this.textBoxOutputPath.TextChanged += new System.EventHandler(this.textBoxOutputPath_TextChanged);
             // 
             // buttonSaveAndRestart
@@ -241,14 +245,15 @@
             this.materialButtonChooseInputFolder.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.materialButtonChooseInputFolder.Depth = 0;
             this.materialButtonChooseInputFolder.HighEmphasis = true;
-            this.materialButtonChooseInputFolder.Icon = global::CodeCompilerServiceManager.Properties.Resources.folder_open;
-            this.materialButtonChooseInputFolder.Location = new System.Drawing.Point(491, 47);
+            this.materialButtonChooseInputFolder.Icon = global::CodeCompilerServiceManager.Properties.Resources.folder_edit;
+            this.materialButtonChooseInputFolder.Location = new System.Drawing.Point(759, 47);
             this.materialButtonChooseInputFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonChooseInputFolder.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonChooseInputFolder.Name = "materialButtonChooseInputFolder";
             this.materialButtonChooseInputFolder.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButtonChooseInputFolder.Size = new System.Drawing.Size(41, 36);
             this.materialButtonChooseInputFolder.TabIndex = 57;
+            this.toolTip1.SetToolTip(this.materialButtonChooseInputFolder, "Wybierz folder");
             this.materialButtonChooseInputFolder.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButtonChooseInputFolder.UseAccentColor = true;
             this.materialButtonChooseInputFolder.UseVisualStyleBackColor = true;
@@ -261,18 +266,25 @@
             this.materialButtonChooseOutputFolder.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.materialButtonChooseOutputFolder.Depth = 0;
             this.materialButtonChooseOutputFolder.HighEmphasis = true;
-            this.materialButtonChooseOutputFolder.Icon = global::CodeCompilerServiceManager.Properties.Resources.folder_open;
-            this.materialButtonChooseOutputFolder.Location = new System.Drawing.Point(491, 148);
+            this.materialButtonChooseOutputFolder.Icon = global::CodeCompilerServiceManager.Properties.Resources.folder_edit;
+            this.materialButtonChooseOutputFolder.Location = new System.Drawing.Point(759, 148);
             this.materialButtonChooseOutputFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonChooseOutputFolder.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonChooseOutputFolder.Name = "materialButtonChooseOutputFolder";
             this.materialButtonChooseOutputFolder.NoAccentTextColor = System.Drawing.Color.Empty;
             this.materialButtonChooseOutputFolder.Size = new System.Drawing.Size(41, 36);
             this.materialButtonChooseOutputFolder.TabIndex = 58;
+            this.toolTip1.SetToolTip(this.materialButtonChooseOutputFolder, "Wybierz folder");
             this.materialButtonChooseOutputFolder.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButtonChooseOutputFolder.UseAccentColor = true;
             this.materialButtonChooseOutputFolder.UseVisualStyleBackColor = true;
             this.materialButtonChooseOutputFolder.Click += new System.EventHandler(this.materialButtonChooseOutputFolder_Click);
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.BackColor = System.Drawing.SystemColors.WindowText;
+            this.toolTip1.ForeColor = System.Drawing.Color.White;
+            this.toolTip1.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this.toolTip1_draw);
             // 
             // LibrarySettingsControl
             // 
@@ -310,5 +322,6 @@
         private MaterialSkin.Controls.MaterialButton buttonSetDefaultServiceSettings;
         private MaterialSkin.Controls.MaterialButton materialButtonChooseInputFolder;
         private MaterialSkin.Controls.MaterialButton materialButtonChooseOutputFolder;
+        private ToolTip toolTip1;
     }
 }

@@ -127,11 +127,29 @@
   <data name="cog" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="cog_off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cog-off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cog_off_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cog-off white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="content_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\content-save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="content_save_cog" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\content-save-cog.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="content_save_cog_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\content-save-cog white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="content_save_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\content-save white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder-edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="folder_edit_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder-edit white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder_open" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder-open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -143,7 +161,7 @@
   <data name="green" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAqUAAAKlCAYAAADy2JUyAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAC3SSURBVHhe7d0r
+        vgAADr4B6kKxwAAAABl0RVh0U29mdHdhcmUATWljcm9zb2Z0IE9mZmljZX/tNXEAAC3SSURBVHhe7d0r
         dBRZ2zbgkiMjIyORSGQkMhIZiUTiklcxDolEIiORSGQkEolEIv//2SH9Tady59Sp7q7DtbKumZV7pau7
         67Droar23t3//vc/AADYqxgCAMAuxRBgrrrz7qgcXzspD/18G9BFeehn9dmaw/QdAOYohgBTUEXbfQXm
         ejH4u/y/iWvfYf07fSx/f866t/Xf1Xp4kdYVwNjFEGAMqsA6vCq0zro39f/287m0guxnSYUb//lV2rpq

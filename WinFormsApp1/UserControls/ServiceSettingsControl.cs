@@ -17,14 +17,45 @@ namespace CodeCompilerServiceManager.UserControls
     public partial class ServiceSettingsControl : UserControl, IUserControlWithSave
     {
         AppForm _appFormParent;
+        int lastIntervalRefreshValue = 10000;
+        int lastOperationTimeoutValue = 3000;
         public ServiceSettingsControl(AppForm appFormParent)
         {
             _appFormParent = appFormParent;
             InitializeComponent();
             BindSettingsToControlls();
+            toolTip1.OwnerDraw = true;
+            toolTip1.BackColor = ColorManager.PrimaryColorAccent;
         }
 
         #region controlEvenets
+        private void buttonOpenServicePath_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_appFormParent.ServiceExist())
+                {
+                    string path = _appFormParent.GetServicePath();
+                    if (string.IsNullOrWhiteSpace(path))
+                    {
+                        //ServiceConnector_MessageHandler(null, "Nie znaleziono ścieżki do logów w opcjach!");
+                    }
+                    else
+                    {
+                        string argument = "/select, \"" + path + "\"";
+                        System.Diagnostics.Process.Start("explorer.exe", argument);
+                    }
+                }
+                else
+                {
+                     //ServiceConnector_MessageHandler(null, "Usługa nie jest zainstalowana!");
+                }
+            }
+            catch (Exception ex)
+            {
+                //ServiceConnector_MessageHandler(null, ex.ToString());
+            }
+        }
         private void buttonInstallService_Click(object sender, EventArgs e)
         {
             try
@@ -145,6 +176,20 @@ namespace CodeCompilerServiceManager.UserControls
             }
         }
 
+
+        private void textBoxServiceMainInterval_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _appFormParent.RestartServiceRequired = true;
+                labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+            }
+            catch (Exception ex)
+            {
+                //ServiceConnector_MessageHandler(null, ex.ToString());
+            }
+        }
+
         private void numericUpDownInternalBufferSize_ValueChanged(object sender, EventArgs e)
         {
             try
@@ -248,7 +293,37 @@ namespace CodeCompilerServiceManager.UserControls
                 //ServiceConnector_MessageHandler(null, ex.ToString());
             }
         }
+        private void toolTip1_draw(object sender, DrawToolTipEventArgs e)
+        {
+            e.DrawBackground();
+            e.DrawBorder();
+            e.DrawText();
+        }
+        private void textBoxPathToLogs_Enter(object sender, EventArgs e)
+        {
+            textBoxPathToLogs.SelectionStart = textBoxPathToLogs.Text.Length;
+            textBoxPathToLogs.SelectionLength = 0;
+        }
+        private void textBoxServiceMainInterval_Enter(object sender, EventArgs e)
+        {
+            textBoxServiceMainInterval.SelectionStart = textBoxServiceMainInterval.Text.Length;
+            textBoxServiceMainInterval.SelectionLength = 0;
+        }
 
+        private void textBoxInternalBufferSize_Enter(object sender, EventArgs e)
+        {
+            textBoxInternalBufferSize.SelectionStart = textBoxInternalBufferSize.Text.Length;
+            textBoxInternalBufferSize.SelectionLength = 0;
+        }
+        private void textBoxServiceMainInterval_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = TextBoxHelper.PreventLetters(sender, e);
+        }
+
+        private void textBoxInternalBufferSize_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = TextBoxHelper.PreventLetters(sender, e);
+        }
         #endregion
 
         #region privateMethods
@@ -351,6 +426,8 @@ namespace CodeCompilerServiceManager.UserControls
                 {
                     numericUpDownInternalBufferSize.Value = bufferSize;
                 }
+
+                lastIntervalRefreshValue = (int)intervalRefresh;
             }
             catch (Exception ex)
             {
@@ -367,5 +444,35 @@ namespace CodeCompilerServiceManager.UserControls
             SaveServiceOptions();
         }
         #endregion
+
+        private void textBoxServiceMainInterval_Leave(object sender, EventArgs e)
+        {
+            int number;
+            if (textBoxServiceMainInterval.Text.All(char.IsDigit))
+            {
+                if (int.TryParse(textBoxServiceMainInterval.Text, out number))
+                {
+                    if (number <= int.MaxValue)
+                    {
+                        lastIntervalRefreshValue = Convert.ToInt32(textBoxServiceMainInterval.Text);
+                    }
+                    else
+                    {
+                        textBoxServiceMainInterval.Text = int.MaxValue.ToString();
+                        lastIntervalRefreshValue = int.MaxValue;
+                    }
+                }
+                else
+                {
+                    textBoxServiceMainInterval.Text = int.MaxValue.ToString();
+                    lastIntervalRefreshValue = int.MaxValue;
+                }
+            }
+            else
+            {
+                textBoxServiceMainInterval.Text = lastIntervalRefreshValue.ToString();
+            }
+        }
+
     }
 }

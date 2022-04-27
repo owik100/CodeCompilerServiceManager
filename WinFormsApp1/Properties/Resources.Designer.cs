@@ -93,6 +93,26 @@ namespace CodeCompilerServiceManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cog_off {
+            get {
+                object obj = ResourceManager.GetObject("cog_off", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cog_off_white {
+            get {
+                object obj = ResourceManager.GetObject("cog_off_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap content_save {
             get {
                 object obj = ResourceManager.GetObject("content_save", resourceCulture);
@@ -103,9 +123,49 @@ namespace CodeCompilerServiceManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap content_save_cog {
+            get {
+                object obj = ResourceManager.GetObject("content_save_cog", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap content_save_cog_white {
+            get {
+                object obj = ResourceManager.GetObject("content_save_cog_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap content_save_white {
             get {
                 object obj = ResourceManager.GetObject("content_save_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap folder_edit {
+            get {
+                object obj = ResourceManager.GetObject("folder_edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap folder_edit_white {
+            get {
+                object obj = ResourceManager.GetObject("folder_edit_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
