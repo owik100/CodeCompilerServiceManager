@@ -1,4 +1,5 @@
-﻿using CodeCompilerServiceManager.Settings;
+﻿using CodeCompilerServiceManager.Helpers;
+using CodeCompilerServiceManager.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace CodeCompilerServiceManager.UserControls
 {
     //TODO error handling
     //TODO podczas zapisywania  zmian wczytac ustawienia z library i je podpiac
-    public partial class ServiceSettingsControl : UserControl
+    public partial class ServiceSettingsControl : UserControl, IUserControlWithSave
     {
         AppForm _appFormParent;
         public ServiceSettingsControl(AppForm appFormParent)
@@ -357,6 +358,13 @@ namespace CodeCompilerServiceManager.UserControls
             }
             _appFormParent.RestartServiceRequired = false;
             labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+        }
+        #endregion
+
+        #region IUserControlWithSave
+        public void SaveChangesOnLeave()
+        {
+            SaveServiceOptions();
         }
         #endregion
     }

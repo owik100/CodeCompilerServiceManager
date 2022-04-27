@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeCompilerServiceManager.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace CodeCompilerServiceManager.UserControls
 {
-    public partial class AboutControl : UserControl
+    public partial class AboutControl : UserControl, IUserControlWithSave
     {
         //TODO error handling
         public AboutControl()
@@ -29,6 +30,13 @@ namespace CodeCompilerServiceManager.UserControls
             {
 
             }
+        }
+        #endregion
+
+        #region IUserControlWithSave
+        public void SaveChangesOnLeave()
+        {
+            //No changes to save
         }
         #endregion
 

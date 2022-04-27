@@ -20,7 +20,7 @@ namespace CodeCompilerServiceManager
         private BackgroundWorker workerOnRestart;
 
         private Button currentMenuButton;
-        private Form activeForm;
+        private IUserControlWithSave activeControl;
         private HomeControl homeControl;
 
         public AppForm()
@@ -201,18 +201,16 @@ namespace CodeCompilerServiceManager
 
 
         /// <returns>True means, we want cancel changing user control</returns>
-        private bool HandleLeaveUcerControl()
+        private bool HandleLeaveUcerControl(IUserControlWithSave activeControl)
         {
             if (RestartServiceRequired)
             {
-                DialogResult dialogResult = MessageBox.Show("Masz nie zapisane zmiany. Chcesz je zapisaæ? (Us³uga zostanie zrestartowana)", "Uwaga", MessageBoxButtons.YesNoCancel, icon: MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.Yes)
+                MaterialDialog materialDialog = new MaterialDialog(this, "Uwaga", "Masz nie zapisane zmiany. Chcesz je zapisaæ? (Us³uga zostanie zrestartowana)", "Zapisz", true, "Anuluj");
+                DialogResult dialogResult = materialDialog.ShowDialog(this);
+
+                if (dialogResult == DialogResult.OK)
                 {
-                    //Zrobic zapis na kontrolce serwisu/biblioteki
-                    return false;
-                }
-                else if (dialogResult == DialogResult.No)
-                {
+                    activeControl.SaveChangesOnLeave();
                     return false;
                 }
                 else if(dialogResult == DialogResult.Cancel)
@@ -220,6 +218,7 @@ namespace CodeCompilerServiceManager
                     return true;
                 }
             }
+            RestartServiceRequired = false;
             return false;
         }
         #endregion
@@ -277,41 +276,50 @@ namespace CodeCompilerServiceManager
 
         private void buttonHome_Click(object sender, EventArgs e)
         {
-            if (!HandleLeaveUcerControl())
+            if (!HandleLeaveUcerControl(activeControl))
             {
                 OpenChildControl(homeControl, sender);
+                activeControl = homeControl;
             }
         }
 
         private void buttonManagerSettings_Click(object sender, EventArgs e)
         {
-            if (!HandleLeaveUcerControl())
+            if (!HandleLeaveUcerControl(activeControl))
             {
-                OpenChildControl(new ManagerSettingsControl(this), sender);
+                ManagerSettingsControl managerSettingsControl = new ManagerSettingsControl(this);
+                OpenChildControl(managerSettingsControl, sender);
+                activeControl = managerSettingsControl;
             }
         }
 
         private void buttonServiceSettings_Click(object sender, EventArgs e)
         {
-            if (!HandleLeaveUcerControl())
+            if (!HandleLeaveUcerControl(activeControl))
             {
-                OpenChildControl(new ServiceSettingsControl(this), sender);
+                ServiceSettingsControl serviceSettingsControl = new ServiceSettingsControl(this);
+                OpenChildControl(serviceSettingsControl, sender);
+                activeControl = serviceSettingsControl;
             }
         }
 
         private void buttonLibrarySettings_Click(object sender, EventArgs e)
         {
-            if (!HandleLeaveUcerControl())
+            if (!HandleLeaveUcerControl(activeControl))
             {
-                OpenChildControl(new LibrarySettingsControl(this), sender);
+                LibrarySettingsControl librarySettingsControl = new LibrarySettingsControl(this);
+                OpenChildControl(librarySettingsControl, sender);
+                activeControl = librarySettingsControl;
             }
         }
 
         private void buttonInfo_Click(object sender, EventArgs e)
         {
-            if (!HandleLeaveUcerControl())
+            if (!HandleLeaveUcerControl(activeControl))
             {
-                OpenChildControl(new AboutControl(), sender);
+                AboutControl aboutControl = new AboutControl();
+                OpenChildControl(aboutControl, sender);
+                activeControl = aboutControl;
             }
         }
 
@@ -339,16 +347,14 @@ namespace CodeCompilerServiceManager
             {
                 if (RestartServiceRequired)
                 {
-                    DialogResult dialogResult = MessageBox.Show("Masz nie zapisane zmiany. Chcesz je zapisaæ? (Us³uga zostanie zrestartowana)", "Uwaga", MessageBoxButtons.YesNoCancel, icon: MessageBoxIcon.Warning);
-                    if (dialogResult == DialogResult.Yes)
+                    MaterialDialog materialDialog = new MaterialDialog(this, "Uwaga", "Masz nie zapisane zmiany. Chcesz je zapisaæ? (Us³uga zostanie zrestartowana)", "Zapisz", true, "Anuluj");
+                    DialogResult dialogResult = materialDialog.ShowDialog(this);
+
+                    if (dialogResult == DialogResult.OK)
                     {
-                        ReStartServiceWorker();
+                        activeControl.SaveChangesOnLeave();
                     }
-                    else if (dialogResult == DialogResult.No)
-                    {
-                        e.Cancel = false;
-                    }
-                    else
+                    else if (dialogResult == DialogResult.Cancel)
                     {
                         e.Cancel = true;
                         return;

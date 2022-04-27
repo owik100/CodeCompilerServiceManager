@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace CodeCompilerServiceManager.UserControls
 {
     //TODO handle erros
-    public partial class ManagerSettingsControl : UserControl
+    public partial class ManagerSettingsControl : UserControl, IUserControlWithSave
     {
         AppForm _appFormParent;
         int lastIntervalRefreshValue = 3000;
@@ -25,6 +25,10 @@ namespace CodeCompilerServiceManager.UserControls
             InitializeComponent();
             BindSettingsToControlls();
             btnSaveManagerSettings.Enabled = false;
+            textBoxIntervalRefresh.Focus();
+            textBoxIntervalRefresh.Select();
+            textBoxIntervalRefresh.SelectionStart = textBoxIntervalRefresh.Text.Length;
+            textBoxIntervalRefresh.SelectionLength = 0;
         }
 
         #region controlEvents
@@ -145,6 +149,18 @@ namespace CodeCompilerServiceManager.UserControls
                 //ServiceConnector_MessageHandler(null, ex.ToString());
             }
         }
+        private void textBoxIntervalRefresh_Enter(object sender, EventArgs e)
+        {
+            textBoxIntervalRefresh.SelectionStart = textBoxIntervalRefresh.Text.Length;
+            textBoxIntervalRefresh.SelectionLength = 0;
+        }
+
+        private void textBoxOperationTimeout_Enter(object sender, EventArgs e)
+        {
+            textBoxOperationTimeout.SelectionStart = textBoxOperationTimeout.Text.Length;
+            textBoxOperationTimeout.SelectionLength = 0;
+        }
+
         #endregion
 
         #region privateMethods
@@ -173,6 +189,13 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 _appFormParent.CheckStatus(null, null);
             }
+        }
+        #endregion
+
+        #region IUserControlWithSave
+        public void SaveChangesOnLeave()
+        {
+            //No changes to save
         }
         #endregion
     }

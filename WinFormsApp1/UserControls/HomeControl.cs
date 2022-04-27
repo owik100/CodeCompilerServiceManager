@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace CodeCompilerServiceManager.UserControls
 {
     //TODO error handle
-    public partial class HomeControl : UserControl
+    public partial class HomeControl : UserControl, IUserControlWithSave
     {
         AppForm _appFormParent;
         public HomeControl(AppForm appFormParent)
@@ -189,6 +189,13 @@ namespace CodeCompilerServiceManager.UserControls
                 txtOutputConsole.Text += errMessage;
                 txtOutputConsole.Text += Environment.NewLine;
             }
+        }
+        #endregion
+
+        #region IUserControlWithSave
+        public void SaveChangesOnLeave()
+        {
+            //No changes to save
         }
         #endregion
     }

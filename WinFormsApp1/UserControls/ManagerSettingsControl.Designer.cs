@@ -30,8 +30,8 @@
         {
             this.checkBoxRefreshEnabled = new MaterialSkin.Controls.MaterialCheckbox();
             this.labelInterval = new MaterialSkin.Controls.MaterialLabel();
-            this.textBoxIntervalRefresh = new MaterialSkin.Controls.MaterialTextBox();
-            this.textBoxOperationTimeout = new MaterialSkin.Controls.MaterialTextBox();
+            this.textBoxIntervalRefresh = new MaterialSkin.Controls.MaterialTextBox2();
+            this.textBoxOperationTimeout = new MaterialSkin.Controls.MaterialTextBox2();
             this.labelOperationTimeout = new MaterialSkin.Controls.MaterialLabel();
             this.btnSaveManagerSettings = new MaterialSkin.Controls.MaterialButton();
             this.btnResetManagerSettings = new MaterialSkin.Controls.MaterialButton();
@@ -71,39 +71,65 @@
             // textBoxIntervalRefresh
             // 
             this.textBoxIntervalRefresh.AnimateReadOnly = false;
-            this.textBoxIntervalRefresh.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxIntervalRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.textBoxIntervalRefresh.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.textBoxIntervalRefresh.Depth = 0;
             this.textBoxIntervalRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxIntervalRefresh.HideSelection = true;
             this.textBoxIntervalRefresh.LeadingIcon = null;
             this.textBoxIntervalRefresh.Location = new System.Drawing.Point(39, 100);
             this.textBoxIntervalRefresh.MaxLength = 50;
             this.textBoxIntervalRefresh.MouseState = MaterialSkin.MouseState.OUT;
-            this.textBoxIntervalRefresh.Multiline = false;
             this.textBoxIntervalRefresh.Name = "textBoxIntervalRefresh";
-            this.textBoxIntervalRefresh.Size = new System.Drawing.Size(295, 50);
+            this.textBoxIntervalRefresh.PasswordChar = '\0';
+            this.textBoxIntervalRefresh.PrefixSuffixText = null;
+            this.textBoxIntervalRefresh.ReadOnly = false;
+            this.textBoxIntervalRefresh.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBoxIntervalRefresh.SelectedText = "";
+            this.textBoxIntervalRefresh.SelectionLength = 0;
+            this.textBoxIntervalRefresh.SelectionStart = 0;
+            this.textBoxIntervalRefresh.ShortcutsEnabled = true;
+            this.textBoxIntervalRefresh.Size = new System.Drawing.Size(295, 48);
             this.textBoxIntervalRefresh.TabIndex = 24;
+            this.textBoxIntervalRefresh.TabStop = false;
             this.textBoxIntervalRefresh.Text = "3000";
+            this.textBoxIntervalRefresh.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textBoxIntervalRefresh.TrailingIcon = null;
-            this.textBoxIntervalRefresh.TextChanged += new System.EventHandler(this.textBoxIntervalRefresh_TextChanged);
+            this.textBoxIntervalRefresh.UseSystemPasswordChar = false;
+            this.textBoxIntervalRefresh.Enter += new System.EventHandler(this.textBoxIntervalRefresh_Enter);
             this.textBoxIntervalRefresh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxIntervalRefresh_KeyPress);
             this.textBoxIntervalRefresh.Leave += new System.EventHandler(this.textBoxIntervalRefresh_Leave);
+            this.textBoxIntervalRefresh.TextChanged += new System.EventHandler(this.textBoxIntervalRefresh_TextChanged);
             // 
             // textBoxOperationTimeout
             // 
             this.textBoxOperationTimeout.AnimateReadOnly = false;
-            this.textBoxOperationTimeout.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxOperationTimeout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.textBoxOperationTimeout.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.textBoxOperationTimeout.Depth = 0;
             this.textBoxOperationTimeout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxOperationTimeout.HideSelection = true;
             this.textBoxOperationTimeout.LeadingIcon = null;
             this.textBoxOperationTimeout.Location = new System.Drawing.Point(39, 216);
             this.textBoxOperationTimeout.MaxLength = 50;
             this.textBoxOperationTimeout.MouseState = MaterialSkin.MouseState.OUT;
-            this.textBoxOperationTimeout.Multiline = false;
             this.textBoxOperationTimeout.Name = "textBoxOperationTimeout";
-            this.textBoxOperationTimeout.Size = new System.Drawing.Size(295, 50);
+            this.textBoxOperationTimeout.PasswordChar = '\0';
+            this.textBoxOperationTimeout.PrefixSuffixText = null;
+            this.textBoxOperationTimeout.ReadOnly = false;
+            this.textBoxOperationTimeout.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.textBoxOperationTimeout.SelectedText = "";
+            this.textBoxOperationTimeout.SelectionLength = 0;
+            this.textBoxOperationTimeout.SelectionStart = 0;
+            this.textBoxOperationTimeout.ShortcutsEnabled = true;
+            this.textBoxOperationTimeout.Size = new System.Drawing.Size(295, 48);
             this.textBoxOperationTimeout.TabIndex = 25;
+            this.textBoxOperationTimeout.TabStop = false;
             this.textBoxOperationTimeout.Text = "5001";
+            this.textBoxOperationTimeout.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.textBoxOperationTimeout.TrailingIcon = null;
+            this.textBoxOperationTimeout.UseSystemPasswordChar = false;
+            this.textBoxOperationTimeout.Enter += new System.EventHandler(this.textBoxOperationTimeout_Enter);
             this.textBoxOperationTimeout.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxOperationTimeout_KeyPress);
             this.textBoxOperationTimeout.Leave += new System.EventHandler(this.textBoxOperationTimeout_Leave);
             // 
@@ -182,8 +208,8 @@
         #endregion
         private MaterialSkin.Controls.MaterialCheckbox checkBoxRefreshEnabled;
         private MaterialSkin.Controls.MaterialLabel labelInterval;
-        private MaterialSkin.Controls.MaterialTextBox textBoxIntervalRefresh;
-        private MaterialSkin.Controls.MaterialTextBox textBoxOperationTimeout;
+        private MaterialSkin.Controls.MaterialTextBox2 textBoxIntervalRefresh;
+        private MaterialSkin.Controls.MaterialTextBox2 textBoxOperationTimeout;
         private MaterialSkin.Controls.MaterialLabel labelOperationTimeout;
         private MaterialSkin.Controls.MaterialButton btnSaveManagerSettings;
         private MaterialSkin.Controls.MaterialButton btnResetManagerSettings;

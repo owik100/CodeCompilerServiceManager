@@ -1,4 +1,5 @@
-﻿using CodeCompilerServiceManager.Settings;
+﻿using CodeCompilerServiceManager.Helpers;
+using CodeCompilerServiceManager.Settings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 namespace CodeCompilerServiceManager.UserControls
 {
     //TODO error handling
-    public partial class LibrarySettingsControl : UserControl
+    public partial class LibrarySettingsControl : UserControl, IUserControlWithSave
     {
         AppForm _appFormParent;
         public LibrarySettingsControl(AppForm appFormParent)
@@ -264,6 +265,13 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 //ServiceConnector_MessageHandler(null, ex.ToString());
             }
+        }
+        #endregion
+
+        #region IUserControlWithSave
+        public void SaveChangesOnLeave()
+        {
+            buttonSaveAndRestart_Click(null, null);
         }
         #endregion
     }
