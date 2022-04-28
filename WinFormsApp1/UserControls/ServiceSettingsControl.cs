@@ -1,5 +1,6 @@
 ﻿using CodeCompilerServiceManager.Helpers;
 using CodeCompilerServiceManager.Settings;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +19,7 @@ namespace CodeCompilerServiceManager.UserControls
     {
         AppForm _appFormParent;
         int lastIntervalRefreshValue = 10000;
-        int lastOperationTimeoutValue = 3000;
+        int lastInternalBufferSize = 8192;
         public ServiceSettingsControl(AppForm appFormParent)
         {
             _appFormParent = appFormParent;
@@ -26,6 +27,8 @@ namespace CodeCompilerServiceManager.UserControls
             BindSettingsToControlls();
             toolTip1.OwnerDraw = true;
             toolTip1.BackColor = ColorManager.PrimaryColorAccent;
+            SetButtonEnabledStatus(false);
+            InitButtonsInstallService();
         }
 
         #region controlEvenets
@@ -63,11 +66,13 @@ namespace CodeCompilerServiceManager.UserControls
                 string path = "";
                 if (_appFormParent.ServiceExist())
                 {
-                    //ServiceConnector_MessageHandler(null, "Usługa jest już zainstalowana!");
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Usługa jest już zainstalowana!", "OK", true);
+                    SnackBarMessage.Show(this);
                 }
                 else
                 {
-                    MessageBox.Show("Wybierz folder zawierający usługę CodeCompilerServiceOwik", "Wybór ścieżki", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MaterialDialog materialDialog = new MaterialDialog(_appFormParent, "Wybór ścieżki", "Wybierz folder zawierający usługę CodeCompilerServiceOwik", "OK", false, "");
+                    DialogResult dialogResult = materialDialog.ShowDialog(this);
                     using (var dialog = new FolderBrowserDialog())
                     {
                         DialogResult result = dialog.ShowDialog();
@@ -81,9 +86,20 @@ namespace CodeCompilerServiceManager.UserControls
                             return;
                         }
                     }
-                    _appFormParent.InstallService(path);
+                    bool res = _appFormParent.InstallService(path);
                     _appFormParent.ReStartService();
                     textBoxServicePath.Text = path;
+                    if (res)
+                    {
+                        MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Usługa zainstalowana poprawnie!", "OK", false);
+                        SnackBarMessage.Show(this);
+                        SetButtonsInstallService(false);
+                    }
+                    else
+                    {
+                        MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                        SnackBarMessage.Show(this);
+                    }
                 }
             }
             catch (Exception ex)
@@ -98,14 +114,24 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 if (_appFormParent.ServiceExist())
                 {
-                    DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz odinstalować usługę CodeCompilerServiceOwik?", "Uwaga", MessageBoxButtons.YesNo, icon: MessageBoxIcon.Warning);
-                    if (dialogResult == DialogResult.Yes)
+                    MaterialDialog materialDialog = new MaterialDialog(_appFormParent, "Uwaga", "Czy na pewno chcesz odinstalować usługę CodeCompilerServiceOwik?", "Tak", true, "Nie");
+                    DialogResult dialogResult = materialDialog.ShowDialog(this);
+                    if (dialogResult == DialogResult.OK)
                     {
                         bool res = _appFormParent.RemoveService();
                         if (res)
                         {
                             textBoxServicePath.Text = "";
                             _appFormParent.StopService();
+
+                            MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Usługa usunięta poprawnie!", "OK", false);
+                            SnackBarMessage.Show(this);
+                            SetButtonsInstallService(true);
+                        }
+                        else
+                        {
+                            MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                            SnackBarMessage.Show(this);
                         }
                     }
                     else
@@ -115,7 +141,8 @@ namespace CodeCompilerServiceManager.UserControls
                 }
                 else
                 {
-                    //ServiceConnector_MessageHandler(null, "Usługa nie jest zainstalowana!");
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Usługa nie jest zainstalowana!", "OK", true);
+                    SnackBarMessage.Show(this);
                 }
             }
             catch (Exception ex)
@@ -130,6 +157,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 _appFormParent.RestartServiceRequired = true;
                 labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
             }
             catch (Exception ex)
             {
@@ -143,6 +171,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 _appFormParent.RestartServiceRequired = true;
                 labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
             }
             catch (Exception ex)
             {
@@ -156,26 +185,13 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 _appFormParent.RestartServiceRequired = true;
                 labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
             }
             catch (Exception ex)
             {
                 //ServiceConnector_MessageHandler(null, ex.ToString());
             }
         }
-
-        private void numericUpDownServiceMainInterval_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                _appFormParent.RestartServiceRequired = true;
-                labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
-            }
-            catch (Exception ex)
-            {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
-            }
-        }
-
 
         private void textBoxServiceMainInterval_TextChanged(object sender, EventArgs e)
         {
@@ -183,6 +199,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 _appFormParent.RestartServiceRequired = true;
                 labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
             }
             catch (Exception ex)
             {
@@ -190,12 +207,13 @@ namespace CodeCompilerServiceManager.UserControls
             }
         }
 
-        private void numericUpDownInternalBufferSize_ValueChanged(object sender, EventArgs e)
+        private void textBoxInternalBufferSize_TextChanged(object sender, EventArgs e)
         {
             try
             {
                 _appFormParent.RestartServiceRequired = true;
                 labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
             }
             catch (Exception ex)
             {
@@ -239,6 +257,7 @@ namespace CodeCompilerServiceManager.UserControls
                 _appFormParent.ReStartService();
                 _appFormParent.RestartServiceRequired = false;
                 labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(false);
             }
             catch (Exception ex)
             {
@@ -260,9 +279,8 @@ namespace CodeCompilerServiceManager.UserControls
                 {
                     textBoxServicePath.Text = servisePath;
                     ServiceSettings.LoadSettings(servisePath, false);
-
-                    //BindLibraryOptionsToControls();
                     BindSettingsToControlls();
+                    SetButtonEnabledStatus(false);
                 }
             }
             catch (Exception ex)
@@ -324,9 +342,109 @@ namespace CodeCompilerServiceManager.UserControls
         {
             e.Handled = TextBoxHelper.PreventLetters(sender, e);
         }
+
+        private void textBoxServiceMainInterval_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                int number;
+                if (textBoxServiceMainInterval.Text.All(char.IsDigit))
+                {
+                    if (int.TryParse(textBoxServiceMainInterval.Text, out number))
+                    {
+                        if (number < 50)
+                        {
+                            textBoxServiceMainInterval.Text = 50.ToString();
+                            lastIntervalRefreshValue = 50;
+                        }
+                        else if (number <= 43200000)
+                        {
+                            lastIntervalRefreshValue = Convert.ToInt32(textBoxServiceMainInterval.Text);
+                        }
+                        else
+                        {
+                            textBoxServiceMainInterval.Text = 43200000.ToString();
+                            lastIntervalRefreshValue = 43200000;
+                        }
+                    }
+                    else
+                    {
+                        textBoxServiceMainInterval.Text = 43200000.ToString();
+                        lastIntervalRefreshValue = 43200000;
+                    }
+                }
+                else
+                {
+                    textBoxServiceMainInterval.Text = lastIntervalRefreshValue.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void textBoxInternalBufferSize_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                int number;
+                if (textBoxInternalBufferSize.Text.All(char.IsDigit))
+                {
+                    if (int.TryParse(textBoxServiceMainInterval.Text, out number))
+                    {
+                        if (number < 100)
+                        {
+                            textBoxInternalBufferSize.Text = 100.ToString();
+                            lastInternalBufferSize = 100;
+                        }
+                        else if (number <= 43200000)
+                        {
+                            lastInternalBufferSize = Convert.ToInt32(textBoxInternalBufferSize.Text);
+                        }
+                        else
+                        {
+                            textBoxInternalBufferSize.Text = 43200000.ToString();
+                            lastInternalBufferSize = 43200000;
+                        }
+                    }
+                    else
+                    {
+                        textBoxInternalBufferSize.Text = 43200000.ToString();
+                        lastInternalBufferSize = 43200000;
+                    }
+                }
+                else
+                {
+                    textBoxInternalBufferSize.Text = lastInternalBufferSize.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
         #endregion
 
         #region privateMethods
+        private void InitButtonsInstallService()
+        {
+            if (_appFormParent.ServiceExist())
+            {
+                buttonInstallService.Enabled = false;
+                buttonDeleteService.Enabled = true;
+            }
+            else
+            {
+                buttonInstallService.Enabled = true;
+                buttonDeleteService.Enabled = false;
+            }
+        }
+        private void SetButtonsInstallService(bool canInstall)
+        {
+            buttonInstallService.Enabled = canInstall;
+            buttonDeleteService.Enabled = !canInstall;
+        }
         private void SaveServiceOptions()
         {
             try
@@ -365,12 +483,12 @@ namespace CodeCompilerServiceManager.UserControls
                 var serviceInterval = ServiceSettings.ServiceSettingsModel?.ServiceOptions?.Interval;
                 if (serviceInterval != null && serviceInterval > -1)
                 {
-                    ServiceSettings.ServiceSettingsModel.ServiceOptions.Interval = (int)numericUpDownServiceMainInterval.Value;
+                    ServiceSettings.ServiceSettingsModel.ServiceOptions.Interval = Convert.ToInt32(textBoxServiceMainInterval.Text);
                 }
                 var bufferSize = ServiceSettings.ServiceSettingsModel?.ServiceOptions?.InternalBufferSize;
                 if (bufferSize != null && bufferSize > -1)
                 {
-                    ServiceSettings.ServiceSettingsModel.ServiceOptions.InternalBufferSize = (int)numericUpDownInternalBufferSize.Value;
+                    ServiceSettings.ServiceSettingsModel.ServiceOptions.InternalBufferSize = Convert.ToInt32(textBoxInternalBufferSize.Text);
                 }
 
                 ServiceSettings.SaveSettingsToJson(textBoxServicePath.Text);
@@ -417,14 +535,15 @@ namespace CodeCompilerServiceManager.UserControls
                 intervalRefresh = (decimal)(ServiceSettings.ServiceSettingsModel?.ServiceOptions?.Interval);
                 if (intervalRefresh > 0)
                 {
-                    numericUpDownServiceMainInterval.Value = intervalRefresh;
+                    textBoxServiceMainInterval.Text = intervalRefresh.ToString();
+                    lastIntervalRefreshValue = (int)intervalRefresh;
                 }
 
                 decimal bufferSize = -1;
                 bufferSize = (decimal)(ServiceSettings.ServiceSettingsModel?.ServiceOptions?.InternalBufferSize);
                 if (bufferSize > 0)
                 {
-                    numericUpDownInternalBufferSize.Value = bufferSize;
+                    textBoxInternalBufferSize.Text = bufferSize.ToString();
                 }
 
                 lastIntervalRefreshValue = (int)intervalRefresh;
@@ -436,43 +555,22 @@ namespace CodeCompilerServiceManager.UserControls
             _appFormParent.RestartServiceRequired = false;
             labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
         }
+        private void SetButtonEnabledStatus(bool enabled)
+        {
+            buttonSaveAndRestart.Enabled = enabled;
+            buttonCancelChanges.Enabled = enabled;
+        }
         #endregion
 
         #region IUserControlWithSave
         public void SaveChangesOnLeave()
         {
-            SaveServiceOptions();
+            buttonSaveAndRestart_Click(null, null);
         }
         #endregion
 
-        private void textBoxServiceMainInterval_Leave(object sender, EventArgs e)
-        {
-            int number;
-            if (textBoxServiceMainInterval.Text.All(char.IsDigit))
-            {
-                if (int.TryParse(textBoxServiceMainInterval.Text, out number))
-                {
-                    if (number <= int.MaxValue)
-                    {
-                        lastIntervalRefreshValue = Convert.ToInt32(textBoxServiceMainInterval.Text);
-                    }
-                    else
-                    {
-                        textBoxServiceMainInterval.Text = int.MaxValue.ToString();
-                        lastIntervalRefreshValue = int.MaxValue;
-                    }
-                }
-                else
-                {
-                    textBoxServiceMainInterval.Text = int.MaxValue.ToString();
-                    lastIntervalRefreshValue = int.MaxValue;
-                }
-            }
-            else
-            {
-                textBoxServiceMainInterval.Text = lastIntervalRefreshValue.ToString();
-            }
-        }
 
+
+       
     }
 }

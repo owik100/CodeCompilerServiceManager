@@ -141,17 +141,21 @@ namespace CodeCompilerServiceManager.Logic
             return ServiceController.GetServices().Any(s => s.ServiceName == "CodeCompilerServiceOwik");
         }
 
-        public void InstallService(string pathToServiceExe)
+        public bool InstallService(string pathToServiceExe)
         {
+            bool result = false;
             try
             {
                 string output = _processHelper.InstallServiceUsingCMD(pathToServiceExe);
                 OnMessage(output);
+                if(output.Contains("SUCCESS"))
+                    result = true;
             }
             catch (Exception ex)
             {
                 OnMessage(ex.ToString());
             }
+            return result;
         }
         public bool RemoveService()
         {

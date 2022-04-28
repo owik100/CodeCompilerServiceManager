@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.numericUpDownServiceMainInterval = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownInternalBufferSize = new System.Windows.Forms.NumericUpDown();
             this.labelRestartRequired = new MaterialSkin.Controls.MaterialLabel();
             this.labelServicePath = new MaterialSkin.Controls.MaterialLabel();
             this.textBoxServicePath = new MaterialSkin.Controls.MaterialTextBox2();
@@ -40,8 +38,8 @@
             this.checkBoxLogToEventViewer = new MaterialSkin.Controls.MaterialCheckbox();
             this.checkBoxLogToFile = new MaterialSkin.Controls.MaterialCheckbox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.textBoxPathToLogs = new MaterialSkin.Controls.MaterialTextBox2();
             this.buttonOpenLogFolder = new MaterialSkin.Controls.MaterialButton();
+            this.textBoxPathToLogs = new MaterialSkin.Controls.MaterialTextBox2();
             this.labelIntervalService = new MaterialSkin.Controls.MaterialLabel();
             this.textBoxServiceMainInterval = new MaterialSkin.Controls.MaterialTextBox2();
             this.labelInternalBufferSize = new MaterialSkin.Controls.MaterialLabel();
@@ -51,56 +49,8 @@
             this.buttonCancelChanges = new MaterialSkin.Controls.MaterialButton();
             this.buttonInstallService = new MaterialSkin.Controls.MaterialButton();
             this.buttonDeleteService = new MaterialSkin.Controls.MaterialButton();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownServiceMainInterval)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownInternalBufferSize)).BeginInit();
             this.panelFooterServicePath.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // numericUpDownServiceMainInterval
-            // 
-            this.numericUpDownServiceMainInterval.Location = new System.Drawing.Point(14, 228);
-            this.numericUpDownServiceMainInterval.Maximum = new decimal(new int[] {
-            -1981284353,
-            -1966660860,
-            0,
-            0});
-            this.numericUpDownServiceMainInterval.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.numericUpDownServiceMainInterval.Name = "numericUpDownServiceMainInterval";
-            this.numericUpDownServiceMainInterval.Size = new System.Drawing.Size(253, 23);
-            this.numericUpDownServiceMainInterval.TabIndex = 37;
-            this.numericUpDownServiceMainInterval.Value = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDownServiceMainInterval.ValueChanged += new System.EventHandler(this.numericUpDownServiceMainInterval_ValueChanged);
-            // 
-            // numericUpDownInternalBufferSize
-            // 
-            this.numericUpDownInternalBufferSize.Location = new System.Drawing.Point(14, 322);
-            this.numericUpDownInternalBufferSize.Maximum = new decimal(new int[] {
-            -478150656,
-            139961312,
-            16263,
-            0});
-            this.numericUpDownInternalBufferSize.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numericUpDownInternalBufferSize.Name = "numericUpDownInternalBufferSize";
-            this.numericUpDownInternalBufferSize.Size = new System.Drawing.Size(253, 23);
-            this.numericUpDownInternalBufferSize.TabIndex = 34;
-            this.numericUpDownInternalBufferSize.Value = new decimal(new int[] {
-            8192,
-            0,
-            0,
-            0});
-            this.numericUpDownInternalBufferSize.ValueChanged += new System.EventHandler(this.numericUpDownInternalBufferSize_ValueChanged);
             // 
             // labelRestartRequired
             // 
@@ -110,7 +60,7 @@
             this.labelRestartRequired.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
             this.labelRestartRequired.ForeColor = System.Drawing.Color.Black;
             this.labelRestartRequired.HighEmphasis = true;
-            this.labelRestartRequired.Location = new System.Drawing.Point(133, 526);
+            this.labelRestartRequired.Location = new System.Drawing.Point(120, 420);
             this.labelRestartRequired.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelRestartRequired.Name = "labelRestartRequired";
             this.labelRestartRequired.Size = new System.Drawing.Size(587, 29);
@@ -194,14 +144,16 @@
             // 
             // panelFooterServicePath
             // 
+            this.panelFooterServicePath.Controls.Add(this.buttonDeleteService);
             this.panelFooterServicePath.Controls.Add(this.buttonOpenServicePath);
+            this.panelFooterServicePath.Controls.Add(this.buttonInstallService);
             this.panelFooterServicePath.Controls.Add(this.materialLabel1);
             this.panelFooterServicePath.Controls.Add(this.textBoxServicePath);
             this.panelFooterServicePath.Controls.Add(this.labelServicePath);
             this.panelFooterServicePath.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooterServicePath.Location = new System.Drawing.Point(0, 558);
+            this.panelFooterServicePath.Location = new System.Drawing.Point(0, 500);
             this.panelFooterServicePath.Name = "panelFooterServicePath";
-            this.panelFooterServicePath.Size = new System.Drawing.Size(866, 60);
+            this.panelFooterServicePath.Size = new System.Drawing.Size(866, 118);
             this.panelFooterServicePath.TabIndex = 56;
             // 
             // checkBoxLogToEventViewer
@@ -243,13 +195,34 @@
             this.toolTip1.ForeColor = System.Drawing.Color.White;
             this.toolTip1.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this.toolTip1_draw);
             // 
+            // buttonOpenLogFolder
+            // 
+            this.buttonOpenLogFolder.AutoSize = false;
+            this.buttonOpenLogFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonOpenLogFolder.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.buttonOpenLogFolder.Depth = 0;
+            this.buttonOpenLogFolder.HighEmphasis = true;
+            this.buttonOpenLogFolder.Icon = global::CodeCompilerServiceManager.Properties.Resources.folder_open;
+            this.buttonOpenLogFolder.Location = new System.Drawing.Point(784, 98);
+            this.buttonOpenLogFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.buttonOpenLogFolder.MouseState = MaterialSkin.MouseState.HOVER;
+            this.buttonOpenLogFolder.Name = "buttonOpenLogFolder";
+            this.buttonOpenLogFolder.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.buttonOpenLogFolder.Size = new System.Drawing.Size(44, 37);
+            this.buttonOpenLogFolder.TabIndex = 56;
+            this.toolTip1.SetToolTip(this.buttonOpenLogFolder, "Otwórz folder z logami serwisu");
+            this.buttonOpenLogFolder.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.buttonOpenLogFolder.UseAccentColor = true;
+            this.buttonOpenLogFolder.UseVisualStyleBackColor = true;
+            this.buttonOpenLogFolder.Click += new System.EventHandler(this.buttonOpenLogFolder_Click);
+            // 
             // textBoxPathToLogs
             // 
             this.textBoxPathToLogs.AnimateReadOnly = false;
             this.textBoxPathToLogs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.textBoxPathToLogs.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.textBoxPathToLogs.Depth = 0;
-            this.textBoxPathToLogs.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textBoxPathToLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxPathToLogs.HideSelection = true;
             this.textBoxPathToLogs.LeadingIcon = null;
             this.textBoxPathToLogs.Location = new System.Drawing.Point(14, 87);
@@ -272,27 +245,6 @@
             this.textBoxPathToLogs.UseSystemPasswordChar = false;
             this.textBoxPathToLogs.Enter += new System.EventHandler(this.textBoxPathToLogs_Enter);
             this.textBoxPathToLogs.TextChanged += new System.EventHandler(this.textBoxPathToLogs_TextChanged);
-            // 
-            // buttonOpenLogFolder
-            // 
-            this.buttonOpenLogFolder.AutoSize = false;
-            this.buttonOpenLogFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonOpenLogFolder.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.buttonOpenLogFolder.Depth = 0;
-            this.buttonOpenLogFolder.HighEmphasis = true;
-            this.buttonOpenLogFolder.Icon = global::CodeCompilerServiceManager.Properties.Resources.folder_open;
-            this.buttonOpenLogFolder.Location = new System.Drawing.Point(784, 98);
-            this.buttonOpenLogFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.buttonOpenLogFolder.MouseState = MaterialSkin.MouseState.HOVER;
-            this.buttonOpenLogFolder.Name = "buttonOpenLogFolder";
-            this.buttonOpenLogFolder.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.buttonOpenLogFolder.Size = new System.Drawing.Size(44, 37);
-            this.buttonOpenLogFolder.TabIndex = 56;
-            this.toolTip1.SetToolTip(this.buttonOpenLogFolder, "Otwórz folder z logami serwisu");
-            this.buttonOpenLogFolder.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.buttonOpenLogFolder.UseAccentColor = true;
-            this.buttonOpenLogFolder.UseVisualStyleBackColor = true;
-            this.buttonOpenLogFolder.Click += new System.EventHandler(this.buttonOpenLogFolder_Click);
             // 
             // labelIntervalService
             // 
@@ -343,7 +295,7 @@
             this.labelInternalBufferSize.AutoSize = true;
             this.labelInternalBufferSize.Depth = 0;
             this.labelInternalBufferSize.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelInternalBufferSize.Location = new System.Drawing.Point(14, 362);
+            this.labelInternalBufferSize.Location = new System.Drawing.Point(14, 247);
             this.labelInternalBufferSize.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelInternalBufferSize.Name = "labelInternalBufferSize";
             this.labelInternalBufferSize.Size = new System.Drawing.Size(305, 19);
@@ -356,10 +308,10 @@
             this.textBoxInternalBufferSize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.textBoxInternalBufferSize.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.textBoxInternalBufferSize.Depth = 0;
-            this.textBoxInternalBufferSize.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.textBoxInternalBufferSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxInternalBufferSize.HideSelection = true;
             this.textBoxInternalBufferSize.LeadingIcon = null;
-            this.textBoxInternalBufferSize.Location = new System.Drawing.Point(14, 384);
+            this.textBoxInternalBufferSize.Location = new System.Drawing.Point(14, 280);
             this.textBoxInternalBufferSize.MaxLength = 32767;
             this.textBoxInternalBufferSize.MouseState = MaterialSkin.MouseState.OUT;
             this.textBoxInternalBufferSize.Name = "textBoxInternalBufferSize";
@@ -379,6 +331,8 @@
             this.textBoxInternalBufferSize.UseSystemPasswordChar = false;
             this.textBoxInternalBufferSize.Enter += new System.EventHandler(this.textBoxInternalBufferSize_Enter);
             this.textBoxInternalBufferSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxInternalBufferSize_KeyPress);
+            this.textBoxInternalBufferSize.Leave += new System.EventHandler(this.textBoxInternalBufferSize_Leave);
+            this.textBoxInternalBufferSize.TextChanged += new System.EventHandler(this.textBoxInternalBufferSize_TextChanged);
             // 
             // buttonSaveAndRestart
             // 
@@ -387,7 +341,7 @@
             this.buttonSaveAndRestart.Depth = 0;
             this.buttonSaveAndRestart.HighEmphasis = true;
             this.buttonSaveAndRestart.Icon = global::CodeCompilerServiceManager.Properties.Resources.content_save;
-            this.buttonSaveAndRestart.Location = new System.Drawing.Point(458, 433);
+            this.buttonSaveAndRestart.Location = new System.Drawing.Point(7, 455);
             this.buttonSaveAndRestart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonSaveAndRestart.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonSaveAndRestart.Name = "buttonSaveAndRestart";
@@ -407,7 +361,7 @@
             this.buttonSetDefaultServiceSettings.Depth = 0;
             this.buttonSetDefaultServiceSettings.HighEmphasis = true;
             this.buttonSetDefaultServiceSettings.Icon = global::CodeCompilerServiceManager.Properties.Resources.refresh;
-            this.buttonSetDefaultServiceSettings.Location = new System.Drawing.Point(458, 481);
+            this.buttonSetDefaultServiceSettings.Location = new System.Drawing.Point(450, 455);
             this.buttonSetDefaultServiceSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonSetDefaultServiceSettings.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonSetDefaultServiceSettings.Name = "buttonSetDefaultServiceSettings";
@@ -427,7 +381,7 @@
             this.buttonCancelChanges.Depth = 0;
             this.buttonCancelChanges.HighEmphasis = true;
             this.buttonCancelChanges.Icon = global::CodeCompilerServiceManager.Properties.Resources.cancel;
-            this.buttonCancelChanges.Location = new System.Drawing.Point(458, 384);
+            this.buttonCancelChanges.Location = new System.Drawing.Point(274, 455);
             this.buttonCancelChanges.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonCancelChanges.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonCancelChanges.Name = "buttonCancelChanges";
@@ -447,7 +401,7 @@
             this.buttonInstallService.Depth = 0;
             this.buttonInstallService.HighEmphasis = true;
             this.buttonInstallService.Icon = global::CodeCompilerServiceManager.Properties.Resources.content_save_cog;
-            this.buttonInstallService.Location = new System.Drawing.Point(458, 292);
+            this.buttonInstallService.Location = new System.Drawing.Point(244, 62);
             this.buttonInstallService.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonInstallService.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonInstallService.Name = "buttonInstallService";
@@ -467,7 +421,7 @@
             this.buttonDeleteService.Depth = 0;
             this.buttonDeleteService.HighEmphasis = true;
             this.buttonDeleteService.Icon = global::CodeCompilerServiceManager.Properties.Resources.cog_off;
-            this.buttonDeleteService.Location = new System.Drawing.Point(668, 292);
+            this.buttonDeleteService.Location = new System.Drawing.Point(458, 62);
             this.buttonDeleteService.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonDeleteService.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonDeleteService.Name = "buttonDeleteService";
@@ -484,8 +438,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.buttonDeleteService);
-            this.Controls.Add(this.buttonInstallService);
             this.Controls.Add(this.buttonCancelChanges);
             this.Controls.Add(this.buttonSetDefaultServiceSettings);
             this.Controls.Add(this.buttonSaveAndRestart);
@@ -499,12 +451,8 @@
             this.Controls.Add(this.labelRestartRequired);
             this.Controls.Add(this.checkBoxLogToEventViewer);
             this.Controls.Add(this.panelFooterServicePath);
-            this.Controls.Add(this.numericUpDownServiceMainInterval);
-            this.Controls.Add(this.numericUpDownInternalBufferSize);
             this.Name = "ServiceSettingsControl";
             this.Size = new System.Drawing.Size(866, 618);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownServiceMainInterval)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownInternalBufferSize)).EndInit();
             this.panelFooterServicePath.ResumeLayout(false);
             this.panelFooterServicePath.PerformLayout();
             this.ResumeLayout(false);
@@ -513,9 +461,6 @@
         }
 
         #endregion
-
-        private NumericUpDown numericUpDownServiceMainInterval;
-        private NumericUpDown numericUpDownInternalBufferSize;
         private MaterialSkin.Controls.MaterialLabel labelRestartRequired;
         private MaterialSkin.Controls.MaterialLabel labelServicePath;
         private MaterialSkin.Controls.MaterialTextBox2 textBoxServicePath;

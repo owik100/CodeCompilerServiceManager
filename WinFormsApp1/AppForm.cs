@@ -46,9 +46,9 @@ namespace CodeCompilerServiceManager
         {
             return serviceConnector.ServiceExist();
         }
-        public void InstallService(string pathToServiceExe)
+        public bool InstallService(string pathToServiceExe)
         {
-            serviceConnector.InstallService(pathToServiceExe);
+            return serviceConnector.InstallService(pathToServiceExe);
         }
         public bool RemoveService()
         {
@@ -95,6 +95,12 @@ namespace CodeCompilerServiceManager
                 if (string.IsNullOrEmpty(servicePath))
                 {
                     homeControl.ServiceConnector_MessageHandler(null, "Nie znaleziono œcie¿ki us³ugi!");
+                    MaterialDialog materialDialog = new MaterialDialog(this, "Nie znaleziono œcie¿ki us³ugi!", "Wygl¹da na to, ¿e us³uga CodeCompilerServiceOwik nie jest zainstalowana. Chcesz to zrobiæ teraz? (Instalacja dostêpna póŸniej na zak³adce ustawieñ serwisu)", "Tak", true, "Nie");
+                    DialogResult dialogResult = materialDialog.ShowDialog(this);
+                    if(dialogResult == DialogResult.OK)
+                    {
+
+                    }
                 }
                 else
                 {

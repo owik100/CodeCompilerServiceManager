@@ -15,7 +15,7 @@ namespace CodeCompilerServiceManager.Logic
         public ServiceControllerStatus GetServiceStatus();
         public bool ServiceExist();
         public string GetServicePath();
-        public void InstallService(string pathToServiceExe);
+        public bool InstallService(string pathToServiceExe);
         public bool RemoveService();
     }
 }
