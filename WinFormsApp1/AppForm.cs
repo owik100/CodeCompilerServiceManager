@@ -37,6 +37,46 @@ namespace CodeCompilerServiceManager
         #endregion
 
         #region Public Methods
+        public bool InstallServiceDialog(ref string path)
+        {
+            bool res = false;
+            try
+            {
+                MaterialDialog materialDialog = new MaterialDialog(this, "Wybór œcie¿ki", "Wybierz folder zawieraj¹cy us³ugê CodeCompilerServiceOwik", "OK", false, "");
+                DialogResult dialogResult = materialDialog.ShowDialog(this);
+                using (var dialog = new FolderBrowserDialog())
+                {
+                    DialogResult result = dialog.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        path = dialog.SelectedPath;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                res = InstallService(path);
+                ReStartService();
+
+                if (res)
+                {
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Us³uga zainstalowana poprawnie!", "OK", false);
+                    SnackBarMessage.Show(this);
+                }
+                else
+                {
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("B³¹d. SprawdŸ okno z szczegó³ami na g³ównej zak³adce!", "OK", true);
+                    SnackBarMessage.Show(this);
+                }
+            }
+            catch (Exception ex)
+            {
+                homeControl.ServiceConnector_MessageHandler(null, ex.ToString());
+            }
+            return res;
+        }
         public void CheckStatus(object sender, EventArgs e)
         {
             ServiceControllerStatus result = serviceConnector.GetServiceStatus();
@@ -95,12 +135,16 @@ namespace CodeCompilerServiceManager
                 if (string.IsNullOrEmpty(servicePath))
                 {
                     homeControl.ServiceConnector_MessageHandler(null, "Nie znaleziono œcie¿ki us³ugi!");
-                    MaterialDialog materialDialog = new MaterialDialog(this, "Nie znaleziono œcie¿ki us³ugi!", "Wygl¹da na to, ¿e us³uga CodeCompilerServiceOwik nie jest zainstalowana. Chcesz to zrobiæ teraz? (Instalacja dostêpna póŸniej na zak³adce ustawieñ serwisu)", "Tak", true, "Nie");
-                    DialogResult dialogResult = materialDialog.ShowDialog(this);
-                    if(dialogResult == DialogResult.OK)
-                    {
-
-                    }
+                    Task.Delay(500).ContinueWith((task) => {
+                        Invoke((MethodInvoker)(() => {
+                            MaterialDialog materialDialog = new MaterialDialog(this, "Nie znaleziono œcie¿ki us³ugi!", "Wygl¹da na to, ¿e us³uga CodeCompilerServiceOwik nie jest zainstalowana. Chcesz to zrobiæ teraz? (Instalacja dostêpna póŸniej na zak³adce ustawieñ serwisu)", "Tak", true, "Nie");
+                            DialogResult dialogResult = materialDialog.ShowDialog(this);
+                            if (dialogResult == DialogResult.OK)
+                            {
+                                InstallServiceDialog(ref servicePath);
+                            }
+                        }));
+                    });
                 }
                 else
                 {

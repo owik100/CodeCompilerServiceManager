@@ -71,34 +71,11 @@ namespace CodeCompilerServiceManager.UserControls
                 }
                 else
                 {
-                    MaterialDialog materialDialog = new MaterialDialog(_appFormParent, "Wybór ścieżki", "Wybierz folder zawierający usługę CodeCompilerServiceOwik", "OK", false, "");
-                    DialogResult dialogResult = materialDialog.ShowDialog(this);
-                    using (var dialog = new FolderBrowserDialog())
-                    {
-                        DialogResult result = dialog.ShowDialog();
-
-                        if (result == DialogResult.OK)
-                        {
-                            path = dialog.SelectedPath;
-                        }
-                        else
-                        {
-                            return;
-                        }
-                    }
-                    bool res = _appFormParent.InstallService(path);
-                    _appFormParent.ReStartService();
+                    bool res = _appFormParent.InstallServiceDialog(ref path);
                     textBoxServicePath.Text = path;
                     if (res)
                     {
-                        MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Usługa zainstalowana poprawnie!", "OK", false);
-                        SnackBarMessage.Show(this);
                         SetButtonsInstallService(false);
-                    }
-                    else
-                    {
-                        MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                        SnackBarMessage.Show(this);
                     }
                 }
             }
