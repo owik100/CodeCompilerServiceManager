@@ -34,6 +34,7 @@ namespace CodeCompilerServiceManager
         #region Properties
         public System.Windows.Forms.Timer ServiceStatusTimer { get; private set; }
         public bool RestartServiceRequired { get; set; } = false;
+        public PictureBox pictureCogAnim { get; private set; }
         #endregion
 
         #region Public Methods
@@ -131,6 +132,7 @@ namespace CodeCompilerServiceManager
                 LoadManagerOptions();
                 InitTimer();
                 InitWorkers();
+                pictureCogAnim = pictureBoxCogAnim;
                 string servicePath = GetServicePath();
                 if (string.IsNullOrEmpty(servicePath))
                 {

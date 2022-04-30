@@ -119,6 +119,7 @@ namespace CodeCompilerServiceManager.UserControls
         private void OnStopped()
         {
             pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.red;
+            _appFormParent.pictureCogAnim.Enabled = false;
             labelServiceStatus.Text = "Stan usługi: Zatrzymana";
             btnStartService.Enabled = true;
             btnStopService.Enabled = false;
@@ -127,6 +128,7 @@ namespace CodeCompilerServiceManager.UserControls
         private void OnRunning()
         {
             pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.green;
+            _appFormParent.pictureCogAnim.Enabled = true;
             labelServiceStatus.Text = "Stan usługi: Uruchomiona";
             btnStartService.Enabled = false;
             btnStopService.Enabled = true;
@@ -135,17 +137,20 @@ namespace CodeCompilerServiceManager.UserControls
         private void OnStartPending()
         {
             pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+            _appFormParent.pictureCogAnim.Enabled = false;
             labelServiceStatus.Text = "Stan usługi: Uruchamianie...";
         }
         private void OnStopPending()
         {
             pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+            _appFormParent.pictureCogAnim.Enabled = false;
             labelServiceStatus.Text = "Stan usługi: Zatrzymywanie...";
         }
 
         private void OnOtherStatus(ServiceControllerStatus result)
         {
             pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+            _appFormParent.pictureCogAnim.Enabled = false;
             labelServiceStatus.Text = "Stan usługi: " + result.ToString();
         }
 

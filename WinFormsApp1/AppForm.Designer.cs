@@ -37,12 +37,15 @@
             this.buttonServiceSettings = new System.Windows.Forms.Button();
             this.buttonManagerSettings = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
-            this.panelLogo = new System.Windows.Forms.Panel();
+            this.panelStatus = new System.Windows.Forms.Panel();
+            this.pictureBoxCogAnim = new System.Windows.Forms.PictureBox();
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.labelTitleBar = new System.Windows.Forms.Label();
             this.panelDesktopParent = new System.Windows.Forms.Panel();
             this.panelSideMenu.SuspendLayout();
             this.panelSlideMenuBottom.SuspendLayout();
+            this.panelStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCogAnim)).BeginInit();
             this.panelTitleBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +59,7 @@
             this.panelSideMenu.Controls.Add(this.buttonServiceSettings);
             this.panelSideMenu.Controls.Add(this.buttonManagerSettings);
             this.panelSideMenu.Controls.Add(this.buttonHome);
-            this.panelSideMenu.Controls.Add(this.panelLogo);
+            this.panelSideMenu.Controls.Add(this.panelStatus);
             this.panelSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSideMenu.Location = new System.Drawing.Point(3, 24);
             this.panelSideMenu.Name = "panelSideMenu";
@@ -178,14 +181,27 @@
             this.buttonHome.UseVisualStyleBackColor = true;
             this.buttonHome.Click += new System.EventHandler(this.buttonHome_Click);
             // 
-            // panelLogo
+            // panelStatus
             // 
-            this.panelLogo.BackColor = System.Drawing.Color.White;
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(220, 100);
-            this.panelLogo.TabIndex = 0;
+            this.panelStatus.BackColor = System.Drawing.Color.White;
+            this.panelStatus.Controls.Add(this.pictureBoxCogAnim);
+            this.panelStatus.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelStatus.Location = new System.Drawing.Point(0, 0);
+            this.panelStatus.Name = "panelStatus";
+            this.panelStatus.Size = new System.Drawing.Size(220, 100);
+            this.panelStatus.TabIndex = 0;
+            // 
+            // pictureBoxCogAnim
+            // 
+            this.pictureBoxCogAnim.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxCogAnim.Enabled = false;
+            this.pictureBoxCogAnim.Image = global::CodeCompilerServiceManager.Properties.Resources.cogAnimation;
+            this.pictureBoxCogAnim.Location = new System.Drawing.Point(40, 3);
+            this.pictureBoxCogAnim.Name = "pictureBoxCogAnim";
+            this.pictureBoxCogAnim.Size = new System.Drawing.Size(138, 97);
+            this.pictureBoxCogAnim.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCogAnim.TabIndex = 0;
+            this.pictureBoxCogAnim.TabStop = false;
             // 
             // panelTitleBar
             // 
@@ -234,6 +250,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AppForm_FormClosing);
             this.panelSideMenu.ResumeLayout(false);
             this.panelSlideMenuBottom.ResumeLayout(false);
+            this.panelStatus.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCogAnim)).EndInit();
             this.panelTitleBar.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -242,7 +260,7 @@
         #endregion
         private Panel panelSideMenu;
         private Button buttonHome;
-        private Panel panelLogo;
+        private Panel panelStatus;
         private Button buttonInfo;
         private Button buttonLibrarySettings;
         private Button buttonServiceSettings;
@@ -253,5 +271,6 @@
         private Panel panelSlideMenuBottom;
         private Button buttonExit;
         private Button buttonRestart;
+        private PictureBox pictureBoxCogAnim;
     }
 }
