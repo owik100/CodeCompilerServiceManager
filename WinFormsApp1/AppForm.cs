@@ -122,6 +122,7 @@ namespace CodeCompilerServiceManager
         private void InitializeHomeControl()
         {
             homeControl = new HomeControl(this);
+            activeControl = homeControl;
         }
         private void InitializeManager()
         {
@@ -330,8 +331,10 @@ namespace CodeCompilerServiceManager
         {
             if (!HandleLeaveUcerControl(activeControl))
             {
-                OpenChildControl(homeControl, sender);
-                activeControl = homeControl;
+                if (activeControl.ControlName != homeControl.Name){
+                    OpenChildControl(homeControl, sender);
+                    activeControl = homeControl;
+                }
             }
         }
 
@@ -339,9 +342,12 @@ namespace CodeCompilerServiceManager
         {
             if (!HandleLeaveUcerControl(activeControl))
             {
-                ManagerSettingsControl managerSettingsControl = new ManagerSettingsControl(this);
-                OpenChildControl(managerSettingsControl, sender);
-                activeControl = managerSettingsControl;
+                if (activeControl.ControlName != "ManagerSettingsControl")
+                {
+                    ManagerSettingsControl managerSettingsControl = new ManagerSettingsControl(this);
+                    OpenChildControl(managerSettingsControl, sender);
+                    activeControl = managerSettingsControl;
+                }
             }
         }
 
@@ -349,9 +355,12 @@ namespace CodeCompilerServiceManager
         {
             if (!HandleLeaveUcerControl(activeControl))
             {
-                ServiceSettingsControl serviceSettingsControl = new ServiceSettingsControl(this);
-                OpenChildControl(serviceSettingsControl, sender);
-                activeControl = serviceSettingsControl;
+                if (activeControl.ControlName != "ServiceSettingsControl")
+                {
+                    ServiceSettingsControl serviceSettingsControl = new ServiceSettingsControl(this);
+                    OpenChildControl(serviceSettingsControl, sender);
+                    activeControl = serviceSettingsControl;
+                }
             }
         }
 
@@ -359,9 +368,12 @@ namespace CodeCompilerServiceManager
         {
             if (!HandleLeaveUcerControl(activeControl))
             {
-                LibrarySettingsControl librarySettingsControl = new LibrarySettingsControl(this);
-                OpenChildControl(librarySettingsControl, sender);
-                activeControl = librarySettingsControl;
+                if (activeControl.ControlName != "LibrarySettingsControl")
+                {
+                    LibrarySettingsControl librarySettingsControl = new LibrarySettingsControl(this);
+                    OpenChildControl(librarySettingsControl, sender);
+                    activeControl = librarySettingsControl;
+                }
             }
         }
 
@@ -369,9 +381,12 @@ namespace CodeCompilerServiceManager
         {
             if (!HandleLeaveUcerControl(activeControl))
             {
-                AboutControl aboutControl = new AboutControl();
-                OpenChildControl(aboutControl, sender);
-                activeControl = aboutControl;
+                if (activeControl.ControlName != "LibrarySettingsControl")
+                {
+                    AboutControl aboutControl = new AboutControl();
+                    OpenChildControl(aboutControl, sender);
+                    activeControl = aboutControl;
+                }
             }
         }
 

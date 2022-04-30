@@ -95,10 +95,7 @@ namespace CodeCompilerServiceManager.UserControls
         {
             //No changes to save
         }
-
-
-
-
+        string IUserControlWithSave.ControlName => "AboutControl";
         #endregion
 
 

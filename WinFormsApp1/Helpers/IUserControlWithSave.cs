@@ -9,5 +9,6 @@ namespace CodeCompilerServiceManager.Helpers
     public interface IUserControlWithSave
     {
         public void SaveChangesOnLeave();
+        public string ControlName { get;}
     }
 }

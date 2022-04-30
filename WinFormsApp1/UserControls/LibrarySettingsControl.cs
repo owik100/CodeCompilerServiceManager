@@ -295,6 +295,7 @@ namespace CodeCompilerServiceManager.UserControls
         {
             buttonSaveAndRestart_Click(null, null);
         }
+        string IUserControlWithSave.ControlName => "LibrarySettingsControl";
         #endregion
     }
     

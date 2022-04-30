@@ -83,6 +83,8 @@
             this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonExit.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonExit.Image = global::CodeCompilerServiceManager.Properties.Resources.exit_to_app_white;
+            this.buttonExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonExit.Location = new System.Drawing.Point(110, 0);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(110, 100);
@@ -98,6 +100,8 @@
             this.buttonRestart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRestart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonRestart.ForeColor = System.Drawing.Color.Gainsboro;
+            this.buttonRestart.Image = global::CodeCompilerServiceManager.Properties.Resources.restart_white;
+            this.buttonRestart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonRestart.Location = new System.Drawing.Point(0, 0);
             this.buttonRestart.Name = "buttonRestart";
             this.buttonRestart.Size = new System.Drawing.Size(110, 100);
@@ -113,11 +117,14 @@
             this.buttonInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonInfo.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonInfo.Location = new System.Drawing.Point(0, 300);
+            this.buttonInfo.Image = global::CodeCompilerServiceManager.Properties.Resources.information_white;
+            this.buttonInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonInfo.Location = new System.Drawing.Point(0, 275);
             this.buttonInfo.Name = "buttonInfo";
             this.buttonInfo.Size = new System.Drawing.Size(220, 50);
             this.buttonInfo.TabIndex = 5;
-            this.buttonInfo.Text = "Informacje";
+            this.buttonInfo.Text = "  Informacje";
+            this.buttonInfo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonInfo.UseVisualStyleBackColor = true;
             this.buttonInfo.Click += new System.EventHandler(this.buttonInfo_Click);
             // 
@@ -128,11 +135,14 @@
             this.buttonLibrarySettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonLibrarySettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonLibrarySettings.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonLibrarySettings.Location = new System.Drawing.Point(0, 250);
+            this.buttonLibrarySettings.Image = global::CodeCompilerServiceManager.Properties.Resources.package_white;
+            this.buttonLibrarySettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonLibrarySettings.Location = new System.Drawing.Point(0, 225);
             this.buttonLibrarySettings.Name = "buttonLibrarySettings";
             this.buttonLibrarySettings.Size = new System.Drawing.Size(220, 50);
             this.buttonLibrarySettings.TabIndex = 4;
-            this.buttonLibrarySettings.Text = "Ustawienia biblioteki kompilującej";
+            this.buttonLibrarySettings.Text = "  Ustawienia biblioteki kompilującej";
+            this.buttonLibrarySettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonLibrarySettings.UseVisualStyleBackColor = true;
             this.buttonLibrarySettings.Click += new System.EventHandler(this.buttonLibrarySettings_Click);
             // 
@@ -143,11 +153,14 @@
             this.buttonServiceSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonServiceSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonServiceSettings.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonServiceSettings.Location = new System.Drawing.Point(0, 200);
+            this.buttonServiceSettings.Image = global::CodeCompilerServiceManager.Properties.Resources.wrench_white;
+            this.buttonServiceSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonServiceSettings.Location = new System.Drawing.Point(0, 175);
             this.buttonServiceSettings.Name = "buttonServiceSettings";
             this.buttonServiceSettings.Size = new System.Drawing.Size(220, 50);
             this.buttonServiceSettings.TabIndex = 3;
-            this.buttonServiceSettings.Text = "Ustawienia serwisu";
+            this.buttonServiceSettings.Text = "  Ustawienia serwisu";
+            this.buttonServiceSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonServiceSettings.UseVisualStyleBackColor = true;
             this.buttonServiceSettings.Click += new System.EventHandler(this.buttonServiceSettings_Click);
             // 
@@ -158,11 +171,15 @@
             this.buttonManagerSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonManagerSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonManagerSettings.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonManagerSettings.Location = new System.Drawing.Point(0, 150);
+            this.buttonManagerSettings.Image = global::CodeCompilerServiceManager.Properties.Resources.application_edit_outline_white;
+            this.buttonManagerSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonManagerSettings.Location = new System.Drawing.Point(0, 125);
             this.buttonManagerSettings.Name = "buttonManagerSettings";
             this.buttonManagerSettings.Size = new System.Drawing.Size(220, 50);
             this.buttonManagerSettings.TabIndex = 2;
-            this.buttonManagerSettings.Text = "Ustawienia menadżera";
+            this.buttonManagerSettings.Text = "  Ustawienia menadżera";
+            this.buttonManagerSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonManagerSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonManagerSettings.UseVisualStyleBackColor = true;
             this.buttonManagerSettings.Click += new System.EventHandler(this.buttonManagerSettings_Click);
             // 
@@ -173,22 +190,25 @@
             this.buttonHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonHome.ForeColor = System.Drawing.Color.Gainsboro;
-            this.buttonHome.Location = new System.Drawing.Point(0, 100);
+            this.buttonHome.Image = global::CodeCompilerServiceManager.Properties.Resources.home_white;
+            this.buttonHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonHome.Location = new System.Drawing.Point(0, 75);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(220, 50);
             this.buttonHome.TabIndex = 1;
-            this.buttonHome.Text = "Home";
+            this.buttonHome.Text = "  Status";
+            this.buttonHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonHome.UseVisualStyleBackColor = true;
             this.buttonHome.Click += new System.EventHandler(this.buttonHome_Click);
             // 
             // panelStatus
             // 
-            this.panelStatus.BackColor = System.Drawing.Color.White;
+            this.panelStatus.BackColor = System.Drawing.SystemColors.Control;
             this.panelStatus.Controls.Add(this.pictureBoxCogAnim);
             this.panelStatus.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelStatus.Location = new System.Drawing.Point(0, 0);
             this.panelStatus.Name = "panelStatus";
-            this.panelStatus.Size = new System.Drawing.Size(220, 100);
+            this.panelStatus.Size = new System.Drawing.Size(220, 75);
             this.panelStatus.TabIndex = 0;
             // 
             // pictureBoxCogAnim
@@ -196,9 +216,9 @@
             this.pictureBoxCogAnim.BackColor = System.Drawing.Color.Transparent;
             this.pictureBoxCogAnim.Enabled = false;
             this.pictureBoxCogAnim.Image = global::CodeCompilerServiceManager.Properties.Resources.cogAnimation;
-            this.pictureBoxCogAnim.Location = new System.Drawing.Point(40, 3);
+            this.pictureBoxCogAnim.Location = new System.Drawing.Point(46, 3);
             this.pictureBoxCogAnim.Name = "pictureBoxCogAnim";
-            this.pictureBoxCogAnim.Size = new System.Drawing.Size(138, 97);
+            this.pictureBoxCogAnim.Size = new System.Drawing.Size(123, 72);
             this.pictureBoxCogAnim.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxCogAnim.TabIndex = 0;
             this.pictureBoxCogAnim.TabStop = false;
