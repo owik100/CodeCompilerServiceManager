@@ -381,7 +381,7 @@ namespace CodeCompilerServiceManager
         {
             if (!HandleLeaveUcerControl(activeControl))
             {
-                if (activeControl.ControlName != "LibrarySettingsControl")
+                if (activeControl.ControlName != "AboutControl")
                 {
                     AboutControl aboutControl = new AboutControl();
                     OpenChildControl(aboutControl, sender);
