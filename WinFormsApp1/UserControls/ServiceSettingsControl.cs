@@ -231,6 +231,7 @@ namespace CodeCompilerServiceManager.UserControls
             try
             {
                 SaveServiceOptions();
+                _appFormParent.pictureCogAnim.Enabled = false;
                 _appFormParent.ReStartService();
                 _appFormParent.RestartServiceRequired = false;
                 labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
@@ -280,6 +281,7 @@ namespace CodeCompilerServiceManager.UserControls
                     ServiceSettings.LoadSettings(servisePath, true);
 
                     BindSettingsToControlls();
+                    _appFormParent.pictureCogAnim.Enabled = false;
                     buttonSaveAndRestart_Click(null, null);
                 }
             }

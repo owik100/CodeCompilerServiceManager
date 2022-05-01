@@ -42,6 +42,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 labelServiceStatus.Text = "Trwa zatrzymywanie usługi...";
                 pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+                _appFormParent.pictureCogAnim.Enabled = false;
                 btnStopService.Enabled = false;
                 btnReStartService.Enabled = false;
                 _appFormParent.StopService();
@@ -58,6 +59,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 labelServiceStatus.Text = "Trwa uruchamianie usługi...";
                 pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+                _appFormParent.pictureCogAnim.Enabled = false;
                 btnStartService.Enabled = false;
                 btnReStartService.Enabled = false;
                 _appFormParent.StartService();
@@ -87,6 +89,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 labelServiceStatus.Text = "Trwa restartowanie usługi...";
                 pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+                _appFormParent.pictureCogAnim.Enabled = false;
                 btnStopService.Enabled = false;
                 btnReStartService.Enabled = false;
                 _appFormParent.ReStartService();
