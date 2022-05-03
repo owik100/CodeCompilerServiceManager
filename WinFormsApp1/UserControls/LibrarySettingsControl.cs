@@ -1,5 +1,7 @@
 ﻿using CodeCompilerServiceManager.Helpers;
+using CodeCompilerServiceManager.Logic;
 using CodeCompilerServiceManager.Settings;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,8 +14,7 @@ using System.Windows.Forms;
 
 namespace CodeCompilerServiceManager.UserControls
 {
-    //TODO error handling
-    public partial class LibrarySettingsControl : UserControl, IUserControlWithSave
+    public partial class LibrarySettingsControl : UserControl, IUserControlWithSave, IMeesageHandling
     {
         AppForm _appFormParent;
         public LibrarySettingsControl(AppForm appFormParent)
@@ -61,7 +62,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
             _appFormParent.RestartServiceRequired = false;
             labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
@@ -99,7 +102,9 @@ namespace CodeCompilerServiceManager.UserControls
 
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
         #endregion
@@ -115,7 +120,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -138,7 +145,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -152,7 +161,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -166,7 +177,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -183,7 +196,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -194,7 +209,9 @@ namespace CodeCompilerServiceManager.UserControls
                 string servisePath = _appFormParent.GetServicePath();
                 if (string.IsNullOrEmpty(servisePath))
                 {
-                    //ServiceConnector_MessageHandler(null, "Nie znaleziono ścieżki usługi!");
+                    OnMessage("Nie znaleziono ścieżki usługi!", MessageHandlingLevel.ManagerError);
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                    SnackBarMessage.Show(this);
                 }
                 else
                 {
@@ -205,7 +222,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -216,7 +235,9 @@ namespace CodeCompilerServiceManager.UserControls
                 string servisePath = _appFormParent.GetServicePath();
                 if (string.IsNullOrEmpty(servisePath))
                 {
-                    //ServiceConnector_MessageHandler(null, "Nie znaleziono ścieżki usługi!");
+                    OnMessage("Nie znaleziono ścieżki usługi!", MessageHandlingLevel.ManagerError);
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                    SnackBarMessage.Show(this);
                 }
                 else
                 {
@@ -229,7 +250,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
         private void materialButtonChooseInputFolder_Click(object sender, EventArgs e)
@@ -252,7 +275,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -276,7 +301,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
         private void textBoxInputPath_Enter(object sender, EventArgs e)
@@ -299,6 +326,14 @@ namespace CodeCompilerServiceManager.UserControls
         }
         string IUserControlWithSave.ControlName => "LibrarySettingsControl";
         #endregion
+        #region IMeesageHandling
+
+        public event EventHandler<MessageHandlingArgs> GetMessage;
+        protected virtual void OnMessage(string message, MessageHandlingLevel level)
+        {
+            GetMessage?.Invoke(this, new MessageHandlingArgs(message, level));
+        }
+        #endregion
     }
-    
+
 }

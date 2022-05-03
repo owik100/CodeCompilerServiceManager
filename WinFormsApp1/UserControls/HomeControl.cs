@@ -1,4 +1,5 @@
 ﻿using CodeCompilerServiceManager.Helpers;
+using CodeCompilerServiceManager.Logic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,8 +13,7 @@ using System.Windows.Forms;
 
 namespace CodeCompilerServiceManager.UserControls
 {
-    //TODO error handle
-    public partial class HomeControl : UserControl, IUserControlWithSave
+    public partial class HomeControl : UserControl, IUserControlWithSave, IMeesageHandling
     {
         AppForm _appFormParent;
         public HomeControl(AppForm appFormParent)
@@ -32,7 +32,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -49,7 +49,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -66,7 +66,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -79,7 +79,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -96,7 +96,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
 
         }
@@ -183,19 +183,41 @@ namespace CodeCompilerServiceManager.UserControls
             }
         }
 
-        public void ServiceConnector_MessageHandler(object? sender, string errorMessage)
+        public void ServiceConnector_MessageHandler(object? sender, MessageHandlingArgs messageArgs)
         {
             if (txtOutputConsole.InvokeRequired)
             {
-                Action safeWrite = delegate { ServiceConnector_MessageHandler(null, errorMessage); };
+                Action safeWrite = delegate { ServiceConnector_MessageHandler(null, messageArgs); };
                 txtOutputConsole.Invoke(safeWrite);
             }
             else
             {
-                string errMessage = DateTime.Now + " " + "[ServiceManager] - " + " " + errorMessage;
-                txtOutputConsole.ForeColor = Color.Red;
-                txtOutputConsole.Text += errMessage;
-                txtOutputConsole.Text += Environment.NewLine;
+                string textPrefix = "";
+                Color textColor = Color.Black;
+                switch (messageArgs.Level)
+                {
+                    case MessageHandlingLevel.ServiceInfo:
+                        textPrefix = "[Service Info]";
+                        textColor = Color.Green;
+                        break;
+                    case MessageHandlingLevel.ServiceError:
+                        textPrefix = "[Service Error]";
+                        textColor = Color.Red;
+                        break;
+                    case MessageHandlingLevel.ManagerInfo:
+                        textPrefix = "[Manager Info]";
+                        textColor = Color.GreenYellow;
+                        break;
+                    case MessageHandlingLevel.ManagerError:
+                        textPrefix = "[Manager Error]";
+                        textColor = Color.OrangeRed;
+                        break;
+                    default:
+                        break;
+                }
+                string errMessage = DateTime.Now + " " + $"{textPrefix} - " + " " + messageArgs.Message;
+
+                txtOutputConsole.AppendText(errMessage, textColor, true);
             }
         }
         #endregion
@@ -206,6 +228,14 @@ namespace CodeCompilerServiceManager.UserControls
             //No changes to save
         }
         string IUserControlWithSave.ControlName => "HomeControl";
+        #endregion
+        #region IMeesageHandling
+
+        public event EventHandler<MessageHandlingArgs> GetMessage;
+        protected virtual void OnMessage(string message, MessageHandlingLevel level)
+        {
+            GetMessage?.Invoke(this, new MessageHandlingArgs(message, level));
+        }
         #endregion
     }
 }

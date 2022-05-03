@@ -15,19 +15,12 @@ namespace CodeCompilerServiceManager.Logic
     {
         ServiceController _sc;
         IProcessHelper _processHelper;
-        public event EventHandler<string> GetMessage;
 
         public ServiceProxy()
         {
             _sc = new ServiceController("CodeCompilerServiceOwik");
             _processHelper = new ProcessHelper();
         }
-
-        protected virtual void OnMessage(string errorMessage)
-        {
-            GetMessage?.Invoke(this, errorMessage);
-        }
-
         public ServiceControllerStatus RunService()
         {
             ServiceControllerStatus result = ServiceControllerStatus.Stopped;
@@ -43,7 +36,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
             return result;
         }
@@ -64,7 +57,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
             return result;
         }
@@ -96,7 +89,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
             return result;
         }
@@ -111,7 +104,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
             return result;
         }
@@ -131,7 +124,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
             return result;
         }
@@ -147,13 +140,20 @@ namespace CodeCompilerServiceManager.Logic
             try
             {
                 string output = _processHelper.InstallServiceUsingCMD(pathToServiceExe);
-                OnMessage(output);
-                if(output.Contains("SUCCESS"))
+                if (output.Contains("SUCCESS"))
+                {
                     result = true;
+                    OnMessage(output, MessageHandlingLevel.ManagerInfo);
+                }
+                else
+                {
+                    OnMessage(output, MessageHandlingLevel.ManagerError);
+                }
+
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
             return result;
         }
@@ -162,14 +162,22 @@ namespace CodeCompilerServiceManager.Logic
             try
             {
                 string output = _processHelper.RemoveService();
-                OnMessage(output);
+                OnMessage(output, MessageHandlingLevel.ManagerInfo);
                 return true;
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
             return false;
         }
+        #region IMeesageHandling
+
+        public event EventHandler<MessageHandlingArgs> GetMessage;
+        protected virtual void OnMessage(string message, MessageHandlingLevel level)
+        {
+            GetMessage?.Invoke(this, new MessageHandlingArgs(message, level));
+        }
+        #endregion
     }
 }

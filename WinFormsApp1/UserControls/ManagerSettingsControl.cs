@@ -1,6 +1,8 @@
 ﻿using CodeCompilerServiceManager.Helpers;
+using CodeCompilerServiceManager.Logic;
 using CodeCompilerServiceManager.Settings;
 using CodeCompilerServiceManager.Settings.Models;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,8 +15,7 @@ using System.Windows.Forms;
 
 namespace CodeCompilerServiceManager.UserControls
 {
-    //TODO handle erros
-    public partial class ManagerSettingsControl : UserControl, IUserControlWithSave
+    public partial class ManagerSettingsControl : UserControl, IUserControlWithSave, IMeesageHandling
     {
         AppForm _appFormParent;
         int lastIntervalRefreshValue = 3000;
@@ -129,7 +130,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
         private void btnResetManagerSettings_Click(object sender, EventArgs e)
@@ -146,7 +149,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
         private void textBoxIntervalRefresh_Enter(object sender, EventArgs e)
@@ -198,6 +203,15 @@ namespace CodeCompilerServiceManager.UserControls
             //No changes to save
         }
         string IUserControlWithSave.ControlName => "ManagerSettingsControl";
+        #endregion
+
+        #region IMeesageHandling
+        public event EventHandler<MessageHandlingArgs> GetMessage;
+        protected virtual void OnMessage(string message, MessageHandlingLevel level)
+        {
+            GetMessage?.Invoke(this, new MessageHandlingArgs(message, level));
+        }
+
         #endregion
     }
 }

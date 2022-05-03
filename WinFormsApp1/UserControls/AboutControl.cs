@@ -1,4 +1,6 @@
 ﻿using CodeCompilerServiceManager.Helpers;
+using CodeCompilerServiceManager.Logic;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,9 +14,8 @@ using System.Windows.Forms;
 
 namespace CodeCompilerServiceManager.UserControls
 {
-    public partial class AboutControl : UserControl, IUserControlWithSave
+    public partial class AboutControl : UserControl, IUserControlWithSave, IMeesageHandling
     {
-        //TODO error handling
         public AboutControl()
         {
             InitializeComponent();
@@ -27,66 +28,44 @@ namespace CodeCompilerServiceManager.UserControls
             string versionNumber = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyFileVersionAttribute>().Version;
             materialLabelApplicationVersion.Text = "Code compiler manager v. " + versionNumber;
         }
+
+        private void GoToLink(string link)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("explorer", link);
+            }
+            catch (Exception ex)
+            {
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
+            }
+        }
         #endregion
 
 
         #region eventControls
         private void materialButtonLinkManager_Click(object sender, EventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start("explorer", "https://github.com/owik100/CodeCompilerServiceManager");
-            }
-            catch (Exception ex)
-            {
-
-            }
+                GoToLink("https://github.com/owik100/CodeCompilerServiceManager");
         }
         private void materialButtonLinkService_Click(object sender, EventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start("explorer", "https://github.com/owik100/CoderCompilerWorkerService");
-            }
-            catch (Exception ex)
-            {
-
-            }
-
+            GoToLink("https://github.com/owik100/CoderCompilerWorkerService");
         }
         private void materialButtonLinkSLibrary_Click(object sender, EventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start("explorer", "https://github.com/owik100/CodeCompilerLibrary");
-            }
-            catch (Exception ex)
-            {
-
-            }
+            GoToLink("https://github.com/owik100/CodeCompilerLibrary");
         }
 
         private void materialButtonLinkMaterilSkin_Click(object sender, EventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start("explorer", "https://github.com/leocb/MaterialSkin");
-            }
-            catch (Exception ex)
-            {
-
-            }
+            GoToLink("https://github.com/leocb/MaterialSkin");
         }
         private void pictureBoxOwikLogo_Click(object sender, EventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process.Start("explorer", "https://owik100.github.io/Portfolio/");
-            }
-            catch (Exception ex)
-            {
-
-            }
+            GoToLink("https://owik100.github.io/Portfolio/");
         }
         #endregion
 
@@ -98,6 +77,14 @@ namespace CodeCompilerServiceManager.UserControls
         string IUserControlWithSave.ControlName => "AboutControl";
         #endregion
 
+        #region IMeesageHandling
+
+        public event EventHandler<MessageHandlingArgs> GetMessage;
+        protected virtual void OnMessage(string message, MessageHandlingLevel level)
+        {
+            GetMessage?.Invoke(this, new MessageHandlingArgs(message, level));
+        }
+        #endregion
 
     }
 }

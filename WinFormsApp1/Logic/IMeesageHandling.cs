@@ -8,6 +8,6 @@ namespace CodeCompilerServiceManager.Logic
 {
     public interface IMeesageHandling
     {
-        public event EventHandler<string> GetMessage;
+        public event EventHandler<MessageHandlingArgs> GetMessage;
     }
 }

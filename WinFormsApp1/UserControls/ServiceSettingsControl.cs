@@ -1,4 +1,5 @@
 ﻿using CodeCompilerServiceManager.Helpers;
+using CodeCompilerServiceManager.Logic;
 using CodeCompilerServiceManager.Settings;
 using MaterialSkin.Controls;
 using System;
@@ -13,9 +14,7 @@ using System.Windows.Forms;
 
 namespace CodeCompilerServiceManager.UserControls
 {
-    //TODO error handling
-    //TODO podczas zapisywania  zmian wczytac ustawienia z library i je podpiac
-    public partial class ServiceSettingsControl : UserControl, IUserControlWithSave
+    public partial class ServiceSettingsControl : UserControl, IUserControlWithSave, IMeesageHandling
     {
         AppForm _appFormParent;
         int lastIntervalRefreshValue = 10000;
@@ -41,7 +40,9 @@ namespace CodeCompilerServiceManager.UserControls
                     string path = _appFormParent.GetServicePath();
                     if (string.IsNullOrWhiteSpace(path))
                     {
-                        //ServiceConnector_MessageHandler(null, "Nie znaleziono ścieżki do logów w opcjach!");
+                        OnMessage("Nie znaleziono ścieżki do logów w opcjach!", MessageHandlingLevel.ManagerError);
+                        MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                        SnackBarMessage.Show(this);
                     }
                     else
                     {
@@ -51,12 +52,16 @@ namespace CodeCompilerServiceManager.UserControls
                 }
                 else
                 {
-                     //ServiceConnector_MessageHandler(null, "Usługa nie jest zainstalowana!");
+                    OnMessage("Usługa nie jest zainstalowana!", MessageHandlingLevel.ManagerError);
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                    SnackBarMessage.Show(this);
                 }
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
         private void buttonInstallService_Click(object sender, EventArgs e)
@@ -81,7 +86,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -124,7 +131,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -138,7 +147,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -152,7 +163,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -166,7 +179,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -180,7 +195,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -194,7 +211,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
         private void buttonOpenLogFolder_Click(object sender, EventArgs e)
@@ -204,14 +223,18 @@ namespace CodeCompilerServiceManager.UserControls
                 string serviceConfigPath = textBoxServicePath.Text;
                 if (string.IsNullOrEmpty(serviceConfigPath))
                 {
-                    //ServiceConnector_MessageHandler(null, "Nie znaleziono ścieżki usługi!");
+                    OnMessage("Nie znaleziono ścieżki usługi!", MessageHandlingLevel.ManagerError);
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                    SnackBarMessage.Show(this);
                 }
                 else
                 {
                     string path = ServiceSettings.ServiceSettingsModel?.Serilog?.WriteTo.Where(x => x.Name == "File").FirstOrDefault()?.Args?.path;
                     if (string.IsNullOrWhiteSpace(path))
                     {
-                        //ServiceConnector_MessageHandler(null, "Nie znaleziono ścieżki do logów w opcjach!");
+                        OnMessage("Nie znaleziono ścieżki do logów w opcjach!", MessageHandlingLevel.ManagerError);
+                        MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                        SnackBarMessage.Show(this);
                     }
                     else
                     {
@@ -222,7 +245,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-               //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -239,7 +264,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -251,7 +278,9 @@ namespace CodeCompilerServiceManager.UserControls
                 string servisePath = _appFormParent.GetServicePath();
                 if (string.IsNullOrEmpty(servisePath))
                 {
-                    //ServiceConnector_MessageHandler(null, "Nie znaleziono ścieżki usługi!");
+                    OnMessage("Nie znaleziono ścieżki usługi!", MessageHandlingLevel.ManagerError);
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                    SnackBarMessage.Show(this);
                 }
                 else
                 {
@@ -263,7 +292,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
         private void buttonSetDefaultServiceSettings_Click(object sender, EventArgs e)
@@ -273,7 +304,9 @@ namespace CodeCompilerServiceManager.UserControls
                 string servisePath = _appFormParent.GetServicePath();
                 if (string.IsNullOrEmpty(servisePath))
                 {
-                    //ServiceConnector_MessageHandler(null, "Nie znaleziono ścieżki usługi!");
+                    OnMessage("Nie znaleziono ścieżki usługi!", MessageHandlingLevel.ManagerError);
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                    SnackBarMessage.Show(this);
                 }
                 else
                 {
@@ -287,7 +320,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
         private void toolTip1_draw(object sender, DrawToolTipEventArgs e)
@@ -359,7 +394,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
 
@@ -400,7 +437,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
         #endregion
@@ -474,7 +513,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
         }
         private void BindSettingsToControlls()
@@ -529,7 +570,9 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                //ServiceConnector_MessageHandler(null, ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(this);
             }
             _appFormParent.RestartServiceRequired = false;
             labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
@@ -549,7 +592,14 @@ namespace CodeCompilerServiceManager.UserControls
         string IUserControlWithSave.ControlName => "ServiceSettingsControl";
         #endregion
 
+        #region IMeesageHandling
 
+        public event EventHandler<MessageHandlingArgs> GetMessage;
+        protected virtual void OnMessage(string message, MessageHandlingLevel level)
+        {
+            GetMessage?.Invoke(this, new MessageHandlingArgs(message, level));
+        }
+        #endregion
 
 
     }

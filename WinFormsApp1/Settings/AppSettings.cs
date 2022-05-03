@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CodeCompilerServiceManager.Settings.Models;
+using CodeCompilerServiceManager.Logic;
+using MaterialSkin.Controls;
 
 namespace CodeCompilerServiceManager.Settings
 {
@@ -14,13 +16,6 @@ namespace CodeCompilerServiceManager.Settings
         public static int CheckStatusInterval;
         public static bool RefreshStatusEnabled;
         public static string ServicePath;
-
-        public static event EventHandler<string> GetMessage;
-
-        public static void OnMessage(string errorMessage)
-        {
-            GetMessage?.Invoke(null, errorMessage);
-        }
 
         public static AppSettingsModel RestartSettings()
         {
@@ -56,7 +51,7 @@ namespace CodeCompilerServiceManager.Settings
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -86,7 +81,7 @@ namespace CodeCompilerServiceManager.Settings
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 RestartSettings();
             }
             OperationTimeout = result.OperationTimeout;
@@ -95,6 +90,14 @@ namespace CodeCompilerServiceManager.Settings
 
             return result;
         }
+        #region IMeesageHandling
+
+        public static event EventHandler<MessageHandlingArgs> GetMessage;
+        public static void OnMessage(string message, MessageHandlingLevel level)
+        {
+            GetMessage?.Invoke(null, new MessageHandlingArgs(message, level));
+        }
+        #endregion
     }
 
 

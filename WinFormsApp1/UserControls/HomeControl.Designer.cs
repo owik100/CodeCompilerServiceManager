@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.btnClearManagerConsole = new MaterialSkin.Controls.MaterialButton();
-            this.txtOutputConsole = new System.Windows.Forms.TextBox();
             this.panelStatusInfo = new System.Windows.Forms.Panel();
             this.labelServiceStatus = new MaterialSkin.Controls.MaterialLabel();
             this.pictureServiceStatus = new System.Windows.Forms.PictureBox();
@@ -41,6 +40,7 @@
             this.buttonRefreshServiceState = new MaterialSkin.Controls.MaterialButton();
             this.btnStopService = new MaterialSkin.Controls.MaterialButton();
             this.panelConsole = new System.Windows.Forms.Panel();
+            this.txtOutputConsole = new System.Windows.Forms.RichTextBox();
             this.panelClearConsole = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelStatusInfo.SuspendLayout();
@@ -71,16 +71,6 @@
             this.btnClearManagerConsole.UseAccentColor = false;
             this.btnClearManagerConsole.UseVisualStyleBackColor = true;
             this.btnClearManagerConsole.Click += new System.EventHandler(this.btnClearManagerConsole_Click);
-            // 
-            // txtOutputConsole
-            // 
-            this.txtOutputConsole.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtOutputConsole.Location = new System.Drawing.Point(10, 10);
-            this.txtOutputConsole.Multiline = true;
-            this.txtOutputConsole.Name = "txtOutputConsole";
-            this.txtOutputConsole.ReadOnly = true;
-            this.txtOutputConsole.Size = new System.Drawing.Size(846, 343);
-            this.txtOutputConsole.TabIndex = 41;
             // 
             // panelStatusInfo
             // 
@@ -242,6 +232,17 @@
             this.panelConsole.Size = new System.Drawing.Size(866, 363);
             this.panelConsole.TabIndex = 44;
             // 
+            // txtOutputConsole
+            // 
+            this.txtOutputConsole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtOutputConsole.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtOutputConsole.Location = new System.Drawing.Point(10, 10);
+            this.txtOutputConsole.Name = "txtOutputConsole";
+            this.txtOutputConsole.ReadOnly = true;
+            this.txtOutputConsole.Size = new System.Drawing.Size(846, 343);
+            this.txtOutputConsole.TabIndex = 42;
+            this.txtOutputConsole.Text = "";
+            // 
             // panelClearConsole
             // 
             this.panelClearConsole.Controls.Add(this.btnClearManagerConsole);
@@ -274,7 +275,6 @@
             this.panelServiceButtons.ResumeLayout(false);
             this.panelServiceButtonContainer.ResumeLayout(false);
             this.panelConsole.ResumeLayout(false);
-            this.panelConsole.PerformLayout();
             this.panelClearConsole.ResumeLayout(false);
             this.panelClearConsole.PerformLayout();
             this.ResumeLayout(false);
@@ -283,7 +283,6 @@
 
         #endregion
         private MaterialSkin.Controls.MaterialButton btnClearManagerConsole;
-        private TextBox txtOutputConsole;
         private Panel panelStatusInfo;
         private MaterialSkin.Controls.MaterialLabel labelServiceStatus;
         private PictureBox pictureServiceStatus;
@@ -296,5 +295,6 @@
         private Panel panelClearConsole;
         private Panel panelServiceButtonContainer;
         private ToolTip toolTip1;
+        private RichTextBox txtOutputConsole;
     }
 }

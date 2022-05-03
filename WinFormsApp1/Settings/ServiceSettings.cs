@@ -14,12 +14,6 @@ namespace CodeCompilerServiceManager.Settings
     {
         public static ServiceSettingsModel ServiceSettingsModel;
 
-        public static event EventHandler<string> GetMessage;
-
-        public static void OnMessage(string errorMessage)
-        {
-            GetMessage?.Invoke(null, errorMessage);
-        }
         public static ServiceSettingsModel LoadSettings(string serviceConfigPath, bool restartToDefault)
         {
             ServiceSettingsModel model = new ServiceSettingsModel();
@@ -35,7 +29,7 @@ namespace CodeCompilerServiceManager.Settings
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
             return model;
         }
@@ -114,8 +108,16 @@ namespace CodeCompilerServiceManager.Settings
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString());
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
             }
         }
+        #region IMeesageHandling
+
+        public static event EventHandler<MessageHandlingArgs> GetMessage;
+        public static void OnMessage(string message, MessageHandlingLevel level)
+        {
+            GetMessage?.Invoke(null, new MessageHandlingArgs(message, level));
+        }
+        #endregion
     }
 }
