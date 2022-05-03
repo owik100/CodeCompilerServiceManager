@@ -64,7 +64,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
             _appFormParent.RestartServiceRequired = false;
             labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
@@ -104,7 +104,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
         }
         #endregion
@@ -122,7 +122,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
         }
 
@@ -147,7 +147,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
         }
 
@@ -163,7 +163,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
         }
 
@@ -179,7 +179,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
         }
 
@@ -198,7 +198,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
         }
 
@@ -211,7 +211,7 @@ namespace CodeCompilerServiceManager.UserControls
                 {
                     OnMessage("Nie znaleziono ścieżki usługi!", MessageHandlingLevel.ManagerError);
                     MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                    SnackBarMessage.Show(this);
+                    SnackBarMessage.Show(_appFormParent);
                 }
                 else
                 {
@@ -224,7 +224,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
         }
 
@@ -237,7 +237,7 @@ namespace CodeCompilerServiceManager.UserControls
                 {
                     OnMessage("Nie znaleziono ścieżki usługi!", MessageHandlingLevel.ManagerError);
                     MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                    SnackBarMessage.Show(this);
+                    SnackBarMessage.Show(_appFormParent);
                 }
                 else
                 {
@@ -252,7 +252,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
         }
         private void materialButtonChooseInputFolder_Click(object sender, EventArgs e)
@@ -277,7 +277,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
         }
 
@@ -303,7 +303,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
         }
         private void textBoxInputPath_Enter(object sender, EventArgs e)

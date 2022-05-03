@@ -206,7 +206,7 @@ namespace CodeCompilerServiceManager.UserControls
                         break;
                     case MessageHandlingLevel.ManagerInfo:
                         textPrefix = "[Manager Info]";
-                        textColor = Color.GreenYellow;
+                        textColor = Color.LawnGreen;
                         break;
                     case MessageHandlingLevel.ManagerError:
                         textPrefix = "[Manager Error]";
@@ -217,7 +217,14 @@ namespace CodeCompilerServiceManager.UserControls
                 }
                 string errMessage = DateTime.Now + " " + $"{textPrefix} - " + " " + messageArgs.Message;
 
-                txtOutputConsole.AppendText(errMessage, textColor, true);
+                try
+                {
+                    txtOutputConsole.AppendText(errMessage, textColor, true);
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
         }
         #endregion

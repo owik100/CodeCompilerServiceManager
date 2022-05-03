@@ -132,7 +132,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
         }
         private void btnResetManagerSettings_Click(object sender, EventArgs e)
@@ -151,7 +151,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
-                SnackBarMessage.Show(this);
+                SnackBarMessage.Show(_appFormParent);
             }
         }
         private void textBoxIntervalRefresh_Enter(object sender, EventArgs e)

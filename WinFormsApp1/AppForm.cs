@@ -22,6 +22,7 @@ namespace CodeCompilerServiceManager
         private Button currentMenuButton;
         private IUserControlWithSave activeControl;
         private HomeControl homeControl;
+        private ConnectionManagerClient communicationManager;
 
         public AppForm()
         {
@@ -74,7 +75,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, ex.ToString());
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.ToString(),MessageHandlingLevel.ManagerError));
             }
             return res;
         }
@@ -128,8 +129,10 @@ namespace CodeCompilerServiceManager
         {
             try
             {
+                communicationManager = new ConnectionManagerClient();
                 AppSettings.GetMessage += homeControl.ServiceConnector_MessageHandler;
                 serviceConnector.GetMessage += homeControl.ServiceConnector_MessageHandler;
+                communicationManager.GetMessage += homeControl.ServiceConnector_MessageHandler;
                 LoadManagerOptions();
                 InitTimer();
                 InitWorkers();
@@ -137,7 +140,7 @@ namespace CodeCompilerServiceManager
                 string servicePath = GetServicePath();
                 if (string.IsNullOrEmpty(servicePath))
                 {
-                    homeControl.ServiceConnector_MessageHandler(null, "Nie znaleziono œcie¿ki us³ugi!");
+                    homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs("Nie znaleziono œcie¿ki us³ugi!", MessageHandlingLevel.ManagerError));
                     Task.Delay(500).ContinueWith((task) => {
                         Invoke((MethodInvoker)(() => {
                             MaterialDialog materialDialog = new MaterialDialog(this, "Nie znaleziono œcie¿ki us³ugi!", "Wygl¹da na to, ¿e us³uga CodeCompilerServiceOwik nie jest zainstalowana. Chcesz to zrobiæ teraz? (Instalacja dostêpna póŸniej na zak³adce ustawieñ serwisu)", "Tak", true, "Nie");
@@ -163,7 +166,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, ex.ToString());
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.ToString(), MessageHandlingLevel.ManagerError));
             }
         }
 
@@ -180,7 +183,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, ex.ToString());
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.ToString(), MessageHandlingLevel.ManagerError));
             }
         }
         private void InitTimer()
@@ -197,7 +200,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, ex.ToString());
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.ToString(), MessageHandlingLevel.ManagerError));
             }
 
         }
@@ -384,6 +387,9 @@ namespace CodeCompilerServiceManager
                 if (activeControl.ControlName != "AboutControl")
                 {
                     AboutControl aboutControl = new AboutControl();
+                    aboutControl.GetMessage -= homeControl.ServiceConnector_MessageHandler;
+                    aboutControl.GetMessage += homeControl.ServiceConnector_MessageHandler;
+
                     OpenChildControl(aboutControl, sender);
                     activeControl = aboutControl;
                 }
@@ -404,7 +410,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, ex.ToString());
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.ToString(), MessageHandlingLevel.ManagerError));
             }
         }
 
@@ -430,7 +436,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, ex.ToString());
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.ToString(), MessageHandlingLevel.ManagerError));
             }
         }
         #endregion
