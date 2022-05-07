@@ -75,7 +75,6 @@ namespace CodeCompilerServiceManager.UserControls
             try
             {
                 txtOutputConsole.Clear();
-
             }
             catch (Exception ex)
             {
