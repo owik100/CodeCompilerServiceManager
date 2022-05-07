@@ -12,9 +12,11 @@ namespace CodeCompilerServiceManager.Logic
     {
         Socket client;
         byte[] _buffer = new byte[512];
+        int _port = 3055;
 
-        public ConnectionManagerClient()
+        public ConnectionManagerClient(int port)
         {
+            _port = port;
             ConnectToServer();
         }
 
@@ -25,9 +27,8 @@ namespace CodeCompilerServiceManager.Logic
                 client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
                 IPAddress ipAdress = IPAddress.Parse("127.0.0.1");
-                int port = 3055;
 
-                client.BeginConnect(ipAdress, port, new AsyncCallback(ConnectCallback), client);
+                client.BeginConnect(ipAdress, _port, new AsyncCallback(ConnectCallback), client);
 
                 client.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, new AsyncCallback(ReciveCallback), client);
             }
@@ -41,13 +42,13 @@ namespace CodeCompilerServiceManager.Logic
         {
             try
             {
-                byte[] infoConnected = Encoding.UTF8.GetBytes("Manager connected!");
+                byte[] infoConnected = Encoding.UTF8.GetBytes("Manager connected on port!");
                 client.BeginSend(infoConnected, 0, infoConnected.Length, SocketFlags.None, new AsyncCallback(SendCallback), client);
 
                 Socket socket = asyncResult.AsyncState as Socket;
                 socket.EndConnect(asyncResult);
 
-                OnMessage("Connected to Code Compiler Service!", MessageHandlingLevel.ManagerInfo);
+                OnMessage($"Connected to Code Compiler Service on port {_port}!", MessageHandlingLevel.ManagerInfo);
             }
             catch (Exception ex)
             {
@@ -93,6 +94,15 @@ namespace CodeCompilerServiceManager.Logic
             {
                 OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
             }
+        }
+
+        public static int  FindFreeTcpPort()
+        {
+            TcpListener l = new TcpListener(IPAddress.Loopback, 0);
+            l.Start();
+            int port = ((IPEndPoint)l.LocalEndpoint).Port;
+            l.Stop();
+            return port;
         }
         #region IMeesageHandling
 

@@ -35,6 +35,8 @@
             this.buttonOpenServicePath = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.panelFooterServicePath = new System.Windows.Forms.Panel();
+            this.buttonDeleteService = new MaterialSkin.Controls.MaterialButton();
+            this.buttonInstallService = new MaterialSkin.Controls.MaterialButton();
             this.checkBoxLogToEventViewer = new MaterialSkin.Controls.MaterialCheckbox();
             this.checkBoxLogToFile = new MaterialSkin.Controls.MaterialCheckbox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -47,8 +49,10 @@
             this.buttonSaveAndRestart = new MaterialSkin.Controls.MaterialButton();
             this.buttonSetDefaultServiceSettings = new MaterialSkin.Controls.MaterialButton();
             this.buttonCancelChanges = new MaterialSkin.Controls.MaterialButton();
-            this.buttonInstallService = new MaterialSkin.Controls.MaterialButton();
-            this.buttonDeleteService = new MaterialSkin.Controls.MaterialButton();
+            this.checkBoxSendMessagesToManager = new MaterialSkin.Controls.MaterialCheckbox();
+            this.materialTextBoxPortForManagerSendMessages = new MaterialSkin.Controls.MaterialTextBox2();
+            this.labelPortForSendManager = new MaterialSkin.Controls.MaterialLabel();
+            this.materialButtonFindFreePort = new MaterialSkin.Controls.MaterialButton();
             this.panelFooterServicePath.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -156,6 +160,46 @@
             this.panelFooterServicePath.Size = new System.Drawing.Size(866, 118);
             this.panelFooterServicePath.TabIndex = 56;
             // 
+            // buttonDeleteService
+            // 
+            this.buttonDeleteService.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonDeleteService.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.buttonDeleteService.Depth = 0;
+            this.buttonDeleteService.HighEmphasis = true;
+            this.buttonDeleteService.Icon = global::CodeCompilerServiceManager.Properties.Resources.cog_off;
+            this.buttonDeleteService.Location = new System.Drawing.Point(458, 62);
+            this.buttonDeleteService.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.buttonDeleteService.MouseState = MaterialSkin.MouseState.HOVER;
+            this.buttonDeleteService.Name = "buttonDeleteService";
+            this.buttonDeleteService.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.buttonDeleteService.Size = new System.Drawing.Size(146, 36);
+            this.buttonDeleteService.TabIndex = 68;
+            this.buttonDeleteService.Text = "Usuń usługę";
+            this.buttonDeleteService.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.buttonDeleteService.UseAccentColor = false;
+            this.buttonDeleteService.UseVisualStyleBackColor = true;
+            this.buttonDeleteService.Click += new System.EventHandler(this.buttonDeleteService_Click);
+            // 
+            // buttonInstallService
+            // 
+            this.buttonInstallService.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonInstallService.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.buttonInstallService.Depth = 0;
+            this.buttonInstallService.HighEmphasis = true;
+            this.buttonInstallService.Icon = global::CodeCompilerServiceManager.Properties.Resources.content_save_cog;
+            this.buttonInstallService.Location = new System.Drawing.Point(244, 62);
+            this.buttonInstallService.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.buttonInstallService.MouseState = MaterialSkin.MouseState.HOVER;
+            this.buttonInstallService.Name = "buttonInstallService";
+            this.buttonInstallService.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.buttonInstallService.Size = new System.Drawing.Size(194, 36);
+            this.buttonInstallService.TabIndex = 67;
+            this.buttonInstallService.Text = "Zainstaluj usługę";
+            this.buttonInstallService.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.buttonInstallService.UseAccentColor = false;
+            this.buttonInstallService.UseVisualStyleBackColor = true;
+            this.buttonInstallService.Click += new System.EventHandler(this.buttonInstallService_Click);
+            // 
             // checkBoxLogToEventViewer
             // 
             this.checkBoxLogToEventViewer.AutoSize = true;
@@ -203,7 +247,7 @@
             this.buttonOpenLogFolder.Depth = 0;
             this.buttonOpenLogFolder.HighEmphasis = true;
             this.buttonOpenLogFolder.Icon = global::CodeCompilerServiceManager.Properties.Resources.folder_open;
-            this.buttonOpenLogFolder.Location = new System.Drawing.Point(784, 98);
+            this.buttonOpenLogFolder.Location = new System.Drawing.Point(777, 98);
             this.buttonOpenLogFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonOpenLogFolder.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonOpenLogFolder.Name = "buttonOpenLogFolder";
@@ -225,7 +269,7 @@
             this.textBoxPathToLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxPathToLogs.HideSelection = true;
             this.textBoxPathToLogs.LeadingIcon = null;
-            this.textBoxPathToLogs.Location = new System.Drawing.Point(14, 87);
+            this.textBoxPathToLogs.Location = new System.Drawing.Point(7, 87);
             this.textBoxPathToLogs.MaxLength = 32767;
             this.textBoxPathToLogs.MouseState = MaterialSkin.MouseState.OUT;
             this.textBoxPathToLogs.Name = "textBoxPathToLogs";
@@ -251,7 +295,7 @@
             this.labelIntervalService.AutoSize = true;
             this.labelIntervalService.Depth = 0;
             this.labelIntervalService.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelIntervalService.Location = new System.Drawing.Point(14, 152);
+            this.labelIntervalService.Location = new System.Drawing.Point(494, 284);
             this.labelIntervalService.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelIntervalService.Name = "labelIntervalService";
             this.labelIntervalService.Size = new System.Drawing.Size(334, 19);
@@ -267,7 +311,7 @@
             this.textBoxServiceMainInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxServiceMainInterval.HideSelection = true;
             this.textBoxServiceMainInterval.LeadingIcon = null;
-            this.textBoxServiceMainInterval.Location = new System.Drawing.Point(14, 174);
+            this.textBoxServiceMainInterval.Location = new System.Drawing.Point(578, 317);
             this.textBoxServiceMainInterval.MaxLength = 32767;
             this.textBoxServiceMainInterval.MouseState = MaterialSkin.MouseState.OUT;
             this.textBoxServiceMainInterval.Name = "textBoxServiceMainInterval";
@@ -295,7 +339,7 @@
             this.labelInternalBufferSize.AutoSize = true;
             this.labelInternalBufferSize.Depth = 0;
             this.labelInternalBufferSize.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelInternalBufferSize.Location = new System.Drawing.Point(14, 247);
+            this.labelInternalBufferSize.Location = new System.Drawing.Point(7, 284);
             this.labelInternalBufferSize.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelInternalBufferSize.Name = "labelInternalBufferSize";
             this.labelInternalBufferSize.Size = new System.Drawing.Size(305, 19);
@@ -311,7 +355,7 @@
             this.textBoxInternalBufferSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxInternalBufferSize.HideSelection = true;
             this.textBoxInternalBufferSize.LeadingIcon = null;
-            this.textBoxInternalBufferSize.Location = new System.Drawing.Point(14, 280);
+            this.textBoxInternalBufferSize.Location = new System.Drawing.Point(7, 317);
             this.textBoxInternalBufferSize.MaxLength = 32767;
             this.textBoxInternalBufferSize.MouseState = MaterialSkin.MouseState.OUT;
             this.textBoxInternalBufferSize.Name = "textBoxInternalBufferSize";
@@ -394,50 +438,95 @@
             this.buttonCancelChanges.UseVisualStyleBackColor = true;
             this.buttonCancelChanges.Click += new System.EventHandler(this.buttonCancelChanges_Click);
             // 
-            // buttonInstallService
+            // checkBoxSendMessagesToManager
             // 
-            this.buttonInstallService.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonInstallService.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.buttonInstallService.Depth = 0;
-            this.buttonInstallService.HighEmphasis = true;
-            this.buttonInstallService.Icon = global::CodeCompilerServiceManager.Properties.Resources.content_save_cog;
-            this.buttonInstallService.Location = new System.Drawing.Point(244, 62);
-            this.buttonInstallService.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.buttonInstallService.MouseState = MaterialSkin.MouseState.HOVER;
-            this.buttonInstallService.Name = "buttonInstallService";
-            this.buttonInstallService.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.buttonInstallService.Size = new System.Drawing.Size(194, 36);
-            this.buttonInstallService.TabIndex = 67;
-            this.buttonInstallService.Text = "Zainstaluj usługę";
-            this.buttonInstallService.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.buttonInstallService.UseAccentColor = false;
-            this.buttonInstallService.UseVisualStyleBackColor = true;
-            this.buttonInstallService.Click += new System.EventHandler(this.buttonInstallService_Click);
+            this.checkBoxSendMessagesToManager.AutoSize = true;
+            this.checkBoxSendMessagesToManager.Depth = 0;
+            this.checkBoxSendMessagesToManager.Location = new System.Drawing.Point(7, 138);
+            this.checkBoxSendMessagesToManager.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBoxSendMessagesToManager.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.checkBoxSendMessagesToManager.MouseState = MaterialSkin.MouseState.HOVER;
+            this.checkBoxSendMessagesToManager.Name = "checkBoxSendMessagesToManager";
+            this.checkBoxSendMessagesToManager.ReadOnly = false;
+            this.checkBoxSendMessagesToManager.Ripple = true;
+            this.checkBoxSendMessagesToManager.Size = new System.Drawing.Size(348, 37);
+            this.checkBoxSendMessagesToManager.TabIndex = 67;
+            this.checkBoxSendMessagesToManager.Text = "Wysyłaj wiadomości do managera z serwisu";
+            this.checkBoxSendMessagesToManager.UseVisualStyleBackColor = true;
+            this.checkBoxSendMessagesToManager.CheckedChanged += new System.EventHandler(this.checkBoxSendMessagesToManager_CheckedChanged);
             // 
-            // buttonDeleteService
+            // materialTextBoxPortForManagerSendMessages
             // 
-            this.buttonDeleteService.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonDeleteService.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.buttonDeleteService.Depth = 0;
-            this.buttonDeleteService.HighEmphasis = true;
-            this.buttonDeleteService.Icon = global::CodeCompilerServiceManager.Properties.Resources.cog_off;
-            this.buttonDeleteService.Location = new System.Drawing.Point(458, 62);
-            this.buttonDeleteService.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.buttonDeleteService.MouseState = MaterialSkin.MouseState.HOVER;
-            this.buttonDeleteService.Name = "buttonDeleteService";
-            this.buttonDeleteService.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.buttonDeleteService.Size = new System.Drawing.Size(146, 36);
-            this.buttonDeleteService.TabIndex = 68;
-            this.buttonDeleteService.Text = "Usuń usługę";
-            this.buttonDeleteService.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.buttonDeleteService.UseAccentColor = false;
-            this.buttonDeleteService.UseVisualStyleBackColor = true;
-            this.buttonDeleteService.Click += new System.EventHandler(this.buttonDeleteService_Click);
+            this.materialTextBoxPortForManagerSendMessages.AnimateReadOnly = false;
+            this.materialTextBoxPortForManagerSendMessages.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.materialTextBoxPortForManagerSendMessages.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.materialTextBoxPortForManagerSendMessages.Depth = 0;
+            this.materialTextBoxPortForManagerSendMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBoxPortForManagerSendMessages.HideSelection = true;
+            this.materialTextBoxPortForManagerSendMessages.LeadingIcon = null;
+            this.materialTextBoxPortForManagerSendMessages.Location = new System.Drawing.Point(7, 204);
+            this.materialTextBoxPortForManagerSendMessages.MaxLength = 32767;
+            this.materialTextBoxPortForManagerSendMessages.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBoxPortForManagerSendMessages.Name = "materialTextBoxPortForManagerSendMessages";
+            this.materialTextBoxPortForManagerSendMessages.PasswordChar = '\0';
+            this.materialTextBoxPortForManagerSendMessages.PrefixSuffixText = null;
+            this.materialTextBoxPortForManagerSendMessages.ReadOnly = false;
+            this.materialTextBoxPortForManagerSendMessages.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.materialTextBoxPortForManagerSendMessages.SelectedText = "";
+            this.materialTextBoxPortForManagerSendMessages.SelectionLength = 0;
+            this.materialTextBoxPortForManagerSendMessages.SelectionStart = 0;
+            this.materialTextBoxPortForManagerSendMessages.ShortcutsEnabled = true;
+            this.materialTextBoxPortForManagerSendMessages.Size = new System.Drawing.Size(250, 48);
+            this.materialTextBoxPortForManagerSendMessages.TabIndex = 68;
+            this.materialTextBoxPortForManagerSendMessages.TabStop = false;
+            this.materialTextBoxPortForManagerSendMessages.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.materialTextBoxPortForManagerSendMessages.TrailingIcon = null;
+            this.materialTextBoxPortForManagerSendMessages.UseSystemPasswordChar = false;
+            this.materialTextBoxPortForManagerSendMessages.Enter += new System.EventHandler(this.materialTextBoxPortForManagerSendMessages_Enter);
+            this.materialTextBoxPortForManagerSendMessages.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.materialTextBoxPortForManagerSendMessages_KeyPress);
+            this.materialTextBoxPortForManagerSendMessages.Leave += new System.EventHandler(this.materialTextBoxPortForManagerSendMessages_Leave);
+            this.materialTextBoxPortForManagerSendMessages.TextChanged += new System.EventHandler(this.materialTextBoxPortForManagerSendMessages_TextChanged);
+            // 
+            // labelPortForSendManager
+            // 
+            this.labelPortForSendManager.AutoSize = true;
+            this.labelPortForSendManager.Depth = 0;
+            this.labelPortForSendManager.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelPortForSendManager.Location = new System.Drawing.Point(7, 182);
+            this.labelPortForSendManager.MouseState = MaterialSkin.MouseState.HOVER;
+            this.labelPortForSendManager.Name = "labelPortForSendManager";
+            this.labelPortForSendManager.Size = new System.Drawing.Size(283, 19);
+            this.labelPortForSendManager.TabIndex = 69;
+            this.labelPortForSendManager.Text = "Port używany do połączenia z serwisem";
+            // 
+            // materialButtonFindFreePort
+            // 
+            this.materialButtonFindFreePort.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButtonFindFreePort.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButtonFindFreePort.Depth = 0;
+            this.materialButtonFindFreePort.HighEmphasis = true;
+            this.materialButtonFindFreePort.Icon = global::CodeCompilerServiceManager.Properties.Resources.magnify;
+            this.materialButtonFindFreePort.Location = new System.Drawing.Point(264, 207);
+            this.materialButtonFindFreePort.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButtonFindFreePort.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButtonFindFreePort.Name = "materialButtonFindFreePort";
+            this.materialButtonFindFreePort.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButtonFindFreePort.Size = new System.Drawing.Size(201, 36);
+            this.materialButtonFindFreePort.TabIndex = 70;
+            this.materialButtonFindFreePort.Text = "Znajdź wolny port";
+            this.materialButtonFindFreePort.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButtonFindFreePort.UseAccentColor = false;
+            this.materialButtonFindFreePort.UseVisualStyleBackColor = true;
+            this.materialButtonFindFreePort.Click += new System.EventHandler(this.materialButtonFindFreePort_Click);
             // 
             // ServiceSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.materialButtonFindFreePort);
+            this.Controls.Add(this.labelPortForSendManager);
+            this.Controls.Add(this.materialTextBoxPortForManagerSendMessages);
+            this.Controls.Add(this.checkBoxSendMessagesToManager);
             this.Controls.Add(this.buttonCancelChanges);
             this.Controls.Add(this.buttonSetDefaultServiceSettings);
             this.Controls.Add(this.buttonSaveAndRestart);
@@ -481,5 +570,9 @@
         private MaterialSkin.Controls.MaterialButton buttonCancelChanges;
         private MaterialSkin.Controls.MaterialButton buttonInstallService;
         private MaterialSkin.Controls.MaterialButton buttonDeleteService;
+        private MaterialSkin.Controls.MaterialCheckbox checkBoxSendMessagesToManager;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBoxPortForManagerSendMessages;
+        private MaterialSkin.Controls.MaterialLabel labelPortForSendManager;
+        private MaterialSkin.Controls.MaterialButton materialButtonFindFreePort;
     }
 }

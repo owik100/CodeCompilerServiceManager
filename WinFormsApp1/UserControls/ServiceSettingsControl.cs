@@ -19,6 +19,7 @@ namespace CodeCompilerServiceManager.UserControls
         AppForm _appFormParent;
         int lastIntervalRefreshValue = 10000;
         int lastInternalBufferSize = 8192;
+        int lastPort = 3055;
         public ServiceSettingsControl(AppForm appFormParent)
         {
             _appFormParent = appFormParent;
@@ -31,6 +32,10 @@ namespace CodeCompilerServiceManager.UserControls
         }
 
         #region controlEvenets
+        private void materialButtonFindFreePort_Click(object sender, EventArgs e)
+        {
+            materialTextBoxPortForManagerSendMessages.Text = ConnectionManagerClient.FindFreeTcpPort().ToString();
+        }
         private void buttonOpenServicePath_Click(object sender, EventArgs e)
         {
             try
@@ -168,6 +173,21 @@ namespace CodeCompilerServiceManager.UserControls
                 SnackBarMessage.Show(_appFormParent);
             }
         }
+        private void checkBoxSendMessagesToManager_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _appFormParent.RestartServiceRequired = true;
+                labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
+            }
+            catch (Exception ex)
+            {
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(_appFormParent);
+            }
+        }
 
         private void textBoxPathToLogs_TextChanged(object sender, EventArgs e)
         {
@@ -202,6 +222,76 @@ namespace CodeCompilerServiceManager.UserControls
         }
 
         private void textBoxInternalBufferSize_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _appFormParent.RestartServiceRequired = true;
+                labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
+            }
+            catch (Exception ex)
+            {
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(_appFormParent);
+            }
+        }
+
+        private void materialTextBoxPortForManagerSendMessages_Enter(object sender, EventArgs e)
+        {
+            materialTextBoxPortForManagerSendMessages.SelectionStart = materialTextBoxPortForManagerSendMessages.Text.Length;
+            materialTextBoxPortForManagerSendMessages.SelectionLength = 0;
+        }
+
+        private void materialTextBoxPortForManagerSendMessages_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                int number;
+                if (materialTextBoxPortForManagerSendMessages.Text.All(char.IsDigit))
+                {
+                    if (int.TryParse(materialTextBoxPortForManagerSendMessages.Text, out number))
+                    {
+                        if (number < 1)
+                        {
+                            materialTextBoxPortForManagerSendMessages.Text = 1.ToString();
+                            lastPort = 1;
+                        }
+                        else if (number <= 65536)
+                        {
+                            lastPort = Convert.ToInt32(materialTextBoxPortForManagerSendMessages.Text);
+                        }
+                        else
+                        {
+                            materialTextBoxPortForManagerSendMessages.Text = 65536.ToString();
+                            lastPort = 65536;
+                        }
+                    }
+                    else
+                    {
+                        materialTextBoxPortForManagerSendMessages.Text = 65536.ToString();
+                        lastPort = 65536;
+                    }
+                }
+                else
+                {
+                    materialTextBoxPortForManagerSendMessages.Text = lastPort.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(_appFormParent);
+            }
+        }
+
+        private void materialTextBoxPortForManagerSendMessages_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = TextBoxHelper.PreventLetters(sender, e);
+        }
+
+        private void materialTextBoxPortForManagerSendMessages_TextChanged(object sender, EventArgs e)
         {
             try
             {
@@ -509,6 +599,14 @@ namespace CodeCompilerServiceManager.UserControls
                     ServiceSettings.ServiceSettingsModel.ServiceOptions.InternalBufferSize = Convert.ToInt32(textBoxInternalBufferSize.Text);
                 }
 
+                ServiceSettings.ServiceSettingsModel.ServiceOptions.SendMessagesToManager = checkBoxSendMessagesToManager.Checked;
+
+                var sendMessagesPort = ServiceSettings.ServiceSettingsModel?.ServiceOptions?.SendMessagesPort;
+                if (sendMessagesPort != null && sendMessagesPort > -1)
+                {
+                    ServiceSettings.ServiceSettingsModel.ServiceOptions.SendMessagesPort = Convert.ToInt32(materialTextBoxPortForManagerSendMessages.Text);
+                }
+
                 ServiceSettings.SaveSettingsToJson(textBoxServicePath.Text);
             }
             catch (Exception ex)
@@ -544,11 +642,25 @@ namespace CodeCompilerServiceManager.UserControls
 
                 checkBoxLogToFile.Checked = saveToFile;
 
+                bool? sendToManager = false;
+                sendToManager = ServiceSettings.ServiceSettingsModel?.ServiceOptions?.SendMessagesToManager;
+                if (sendToManager == null)
+                    sendToManager = false;
+                checkBoxSendMessagesToManager.Checked = (bool)sendToManager;
+
                 string pathToFileLog = "";
                 pathToFileLog = ServiceSettings.ServiceSettingsModel?.Serilog?.WriteTo?.Where(x => x.Name == "File")?.FirstOrDefault()?.Args?.path;
                 if (pathToFileLog != null)
                 {
                     textBoxPathToLogs.Text = pathToFileLog;
+                }
+
+                decimal sendToManagerPort = -1;
+                sendToManagerPort = (decimal)(ServiceSettings.ServiceSettingsModel?.ServiceOptions?.SendMessagesPort);
+                if (sendToManagerPort > -1)
+                {
+                    materialTextBoxPortForManagerSendMessages.Text = sendToManagerPort.ToString();
+                    lastPort = (int)sendToManagerPort;
                 }
 
                 decimal intervalRefresh = -1;
@@ -599,8 +711,7 @@ namespace CodeCompilerServiceManager.UserControls
         {
             GetMessage?.Invoke(this, new MessageHandlingArgs(message, level));
         }
+
         #endregion
-
-
     }
 }

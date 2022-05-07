@@ -41,14 +41,17 @@ namespace CodeCompilerServiceManager
         #region Public Methods
         public void InitConnectionCommunicationManager()
         {
-            //Sprawdz checkbox
-            Task.Delay(1000).ContinueWith((task) => {
-                Invoke((MethodInvoker)(() => {
-                    communicationManager = new ConnectionManagerClient();
-                    communicationManager.GetMessage -= homeControl.ServiceConnector_MessageHandler;
-                    communicationManager.GetMessage += homeControl.ServiceConnector_MessageHandler;
-                }));
-            });
+            if (ServiceSettings.ServiceSettingsModel?.ServiceOptions?.SendMessagesToManager == true)
+            {
+                Task.Delay(1000).ContinueWith((task) => {
+                    Invoke((MethodInvoker)(() => {
+                        communicationManager = new ConnectionManagerClient(ServiceSettings.ServiceSettingsModel.ServiceOptions.SendMessagesPort);
+                        communicationManager.GetMessage -= homeControl.ServiceConnector_MessageHandler;
+                        communicationManager.GetMessage += homeControl.ServiceConnector_MessageHandler;
+                    }));
+                });
+
+            }
         }
         public void StopConnectionCommunicationManager()
         {
@@ -117,14 +120,17 @@ namespace CodeCompilerServiceManager
         }
         public void ReStartService()
         {
+            InitConnectionCommunicationManager();
             ReStartServiceWorker();
         }
         public void StopService()
         {
+            StopConnectionCommunicationManager();
             StopServiceWorker();
         }
         public void StartService()
         {
+            InitConnectionCommunicationManager();
             StartServiceWorker();
         }
         #endregion
@@ -145,11 +151,6 @@ namespace CodeCompilerServiceManager
             try
             {
                 string servicePath = GetServicePath();
-                if (!string.IsNullOrEmpty(servicePath) && serviceConnector.GetServiceStatus() == ServiceControllerStatus.Running)
-                {
-                    InitConnectionCommunicationManager();
-                }
-
                 AppSettings.GetMessage += homeControl.ServiceConnector_MessageHandler;
                 serviceConnector.GetMessage += homeControl.ServiceConnector_MessageHandler;
 
@@ -175,6 +176,10 @@ namespace CodeCompilerServiceManager
                 {
                     LoadServiceSettings(servicePath);
                     ServiceSettings.GetMessage += homeControl.ServiceConnector_MessageHandler;
+                }
+                if (!string.IsNullOrEmpty(servicePath) && serviceConnector.GetServiceStatus() == ServiceControllerStatus.Running)
+                {
+                    InitConnectionCommunicationManager();
                 }
                 if (AppSettings.RefreshStatusEnabled)
                 {

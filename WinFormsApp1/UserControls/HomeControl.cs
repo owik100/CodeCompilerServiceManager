@@ -45,7 +45,6 @@ namespace CodeCompilerServiceManager.UserControls
                 _appFormParent.pictureCogAnim.Enabled = false;
                 btnStopService.Enabled = false;
                 btnReStartService.Enabled = false;
-                _appFormParent.StopConnectionCommunicationManager();
                 _appFormParent.StopService();
             }
             catch (Exception ex)
@@ -63,7 +62,6 @@ namespace CodeCompilerServiceManager.UserControls
                 _appFormParent.pictureCogAnim.Enabled = false;
                 btnStartService.Enabled = false;
                 btnReStartService.Enabled = false;
-                _appFormParent.InitConnectionCommunicationManager();
                 _appFormParent.StartService();
             }
             catch (Exception ex)
@@ -93,7 +91,6 @@ namespace CodeCompilerServiceManager.UserControls
                 _appFormParent.pictureCogAnim.Enabled = false;
                 btnStopService.Enabled = false;
                 btnReStartService.Enabled = false;
-                _appFormParent.InitConnectionCommunicationManager();
                 _appFormParent.ReStartService();
             }
             catch (Exception ex)
