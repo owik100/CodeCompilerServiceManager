@@ -39,6 +39,21 @@ namespace CodeCompilerServiceManager
         #endregion
 
         #region Public Methods
+        public void InitConnectionCommunicationManager()
+        {
+            //Sprawdz checkbox
+            Task.Delay(1000).ContinueWith((task) => {
+                Invoke((MethodInvoker)(() => {
+                    communicationManager = new ConnectionManagerClient();
+                    communicationManager.GetMessage -= homeControl.ServiceConnector_MessageHandler;
+                    communicationManager.GetMessage += homeControl.ServiceConnector_MessageHandler;
+                }));
+            });
+        }
+        public void StopConnectionCommunicationManager()
+        {
+            communicationManager = null;
+        }
         public bool InstallServiceDialog(ref string path)
         {
             bool res = false;
@@ -129,15 +144,19 @@ namespace CodeCompilerServiceManager
         {
             try
             {
-                communicationManager = new ConnectionManagerClient();
+                string servicePath = GetServicePath();
+                if (!string.IsNullOrEmpty(servicePath) && serviceConnector.GetServiceStatus() == ServiceControllerStatus.Running)
+                {
+                    InitConnectionCommunicationManager();
+                }
+
                 AppSettings.GetMessage += homeControl.ServiceConnector_MessageHandler;
                 serviceConnector.GetMessage += homeControl.ServiceConnector_MessageHandler;
-                communicationManager.GetMessage += homeControl.ServiceConnector_MessageHandler;
+
                 LoadManagerOptions();
                 InitTimer();
                 InitWorkers();
                 pictureCogAnim = pictureBoxCogAnim;
-                string servicePath = GetServicePath();
                 if (string.IsNullOrEmpty(servicePath))
                 {
                     homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs("Nie znaleziono œcie¿ki us³ugi!", MessageHandlingLevel.ManagerError));

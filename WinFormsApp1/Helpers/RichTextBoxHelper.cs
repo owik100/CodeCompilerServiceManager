@@ -13,7 +13,6 @@ namespace CodeCompilerServiceManager.Helpers
             if (AddNewLine)
             {
                 text += Environment.NewLine;
-                text += Environment.NewLine;
             }
 
             box.SelectionStart = box.TextLength;

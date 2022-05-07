@@ -33,7 +33,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -46,10 +46,12 @@ namespace CodeCompilerServiceManager.Logic
 
                 Socket socket = asyncResult.AsyncState as Socket;
                 socket.EndConnect(asyncResult);
+
+                OnMessage("Connected to Code Compiler Service!", MessageHandlingLevel.ManagerInfo);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, ex.GetType().Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
             }
 
         }
@@ -62,7 +64,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -71,22 +73,25 @@ namespace CodeCompilerServiceManager.Logic
             Socket socket = asyncResult.AsyncState as Socket;
             try
             {
-                int recived = client.EndReceive(asyncResult);
-                byte[] dataBuf = new byte[recived];
-                Array.Copy(_buffer, dataBuf, recived);
-
-                string message = Encoding.UTF8.GetString(dataBuf);
-
-                if (message.Length > 0)
+                if(socket != null && socket.Connected)
                 {
-                    OnMessage(message, MessageHandlingLevel.ServiceInfo);
-                }
+                    int recived = client.EndReceive(asyncResult);
+                    byte[] dataBuf = new byte[recived];
+                    Array.Copy(_buffer, dataBuf, recived);
 
-                client.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, new AsyncCallback(ReciveCallback), client);
+                    string message = Encoding.UTF8.GetString(dataBuf);
+
+                    if (message.Length > 0)
+                    {
+                        OnMessage(message, MessageHandlingLevel.ServiceInfo);
+                    }
+
+                    client.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, new AsyncCallback(ReciveCallback), client);
+                }
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
             }
         }
         #region IMeesageHandling
