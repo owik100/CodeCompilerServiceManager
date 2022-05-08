@@ -79,7 +79,7 @@
             this.panelStatusInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelStatusInfo.Location = new System.Drawing.Point(0, 0);
             this.panelStatusInfo.Name = "panelStatusInfo";
-            this.panelStatusInfo.Size = new System.Drawing.Size(866, 100);
+            this.panelStatusInfo.Size = new System.Drawing.Size(866, 123);
             this.panelStatusInfo.TabIndex = 42;
             // 
             // labelServiceStatus
@@ -88,7 +88,7 @@
             this.labelServiceStatus.AutoSize = true;
             this.labelServiceStatus.Depth = 0;
             this.labelServiceStatus.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelServiceStatus.Location = new System.Drawing.Point(361, 68);
+            this.labelServiceStatus.Location = new System.Drawing.Point(357, 100);
             this.labelServiceStatus.Margin = new System.Windows.Forms.Padding(3, 100, 3, 0);
             this.labelServiceStatus.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelServiceStatus.Name = "labelServiceStatus";
@@ -100,11 +100,12 @@
             // pictureServiceStatus
             // 
             this.pictureServiceStatus.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureServiceStatus.Image = global::CodeCompilerServiceManager.Properties.Resources.yellow;
-            this.pictureServiceStatus.Location = new System.Drawing.Point(405, 14);
+            this.pictureServiceStatus.Enabled = false;
+            this.pictureServiceStatus.Image = global::CodeCompilerServiceManager.Properties.Resources.cogAnimation;
+            this.pictureServiceStatus.Location = new System.Drawing.Point(388, 14);
             this.pictureServiceStatus.Name = "pictureServiceStatus";
             this.pictureServiceStatus.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.pictureServiceStatus.Size = new System.Drawing.Size(70, 51);
+            this.pictureServiceStatus.Size = new System.Drawing.Size(107, 81);
             this.pictureServiceStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureServiceStatus.TabIndex = 39;
             this.pictureServiceStatus.TabStop = false;
@@ -113,9 +114,9 @@
             // 
             this.panelServiceButtons.Controls.Add(this.panelServiceButtonContainer);
             this.panelServiceButtons.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelServiceButtons.Location = new System.Drawing.Point(0, 100);
+            this.panelServiceButtons.Location = new System.Drawing.Point(0, 123);
             this.panelServiceButtons.Name = "panelServiceButtons";
-            this.panelServiceButtons.Size = new System.Drawing.Size(866, 106);
+            this.panelServiceButtons.Size = new System.Drawing.Size(866, 63);
             this.panelServiceButtons.TabIndex = 43;
             // 
             // panelServiceButtonContainer
@@ -125,7 +126,7 @@
             this.panelServiceButtonContainer.Controls.Add(this.btnReStartService);
             this.panelServiceButtonContainer.Controls.Add(this.buttonRefreshServiceState);
             this.panelServiceButtonContainer.Controls.Add(this.btnStopService);
-            this.panelServiceButtonContainer.Location = new System.Drawing.Point(263, 6);
+            this.panelServiceButtonContainer.Location = new System.Drawing.Point(265, 1);
             this.panelServiceButtonContainer.Name = "panelServiceButtonContainer";
             this.panelServiceButtonContainer.Size = new System.Drawing.Size(341, 66);
             this.panelServiceButtonContainer.TabIndex = 42;
@@ -226,10 +227,10 @@
             // 
             this.panelConsole.Controls.Add(this.txtOutputConsole);
             this.panelConsole.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelConsole.Location = new System.Drawing.Point(0, 206);
+            this.panelConsole.Location = new System.Drawing.Point(0, 186);
             this.panelConsole.Name = "panelConsole";
             this.panelConsole.Padding = new System.Windows.Forms.Padding(10);
-            this.panelConsole.Size = new System.Drawing.Size(866, 363);
+            this.panelConsole.Size = new System.Drawing.Size(866, 383);
             this.panelConsole.TabIndex = 44;
             // 
             // txtOutputConsole
@@ -239,7 +240,7 @@
             this.txtOutputConsole.Location = new System.Drawing.Point(10, 10);
             this.txtOutputConsole.Name = "txtOutputConsole";
             this.txtOutputConsole.ReadOnly = true;
-            this.txtOutputConsole.Size = new System.Drawing.Size(846, 343);
+            this.txtOutputConsole.Size = new System.Drawing.Size(846, 363);
             this.txtOutputConsole.TabIndex = 42;
             this.txtOutputConsole.Text = "";
             // 

@@ -38,10 +38,11 @@
             this.buttonManagerSettings = new System.Windows.Forms.Button();
             this.buttonHome = new System.Windows.Forms.Button();
             this.panelStatus = new System.Windows.Forms.Panel();
+            this.materialLabelServiceStatus = new MaterialSkin.Controls.MaterialLabel();
             this.pictureBoxCogAnim = new System.Windows.Forms.PictureBox();
-            this.panelTitleBar = new System.Windows.Forms.Panel();
-            this.labelTitleBar = new System.Windows.Forms.Label();
             this.panelDesktopParent = new System.Windows.Forms.Panel();
+            this.labelTitleBar = new System.Windows.Forms.Label();
+            this.panelTitleBar = new System.Windows.Forms.Panel();
             this.panelSideMenu.SuspendLayout();
             this.panelSlideMenuBottom.SuspendLayout();
             this.panelStatus.SuspendLayout();
@@ -119,7 +120,7 @@
             this.buttonInfo.ForeColor = System.Drawing.Color.Gainsboro;
             this.buttonInfo.Image = global::CodeCompilerServiceManager.Properties.Resources.information_white;
             this.buttonInfo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonInfo.Location = new System.Drawing.Point(0, 275);
+            this.buttonInfo.Location = new System.Drawing.Point(0, 292);
             this.buttonInfo.Name = "buttonInfo";
             this.buttonInfo.Size = new System.Drawing.Size(220, 50);
             this.buttonInfo.TabIndex = 5;
@@ -137,7 +138,7 @@
             this.buttonLibrarySettings.ForeColor = System.Drawing.Color.Gainsboro;
             this.buttonLibrarySettings.Image = global::CodeCompilerServiceManager.Properties.Resources.package_white;
             this.buttonLibrarySettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonLibrarySettings.Location = new System.Drawing.Point(0, 225);
+            this.buttonLibrarySettings.Location = new System.Drawing.Point(0, 242);
             this.buttonLibrarySettings.Name = "buttonLibrarySettings";
             this.buttonLibrarySettings.Size = new System.Drawing.Size(220, 50);
             this.buttonLibrarySettings.TabIndex = 4;
@@ -155,7 +156,7 @@
             this.buttonServiceSettings.ForeColor = System.Drawing.Color.Gainsboro;
             this.buttonServiceSettings.Image = global::CodeCompilerServiceManager.Properties.Resources.wrench_white;
             this.buttonServiceSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonServiceSettings.Location = new System.Drawing.Point(0, 175);
+            this.buttonServiceSettings.Location = new System.Drawing.Point(0, 192);
             this.buttonServiceSettings.Name = "buttonServiceSettings";
             this.buttonServiceSettings.Size = new System.Drawing.Size(220, 50);
             this.buttonServiceSettings.TabIndex = 3;
@@ -173,7 +174,7 @@
             this.buttonManagerSettings.ForeColor = System.Drawing.Color.Gainsboro;
             this.buttonManagerSettings.Image = global::CodeCompilerServiceManager.Properties.Resources.application_edit_outline_white;
             this.buttonManagerSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonManagerSettings.Location = new System.Drawing.Point(0, 125);
+            this.buttonManagerSettings.Location = new System.Drawing.Point(0, 142);
             this.buttonManagerSettings.Name = "buttonManagerSettings";
             this.buttonManagerSettings.Size = new System.Drawing.Size(220, 50);
             this.buttonManagerSettings.TabIndex = 2;
@@ -192,7 +193,7 @@
             this.buttonHome.ForeColor = System.Drawing.Color.Gainsboro;
             this.buttonHome.Image = global::CodeCompilerServiceManager.Properties.Resources.home_white;
             this.buttonHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonHome.Location = new System.Drawing.Point(0, 75);
+            this.buttonHome.Location = new System.Drawing.Point(0, 92);
             this.buttonHome.Name = "buttonHome";
             this.buttonHome.Size = new System.Drawing.Size(220, 50);
             this.buttonHome.TabIndex = 1;
@@ -204,12 +205,28 @@
             // panelStatus
             // 
             this.panelStatus.BackColor = System.Drawing.SystemColors.Control;
+            this.panelStatus.Controls.Add(this.materialLabelServiceStatus);
             this.panelStatus.Controls.Add(this.pictureBoxCogAnim);
             this.panelStatus.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelStatus.Location = new System.Drawing.Point(0, 0);
             this.panelStatus.Name = "panelStatus";
-            this.panelStatus.Size = new System.Drawing.Size(220, 75);
+            this.panelStatus.Size = new System.Drawing.Size(220, 92);
             this.panelStatus.TabIndex = 0;
+            // 
+            // materialLabelServiceStatus
+            // 
+            this.materialLabelServiceStatus.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.materialLabelServiceStatus.AutoSize = true;
+            this.materialLabelServiceStatus.Depth = 0;
+            this.materialLabelServiceStatus.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabelServiceStatus.Location = new System.Drawing.Point(3, 70);
+            this.materialLabelServiceStatus.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabelServiceStatus.Name = "materialLabelServiceStatus";
+            this.materialLabelServiceStatus.Size = new System.Drawing.Size(171, 19);
+            this.materialLabelServiceStatus.TabIndex = 1;
+            this.materialLabelServiceStatus.Text = " Stan usługi: Nieznany...";
+            this.materialLabelServiceStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.materialLabelServiceStatus.SizeChanged += new System.EventHandler(this.materialLabelServiceStatus_SizeChanged);
             // 
             // pictureBoxCogAnim
             // 
@@ -218,20 +235,18 @@
             this.pictureBoxCogAnim.Image = global::CodeCompilerServiceManager.Properties.Resources.cogAnimation;
             this.pictureBoxCogAnim.Location = new System.Drawing.Point(46, 3);
             this.pictureBoxCogAnim.Name = "pictureBoxCogAnim";
-            this.pictureBoxCogAnim.Size = new System.Drawing.Size(123, 72);
+            this.pictureBoxCogAnim.Size = new System.Drawing.Size(133, 66);
             this.pictureBoxCogAnim.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxCogAnim.TabIndex = 0;
             this.pictureBoxCogAnim.TabStop = false;
             // 
-            // panelTitleBar
+            // panelDesktopParent
             // 
-            this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(142)))), ((int)(((byte)(60)))));
-            this.panelTitleBar.Controls.Add(this.labelTitleBar);
-            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTitleBar.Location = new System.Drawing.Point(223, 24);
-            this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(866, 75);
-            this.panelTitleBar.TabIndex = 40;
+            this.panelDesktopParent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDesktopParent.Location = new System.Drawing.Point(223, 99);
+            this.panelDesktopParent.Name = "panelDesktopParent";
+            this.panelDesktopParent.Size = new System.Drawing.Size(866, 618);
+            this.panelDesktopParent.TabIndex = 41;
             // 
             // labelTitleBar
             // 
@@ -246,13 +261,15 @@
             this.labelTitleBar.Text = "Home";
             this.labelTitleBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panelDesktopParent
+            // panelTitleBar
             // 
-            this.panelDesktopParent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktopParent.Location = new System.Drawing.Point(223, 99);
-            this.panelDesktopParent.Name = "panelDesktopParent";
-            this.panelDesktopParent.Size = new System.Drawing.Size(866, 618);
-            this.panelDesktopParent.TabIndex = 41;
+            this.panelTitleBar.BackColor = System.Drawing.Color.Transparent;
+            this.panelTitleBar.Controls.Add(this.labelTitleBar);
+            this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTitleBar.Location = new System.Drawing.Point(223, 24);
+            this.panelTitleBar.Name = "panelTitleBar";
+            this.panelTitleBar.Size = new System.Drawing.Size(866, 75);
+            this.panelTitleBar.TabIndex = 40;
             // 
             // AppForm
             // 
@@ -271,6 +288,7 @@
             this.panelSideMenu.ResumeLayout(false);
             this.panelSlideMenuBottom.ResumeLayout(false);
             this.panelStatus.ResumeLayout(false);
+            this.panelStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCogAnim)).EndInit();
             this.panelTitleBar.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -285,12 +303,13 @@
         private Button buttonLibrarySettings;
         private Button buttonServiceSettings;
         private Button buttonManagerSettings;
-        private Panel panelTitleBar;
-        private Label labelTitleBar;
         private Panel panelDesktopParent;
         private Panel panelSlideMenuBottom;
         private Button buttonExit;
         private Button buttonRestart;
         private PictureBox pictureBoxCogAnim;
+        private MaterialSkin.Controls.MaterialLabel materialLabelServiceStatus;
+        private Label labelTitleBar;
+        private Panel panelTitleBar;
     }
 }

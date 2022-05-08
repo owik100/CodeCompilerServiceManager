@@ -41,7 +41,8 @@ namespace CodeCompilerServiceManager.UserControls
             try
             {
                 labelServiceStatus.Text = "Trwa zatrzymywanie usługi...";
-                pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+                _appFormParent.labelAppFormServiceStatus.Text = "Trwa zatrzymywanie usługi...";
+                pictureServiceStatus.Enabled = false;
                 _appFormParent.pictureCogAnim.Enabled = false;
                 btnStopService.Enabled = false;
                 btnReStartService.Enabled = false;
@@ -58,7 +59,8 @@ namespace CodeCompilerServiceManager.UserControls
             try
             {
                 labelServiceStatus.Text = "Trwa uruchamianie usługi...";
-                pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+                _appFormParent.labelAppFormServiceStatus.Text = "Trwa uruchamianie usługi...";
+                pictureServiceStatus.Enabled = false;
                 _appFormParent.pictureCogAnim.Enabled = false;
                 btnStartService.Enabled = false;
                 btnReStartService.Enabled = false;
@@ -87,7 +89,8 @@ namespace CodeCompilerServiceManager.UserControls
             try
             {
                 labelServiceStatus.Text = "Trwa restartowanie usługi...";
-                pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+                _appFormParent.labelAppFormServiceStatus.Text = "Trwa restartowanie usługi...";
+                pictureServiceStatus.Enabled = false;
                 _appFormParent.pictureCogAnim.Enabled = false;
                 btnStopService.Enabled = false;
                 btnReStartService.Enabled = false;
@@ -120,40 +123,45 @@ namespace CodeCompilerServiceManager.UserControls
         }
         private void OnStopped()
         {
-            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.red;
+            pictureServiceStatus.Enabled = false;
             _appFormParent.pictureCogAnim.Enabled = false;
             labelServiceStatus.Text = "Stan usługi: Zatrzymana";
+            _appFormParent.labelAppFormServiceStatus.Text = "Stan usługi: Zatrzymana";
             btnStartService.Enabled = true;
             btnStopService.Enabled = false;
         }
 
         private void OnRunning()
         {
-            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.green;
+            pictureServiceStatus.Enabled = true;
             _appFormParent.pictureCogAnim.Enabled = true;
             labelServiceStatus.Text = "Stan usługi: Uruchomiona";
+            _appFormParent.labelAppFormServiceStatus.Text = "Stan usługi: Uruchomiona";
             btnStartService.Enabled = false;
             btnStopService.Enabled = true;
         }
 
         private void OnStartPending()
         {
-            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+            pictureServiceStatus.Enabled = false;
             _appFormParent.pictureCogAnim.Enabled = false;
             labelServiceStatus.Text = "Stan usługi: Uruchamianie...";
+            _appFormParent.labelAppFormServiceStatus.Text = "Stan usługi: Uruchamianie...";
         }
         private void OnStopPending()
         {
-            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+            pictureServiceStatus.Enabled = false;
             _appFormParent.pictureCogAnim.Enabled = false;
             labelServiceStatus.Text = "Stan usługi: Zatrzymywanie...";
+            _appFormParent.labelAppFormServiceStatus.Text = "Stan usługi: Zatrzymywanie...";
         }
 
         private void OnOtherStatus(ServiceControllerStatus result)
         {
-            pictureServiceStatus.Image = CodeCompilerServiceManager.Properties.Resources.yellow;
+            pictureServiceStatus.Enabled = false;
             _appFormParent.pictureCogAnim.Enabled = false;
             labelServiceStatus.Text = "Stan usługi: " + result.ToString();
+            _appFormParent.labelAppFormServiceStatus.Text = "Stan usługi: " + result.ToString();
         }
 
         #endregion
@@ -197,7 +205,7 @@ namespace CodeCompilerServiceManager.UserControls
                 {
                     case MessageHandlingLevel.ServiceInfo:
                         textPrefix = "[Service Info]";
-                        textColor = Color.Green;
+                        textColor = Color.Black;
                         break;
                     case MessageHandlingLevel.ServiceError:
                         textPrefix = "[Service Error]";
@@ -205,7 +213,7 @@ namespace CodeCompilerServiceManager.UserControls
                         break;
                     case MessageHandlingLevel.ManagerInfo:
                         textPrefix = "[Manager Info]";
-                        textColor = Color.LawnGreen;
+                        textColor = Color.Green;
                         break;
                     case MessageHandlingLevel.ManagerError:
                         textPrefix = "[Manager Error]";

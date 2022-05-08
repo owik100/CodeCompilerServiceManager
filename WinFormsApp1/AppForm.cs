@@ -36,6 +36,7 @@ namespace CodeCompilerServiceManager
         public System.Windows.Forms.Timer ServiceStatusTimer { get; private set; }
         public bool RestartServiceRequired { get; set; } = false;
         public PictureBox pictureCogAnim { get; private set; }
+        public MaterialLabel labelAppFormServiceStatus { get; private set; }
         #endregion
 
         #region Public Methods
@@ -138,13 +139,13 @@ namespace CodeCompilerServiceManager
         #region Private methods
         private void InitColors()
         {
-            //panelLogo.BackColor = ColorManager.PrimaryColorAccent;
             labelTitleBar.BackColor = ColorManager.PrimaryColor;
         }
         private void InitializeHomeControl()
         {
             homeControl = new HomeControl(this);
             activeControl = homeControl;
+            homeControl.GetMessage += homeControl.ServiceConnector_MessageHandler;
         }
         private void InitializeManager()
         {
@@ -158,6 +159,7 @@ namespace CodeCompilerServiceManager
                 InitTimer();
                 InitWorkers();
                 pictureCogAnim = pictureBoxCogAnim;
+                labelAppFormServiceStatus = materialLabelServiceStatus;
                 if (string.IsNullOrEmpty(servicePath))
                 {
                     homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs("Nie znaleziono œcie¿ki us³ugi!", MessageHandlingLevel.ManagerError));
@@ -353,6 +355,10 @@ namespace CodeCompilerServiceManager
         #endregion
 
         #region formEvents
+        private void materialLabelServiceStatus_SizeChanged(object sender, EventArgs e)
+        {
+            materialLabelServiceStatus.Left = (panelStatus.Width - materialLabelServiceStatus.Width) / 2;
+        }
 
         private void buttonHome_Click(object sender, EventArgs e)
         {
@@ -374,6 +380,8 @@ namespace CodeCompilerServiceManager
                     ManagerSettingsControl managerSettingsControl = new ManagerSettingsControl(this);
                     OpenChildControl(managerSettingsControl, sender);
                     activeControl = managerSettingsControl;
+                    managerSettingsControl.GetMessage -= homeControl.ServiceConnector_MessageHandler;
+                    managerSettingsControl.GetMessage += homeControl.ServiceConnector_MessageHandler;
                 }
             }
         }
@@ -387,6 +395,8 @@ namespace CodeCompilerServiceManager
                     ServiceSettingsControl serviceSettingsControl = new ServiceSettingsControl(this);
                     OpenChildControl(serviceSettingsControl, sender);
                     activeControl = serviceSettingsControl;
+                    serviceSettingsControl.GetMessage -= homeControl.ServiceConnector_MessageHandler;
+                    serviceSettingsControl.GetMessage += homeControl.ServiceConnector_MessageHandler;
                 }
             }
         }
@@ -400,6 +410,8 @@ namespace CodeCompilerServiceManager
                     LibrarySettingsControl librarySettingsControl = new LibrarySettingsControl(this);
                     OpenChildControl(librarySettingsControl, sender);
                     activeControl = librarySettingsControl;
+                    librarySettingsControl.GetMessage -= homeControl.ServiceConnector_MessageHandler;
+                    librarySettingsControl.GetMessage += homeControl.ServiceConnector_MessageHandler;
                 }
             }
         }
