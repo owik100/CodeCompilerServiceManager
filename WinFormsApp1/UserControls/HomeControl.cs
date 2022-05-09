@@ -32,7 +32,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -50,7 +50,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -68,7 +68,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -80,7 +80,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -98,7 +98,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
 
         }
@@ -201,6 +201,7 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 string textPrefix = "";
                 Color textColor = Color.Black;
+                bool bold = false;
                 switch (messageArgs.Level)
                 {
                     case MessageHandlingLevel.ServiceInfo:
@@ -215,6 +216,10 @@ namespace CodeCompilerServiceManager.UserControls
                         textPrefix = "[Manager Info]";
                         textColor = Color.Green;
                         break;
+                    case MessageHandlingLevel.ManagerWarning:
+                        textPrefix = "[Manager Warning]";
+                        textColor = Color.Orange;
+                        break;
                     case MessageHandlingLevel.ManagerError:
                         textPrefix = "[Manager Error]";
                         textColor = Color.OrangeRed;
@@ -226,7 +231,7 @@ namespace CodeCompilerServiceManager.UserControls
 
                 try
                 {
-                    txtOutputConsole.AppendText(errMessage, textColor, true);
+                    txtOutputConsole.AppendText(errMessage, textColor, true, bold);
                 }
                 catch (Exception ex)
                 {

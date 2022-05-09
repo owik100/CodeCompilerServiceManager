@@ -138,6 +138,7 @@
             this.btnStartService.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnStartService.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnStartService.Depth = 0;
+            this.btnStartService.Enabled = false;
             this.btnStartService.HighEmphasis = true;
             this.btnStartService.Icon = global::CodeCompilerServiceManager.Properties.Resources.play;
             this.btnStartService.Location = new System.Drawing.Point(77, 10);
@@ -207,6 +208,7 @@
             this.btnStopService.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnStopService.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnStopService.Depth = 0;
+            this.btnStopService.Enabled = false;
             this.btnStopService.HighEmphasis = true;
             this.btnStopService.Icon = global::CodeCompilerServiceManager.Properties.Resources.stop;
             this.btnStopService.Location = new System.Drawing.Point(123, 10);
@@ -237,6 +239,7 @@
             // 
             this.txtOutputConsole.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtOutputConsole.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtOutputConsole.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.txtOutputConsole.Location = new System.Drawing.Point(10, 10);
             this.txtOutputConsole.Name = "txtOutputConsole";
             this.txtOutputConsole.ReadOnly = true;

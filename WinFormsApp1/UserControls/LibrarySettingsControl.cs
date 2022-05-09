@@ -62,7 +62,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }
@@ -102,7 +102,7 @@ namespace CodeCompilerServiceManager.UserControls
 
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }
@@ -120,7 +120,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }
@@ -145,7 +145,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }
@@ -161,7 +161,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }
@@ -177,7 +177,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }
@@ -196,7 +196,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }
@@ -215,14 +215,14 @@ namespace CodeCompilerServiceManager.UserControls
                 }
                 else
                 {
-                    ServiceSettings.LoadSettings(servisePath, false);
+                    ServiceSettings.LoadSettings(servisePath, true, false);
                     BindSettingsToControlls();
                     SetButtonEnabledStatus(false);
                 }
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }
@@ -241,7 +241,7 @@ namespace CodeCompilerServiceManager.UserControls
                 }
                 else
                 {
-                    ServiceSettings.LoadSettings(servisePath, true);
+                    ServiceSettings.LoadSettings(servisePath, true, true);
 
                     BindSettingsToControlls();
                     _appFormParent.pictureCogAnim.Enabled = false;
@@ -250,7 +250,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }
@@ -275,7 +275,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }
@@ -301,7 +301,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }

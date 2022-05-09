@@ -51,7 +51,7 @@ namespace CodeCompilerServiceManager.Settings
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -81,7 +81,7 @@ namespace CodeCompilerServiceManager.Settings
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 RestartSettings();
             }
             OperationTimeout = result.OperationTimeout;

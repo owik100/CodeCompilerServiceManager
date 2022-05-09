@@ -22,6 +22,7 @@ namespace CodeCompilerServiceManager.Logic
         ServiceInfo,
         ServiceError,
         ManagerInfo,
+        ManagerWarning,
         ManagerError,
     }
 }

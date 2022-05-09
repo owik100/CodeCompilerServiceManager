@@ -40,6 +40,30 @@ namespace CodeCompilerServiceManager
         #endregion
 
         #region Public Methods
+        public void CheckIfFolderInputOutputEmpty()
+        {
+            try
+            {
+                if (ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath != null)
+                {
+                    if (string.IsNullOrEmpty(ServiceSettings.ServiceSettingsModel.CodeCompilerLibOptions.InputPath))
+                    {
+                        homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs("Nie podano œcie¿ki do folderu plików wejœciowych do kompilacji!", MessageHandlingLevel.ManagerWarning));
+                    }
+                }
+                if (ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.OutputPath != null)
+                {
+                    if (string.IsNullOrEmpty(ServiceSettings.ServiceSettingsModel.CodeCompilerLibOptions.OutputPath))
+                    {
+                        homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs("Nie podano œcie¿ki do folderu wyjœciowego skompilowanych plików!", MessageHandlingLevel.ManagerWarning));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message, MessageHandlingLevel.ManagerError));
+            }
+        }
         public void InitConnectionCommunicationManager()
         {
             if (ServiceSettings.ServiceSettingsModel?.ServiceOptions?.SendMessagesToManager == true)
@@ -79,22 +103,23 @@ namespace CodeCompilerServiceManager
                     }
                 }
                 res = InstallService(path);
-                ReStartService();
-
                 if (res)
                 {
                     MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Us³uga zainstalowana poprawnie!", "OK", false);
                     SnackBarMessage.Show(this);
+                    ServiceSettings.LoadSettings(path, false, false);
+                    CheckIfFolderInputOutputEmpty();
                 }
                 else
                 {
                     MaterialSnackBar SnackBarMessage = new MaterialSnackBar("B³¹d. SprawdŸ okno z szczegó³ami na g³ównej zak³adce!", "OK", true);
                     SnackBarMessage.Show(this);
                 }
+                ReStartService();
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.ToString(),MessageHandlingLevel.ManagerError));
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message ,MessageHandlingLevel.ManagerError));
             }
             return res;
         }
@@ -160,6 +185,7 @@ namespace CodeCompilerServiceManager
                 InitWorkers();
                 pictureCogAnim = pictureBoxCogAnim;
                 labelAppFormServiceStatus = materialLabelServiceStatus;
+                ServiceSettings.GetMessage += homeControl.ServiceConnector_MessageHandler;
                 if (string.IsNullOrEmpty(servicePath))
                 {
                     homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs("Nie znaleziono œcie¿ki us³ugi!", MessageHandlingLevel.ManagerError));
@@ -177,7 +203,7 @@ namespace CodeCompilerServiceManager
                 else
                 {
                     LoadServiceSettings(servicePath);
-                    ServiceSettings.GetMessage += homeControl.ServiceConnector_MessageHandler;
+                    CheckIfFolderInputOutputEmpty();
                 }
                 if (!string.IsNullOrEmpty(servicePath) && serviceConnector.GetServiceStatus() == ServiceControllerStatus.Running)
                 {
@@ -192,13 +218,13 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.ToString(), MessageHandlingLevel.ManagerError));
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message , MessageHandlingLevel.ManagerError));
             }
         }
 
         private void LoadServiceSettings(string serviceConfigPath)
         {
-            ServiceSettings.LoadSettings(serviceConfigPath, false);
+            ServiceSettings.LoadSettings(serviceConfigPath, true, false);
         }
 
         private void LoadManagerOptions()
@@ -209,7 +235,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.ToString(), MessageHandlingLevel.ManagerError));
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message , MessageHandlingLevel.ManagerError));
             }
         }
         private void InitTimer()
@@ -226,7 +252,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.ToString(), MessageHandlingLevel.ManagerError));
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message , MessageHandlingLevel.ManagerError));
             }
 
         }
@@ -446,7 +472,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.ToString(), MessageHandlingLevel.ManagerError));
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message , MessageHandlingLevel.ManagerError));
             }
         }
 
@@ -472,7 +498,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.ToString(), MessageHandlingLevel.ManagerError));
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message , MessageHandlingLevel.ManagerError));
             }
         }
         #endregion

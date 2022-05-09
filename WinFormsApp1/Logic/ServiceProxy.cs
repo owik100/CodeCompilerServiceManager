@@ -36,7 +36,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
             return result;
         }
@@ -57,7 +57,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
             return result;
         }
@@ -89,7 +89,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
             return result;
         }
@@ -104,7 +104,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
             return result;
         }
@@ -124,7 +124,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
             return result;
         }
@@ -153,7 +153,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
             return result;
         }
@@ -167,7 +167,7 @@ namespace CodeCompilerServiceManager.Logic
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
             return false;
         }

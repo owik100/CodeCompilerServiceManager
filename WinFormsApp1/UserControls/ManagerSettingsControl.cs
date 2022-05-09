@@ -130,7 +130,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }
@@ -149,7 +149,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }

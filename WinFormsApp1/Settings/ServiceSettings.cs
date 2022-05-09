@@ -14,13 +14,21 @@ namespace CodeCompilerServiceManager.Settings
     {
         public static ServiceSettingsModel ServiceSettingsModel;
 
-        public static ServiceSettingsModel LoadSettings(string serviceConfigPath, bool restartToDefault)
+        public static ServiceSettingsModel LoadSettings(string serviceConfigPath, bool pathToServiceExe, bool restartToDefault)
         {
             ServiceSettingsModel model = new ServiceSettingsModel();
             try
             {
                 string jsonFileName = restartToDefault ? @"\appsettingsDefault.json" : @"\appsettings.json";
-                string pathToJson = Path.GetDirectoryName(serviceConfigPath) + jsonFileName;
+                string pathToJson = "";
+                if (pathToServiceExe)
+                {
+                    pathToJson = Path.GetDirectoryName(serviceConfigPath) + jsonFileName;
+                }
+                else
+                {
+                    pathToJson = serviceConfigPath + jsonFileName;
+                }
                 using (StreamReader r = new StreamReader(pathToJson))
                 {
                     string json = r.ReadToEnd();
@@ -29,7 +37,7 @@ namespace CodeCompilerServiceManager.Settings
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
             return model;
         }
@@ -108,7 +116,7 @@ namespace CodeCompilerServiceManager.Settings
             }
             catch (Exception ex)
             {
-                OnMessage(ex.ToString(), MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
             }
         }
         #region IMeesageHandling
