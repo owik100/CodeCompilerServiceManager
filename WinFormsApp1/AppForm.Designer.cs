@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppForm));
             this.panelSideMenu = new System.Windows.Forms.Panel();
             this.panelSlideMenuBottom = new System.Windows.Forms.Panel();
             this.buttonExit = new System.Windows.Forms.Button();
@@ -43,11 +45,22 @@
             this.panelDesktopParent = new System.Windows.Forms.Panel();
             this.labelTitleBar = new System.Windows.Forms.Label();
             this.panelTitleBar = new System.Windows.Forms.Panel();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStripForNotyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.sTOPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rUNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rESTARTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.podgladToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSideMenu.SuspendLayout();
             this.panelSlideMenuBottom.SuspendLayout();
             this.panelStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCogAnim)).BeginInit();
             this.panelTitleBar.SuspendLayout();
+            this.contextMenuStripForNotyIcon.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSideMenu
@@ -271,6 +284,73 @@
             this.panelTitleBar.Size = new System.Drawing.Size(866, 75);
             this.panelTitleBar.TabIndex = 40;
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "Code Compiler Service Manager";
+            this.notifyIcon1.Visible = true;
+            // 
+            // contextMenuStripForNotyIcon
+            // 
+            this.contextMenuStripForNotyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OpenToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.rUNToolStripMenuItem,
+            this.sTOPToolStripMenuItem,
+            this.rESTARTToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.quitToolStripMenuItem});
+            this.contextMenuStripForNotyIcon.Name = "contextMenuStrip1";
+            this.contextMenuStripForNotyIcon.Size = new System.Drawing.Size(119, 126);
+            // 
+            // OpenToolStripMenuItem
+            // 
+            this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.OpenToolStripMenuItem.Text = "Otwórz";
+            this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(115, 6);
+            // 
+            // sTOPToolStripMenuItem
+            // 
+            this.sTOPToolStripMenuItem.Name = "sTOPToolStripMenuItem";
+            this.sTOPToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.sTOPToolStripMenuItem.Text = "STOP";
+            // 
+            // rUNToolStripMenuItem
+            // 
+            this.rUNToolStripMenuItem.Name = "rUNToolStripMenuItem";
+            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.rUNToolStripMenuItem.Text = "RUN";
+            // 
+            // rESTARTToolStripMenuItem
+            // 
+            this.rESTARTToolStripMenuItem.Name = "rESTARTToolStripMenuItem";
+            this.rESTARTToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.rESTARTToolStripMenuItem.Text = "RESTART";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(115, 6);
+            // 
+            // quitToolStripMenuItem
+            // 
+            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.quitToolStripMenuItem.Text = "Wyjdź";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
+            // 
+            // podgladToolStripMenuItem
+            // 
+            this.podgladToolStripMenuItem.Name = "podgladToolStripMenuItem";
+            this.podgladToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.podgladToolStripMenuItem.Text = "Otwórz";
+            // 
             // AppForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -280,6 +360,7 @@
             this.Controls.Add(this.panelTitleBar);
             this.Controls.Add(this.panelSideMenu);
             this.FormStyle = MaterialSkin.Controls.MaterialForm.FormStyles.ActionBar_None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1092, 720);
             this.Name = "AppForm";
             this.Padding = new System.Windows.Forms.Padding(3, 24, 3, 3);
@@ -291,6 +372,7 @@
             this.panelStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCogAnim)).EndInit();
             this.panelTitleBar.ResumeLayout(false);
+            this.contextMenuStripForNotyIcon.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -311,5 +393,15 @@
         private MaterialSkin.Controls.MaterialLabel materialLabelServiceStatus;
         private Label labelTitleBar;
         private Panel panelTitleBar;
+        private NotifyIcon notifyIcon1;
+        private ContextMenuStrip contextMenuStripForNotyIcon;
+        private ToolStripMenuItem rUNToolStripMenuItem;
+        private ToolStripMenuItem sTOPToolStripMenuItem;
+        private ToolStripMenuItem rESTARTToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem quitToolStripMenuItem;
+        private ToolStripMenuItem OpenToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem podgladToolStripMenuItem;
     }
 }

@@ -6,12 +6,17 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
 	  <Version>1.0.0.0</Version>
+	  <ApplicationIcon>CogIcon.ico</ApplicationIcon>
+	  <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
     <AdditionalFiles Remove="app.manifest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="CogIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>

@@ -68,8 +68,10 @@ namespace CodeCompilerServiceManager
         {
             if (ServiceSettings.ServiceSettingsModel?.ServiceOptions?.SendMessagesToManager == true)
             {
-                Task.Delay(1000).ContinueWith((task) => {
-                    Invoke((MethodInvoker)(() => {
+                Task.Delay(1000).ContinueWith((task) =>
+                {
+                    Invoke((MethodInvoker)(() =>
+                    {
                         communicationManager = new ConnectionManagerClient(ServiceSettings.ServiceSettingsModel.ServiceOptions.SendMessagesPort);
                         communicationManager.GetMessage -= homeControl.ServiceConnector_MessageHandler;
                         communicationManager.GetMessage += homeControl.ServiceConnector_MessageHandler;
@@ -119,7 +121,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message ,MessageHandlingLevel.ManagerError));
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message, MessageHandlingLevel.ManagerError));
             }
             return res;
         }
@@ -189,8 +191,10 @@ namespace CodeCompilerServiceManager
                 if (string.IsNullOrEmpty(servicePath))
                 {
                     homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs("Nie znaleziono œcie¿ki us³ugi!", MessageHandlingLevel.ManagerError));
-                    Task.Delay(500).ContinueWith((task) => {
-                        Invoke((MethodInvoker)(() => {
+                    Task.Delay(500).ContinueWith((task) =>
+                    {
+                        Invoke((MethodInvoker)(() =>
+                        {
                             MaterialDialog materialDialog = new MaterialDialog(this, "Nie znaleziono œcie¿ki us³ugi!", "Wygl¹da na to, ¿e us³uga CodeCompilerServiceOwik nie jest zainstalowana. Chcesz to zrobiæ teraz? (Instalacja dostêpna póŸniej na zak³adce ustawieñ serwisu)", "Tak", true, "Nie");
                             DialogResult dialogResult = materialDialog.ShowDialog(this);
                             if (dialogResult == DialogResult.OK)
@@ -215,10 +219,12 @@ namespace CodeCompilerServiceManager
                 }
                 RestartServiceRequired = false;
                 OpenChildControl(homeControl, buttonHome);
+
+                notifyIcon1.ContextMenuStrip = contextMenuStripForNotyIcon;
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message , MessageHandlingLevel.ManagerError));
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message, MessageHandlingLevel.ManagerError));
             }
         }
 
@@ -235,7 +241,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message , MessageHandlingLevel.ManagerError));
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message, MessageHandlingLevel.ManagerError));
             }
         }
         private void InitTimer()
@@ -252,7 +258,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message , MessageHandlingLevel.ManagerError));
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message, MessageHandlingLevel.ManagerError));
             }
 
         }
@@ -321,7 +327,7 @@ namespace CodeCompilerServiceManager
                     activeControl.SaveChangesOnLeave();
                     return false;
                 }
-                else if(dialogResult == DialogResult.Cancel)
+                else if (dialogResult == DialogResult.Cancel)
                 {
                     return true;
                 }
@@ -390,7 +396,8 @@ namespace CodeCompilerServiceManager
         {
             if (!HandleLeaveUcerControl(activeControl))
             {
-                if (activeControl.ControlName != homeControl.Name){
+                if (activeControl.ControlName != homeControl.Name)
+                {
                     OpenChildControl(homeControl, sender);
                     activeControl = homeControl;
                 }
@@ -472,7 +479,7 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message , MessageHandlingLevel.ManagerError));
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message, MessageHandlingLevel.ManagerError));
             }
         }
 
@@ -498,8 +505,21 @@ namespace CodeCompilerServiceManager
             }
             catch (Exception ex)
             {
-                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message , MessageHandlingLevel.ManagerError));
+                homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message, MessageHandlingLevel.ManagerError));
             }
+        }
+        #endregion
+
+        #region ToolStrip
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
         }
         #endregion
     }
