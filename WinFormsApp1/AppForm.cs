@@ -37,6 +37,8 @@ namespace CodeCompilerServiceManager
         public bool RestartServiceRequired { get; set; } = false;
         public PictureBox pictureCogAnim { get; private set; }
         public MaterialLabel labelAppFormServiceStatus { get; private set; }
+        public NotifyIcon NotifyIcon { get; private set; }
+        public ContextMenuStrip ContextMenuForNotyIcon { get; private set; }
         #endregion
 
         #region Public Methods
@@ -187,6 +189,8 @@ namespace CodeCompilerServiceManager
                 InitWorkers();
                 pictureCogAnim = pictureBoxCogAnim;
                 labelAppFormServiceStatus = materialLabelServiceStatus;
+                NotifyIcon = notifyIcon1;
+                ContextMenuForNotyIcon = contextMenuStripForNotyIcon;
                 ServiceSettings.GetMessage += homeControl.ServiceConnector_MessageHandler;
                 if (string.IsNullOrEmpty(servicePath))
                 {
@@ -474,6 +478,9 @@ namespace CodeCompilerServiceManager
         {
             try
             {
+                NotifyIcon?.Icon?.Dispose();
+                NotifyIcon?.Dispose();
+
                 Application.Restart();
                 Environment.Exit(0);
             }
@@ -507,6 +514,8 @@ namespace CodeCompilerServiceManager
             {
                 homeControl.ServiceConnector_MessageHandler(null, new MessageHandlingArgs(ex.Message, MessageHandlingLevel.ManagerError));
             }
+            NotifyIcon?.Icon?.Dispose();
+            NotifyIcon?.Dispose();
         }
         #endregion
 
@@ -521,6 +530,30 @@ namespace CodeCompilerServiceManager
             this.Show();
             this.WindowState = FormWindowState.Normal;
         }
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            OpenToolStripMenuItem_Click(null, null);
+        }
+        private void rUNToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartService();
+        }
+
+        private void sTOPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pictureCogAnim.Enabled = false;
+            this.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
+            StopService();
+        }
+
+        private void rESTARTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pictureCogAnim.Enabled = false;
+            this.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
+            ReStartService();
+        }
         #endregion
+
+
     }
 }

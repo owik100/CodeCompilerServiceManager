@@ -49,8 +49,8 @@
             this.contextMenuStripForNotyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.sTOPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rUNToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sTOPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rESTARTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -289,6 +289,7 @@
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "Code Compiler Service Manager";
             this.notifyIcon1.Visible = true;
+            this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             // 
             // contextMenuStripForNotyIcon
             // 
@@ -301,47 +302,57 @@
             this.toolStripSeparator1,
             this.quitToolStripMenuItem});
             this.contextMenuStripForNotyIcon.Name = "contextMenuStrip1";
-            this.contextMenuStripForNotyIcon.Size = new System.Drawing.Size(119, 126);
+            this.contextMenuStripForNotyIcon.Size = new System.Drawing.Size(216, 126);
             // 
             // OpenToolStripMenuItem
             // 
+            this.OpenToolStripMenuItem.Image = global::CodeCompilerServiceManager.Properties.Resources.cog;
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.OpenToolStripMenuItem.Text = "Otwórz";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(115, 6);
-            // 
-            // sTOPToolStripMenuItem
-            // 
-            this.sTOPToolStripMenuItem.Name = "sTOPToolStripMenuItem";
-            this.sTOPToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.sTOPToolStripMenuItem.Text = "STOP";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(212, 6);
             // 
             // rUNToolStripMenuItem
             // 
+            this.rUNToolStripMenuItem.Enabled = false;
+            this.rUNToolStripMenuItem.Image = global::CodeCompilerServiceManager.Properties.Resources.play;
             this.rUNToolStripMenuItem.Name = "rUNToolStripMenuItem";
-            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.rUNToolStripMenuItem.Text = "RUN";
+            this.rUNToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.rUNToolStripMenuItem.Text = "Uruchom usługę";
+            this.rUNToolStripMenuItem.Click += new System.EventHandler(this.rUNToolStripMenuItem_Click);
+            // 
+            // sTOPToolStripMenuItem
+            // 
+            this.sTOPToolStripMenuItem.Enabled = false;
+            this.sTOPToolStripMenuItem.Image = global::CodeCompilerServiceManager.Properties.Resources.stop;
+            this.sTOPToolStripMenuItem.Name = "sTOPToolStripMenuItem";
+            this.sTOPToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.sTOPToolStripMenuItem.Text = "Zatrzymaj usługę";
+            this.sTOPToolStripMenuItem.Click += new System.EventHandler(this.sTOPToolStripMenuItem_Click);
             // 
             // rESTARTToolStripMenuItem
             // 
+            this.rESTARTToolStripMenuItem.Image = global::CodeCompilerServiceManager.Properties.Resources.restart;
             this.rESTARTToolStripMenuItem.Name = "rESTARTToolStripMenuItem";
-            this.rESTARTToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
-            this.rESTARTToolStripMenuItem.Text = "RESTART";
+            this.rESTARTToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.rESTARTToolStripMenuItem.Text = "Uruchom ponowne usługę";
+            this.rESTARTToolStripMenuItem.Click += new System.EventHandler(this.rESTARTToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(115, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(212, 6);
             // 
             // quitToolStripMenuItem
             // 
+            this.quitToolStripMenuItem.Image = global::CodeCompilerServiceManager.Properties.Resources.exit_to_app;
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
             this.quitToolStripMenuItem.Text = "Wyjdź";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 

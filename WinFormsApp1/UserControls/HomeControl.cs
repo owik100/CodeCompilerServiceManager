@@ -42,8 +42,14 @@ namespace CodeCompilerServiceManager.UserControls
             {
                 labelServiceStatus.Text = "Trwa zatrzymywanie usługi...";
                 _appFormParent.labelAppFormServiceStatus.Text = "Trwa zatrzymywanie usługi...";
+                _appFormParent.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
+                _appFormParent.NotifyIcon.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
+                _appFormParent.NotifyIcon.Text = "Code Compiler Service Manager - Trwa zatrzymywanie usługi...";
                 pictureServiceStatus.Enabled = false;
                 _appFormParent.pictureCogAnim.Enabled = false;
+                _appFormParent.NotifyIcon.Text = "Code Compiler Service Manager - Stan usługi: Uruchomiona";
+                _appFormParent.ContextMenuForNotyIcon.Items[3].Enabled = false;
+                _appFormParent.ContextMenuForNotyIcon.Items[4].Enabled = false;
                 btnStopService.Enabled = false;
                 btnReStartService.Enabled = false;
                 _appFormParent.StopService();
@@ -59,9 +65,14 @@ namespace CodeCompilerServiceManager.UserControls
             try
             {
                 labelServiceStatus.Text = "Trwa uruchamianie usługi...";
+                _appFormParent.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
                 _appFormParent.labelAppFormServiceStatus.Text = "Trwa uruchamianie usługi...";
+                _appFormParent.NotifyIcon.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
+                _appFormParent.NotifyIcon.Text = "Code Compiler Service Manager - Trwa uruchamianie usługi...";
                 pictureServiceStatus.Enabled = false;
                 _appFormParent.pictureCogAnim.Enabled = false;
+                _appFormParent.ContextMenuForNotyIcon.Items[2].Enabled = false;
+                _appFormParent.ContextMenuForNotyIcon.Items[4].Enabled = false;
                 btnStartService.Enabled = false;
                 btnReStartService.Enabled = false;
                 _appFormParent.StartService();
@@ -89,9 +100,14 @@ namespace CodeCompilerServiceManager.UserControls
             try
             {
                 labelServiceStatus.Text = "Trwa restartowanie usługi...";
+                _appFormParent.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
                 _appFormParent.labelAppFormServiceStatus.Text = "Trwa restartowanie usługi...";
+                _appFormParent.NotifyIcon.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
+                _appFormParent.NotifyIcon.Text = "Code Compiler Service Manager - Trwa restartowanie usługi...";
                 pictureServiceStatus.Enabled = false;
                 _appFormParent.pictureCogAnim.Enabled = false;
+                _appFormParent.ContextMenuForNotyIcon.Items[3].Enabled = false;
+                _appFormParent.ContextMenuForNotyIcon.Items[4].Enabled = false;
                 btnStopService.Enabled = false;
                 btnReStartService.Enabled = false;
                 _appFormParent.ReStartService();
@@ -125,8 +141,13 @@ namespace CodeCompilerServiceManager.UserControls
         {
             pictureServiceStatus.Enabled = false;
             _appFormParent.pictureCogAnim.Enabled = false;
+            _appFormParent.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_red;
             labelServiceStatus.Text = "Stan usługi: Zatrzymana";
             _appFormParent.labelAppFormServiceStatus.Text = "Stan usługi: Zatrzymana";
+            _appFormParent.NotifyIcon.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_red;
+            _appFormParent.NotifyIcon.Text = "Code Compiler Service Manager - Stan usługi: Zatrzymana";
+            _appFormParent.ContextMenuForNotyIcon.Items[2].Enabled = true;
+            _appFormParent.ContextMenuForNotyIcon.Items[3].Enabled = false;
             btnStartService.Enabled = true;
             btnStopService.Enabled = false;
         }
@@ -135,8 +156,13 @@ namespace CodeCompilerServiceManager.UserControls
         {
             pictureServiceStatus.Enabled = true;
             _appFormParent.pictureCogAnim.Enabled = true;
+            _appFormParent.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_green;
             labelServiceStatus.Text = "Stan usługi: Uruchomiona";
             _appFormParent.labelAppFormServiceStatus.Text = "Stan usługi: Uruchomiona";
+            _appFormParent.NotifyIcon.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_green;
+            _appFormParent.NotifyIcon.Text = "Code Compiler Service Manager - Stan usługi: Uruchomiona";
+            _appFormParent.ContextMenuForNotyIcon.Items[2].Enabled = false;
+            _appFormParent.ContextMenuForNotyIcon.Items[3].Enabled = true;
             btnStartService.Enabled = false;
             btnStopService.Enabled = true;
         }
@@ -145,23 +171,32 @@ namespace CodeCompilerServiceManager.UserControls
         {
             pictureServiceStatus.Enabled = false;
             _appFormParent.pictureCogAnim.Enabled = false;
+            _appFormParent.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
             labelServiceStatus.Text = "Stan usługi: Uruchamianie...";
             _appFormParent.labelAppFormServiceStatus.Text = "Stan usługi: Uruchamianie...";
+            _appFormParent.NotifyIcon.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
+            _appFormParent.NotifyIcon.Text = "Code Compiler Service Manager - Stan usługi: Uruchamianie...";
         }
         private void OnStopPending()
         {
             pictureServiceStatus.Enabled = false;
             _appFormParent.pictureCogAnim.Enabled = false;
+            _appFormParent.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
             labelServiceStatus.Text = "Stan usługi: Zatrzymywanie...";
             _appFormParent.labelAppFormServiceStatus.Text = "Stan usługi: Zatrzymywanie...";
+            _appFormParent.NotifyIcon.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
+            _appFormParent.NotifyIcon.Text = "Code Compiler Service Manager - Stan usługi: Zatrzymywanie...";
         }
 
         private void OnOtherStatus(ServiceControllerStatus result)
         {
             pictureServiceStatus.Enabled = false;
             _appFormParent.pictureCogAnim.Enabled = false;
+            _appFormParent.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
             labelServiceStatus.Text = "Stan usługi: " + result.ToString();
             _appFormParent.labelAppFormServiceStatus.Text = "Stan usługi: " + result.ToString();
+            _appFormParent.NotifyIcon.Icon = CodeCompilerServiceManager.Properties.Resources.favicon_yellow;
+            _appFormParent.labelAppFormServiceStatus.Text = "Code Compiler Service Manager - Stan usługi: " + result.ToString();
         }
 
         #endregion
