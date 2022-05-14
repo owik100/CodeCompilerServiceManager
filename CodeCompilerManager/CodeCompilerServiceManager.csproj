@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Usługi\CodeCompilerService\CodeCompilerService\CodeCompilerService.csproj" />
+    <ProjectReference Include="..\..\CodeCompilerSettingsModels\CodeCompilerSettingsModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

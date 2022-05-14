@@ -3,7 +3,6 @@ using CodeCompilerServiceManager.Settings;
 using Newtonsoft.Json;
 using System.ComponentModel;
 using System.ServiceProcess;
-using CodeCompilerService.OptionModels;
 using CodeCompilerServiceManager.Settings.Models;
 using CodeCompilerServiceManager.Helpers;
 using CodeCompilerServiceManager.UserControls;
