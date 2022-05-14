@@ -53,6 +53,8 @@
             this.materialTextBoxPortForManagerSendMessages = new MaterialSkin.Controls.MaterialTextBox2();
             this.labelPortForSendManager = new MaterialSkin.Controls.MaterialLabel();
             this.materialButtonFindFreePort = new MaterialSkin.Controls.MaterialButton();
+            this.labelMaxThead = new MaterialSkin.Controls.MaterialLabel();
+            this.materialTextBoxMaxThreads = new MaterialSkin.Controls.MaterialTextBox2();
             this.panelFooterServicePath.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -519,10 +521,56 @@
             this.materialButtonFindFreePort.UseVisualStyleBackColor = true;
             this.materialButtonFindFreePort.Click += new System.EventHandler(this.materialButtonFindFreePort_Click);
             // 
+            // labelMaxThead
+            // 
+            this.labelMaxThead.AutoSize = true;
+            this.labelMaxThead.Depth = 0;
+            this.labelMaxThead.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelMaxThead.Location = new System.Drawing.Point(494, 182);
+            this.labelMaxThead.MouseState = MaterialSkin.MouseState.HOVER;
+            this.labelMaxThead.Name = "labelMaxThead";
+            this.labelMaxThead.Size = new System.Drawing.Size(340, 19);
+            this.labelMaxThead.TabIndex = 71;
+            this.labelMaxThead.Text = "Liczba wątków używanych do kompilacji plików";
+            // 
+            // materialTextBoxMaxThreads
+            // 
+            this.materialTextBoxMaxThreads.AnimateReadOnly = false;
+            this.materialTextBoxMaxThreads.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.materialTextBoxMaxThreads.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.materialTextBoxMaxThreads.Depth = 0;
+            this.materialTextBoxMaxThreads.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBoxMaxThreads.HideSelection = true;
+            this.materialTextBoxMaxThreads.LeadingIcon = null;
+            this.materialTextBoxMaxThreads.Location = new System.Drawing.Point(578, 207);
+            this.materialTextBoxMaxThreads.MaxLength = 32767;
+            this.materialTextBoxMaxThreads.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialTextBoxMaxThreads.Name = "materialTextBoxMaxThreads";
+            this.materialTextBoxMaxThreads.PasswordChar = '\0';
+            this.materialTextBoxMaxThreads.PrefixSuffixText = null;
+            this.materialTextBoxMaxThreads.ReadOnly = false;
+            this.materialTextBoxMaxThreads.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.materialTextBoxMaxThreads.SelectedText = "";
+            this.materialTextBoxMaxThreads.SelectionLength = 0;
+            this.materialTextBoxMaxThreads.SelectionStart = 0;
+            this.materialTextBoxMaxThreads.ShortcutsEnabled = true;
+            this.materialTextBoxMaxThreads.Size = new System.Drawing.Size(250, 48);
+            this.materialTextBoxMaxThreads.TabIndex = 72;
+            this.materialTextBoxMaxThreads.TabStop = false;
+            this.materialTextBoxMaxThreads.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.materialTextBoxMaxThreads.TrailingIcon = null;
+            this.materialTextBoxMaxThreads.UseSystemPasswordChar = false;
+            this.materialTextBoxMaxThreads.Enter += new System.EventHandler(this.materialTextBoxMaxThreads_Enter);
+            this.materialTextBoxMaxThreads.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.materialTextBoxMaxThreads_KeyPress);
+            this.materialTextBoxMaxThreads.Leave += new System.EventHandler(this.materialTextBoxMaxThreads_Leave);
+            this.materialTextBoxMaxThreads.TextChanged += new System.EventHandler(this.materialTextBoxMaxThreads_TextChanged);
+            // 
             // ServiceSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.materialTextBoxMaxThreads);
+            this.Controls.Add(this.labelMaxThead);
             this.Controls.Add(this.materialButtonFindFreePort);
             this.Controls.Add(this.labelPortForSendManager);
             this.Controls.Add(this.materialTextBoxPortForManagerSendMessages);
@@ -574,5 +622,7 @@
         private MaterialSkin.Controls.MaterialTextBox2 materialTextBoxPortForManagerSendMessages;
         private MaterialSkin.Controls.MaterialLabel labelPortForSendManager;
         private MaterialSkin.Controls.MaterialButton materialButtonFindFreePort;
+        private MaterialSkin.Controls.MaterialLabel labelMaxThead;
+        private MaterialSkin.Controls.MaterialTextBox2 materialTextBoxMaxThreads;
     }
 }

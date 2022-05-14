@@ -18,6 +18,7 @@ namespace CodeCompilerServiceManager.UserControls
     {
         AppForm _appFormParent;
         int lastIntervalRefreshValue = 10000;
+        int lastThreadCount = 4;
         int lastInternalBufferSize = 8192;
         int lastPort = 3055;
         public ServiceSettingsControl(AppForm appFormParent)
@@ -139,6 +140,76 @@ namespace CodeCompilerServiceManager.UserControls
             catch (Exception ex)
             {
                 OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(_appFormParent);
+            }
+        }
+
+        private void materialTextBoxMaxThreads_Enter(object sender, EventArgs e)
+        {
+            materialTextBoxMaxThreads.SelectionStart = materialTextBoxMaxThreads.Text.Length;
+            materialTextBoxMaxThreads.SelectionLength = 0;
+        }
+
+        private void materialTextBoxMaxThreads_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                int number;
+                if (materialTextBoxMaxThreads.Text.All(char.IsDigit))
+                {
+                    if (int.TryParse(materialTextBoxMaxThreads.Text, out number))
+                    {
+                        if (number < 0)
+                        {
+                            materialTextBoxMaxThreads.Text = 1.ToString();
+                            lastThreadCount = 1;
+                        }
+                        else if (number <= 131072)
+                        {
+                            lastThreadCount = Convert.ToInt32(materialTextBoxMaxThreads.Text);
+                        }
+                        else
+                        {
+                            materialTextBoxMaxThreads.Text = 131072.ToString();
+                            lastThreadCount = 131072;
+                        }
+                    }
+                    else
+                    {
+                        materialTextBoxMaxThreads.Text = 131072.ToString();
+                        lastThreadCount = 131072;
+                    }
+                }
+                else
+                {
+                    materialTextBoxMaxThreads.Text = lastThreadCount.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(_appFormParent);
+            }
+        }
+
+        private void materialTextBoxMaxThreads_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = TextBoxHelper.PreventLetters(sender, e);
+        }
+
+        private void materialTextBoxMaxThreads_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _appFormParent.RestartServiceRequired = true;
+                labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
+            }
+            catch (Exception ex)
+            {
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
                 MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
                 SnackBarMessage.Show(_appFormParent);
             }
@@ -610,6 +681,12 @@ namespace CodeCompilerServiceManager.UserControls
                     ServiceSettings.ServiceSettingsModel.ServiceOptions.SendMessagesPort = Convert.ToInt32(materialTextBoxPortForManagerSendMessages.Text);
                 }
 
+                var maxThreadSize = ServiceSettings.ServiceSettingsModel?.ServiceOptions?.MaxThreads;
+                if (maxThreadSize != null && maxThreadSize > -1)
+                {
+                    ServiceSettings.ServiceSettingsModel.ServiceOptions.MaxThreads = Convert.ToInt32(materialTextBoxMaxThreads.Text);
+                }
+
                 ServiceSettings.SaveSettingsToJson(textBoxServicePath.Text);
             }
             catch (Exception ex)
@@ -674,6 +751,15 @@ namespace CodeCompilerServiceManager.UserControls
                     intervalRefresh = (decimal)intervalRefreshRes;
                     textBoxServiceMainInterval.Text = intervalRefresh.ToString();
                     lastIntervalRefreshValue = (int)intervalRefresh;
+                }
+
+                decimal maxThreads = -1;
+                var maxThreadsRes = ServiceSettings.ServiceSettingsModel?.ServiceOptions?.MaxThreads;
+                if (maxThreadsRes != null)
+                {
+                    maxThreads = (decimal)maxThreadsRes;
+                    materialTextBoxMaxThreads.Text = maxThreads.ToString();
+                    lastThreadCount = (int)maxThreads;
                 }
 
                 decimal bufferSize = -1;
