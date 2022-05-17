@@ -55,6 +55,7 @@
             this.materialButtonFindFreePort = new MaterialSkin.Controls.MaterialButton();
             this.labelMaxThead = new MaterialSkin.Controls.MaterialLabel();
             this.materialTextBoxMaxThreads = new MaterialSkin.Controls.MaterialTextBox2();
+            this.materialCheckboxSendMessageAboutBeingAlive = new MaterialSkin.Controls.MaterialCheckbox();
             this.panelFooterServicePath.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -565,10 +566,28 @@
             this.materialTextBoxMaxThreads.Leave += new System.EventHandler(this.materialTextBoxMaxThreads_Leave);
             this.materialTextBoxMaxThreads.TextChanged += new System.EventHandler(this.materialTextBoxMaxThreads_TextChanged);
             // 
+            // materialCheckboxSendMessageAboutBeingAlive
+            // 
+            this.materialCheckboxSendMessageAboutBeingAlive.AutoSize = true;
+            this.materialCheckboxSendMessageAboutBeingAlive.Depth = 0;
+            this.materialCheckboxSendMessageAboutBeingAlive.Location = new System.Drawing.Point(395, 138);
+            this.materialCheckboxSendMessageAboutBeingAlive.Margin = new System.Windows.Forms.Padding(0);
+            this.materialCheckboxSendMessageAboutBeingAlive.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialCheckboxSendMessageAboutBeingAlive.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCheckboxSendMessageAboutBeingAlive.Name = "materialCheckboxSendMessageAboutBeingAlive";
+            this.materialCheckboxSendMessageAboutBeingAlive.ReadOnly = false;
+            this.materialCheckboxSendMessageAboutBeingAlive.Ripple = true;
+            this.materialCheckboxSendMessageAboutBeingAlive.Size = new System.Drawing.Size(433, 37);
+            this.materialCheckboxSendMessageAboutBeingAlive.TabIndex = 73;
+            this.materialCheckboxSendMessageAboutBeingAlive.Text = "Wysyłaj wiadomości do managera o aktywności serwisu";
+            this.materialCheckboxSendMessageAboutBeingAlive.UseVisualStyleBackColor = true;
+            this.materialCheckboxSendMessageAboutBeingAlive.CheckedChanged += new System.EventHandler(this.materialCheckboxSendMessageAboutBeingAlive_CheckedChanged);
+            // 
             // ServiceSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.materialCheckboxSendMessageAboutBeingAlive);
             this.Controls.Add(this.materialTextBoxMaxThreads);
             this.Controls.Add(this.labelMaxThead);
             this.Controls.Add(this.materialButtonFindFreePort);
@@ -624,5 +643,6 @@
         private MaterialSkin.Controls.MaterialButton materialButtonFindFreePort;
         private MaterialSkin.Controls.MaterialLabel labelMaxThead;
         private MaterialSkin.Controls.MaterialTextBox2 materialTextBoxMaxThreads;
+        private MaterialSkin.Controls.MaterialCheckbox materialCheckboxSendMessageAboutBeingAlive;
     }
 }
