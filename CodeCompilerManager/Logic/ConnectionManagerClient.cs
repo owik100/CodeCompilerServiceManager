@@ -84,15 +84,28 @@ namespace CodeCompilerServiceManager.Logic
 
                     if (message.Length > 0)
                     {
-                        OnMessage(message, MessageHandlingLevel.ServiceInfo);
+                        if(message.Length > 16 && message.Contains("[SERVICE ERROR]"))
+                        {
+                            message = message.Substring(15);
+                            OnMessage(message, MessageHandlingLevel.ServiceError);
+                        }
+                        else
+                        {
+                            OnMessage(message, MessageHandlingLevel.ServiceInfo);
+                        }
                     }
-
-                    client.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, new AsyncCallback(ReciveCallback), client);
                 }
             }
             catch (Exception ex)
             {
                 OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
+            }
+            finally
+            {
+                if (socket != null && socket.Connected)
+                {
+                    client.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, new AsyncCallback(ReciveCallback), client);
+                }
             }
         }
 
