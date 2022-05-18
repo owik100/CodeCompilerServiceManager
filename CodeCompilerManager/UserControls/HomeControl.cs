@@ -1,5 +1,7 @@
 ﻿using CodeCompilerServiceManager.Helpers;
 using CodeCompilerServiceManager.Logic;
+using CodeCompilerServiceManager.Settings;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,7 +34,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -56,7 +58,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -79,7 +81,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -91,7 +93,7 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
             }
         }
 
@@ -114,11 +116,129 @@ namespace CodeCompilerServiceManager.UserControls
             }
             catch (Exception ex)
             {
-                OnMessage(ex.Message , MessageHandlingLevel.ManagerError);
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
             }
 
         }
+        private void buttonOpenInputFolder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string inputFolderPath = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath;
+                if (string.IsNullOrEmpty(inputFolderPath))
+                {
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Nie znaleziono ścieżki do folderu wejściowego!", "OK", true);
+                    SnackBarMessage.Show(_appFormParent);
+                }
+                else
+                {
+                    string argument = "/open, \"" + inputFolderPath + "\"";
+                    System.Diagnostics.Process.Start("explorer.exe", argument);
+                }
+            }
+            catch (Exception ex)
+            {
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
+            }
+        }
 
+        private void buttonOpenOutputFolder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string outputFolderPath = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.OutputPath;
+                if (string.IsNullOrEmpty(outputFolderPath))
+                {
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Nie znaleziono ścieżki do folderu wyjściowego!", "OK", true);
+                    SnackBarMessage.Show(_appFormParent);
+                }
+                else
+                {
+                    string argument = "/open, \"" + outputFolderPath + "\"";
+                    System.Diagnostics.Process.Start("explorer.exe", argument);
+                }
+            }
+            catch (Exception ex)
+            {
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
+            }
+        }
+
+        private void materialButtonDeleteInputPath_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string inputFolderPath = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.InputPath;
+                if (string.IsNullOrEmpty(inputFolderPath))
+                {
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Nie znaleziono ścieżki do folderu wejściowego!", "OK", true);
+                    SnackBarMessage.Show(_appFormParent);
+                }
+                else
+                {
+                    MaterialDialog materialDialog = new MaterialDialog(_appFormParent, "Uwaga", "Czy na pewno chcesz usunąć wszystkie pliki w folderze wejściowym?", "Tak", true, "Nie");
+                    DialogResult dialogResult = materialDialog.ShowDialog(this);
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        DirectoryInfo di = new DirectoryInfo(inputFolderPath);
+                        var files = di.EnumerateFiles();
+                        foreach (FileInfo file in files)
+                        {
+                            file.Delete();
+                        }
+                        var directories = di.EnumerateDirectories();
+                        foreach (DirectoryInfo dir in directories)
+                        {
+                            dir.Delete(true);
+                        }
+                        MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Usunięto pliki!", "OK", true);
+                        SnackBarMessage.Show(_appFormParent);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
+            }
+        }
+
+        private void materialButtonDeleteOutputPath_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string outputFolderPath = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.OutputPath;
+                if (string.IsNullOrEmpty(outputFolderPath))
+                {
+                    MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Nie znaleziono ścieżki do folderu wyjściowego!", "OK", true);
+                    SnackBarMessage.Show(_appFormParent);
+                }
+                else
+                {
+                    MaterialDialog materialDialog = new MaterialDialog(_appFormParent, "Uwaga", "Czy na pewno chcesz usunąć wszystkie pliki w folderze wyjściowym?", "Tak", true, "Nie");
+                    DialogResult dialogResult = materialDialog.ShowDialog(this);
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        DirectoryInfo di = new DirectoryInfo(outputFolderPath);
+                        var files = di.EnumerateFiles();
+                        foreach (FileInfo file in files)
+                        {
+                            file.Delete();
+                        }
+                        var directories = di.EnumerateDirectories();
+                        foreach (DirectoryInfo dir in directories)
+                        {
+                            dir.Delete(true);
+                        }
+                        MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Usunięto pliki!", "OK", true);
+                        SnackBarMessage.Show(_appFormParent);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
+            }
+        }
         private void toolTip1_draw(object sender, DrawToolTipEventArgs e)
         {
             e.DrawBackground();
