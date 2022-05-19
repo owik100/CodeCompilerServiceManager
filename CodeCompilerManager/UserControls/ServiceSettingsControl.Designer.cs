@@ -33,8 +33,8 @@
             this.labelServicePath = new MaterialSkin.Controls.MaterialLabel();
             this.textBoxServicePath = new MaterialSkin.Controls.MaterialTextBox2();
             this.buttonOpenServicePath = new MaterialSkin.Controls.MaterialButton();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.panelFooterServicePath = new System.Windows.Forms.Panel();
+            this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
             this.buttonDeleteService = new MaterialSkin.Controls.MaterialButton();
             this.buttonInstallService = new MaterialSkin.Controls.MaterialButton();
             this.checkBoxLogToEventViewer = new MaterialSkin.Controls.MaterialCheckbox();
@@ -56,7 +56,13 @@
             this.labelMaxThead = new MaterialSkin.Controls.MaterialLabel();
             this.materialTextBoxMaxThreads = new MaterialSkin.Controls.MaterialTextBox2();
             this.materialCheckboxSendMessageAboutBeingAlive = new MaterialSkin.Controls.MaterialCheckbox();
+            this.panelBottom = new System.Windows.Forms.Panel();
+            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialDivider3 = new MaterialSkin.Controls.MaterialDivider();
+            this.materialDivider4 = new MaterialSkin.Controls.MaterialDivider();
             this.panelFooterServicePath.SuspendLayout();
+            this.panelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelRestartRequired
@@ -67,7 +73,7 @@
             this.labelRestartRequired.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
             this.labelRestartRequired.ForeColor = System.Drawing.Color.Black;
             this.labelRestartRequired.HighEmphasis = true;
-            this.labelRestartRequired.Location = new System.Drawing.Point(120, 420);
+            this.labelRestartRequired.Location = new System.Drawing.Point(133, 7);
             this.labelRestartRequired.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelRestartRequired.Name = "labelRestartRequired";
             this.labelRestartRequired.Size = new System.Drawing.Size(587, 29);
@@ -138,30 +144,30 @@
             this.buttonOpenServicePath.UseVisualStyleBackColor = true;
             this.buttonOpenServicePath.Click += new System.EventHandler(this.buttonOpenServicePath_Click);
             // 
-            // materialLabel1
-            // 
-            this.materialLabel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(-36, 9);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(65535, 2);
-            this.materialLabel1.TabIndex = 55;
-            // 
             // panelFooterServicePath
             // 
+            this.panelFooterServicePath.Controls.Add(this.materialDivider2);
             this.panelFooterServicePath.Controls.Add(this.buttonDeleteService);
             this.panelFooterServicePath.Controls.Add(this.buttonOpenServicePath);
             this.panelFooterServicePath.Controls.Add(this.buttonInstallService);
-            this.panelFooterServicePath.Controls.Add(this.materialLabel1);
             this.panelFooterServicePath.Controls.Add(this.textBoxServicePath);
             this.panelFooterServicePath.Controls.Add(this.labelServicePath);
             this.panelFooterServicePath.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooterServicePath.Location = new System.Drawing.Point(0, 500);
+            this.panelFooterServicePath.Location = new System.Drawing.Point(0, 400);
             this.panelFooterServicePath.Name = "panelFooterServicePath";
             this.panelFooterServicePath.Size = new System.Drawing.Size(866, 118);
             this.panelFooterServicePath.TabIndex = 56;
+            // 
+            // materialDivider2
+            // 
+            this.materialDivider2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider2.Depth = 0;
+            this.materialDivider2.Location = new System.Drawing.Point(-32347, 0);
+            this.materialDivider2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider2.Name = "materialDivider2";
+            this.materialDivider2.Size = new System.Drawing.Size(65535, 3);
+            this.materialDivider2.TabIndex = 67;
+            this.materialDivider2.Text = "materialDivider2";
             // 
             // buttonDeleteService
             // 
@@ -207,7 +213,7 @@
             // 
             this.checkBoxLogToEventViewer.AutoSize = true;
             this.checkBoxLogToEventViewer.Depth = 0;
-            this.checkBoxLogToEventViewer.Location = new System.Drawing.Point(7, 10);
+            this.checkBoxLogToEventViewer.Location = new System.Drawing.Point(244, 16);
             this.checkBoxLogToEventViewer.Margin = new System.Windows.Forms.Padding(0);
             this.checkBoxLogToEventViewer.MouseLocation = new System.Drawing.Point(-1, -1);
             this.checkBoxLogToEventViewer.MouseState = MaterialSkin.MouseState.HOVER;
@@ -224,7 +230,7 @@
             // 
             this.checkBoxLogToFile.AutoSize = true;
             this.checkBoxLogToFile.Depth = 0;
-            this.checkBoxLogToFile.Location = new System.Drawing.Point(7, 47);
+            this.checkBoxLogToFile.Location = new System.Drawing.Point(20, 16);
             this.checkBoxLogToFile.Margin = new System.Windows.Forms.Padding(0);
             this.checkBoxLogToFile.MouseLocation = new System.Drawing.Point(-1, -1);
             this.checkBoxLogToFile.MouseState = MaterialSkin.MouseState.HOVER;
@@ -250,7 +256,7 @@
             this.buttonOpenLogFolder.Depth = 0;
             this.buttonOpenLogFolder.HighEmphasis = true;
             this.buttonOpenLogFolder.Icon = global::CodeCompilerServiceManager.Properties.Resources.folder_open;
-            this.buttonOpenLogFolder.Location = new System.Drawing.Point(777, 98);
+            this.buttonOpenLogFolder.Location = new System.Drawing.Point(799, 67);
             this.buttonOpenLogFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonOpenLogFolder.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonOpenLogFolder.Name = "buttonOpenLogFolder";
@@ -272,7 +278,7 @@
             this.textBoxPathToLogs.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxPathToLogs.HideSelection = true;
             this.textBoxPathToLogs.LeadingIcon = null;
-            this.textBoxPathToLogs.Location = new System.Drawing.Point(7, 87);
+            this.textBoxPathToLogs.Location = new System.Drawing.Point(120, 56);
             this.textBoxPathToLogs.MaxLength = 32767;
             this.textBoxPathToLogs.MouseState = MaterialSkin.MouseState.OUT;
             this.textBoxPathToLogs.Name = "textBoxPathToLogs";
@@ -284,7 +290,7 @@
             this.textBoxPathToLogs.SelectionLength = 0;
             this.textBoxPathToLogs.SelectionStart = 0;
             this.textBoxPathToLogs.ShortcutsEnabled = true;
-            this.textBoxPathToLogs.Size = new System.Drawing.Size(763, 48);
+            this.textBoxPathToLogs.Size = new System.Drawing.Size(672, 48);
             this.textBoxPathToLogs.TabIndex = 59;
             this.textBoxPathToLogs.TabStop = false;
             this.textBoxPathToLogs.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -298,7 +304,7 @@
             this.labelIntervalService.AutoSize = true;
             this.labelIntervalService.Depth = 0;
             this.labelIntervalService.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelIntervalService.Location = new System.Drawing.Point(494, 284);
+            this.labelIntervalService.Location = new System.Drawing.Point(25, 343);
             this.labelIntervalService.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelIntervalService.Name = "labelIntervalService";
             this.labelIntervalService.Size = new System.Drawing.Size(334, 19);
@@ -314,7 +320,7 @@
             this.textBoxServiceMainInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxServiceMainInterval.HideSelection = true;
             this.textBoxServiceMainInterval.LeadingIcon = null;
-            this.textBoxServiceMainInterval.Location = new System.Drawing.Point(578, 317);
+            this.textBoxServiceMainInterval.Location = new System.Drawing.Point(375, 330);
             this.textBoxServiceMainInterval.MaxLength = 32767;
             this.textBoxServiceMainInterval.MouseState = MaterialSkin.MouseState.OUT;
             this.textBoxServiceMainInterval.Name = "textBoxServiceMainInterval";
@@ -342,12 +348,12 @@
             this.labelInternalBufferSize.AutoSize = true;
             this.labelInternalBufferSize.Depth = 0;
             this.labelInternalBufferSize.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelInternalBufferSize.Location = new System.Drawing.Point(7, 284);
+            this.labelInternalBufferSize.Location = new System.Drawing.Point(25, 286);
             this.labelInternalBufferSize.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelInternalBufferSize.Name = "labelInternalBufferSize";
             this.labelInternalBufferSize.Size = new System.Drawing.Size(305, 19);
             this.labelInternalBufferSize.TabIndex = 62;
-            this.labelInternalBufferSize.Text = "Rozmiar (w bajtach) buforu wewnętrznego.";
+            this.labelInternalBufferSize.Text = "Rozmiar (w bajtach) buforu wewnętrznego:";
             // 
             // textBoxInternalBufferSize
             // 
@@ -358,7 +364,7 @@
             this.textBoxInternalBufferSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxInternalBufferSize.HideSelection = true;
             this.textBoxInternalBufferSize.LeadingIcon = null;
-            this.textBoxInternalBufferSize.Location = new System.Drawing.Point(7, 317);
+            this.textBoxInternalBufferSize.Location = new System.Drawing.Point(375, 276);
             this.textBoxInternalBufferSize.MaxLength = 32767;
             this.textBoxInternalBufferSize.MouseState = MaterialSkin.MouseState.OUT;
             this.textBoxInternalBufferSize.Name = "textBoxInternalBufferSize";
@@ -388,7 +394,7 @@
             this.buttonSaveAndRestart.Depth = 0;
             this.buttonSaveAndRestart.HighEmphasis = true;
             this.buttonSaveAndRestart.Icon = global::CodeCompilerServiceManager.Properties.Resources.content_save;
-            this.buttonSaveAndRestart.Location = new System.Drawing.Point(7, 455);
+            this.buttonSaveAndRestart.Location = new System.Drawing.Point(20, 42);
             this.buttonSaveAndRestart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonSaveAndRestart.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonSaveAndRestart.Name = "buttonSaveAndRestart";
@@ -408,7 +414,7 @@
             this.buttonSetDefaultServiceSettings.Depth = 0;
             this.buttonSetDefaultServiceSettings.HighEmphasis = true;
             this.buttonSetDefaultServiceSettings.Icon = global::CodeCompilerServiceManager.Properties.Resources.refresh;
-            this.buttonSetDefaultServiceSettings.Location = new System.Drawing.Point(450, 455);
+            this.buttonSetDefaultServiceSettings.Location = new System.Drawing.Point(459, 42);
             this.buttonSetDefaultServiceSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonSetDefaultServiceSettings.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonSetDefaultServiceSettings.Name = "buttonSetDefaultServiceSettings";
@@ -428,7 +434,7 @@
             this.buttonCancelChanges.Depth = 0;
             this.buttonCancelChanges.HighEmphasis = true;
             this.buttonCancelChanges.Icon = global::CodeCompilerServiceManager.Properties.Resources.cancel;
-            this.buttonCancelChanges.Location = new System.Drawing.Point(274, 455);
+            this.buttonCancelChanges.Location = new System.Drawing.Point(287, 42);
             this.buttonCancelChanges.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonCancelChanges.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonCancelChanges.Name = "buttonCancelChanges";
@@ -445,7 +451,7 @@
             // 
             this.checkBoxSendMessagesToManager.AutoSize = true;
             this.checkBoxSendMessagesToManager.Depth = 0;
-            this.checkBoxSendMessagesToManager.Location = new System.Drawing.Point(7, 138);
+            this.checkBoxSendMessagesToManager.Location = new System.Drawing.Point(20, 119);
             this.checkBoxSendMessagesToManager.Margin = new System.Windows.Forms.Padding(0);
             this.checkBoxSendMessagesToManager.MouseLocation = new System.Drawing.Point(-1, -1);
             this.checkBoxSendMessagesToManager.MouseState = MaterialSkin.MouseState.HOVER;
@@ -467,7 +473,7 @@
             this.materialTextBoxPortForManagerSendMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialTextBoxPortForManagerSendMessages.HideSelection = true;
             this.materialTextBoxPortForManagerSendMessages.LeadingIcon = null;
-            this.materialTextBoxPortForManagerSendMessages.Location = new System.Drawing.Point(7, 204);
+            this.materialTextBoxPortForManagerSendMessages.Location = new System.Drawing.Point(318, 159);
             this.materialTextBoxPortForManagerSendMessages.MaxLength = 32767;
             this.materialTextBoxPortForManagerSendMessages.MouseState = MaterialSkin.MouseState.OUT;
             this.materialTextBoxPortForManagerSendMessages.Name = "materialTextBoxPortForManagerSendMessages";
@@ -495,12 +501,12 @@
             this.labelPortForSendManager.AutoSize = true;
             this.labelPortForSendManager.Depth = 0;
             this.labelPortForSendManager.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelPortForSendManager.Location = new System.Drawing.Point(7, 182);
+            this.labelPortForSendManager.Location = new System.Drawing.Point(29, 172);
             this.labelPortForSendManager.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelPortForSendManager.Name = "labelPortForSendManager";
-            this.labelPortForSendManager.Size = new System.Drawing.Size(283, 19);
+            this.labelPortForSendManager.Size = new System.Drawing.Size(287, 19);
             this.labelPortForSendManager.TabIndex = 69;
-            this.labelPortForSendManager.Text = "Port używany do połączenia z serwisem";
+            this.labelPortForSendManager.Text = "Port używany do połączenia z serwisem:";
             // 
             // materialButtonFindFreePort
             // 
@@ -509,7 +515,7 @@
             this.materialButtonFindFreePort.Depth = 0;
             this.materialButtonFindFreePort.HighEmphasis = true;
             this.materialButtonFindFreePort.Icon = global::CodeCompilerServiceManager.Properties.Resources.magnify;
-            this.materialButtonFindFreePort.Location = new System.Drawing.Point(264, 207);
+            this.materialButtonFindFreePort.Location = new System.Drawing.Point(575, 162);
             this.materialButtonFindFreePort.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButtonFindFreePort.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButtonFindFreePort.Name = "materialButtonFindFreePort";
@@ -527,12 +533,12 @@
             this.labelMaxThead.AutoSize = true;
             this.labelMaxThead.Depth = 0;
             this.labelMaxThead.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelMaxThead.Location = new System.Drawing.Point(494, 182);
+            this.labelMaxThead.Location = new System.Drawing.Point(25, 236);
             this.labelMaxThead.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelMaxThead.Name = "labelMaxThead";
-            this.labelMaxThead.Size = new System.Drawing.Size(340, 19);
+            this.labelMaxThead.Size = new System.Drawing.Size(344, 19);
             this.labelMaxThead.TabIndex = 71;
-            this.labelMaxThead.Text = "Liczba wątków używanych do kompilacji plików";
+            this.labelMaxThead.Text = "Liczba wątków używanych do kompilacji plików:";
             // 
             // materialTextBoxMaxThreads
             // 
@@ -543,7 +549,7 @@
             this.materialTextBoxMaxThreads.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.materialTextBoxMaxThreads.HideSelection = true;
             this.materialTextBoxMaxThreads.LeadingIcon = null;
-            this.materialTextBoxMaxThreads.Location = new System.Drawing.Point(578, 207);
+            this.materialTextBoxMaxThreads.Location = new System.Drawing.Point(375, 222);
             this.materialTextBoxMaxThreads.MaxLength = 32767;
             this.materialTextBoxMaxThreads.MouseState = MaterialSkin.MouseState.OUT;
             this.materialTextBoxMaxThreads.Name = "materialTextBoxMaxThreads";
@@ -570,7 +576,7 @@
             // 
             this.materialCheckboxSendMessageAboutBeingAlive.AutoSize = true;
             this.materialCheckboxSendMessageAboutBeingAlive.Depth = 0;
-            this.materialCheckboxSendMessageAboutBeingAlive.Location = new System.Drawing.Point(395, 138);
+            this.materialCheckboxSendMessageAboutBeingAlive.Location = new System.Drawing.Point(381, 119);
             this.materialCheckboxSendMessageAboutBeingAlive.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckboxSendMessageAboutBeingAlive.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckboxSendMessageAboutBeingAlive.MouseState = MaterialSkin.MouseState.HOVER;
@@ -583,10 +589,71 @@
             this.materialCheckboxSendMessageAboutBeingAlive.UseVisualStyleBackColor = true;
             this.materialCheckboxSendMessageAboutBeingAlive.CheckedChanged += new System.EventHandler(this.materialCheckboxSendMessageAboutBeingAlive_CheckedChanged);
             // 
+            // panelBottom
+            // 
+            this.panelBottom.Controls.Add(this.materialDivider1);
+            this.panelBottom.Controls.Add(this.buttonCancelChanges);
+            this.panelBottom.Controls.Add(this.labelRestartRequired);
+            this.panelBottom.Controls.Add(this.buttonSaveAndRestart);
+            this.panelBottom.Controls.Add(this.buttonSetDefaultServiceSettings);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 518);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(866, 100);
+            this.panelBottom.TabIndex = 74;
+            // 
+            // materialDivider1
+            // 
+            this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider1.Depth = 0;
+            this.materialDivider1.Location = new System.Drawing.Point(0, 0);
+            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider1.Name = "materialDivider1";
+            this.materialDivider1.Size = new System.Drawing.Size(65535, 3);
+            this.materialDivider1.TabIndex = 29;
+            this.materialDivider1.Text = "materialDivider1";
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(16, 77);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(98, 19);
+            this.materialLabel1.TabIndex = 69;
+            this.materialLabel1.Text = "Ścieżka pliku:";
+            // 
+            // materialDivider3
+            // 
+            this.materialDivider3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider3.Depth = 0;
+            this.materialDivider3.Location = new System.Drawing.Point(-32398, 113);
+            this.materialDivider3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider3.Name = "materialDivider3";
+            this.materialDivider3.Size = new System.Drawing.Size(65535, 3);
+            this.materialDivider3.TabIndex = 69;
+            this.materialDivider3.Text = "materialDivider3";
+            // 
+            // materialDivider4
+            // 
+            this.materialDivider4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider4.Depth = 0;
+            this.materialDivider4.Location = new System.Drawing.Point(-32366, 213);
+            this.materialDivider4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider4.Name = "materialDivider4";
+            this.materialDivider4.Size = new System.Drawing.Size(65535, 3);
+            this.materialDivider4.TabIndex = 75;
+            this.materialDivider4.Text = "materialDivider4";
+            // 
             // ServiceSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.materialDivider4);
+            this.Controls.Add(this.materialDivider3);
+            this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.materialCheckboxSendMessageAboutBeingAlive);
             this.Controls.Add(this.materialTextBoxMaxThreads);
             this.Controls.Add(this.labelMaxThead);
@@ -594,9 +661,6 @@
             this.Controls.Add(this.labelPortForSendManager);
             this.Controls.Add(this.materialTextBoxPortForManagerSendMessages);
             this.Controls.Add(this.checkBoxSendMessagesToManager);
-            this.Controls.Add(this.buttonCancelChanges);
-            this.Controls.Add(this.buttonSetDefaultServiceSettings);
-            this.Controls.Add(this.buttonSaveAndRestart);
             this.Controls.Add(this.textBoxInternalBufferSize);
             this.Controls.Add(this.labelInternalBufferSize);
             this.Controls.Add(this.textBoxServiceMainInterval);
@@ -604,13 +668,15 @@
             this.Controls.Add(this.buttonOpenLogFolder);
             this.Controls.Add(this.textBoxPathToLogs);
             this.Controls.Add(this.checkBoxLogToFile);
-            this.Controls.Add(this.labelRestartRequired);
             this.Controls.Add(this.checkBoxLogToEventViewer);
             this.Controls.Add(this.panelFooterServicePath);
+            this.Controls.Add(this.panelBottom);
             this.Name = "ServiceSettingsControl";
             this.Size = new System.Drawing.Size(866, 618);
             this.panelFooterServicePath.ResumeLayout(false);
             this.panelFooterServicePath.PerformLayout();
+            this.panelBottom.ResumeLayout(false);
+            this.panelBottom.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -621,7 +687,6 @@
         private MaterialSkin.Controls.MaterialLabel labelServicePath;
         private MaterialSkin.Controls.MaterialTextBox2 textBoxServicePath;
         private MaterialSkin.Controls.MaterialButton buttonOpenServicePath;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private Panel panelFooterServicePath;
         private MaterialSkin.Controls.MaterialCheckbox checkBoxLogToEventViewer;
         private MaterialSkin.Controls.MaterialCheckbox checkBoxLogToFile;
@@ -644,5 +709,11 @@
         private MaterialSkin.Controls.MaterialLabel labelMaxThead;
         private MaterialSkin.Controls.MaterialTextBox2 materialTextBoxMaxThreads;
         private MaterialSkin.Controls.MaterialCheckbox materialCheckboxSendMessageAboutBeingAlive;
+        private Panel panelBottom;
+        private MaterialSkin.Controls.MaterialDivider materialDivider1;
+        private MaterialSkin.Controls.MaterialDivider materialDivider2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialDivider materialDivider3;
+        private MaterialSkin.Controls.MaterialDivider materialDivider4;
     }
 }

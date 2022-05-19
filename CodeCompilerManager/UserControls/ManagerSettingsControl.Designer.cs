@@ -35,6 +35,9 @@
             this.labelOperationTimeout = new MaterialSkin.Controls.MaterialLabel();
             this.btnSaveManagerSettings = new MaterialSkin.Controls.MaterialButton();
             this.btnResetManagerSettings = new MaterialSkin.Controls.MaterialButton();
+            this.panelBottom = new System.Windows.Forms.Panel();
+            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
+            this.panelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxRefreshEnabled
@@ -61,7 +64,7 @@
             this.labelInterval.AutoSize = true;
             this.labelInterval.Depth = 0;
             this.labelInterval.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelInterval.Location = new System.Drawing.Point(39, 68);
+            this.labelInterval.Location = new System.Drawing.Point(44, 86);
             this.labelInterval.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelInterval.Name = "labelInterval";
             this.labelInterval.Size = new System.Drawing.Size(282, 19);
@@ -77,7 +80,7 @@
             this.textBoxIntervalRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxIntervalRefresh.HideSelection = true;
             this.textBoxIntervalRefresh.LeadingIcon = null;
-            this.textBoxIntervalRefresh.Location = new System.Drawing.Point(39, 100);
+            this.textBoxIntervalRefresh.Location = new System.Drawing.Point(353, 67);
             this.textBoxIntervalRefresh.MaxLength = 50;
             this.textBoxIntervalRefresh.MouseState = MaterialSkin.MouseState.OUT;
             this.textBoxIntervalRefresh.Name = "textBoxIntervalRefresh";
@@ -110,7 +113,7 @@
             this.textBoxOperationTimeout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxOperationTimeout.HideSelection = true;
             this.textBoxOperationTimeout.LeadingIcon = null;
-            this.textBoxOperationTimeout.Location = new System.Drawing.Point(39, 216);
+            this.textBoxOperationTimeout.Location = new System.Drawing.Point(353, 132);
             this.textBoxOperationTimeout.MaxLength = 50;
             this.textBoxOperationTimeout.MouseState = MaterialSkin.MouseState.OUT;
             this.textBoxOperationTimeout.Name = "textBoxOperationTimeout";
@@ -138,7 +141,7 @@
             this.labelOperationTimeout.AutoSize = true;
             this.labelOperationTimeout.Depth = 0;
             this.labelOperationTimeout.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelOperationTimeout.Location = new System.Drawing.Point(39, 182);
+            this.labelOperationTimeout.Location = new System.Drawing.Point(44, 145);
             this.labelOperationTimeout.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelOperationTimeout.Name = "labelOperationTimeout";
             this.labelOperationTimeout.Size = new System.Drawing.Size(307, 19);
@@ -153,7 +156,7 @@
             this.btnSaveManagerSettings.Enabled = false;
             this.btnSaveManagerSettings.HighEmphasis = true;
             this.btnSaveManagerSettings.Icon = global::CodeCompilerServiceManager.Properties.Resources.content_save;
-            this.btnSaveManagerSettings.Location = new System.Drawing.Point(39, 288);
+            this.btnSaveManagerSettings.Location = new System.Drawing.Point(20, 42);
             this.btnSaveManagerSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnSaveManagerSettings.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSaveManagerSettings.Name = "btnSaveManagerSettings";
@@ -173,7 +176,7 @@
             this.btnResetManagerSettings.Depth = 0;
             this.btnResetManagerSettings.HighEmphasis = true;
             this.btnResetManagerSettings.Icon = global::CodeCompilerServiceManager.Properties.Resources.refresh;
-            this.btnResetManagerSettings.Location = new System.Drawing.Point(39, 341);
+            this.btnResetManagerSettings.Location = new System.Drawing.Point(218, 42);
             this.btnResetManagerSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnResetManagerSettings.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnResetManagerSettings.Name = "btnResetManagerSettings";
@@ -187,12 +190,33 @@
             this.btnResetManagerSettings.TextChanged += new System.EventHandler(this.btnResetManagerSettings_TextChanged);
             this.btnResetManagerSettings.Click += new System.EventHandler(this.btnResetManagerSettings_Click);
             // 
+            // panelBottom
+            // 
+            this.panelBottom.Controls.Add(this.materialDivider1);
+            this.panelBottom.Controls.Add(this.btnSaveManagerSettings);
+            this.panelBottom.Controls.Add(this.btnResetManagerSettings);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 518);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(866, 100);
+            this.panelBottom.TabIndex = 75;
+            // 
+            // materialDivider1
+            // 
+            this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider1.Depth = 0;
+            this.materialDivider1.Location = new System.Drawing.Point(0, 0);
+            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider1.Name = "materialDivider1";
+            this.materialDivider1.Size = new System.Drawing.Size(65535, 3);
+            this.materialDivider1.TabIndex = 29;
+            this.materialDivider1.Text = "materialDivider1";
+            // 
             // ManagerSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnResetManagerSettings);
-            this.Controls.Add(this.btnSaveManagerSettings);
+            this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.labelOperationTimeout);
             this.Controls.Add(this.textBoxOperationTimeout);
             this.Controls.Add(this.textBoxIntervalRefresh);
@@ -200,6 +224,8 @@
             this.Controls.Add(this.checkBoxRefreshEnabled);
             this.Name = "ManagerSettingsControl";
             this.Size = new System.Drawing.Size(866, 618);
+            this.panelBottom.ResumeLayout(false);
+            this.panelBottom.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,5 +239,7 @@
         private MaterialSkin.Controls.MaterialLabel labelOperationTimeout;
         private MaterialSkin.Controls.MaterialButton btnSaveManagerSettings;
         private MaterialSkin.Controls.MaterialButton btnResetManagerSettings;
+        private Panel panelBottom;
+        private MaterialSkin.Controls.MaterialDivider materialDivider1;
     }
 }

@@ -42,6 +42,10 @@
             this.materialButtonChooseInputFolder = new MaterialSkin.Controls.MaterialButton();
             this.materialButtonChooseOutputFolder = new MaterialSkin.Controls.MaterialButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.panelBottom = new System.Windows.Forms.Panel();
+            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
+            this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
+            this.panelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelInputPath
@@ -52,9 +56,9 @@
             this.labelInputPath.Location = new System.Drawing.Point(13, 13);
             this.labelInputPath.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelInputPath.Name = "labelInputPath";
-            this.labelInputPath.Size = new System.Drawing.Size(271, 19);
+            this.labelInputPath.Size = new System.Drawing.Size(275, 19);
             this.labelInputPath.TabIndex = 44;
-            this.labelInputPath.Text = "Folder wejściowy plików do kompilacji";
+            this.labelInputPath.Text = "Folder wejściowy plików do kompilacji:";
             // 
             // labelIOutputPath
             // 
@@ -64,15 +68,15 @@
             this.labelIOutputPath.Location = new System.Drawing.Point(13, 107);
             this.labelIOutputPath.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelIOutputPath.Name = "labelIOutputPath";
-            this.labelIOutputPath.Size = new System.Drawing.Size(292, 19);
+            this.labelIOutputPath.Size = new System.Drawing.Size(296, 19);
             this.labelIOutputPath.TabIndex = 45;
-            this.labelIOutputPath.Text = "Folder wyściowy skompilowanych plików";
+            this.labelIOutputPath.Text = "Folder wyściowy skompilowanych plików:";
             // 
             // materialRadioButtonMakeDll
             // 
             this.materialRadioButtonMakeDll.AutoSize = true;
             this.materialRadioButtonMakeDll.Depth = 0;
-            this.materialRadioButtonMakeDll.Location = new System.Drawing.Point(13, 192);
+            this.materialRadioButtonMakeDll.Location = new System.Drawing.Point(13, 220);
             this.materialRadioButtonMakeDll.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButtonMakeDll.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButtonMakeDll.MouseState = MaterialSkin.MouseState.HOVER;
@@ -89,7 +93,7 @@
             // 
             this.materialRadioButtonMakeExe.AutoSize = true;
             this.materialRadioButtonMakeExe.Depth = 0;
-            this.materialRadioButtonMakeExe.Location = new System.Drawing.Point(13, 229);
+            this.materialRadioButtonMakeExe.Location = new System.Drawing.Point(13, 257);
             this.materialRadioButtonMakeExe.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButtonMakeExe.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButtonMakeExe.MouseState = MaterialSkin.MouseState.HOVER;
@@ -110,7 +114,7 @@
             this.labelRestartRequired.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
             this.labelRestartRequired.ForeColor = System.Drawing.Color.Black;
             this.labelRestartRequired.HighEmphasis = true;
-            this.labelRestartRequired.Location = new System.Drawing.Point(18, 280);
+            this.labelRestartRequired.Location = new System.Drawing.Point(49, 6);
             this.labelRestartRequired.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelRestartRequired.Name = "labelRestartRequired";
             this.labelRestartRequired.Size = new System.Drawing.Size(738, 29);
@@ -185,7 +189,7 @@
             this.buttonSaveAndRestart.Depth = 0;
             this.buttonSaveAndRestart.HighEmphasis = true;
             this.buttonSaveAndRestart.Icon = global::CodeCompilerServiceManager.Properties.Resources.content_save;
-            this.buttonSaveAndRestart.Location = new System.Drawing.Point(18, 327);
+            this.buttonSaveAndRestart.Location = new System.Drawing.Point(20, 42);
             this.buttonSaveAndRestart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonSaveAndRestart.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonSaveAndRestart.Name = "buttonSaveAndRestart";
@@ -205,7 +209,7 @@
             this.buttonCancelChanges.Depth = 0;
             this.buttonCancelChanges.HighEmphasis = true;
             this.buttonCancelChanges.Icon = global::CodeCompilerServiceManager.Properties.Resources.cancel;
-            this.buttonCancelChanges.Location = new System.Drawing.Point(285, 327);
+            this.buttonCancelChanges.Location = new System.Drawing.Point(287, 42);
             this.buttonCancelChanges.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonCancelChanges.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonCancelChanges.Name = "buttonCancelChanges";
@@ -225,7 +229,7 @@
             this.buttonSetDefaultServiceSettings.Depth = 0;
             this.buttonSetDefaultServiceSettings.HighEmphasis = true;
             this.buttonSetDefaultServiceSettings.Icon = global::CodeCompilerServiceManager.Properties.Resources.refresh;
-            this.buttonSetDefaultServiceSettings.Location = new System.Drawing.Point(457, 327);
+            this.buttonSetDefaultServiceSettings.Location = new System.Drawing.Point(459, 42);
             this.buttonSetDefaultServiceSettings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.buttonSetDefaultServiceSettings.MouseState = MaterialSkin.MouseState.HOVER;
             this.buttonSetDefaultServiceSettings.Name = "buttonSetDefaultServiceSettings";
@@ -286,24 +290,59 @@
             this.toolTip1.ForeColor = System.Drawing.Color.White;
             this.toolTip1.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this.toolTip1_draw);
             // 
+            // panelBottom
+            // 
+            this.panelBottom.Controls.Add(this.materialDivider1);
+            this.panelBottom.Controls.Add(this.labelRestartRequired);
+            this.panelBottom.Controls.Add(this.buttonSaveAndRestart);
+            this.panelBottom.Controls.Add(this.buttonSetDefaultServiceSettings);
+            this.panelBottom.Controls.Add(this.buttonCancelChanges);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 518);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(866, 100);
+            this.panelBottom.TabIndex = 59;
+            // 
+            // materialDivider1
+            // 
+            this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider1.Depth = 0;
+            this.materialDivider1.Location = new System.Drawing.Point(0, 0);
+            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider1.Name = "materialDivider1";
+            this.materialDivider1.Size = new System.Drawing.Size(65535, 3);
+            this.materialDivider1.TabIndex = 29;
+            this.materialDivider1.Text = "materialDivider1";
+            // 
+            // materialDivider2
+            // 
+            this.materialDivider2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider2.Depth = 0;
+            this.materialDivider2.Location = new System.Drawing.Point(-32400, 205);
+            this.materialDivider2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider2.Name = "materialDivider2";
+            this.materialDivider2.Size = new System.Drawing.Size(65535, 3);
+            this.materialDivider2.TabIndex = 57;
+            this.materialDivider2.Text = "materialDivider2";
+            // 
             // LibrarySettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.materialDivider2);
+            this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.materialButtonChooseOutputFolder);
             this.Controls.Add(this.materialButtonChooseInputFolder);
-            this.Controls.Add(this.buttonSetDefaultServiceSettings);
-            this.Controls.Add(this.buttonCancelChanges);
-            this.Controls.Add(this.buttonSaveAndRestart);
             this.Controls.Add(this.textBoxOutputPath);
             this.Controls.Add(this.textBoxInputPath);
-            this.Controls.Add(this.labelRestartRequired);
             this.Controls.Add(this.materialRadioButtonMakeExe);
             this.Controls.Add(this.materialRadioButtonMakeDll);
             this.Controls.Add(this.labelIOutputPath);
             this.Controls.Add(this.labelInputPath);
             this.Name = "LibrarySettingsControl";
             this.Size = new System.Drawing.Size(866, 618);
+            this.panelBottom.ResumeLayout(false);
+            this.panelBottom.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -323,5 +362,8 @@
         private MaterialSkin.Controls.MaterialButton materialButtonChooseInputFolder;
         private MaterialSkin.Controls.MaterialButton materialButtonChooseOutputFolder;
         private ToolTip toolTip1;
+        private Panel panelBottom;
+        private MaterialSkin.Controls.MaterialDivider materialDivider1;
+        private MaterialSkin.Controls.MaterialDivider materialDivider2;
     }
 }

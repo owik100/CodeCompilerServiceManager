@@ -232,7 +232,7 @@
             this.materialLabelServiceStatus.AutoSize = true;
             this.materialLabelServiceStatus.Depth = 0;
             this.materialLabelServiceStatus.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabelServiceStatus.Location = new System.Drawing.Point(3, 70);
+            this.materialLabelServiceStatus.Location = new System.Drawing.Point(-16326, 70);
             this.materialLabelServiceStatus.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabelServiceStatus.Name = "materialLabelServiceStatus";
             this.materialLabelServiceStatus.Size = new System.Drawing.Size(171, 19);
@@ -256,9 +256,9 @@
             // panelDesktopParent
             // 
             this.panelDesktopParent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelDesktopParent.Location = new System.Drawing.Point(223, 99);
+            this.panelDesktopParent.Location = new System.Drawing.Point(223, 116);
             this.panelDesktopParent.Name = "panelDesktopParent";
-            this.panelDesktopParent.Size = new System.Drawing.Size(866, 618);
+            this.panelDesktopParent.Size = new System.Drawing.Size(866, 601);
             this.panelDesktopParent.TabIndex = 41;
             // 
             // labelTitleBar
@@ -269,7 +269,7 @@
             this.labelTitleBar.ForeColor = System.Drawing.Color.White;
             this.labelTitleBar.Location = new System.Drawing.Point(0, 0);
             this.labelTitleBar.Name = "labelTitleBar";
-            this.labelTitleBar.Size = new System.Drawing.Size(866, 75);
+            this.labelTitleBar.Size = new System.Drawing.Size(866, 92);
             this.labelTitleBar.TabIndex = 0;
             this.labelTitleBar.Text = "Home";
             this.labelTitleBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -281,7 +281,7 @@
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTitleBar.Location = new System.Drawing.Point(223, 24);
             this.panelTitleBar.Name = "panelTitleBar";
-            this.panelTitleBar.Size = new System.Drawing.Size(866, 75);
+            this.panelTitleBar.Size = new System.Drawing.Size(866, 92);
             this.panelTitleBar.TabIndex = 40;
             // 
             // notifyIcon1

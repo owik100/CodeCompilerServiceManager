@@ -39,7 +39,7 @@
             this.materialLabelApplicationVersion = new MaterialSkin.Controls.MaterialLabel();
             this.pictureBoxOwikLogo = new System.Windows.Forms.PictureBox();
             this.panelFooter = new System.Windows.Forms.Panel();
-            this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
+            this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
             this.materialCardMaterilSkinInfo.SuspendLayout();
             this.materialCardGitHubLinks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOwikLogo)).BeginInit();
@@ -188,7 +188,7 @@
             this.materialLabelApplicationVersion.Depth = 0;
             this.materialLabelApplicationVersion.Font = new System.Drawing.Font("Roboto Medium", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.materialLabelApplicationVersion.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            this.materialLabelApplicationVersion.Location = new System.Drawing.Point(32, 30);
+            this.materialLabelApplicationVersion.Location = new System.Drawing.Point(13, 47);
             this.materialLabelApplicationVersion.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabelApplicationVersion.Name = "materialLabelApplicationVersion";
             this.materialLabelApplicationVersion.Size = new System.Drawing.Size(227, 24);
@@ -200,9 +200,9 @@
             this.pictureBoxOwikLogo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxOwikLogo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxOwikLogo.Image = global::CodeCompilerServiceManager.Properties.Resources.Owik100x100;
-            this.pictureBoxOwikLogo.Location = new System.Drawing.Point(817, 18);
+            this.pictureBoxOwikLogo.Location = new System.Drawing.Point(776, 22);
             this.pictureBoxOwikLogo.Name = "pictureBoxOwikLogo";
-            this.pictureBoxOwikLogo.Size = new System.Drawing.Size(36, 36);
+            this.pictureBoxOwikLogo.Size = new System.Drawing.Size(87, 62);
             this.pictureBoxOwikLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxOwikLogo.TabIndex = 11;
             this.pictureBoxOwikLogo.TabStop = false;
@@ -210,25 +210,25 @@
             // 
             // panelFooter
             // 
-            this.panelFooter.Controls.Add(this.materialDivider1);
-            this.panelFooter.Controls.Add(this.materialLabelApplicationVersion);
+            this.panelFooter.Controls.Add(this.materialDivider2);
             this.panelFooter.Controls.Add(this.pictureBoxOwikLogo);
+            this.panelFooter.Controls.Add(this.materialLabelApplicationVersion);
             this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooter.Location = new System.Drawing.Point(0, 552);
+            this.panelFooter.Location = new System.Drawing.Point(0, 518);
             this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(866, 66);
-            this.panelFooter.TabIndex = 12;
+            this.panelFooter.Size = new System.Drawing.Size(866, 100);
+            this.panelFooter.TabIndex = 60;
             // 
-            // materialDivider1
+            // materialDivider2
             // 
-            this.materialDivider1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialDivider1.Depth = 0;
-            this.materialDivider1.Location = new System.Drawing.Point(-13, 3);
-            this.materialDivider1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialDivider1.Name = "materialDivider1";
-            this.materialDivider1.Size = new System.Drawing.Size(65535, 10);
-            this.materialDivider1.TabIndex = 13;
-            this.materialDivider1.Text = "materialDivider1";
+            this.materialDivider2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialDivider2.Depth = 0;
+            this.materialDivider2.Location = new System.Drawing.Point(0, 0);
+            this.materialDivider2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDivider2.Name = "materialDivider2";
+            this.materialDivider2.Size = new System.Drawing.Size(65535, 3);
+            this.materialDivider2.TabIndex = 29;
+            this.materialDivider2.Text = "materialDivider2";
             // 
             // AboutControl
             // 
@@ -262,6 +262,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabelApplicationVersion;
         private PictureBox pictureBoxOwikLogo;
         private Panel panelFooter;
-        private MaterialSkin.Controls.MaterialDivider materialDivider1;
+        private MaterialSkin.Controls.MaterialDivider materialDivider2;
     }
 }
