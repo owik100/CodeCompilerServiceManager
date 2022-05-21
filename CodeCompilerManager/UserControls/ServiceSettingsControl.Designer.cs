@@ -307,9 +307,9 @@
             this.labelIntervalService.Location = new System.Drawing.Point(25, 343);
             this.labelIntervalService.MouseState = MaterialSkin.MouseState.HOVER;
             this.labelIntervalService.Name = "labelIntervalService";
-            this.labelIntervalService.Size = new System.Drawing.Size(334, 19);
+            this.labelIntervalService.Size = new System.Drawing.Size(411, 19);
             this.labelIntervalService.TabIndex = 60;
-            this.labelIntervalService.Text = "Interwał odświeżania głównej akcji usługi (ms):";
+            this.labelIntervalService.Text = "Interwał sprawdzania plików w kolejce do kompilacji (ms):";
             // 
             // textBoxServiceMainInterval
             // 
@@ -320,7 +320,7 @@
             this.textBoxServiceMainInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.textBoxServiceMainInterval.HideSelection = true;
             this.textBoxServiceMainInterval.LeadingIcon = null;
-            this.textBoxServiceMainInterval.Location = new System.Drawing.Point(375, 330);
+            this.textBoxServiceMainInterval.Location = new System.Drawing.Point(442, 330);
             this.textBoxServiceMainInterval.MaxLength = 32767;
             this.textBoxServiceMainInterval.MouseState = MaterialSkin.MouseState.OUT;
             this.textBoxServiceMainInterval.Name = "textBoxServiceMainInterval";
