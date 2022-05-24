@@ -28,4 +28,6 @@ Additionally, you need to add a reference to the project [Code Compiler Settings
 ```
 
  ## Installation
- You can download app [here](https://github.com/owik100/CodeCompilerServiceManager/releases).
+1. You can download app [here](https://github.com/owik100/CodeCompilerServiceManager/releases).
+2. After the first launch, the application will ask for the path to the [service](https://github.com/owik100/CoderCompilerWorkerService).
+3. You should also set the input and output paths on compiling library settings tab.
