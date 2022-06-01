@@ -21,6 +21,7 @@ namespace CodeCompilerServiceManager.UserControls
         {
             _appFormParent = appFormParent;
             InitializeComponent();
+            SetComboBoxNetVersionItems();
             BindSettingsToControlls();
             SetButtonEnabledStatus(false);
             toolTip1.OwnerDraw = true;
@@ -32,6 +33,21 @@ namespace CodeCompilerServiceManager.UserControls
         {
             buttonSaveAndRestart.Enabled = enabled;
             buttonCancelChanges.Enabled = enabled;
+        }
+
+        private void SetComboBoxNetVersionItems()
+        {
+            Dictionary<string, string> comboDictionary = new Dictionary<string, string>();
+            comboDictionary.Add("Net461", ".NET Framework 4.6.1");
+            comboDictionary.Add("Net472", ".NET Framework 4.7.2");
+            comboDictionary.Add("NetStandard13", ".NET Standard 1.3");
+            comboDictionary.Add("NetStandard20", ".NET Standard 2.0");
+            comboDictionary.Add("NetCoreApp31", ".NET Core 3.1");
+            comboDictionary.Add("Net50", ".NET 5");
+            comboDictionary.Add("Net60", ".NET 6");
+            materialComboBoxNetVersion.DataSource = new BindingSource(comboDictionary, null);
+            materialComboBoxNetVersion.DisplayMember = "Value";
+            materialComboBoxNetVersion.ValueMember = "Key";
         }
 
         private void BindSettingsToControlls()
@@ -52,13 +68,20 @@ namespace CodeCompilerServiceManager.UserControls
                     textBoxOutputPath.Text = pathToOutput;
                 }
 
-                bool? compileToConsoleApp = false;
-                compileToConsoleApp = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildToConsoleApp;
-                if (compileToConsoleApp == null)
-                    compileToConsoleApp = false;
+                string buildType = "";
+                buildType = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildType;
 
-                materialRadioButtonMakeDll.Checked = !(bool)compileToConsoleApp;
-                materialRadioButtonMakeExe.Checked = (bool)compileToConsoleApp;
+                materialRadioButtonMakeDll.Checked = buildType == "DynamicallyLinkedLibrary";
+                materialRadioButtonMakeExe.Checked = buildType == "ConsoleApplication";
+
+                string netVerison = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.NetVersionToCompile;
+
+                foreach (var item in materialComboBoxNetVersion.Items)
+                {
+                    var comboItem = (KeyValuePair< string, string>)item;
+                    if (comboItem.Key.Equals(netVerison))
+                        materialComboBoxNetVersion.SelectedItem = comboItem;
+                }
             }
             catch (Exception ex)
             {
@@ -87,11 +110,22 @@ namespace CodeCompilerServiceManager.UserControls
                     ServiceSettings.ServiceSettingsModel.CodeCompilerLibOptions.OutputPath = textBoxOutputPath.Text;
                 }
 
-                var compileToWindowConsole = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildToConsoleApp;
+                var compileToWindowConsole = ServiceSettings.ServiceSettingsModel?.CodeCompilerLibOptions?.BuildType;
                 if (compileToWindowConsole != null)
                 {
-                    ServiceSettings.ServiceSettingsModel.CodeCompilerLibOptions.BuildToConsoleApp = materialRadioButtonMakeExe.Checked;
+                    string res = "";
+                    if (materialRadioButtonMakeExe.Checked)
+                    {
+                        res = "ConsoleApplication";
+                    }
+                    else
+                    {
+                        res = "DynamicallyLinkedLibrary";
+                    }
+                    ServiceSettings.ServiceSettingsModel.CodeCompilerLibOptions.BuildType = res;
                 }
+
+                ServiceSettings.ServiceSettingsModel.CodeCompilerLibOptions.NetVersionToCompile = ((KeyValuePair<string, string>)materialComboBoxNetVersion.SelectedItem).Key;
 
                 string servisePath = _appFormParent.GetServicePath();
                 if (!string.IsNullOrEmpty(servisePath))
@@ -110,6 +144,22 @@ namespace CodeCompilerServiceManager.UserControls
         #endregion
 
         #region controlEvents
+
+        private void materialComboBoxNetVersion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _appFormParent.RestartServiceRequired = true;
+                labelRestartRequired.Visible = _appFormParent.RestartServiceRequired;
+                SetButtonEnabledStatus(true);
+            }
+            catch (Exception ex)
+            {
+                OnMessage(ex.Message, MessageHandlingLevel.ManagerError);
+                MaterialSnackBar SnackBarMessage = new MaterialSnackBar("Błąd. Sprawdź okno z szczegółami na głównej zakładce!", "OK", true);
+                SnackBarMessage.Show(_appFormParent);
+            }
+        }
         private void textBoxInputPath_TextChanged(object sender, EventArgs e)
         {
             try
@@ -334,6 +384,7 @@ namespace CodeCompilerServiceManager.UserControls
             GetMessage?.Invoke(this, new MessageHandlingArgs(message, level));
         }
         #endregion
+
     }
 
 }

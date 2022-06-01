@@ -45,6 +45,8 @@
             this.panelBottom = new System.Windows.Forms.Panel();
             this.materialDivider1 = new MaterialSkin.Controls.MaterialDivider();
             this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
+            this.materialComboBoxNetVersion = new MaterialSkin.Controls.MaterialComboBox();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.panelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -325,10 +327,47 @@
             this.materialDivider2.TabIndex = 57;
             this.materialDivider2.Text = "materialDivider2";
             // 
+            // materialComboBoxNetVersion
+            // 
+            this.materialComboBoxNetVersion.AutoResize = false;
+            this.materialComboBoxNetVersion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialComboBoxNetVersion.Depth = 0;
+            this.materialComboBoxNetVersion.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.materialComboBoxNetVersion.DropDownHeight = 174;
+            this.materialComboBoxNetVersion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.materialComboBoxNetVersion.DropDownWidth = 121;
+            this.materialComboBoxNetVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialComboBoxNetVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialComboBoxNetVersion.FormattingEnabled = true;
+            this.materialComboBoxNetVersion.IntegralHeight = false;
+            this.materialComboBoxNetVersion.ItemHeight = 43;
+            this.materialComboBoxNetVersion.Location = new System.Drawing.Point(13, 339);
+            this.materialComboBoxNetVersion.MaxDropDownItems = 4;
+            this.materialComboBoxNetVersion.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialComboBoxNetVersion.Name = "materialComboBoxNetVersion";
+            this.materialComboBoxNetVersion.Size = new System.Drawing.Size(369, 49);
+            this.materialComboBoxNetVersion.StartIndex = 0;
+            this.materialComboBoxNetVersion.TabIndex = 60;
+            this.materialComboBoxNetVersion.SelectedIndexChanged += new System.EventHandler(this.materialComboBoxNetVersion_SelectedIndexChanged);
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(13, 308);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(369, 19);
+            this.materialLabel1.TabIndex = 61;
+            this.materialLabel1.Text = "Wersja .NET referencji używana podczas kompilacji:";
+            // 
             // LibrarySettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.materialLabel1);
+            this.Controls.Add(this.materialComboBoxNetVersion);
             this.Controls.Add(this.materialDivider2);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.materialButtonChooseOutputFolder);
@@ -365,5 +404,7 @@
         private Panel panelBottom;
         private MaterialSkin.Controls.MaterialDivider materialDivider1;
         private MaterialSkin.Controls.MaterialDivider materialDivider2;
+        private MaterialSkin.Controls.MaterialComboBox materialComboBoxNetVersion;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
     }
 }
