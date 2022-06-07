@@ -67,6 +67,10 @@ namespace CodeCompilerServiceManager.UserControls
         {
             GoToLink("https://owik100.github.io/Portfolio/");
         }
+        private void materialButtonBasicReferenceAssemblies_Click(object sender, EventArgs e)
+        {
+            GoToLink("https://github.com/jaredpar/basic-reference-assemblies");
+        }
         #endregion
 
         #region IUserControlWithSave
@@ -85,6 +89,5 @@ namespace CodeCompilerServiceManager.UserControls
             GetMessage?.Invoke(this, new MessageHandlingArgs(message, level));
         }
         #endregion
-
     }
 }

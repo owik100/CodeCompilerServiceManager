@@ -40,6 +40,8 @@
             this.pictureBoxOwikLogo = new System.Windows.Forms.PictureBox();
             this.panelFooter = new System.Windows.Forms.Panel();
             this.materialDivider2 = new MaterialSkin.Controls.MaterialDivider();
+            this.materialButtonBasicReferenceAssemblies = new MaterialSkin.Controls.MaterialButton();
+            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.materialCardMaterilSkinInfo.SuspendLayout();
             this.materialCardGitHubLinks.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOwikLogo)).BeginInit();
@@ -141,6 +143,8 @@
             // materialCardMaterilSkinInfo
             // 
             this.materialCardMaterilSkinInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCardMaterilSkinInfo.Controls.Add(this.materialLabel1);
+            this.materialCardMaterilSkinInfo.Controls.Add(this.materialButtonBasicReferenceAssemblies);
             this.materialCardMaterilSkinInfo.Controls.Add(this.materialLabelMaterialSkinInfo);
             this.materialCardMaterilSkinInfo.Controls.Add(this.materialButtonLinkMaterilSkin);
             this.materialCardMaterilSkinInfo.Depth = 0;
@@ -150,7 +154,7 @@
             this.materialCardMaterilSkinInfo.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialCardMaterilSkinInfo.Name = "materialCardMaterilSkinInfo";
             this.materialCardMaterilSkinInfo.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCardMaterilSkinInfo.Size = new System.Drawing.Size(488, 100);
+            this.materialCardMaterilSkinInfo.Size = new System.Drawing.Size(488, 171);
             this.materialCardMaterilSkinInfo.TabIndex = 8;
             // 
             // materialCardGitHubLinks
@@ -230,6 +234,38 @@
             this.materialDivider2.TabIndex = 29;
             this.materialDivider2.Text = "materialDivider2";
             // 
+            // materialButtonBasicReferenceAssemblies
+            // 
+            this.materialButtonBasicReferenceAssemblies.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButtonBasicReferenceAssemblies.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButtonBasicReferenceAssemblies.Depth = 0;
+            this.materialButtonBasicReferenceAssemblies.HighEmphasis = true;
+            this.materialButtonBasicReferenceAssemblies.Icon = global::CodeCompilerServiceManager.Properties.Resources.github;
+            this.materialButtonBasicReferenceAssemblies.Location = new System.Drawing.Point(18, 77);
+            this.materialButtonBasicReferenceAssemblies.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButtonBasicReferenceAssemblies.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButtonBasicReferenceAssemblies.Name = "materialButtonBasicReferenceAssemblies";
+            this.materialButtonBasicReferenceAssemblies.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButtonBasicReferenceAssemblies.Size = new System.Drawing.Size(266, 36);
+            this.materialButtonBasicReferenceAssemblies.TabIndex = 8;
+            this.materialButtonBasicReferenceAssemblies.Text = "Basic Reference Assemblies";
+            this.materialButtonBasicReferenceAssemblies.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Text;
+            this.materialButtonBasicReferenceAssemblies.UseAccentColor = false;
+            this.materialButtonBasicReferenceAssemblies.UseVisualStyleBackColor = true;
+            this.materialButtonBasicReferenceAssemblies.Click += new System.EventHandler(this.materialButtonBasicReferenceAssemblies_Click);
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(18, 119);
+            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(465, 19);
+            this.materialLabel1.TabIndex = 9;
+            this.materialLabel1.Text = "Bardzo pomocna paczka przy ustawianiu referncji przy kompilacji";
+            // 
             // AboutControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -263,5 +299,7 @@
         private PictureBox pictureBoxOwikLogo;
         private Panel panelFooter;
         private MaterialSkin.Controls.MaterialDivider materialDivider2;
+        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private MaterialSkin.Controls.MaterialButton materialButtonBasicReferenceAssemblies;
     }
 }
